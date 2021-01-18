@@ -21,8 +21,10 @@
   - Password: !N8_abijjmtz (same for email)
 - Team Contract
   - Expectations Brainstorm (2 Min)
+  	- Discussion of Expectaions
   - Agreements Brainstorm (2 Min)
-  - What to do if Expectations are not Met Brainstorm (2 Min)
+  	- Discussion of Agreements
+  - What to do if Expectations are not Met by a Team Member
 - GitHub Wiki
     - Theme/Brand Brainstorm (2 Min)
     - Values Brainstorm (2 Min)
