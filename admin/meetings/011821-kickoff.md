@@ -3,7 +3,7 @@
 ### Place: via Zoom					Date: 1-18-21 @ 1:30PM
 				
 ### Attendance:   
-Ari Cortes [ ]				Jack Mitchener [ ]
+Ari Cortes [x]				Jack Mitchener [x]
 Brian Lam [ ]				Iain Ro [ ]
 Jiahong Long [ ]			Megan Choi [ ]
 Tommy Tran [ ]			Zongchen Li [ ]
