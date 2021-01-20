@@ -1,0 +1,41 @@
+13:45:08	 From  Jack Mitchener : If a team member fails to live up to this agreement, the situation may be reported to the staff, but the team will still be responsible for submitting a completed assignment. Staff will be available to meet with teams to resolve issues.
+13:47:14	 From  Zongchen Li : +1
+13:53:31	 From  ARI CORTES : //team 20
+13:54:12	 From  ARI CORTES : JustUsLeague
+13:54:13	 From  Zongchen Li : codingPool
+14:01:30	 From  ARI CORTES : Holding ourselves to engineering standards
+14:02:09	 From  ARI CORTES : Releasing finished products
+14:02:56	 From  Jiahong Long : Every design decision has an impact / Make decisions for the long term
+14:03:17	 From  Zongchen Li : Learn to create softwares with responsibility and to think of producing softwares’ lasting benefit to people.
+14:03:23	 From  Megan Choi : Learn to be more open to and comfortable in failure
+14:03:31	 From  Iain Ro : Making sure to help others if needed/being availablenot focusing purely on getting the product finished, but thinking about the final product
+14:03:44	 From  Megan Choi : Always consider public interest and ethical implications when developing products
+14:03:53	 From  Zongchen Li : Learn to create softwares to enhance development of other industries.
+14:03:53	 From  Brian Lam : Develop with curiosity / Be ambitious, yet reasonable
+14:04:22	 From  TOMMY TRAN : Always try to improve / strive to be critical thinkers
+14:05:34	 From  Jack Mitchener : Always consider the longevity of the project I am working on
+14:05:51	 From  Jack Mitchener : Aspire to release a fully functional and complete product
+14:14:12	 From  Zongchen Li : Can a video be a recording of Zoom?
+14:22:01	 From  Iain Ro : https://cse110-w21.slack.com/archives/C019ZN2TABY/p1610765184014500
+14:25:35	 From  Jack Mitchener : Hello! We are wepomo and we are going to create the best Pomodoro Timer to maximize YOUR efficiency! Get ready for our timer by Spring 2021! I am Jack…
+14:26:40	 From  ARI CORTES : 2077
+14:27:27	 From  ARI CORTES : Everyone: name, small intro about themselves
+14:31:39	 From  Jack Mitchener : I put a slice of bread in the oven and forgot to set the timer.
+
+As soon as I could smell it burning I knew it was toast.
+14:32:17	 From  ARI CORTES : Pomos go great with eggs 
+14:34:02	 From  ARI CORTES : brief overview of each member with a link to their personal Github page.
+14:34:55	 From  Jiahong Long : github.com/j1ah0ng
+14:35:01	 From  Jiahong Long : or if they want a website j1ah0ng.xyz
+14:35:37	 From  Jiahong Long : background at https://github.com/cse110-w21-group20/cse110-w21-group20/tree/media-assets/admin/assets
+14:36:04	 From  Jack Mitchener : Jack Mitchener: I am a Math-Computer Science student. I currently am waiting to hear back from law schools that I applied to back in October. So far I have heard back from UCLA and was admitted! I am very excited about this and am hoping to hear back more good news in the next couple months. My goal is to become an intellectual property or patent lawyer in the future. I want to develop a strong background in Computer Science so I can be the best lawyer possible for Software Engineers and other developers when they are trying to protect their products. https://jackmitchener42.github.io
+14:37:04	 From  Jiahong Long : take blurb from: (https://github.com/j1ah0ng/j1ah0ng)
+14:37:50	 From  TOMMY TRAN : https://tommytran-8.github.io/totran.github.io/
+14:38:27	 From  Megan Choi : https://github.com/meganchoi-bot
+14:39:41	 From  Iain Ro : https://github.com/ibro912/ibro912.github.io
+14:39:59	 From  Brian Lam : Hi there, I'm Brian! I'm a Computer Science student studying at UC San Diego, and an aspiring software engineer. Lately, I have been focusing on back-end development for numerous projects but have worked on full-stack development in the past!I have put thousands of hours and a lot of love into my open-source projects as well as contributing towards others' open-source projects.https://www.lambrian.me/
+14:48:56	 From  Megan Choi : Megan Choi: Hi I’m Megan, a 4th year undergraduate student at UCSD majoring in General Biology and minoring in Computer Science. I am currently working towards a certificate in Applied Bioinformatics and intend to become a bioinformatics scientist in the future!
+14:49:42	 From  Zongchen Li : https://frankli123.github.io/
+14:51:06	 From  Zongchen Li : Hello, My name is Zongchen Li. I am a senior student and my major is Mathematics and Economics and minor in Computer Science. I am have a lot of interest in software engineering and want to study the field of AI in master school. 
+14:54:14	 From  TOMMY TRAN : Hi, I'm Tommy. I'm a 3rd year Math-Computer Science major at UC San Diego. I am striving to become a software engineer. I'm excited for this course and I'm always trying to improve myself. I look forward to working with a group and developing a product.
+14:57:26	 From  Jack Mitchener : Hello my name is Jack and we are wepomo! Our goal is to create the best Pomodoro Timer to maximize YOUR efficiency! Get ready for our timer releasing in Spring 2021!
