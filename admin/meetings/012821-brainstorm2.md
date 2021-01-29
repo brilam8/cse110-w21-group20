@@ -2,14 +2,14 @@
 ### Place: via Zoom					Date: 1-28-21 @ 5:00PM
 				
 ### Attendance:   
-- [ ] Ari Cortes			
-- [ ] Jack Mitchener
-- [ ] Brian Lam				
-- [ ] Iain Ro
-- [ ] Jiahong Long			
-- [ ] Megan Choi
-- [ ] Tommy Tran			
-- [ ] Zongchen Li
+- [x] Ari Cortes			
+- [x] Jack Mitchener
+- [x] Brian Lam				
+- [x] Iain Ro
+- [x] Jiahong Long			
+- [x] Megan Choi
+- [x] Tommy Tran			
+- [x] Zongchen Li
 
 ### Agenda:
 - Talk with Jordan
@@ -26,7 +26,13 @@
 ### Next Meeting:
 Thursday 5pm
 ### Meeting Notes:
-	
-	
+
+#### Jordan
+- User Personas
+- Interface Design
+- Roadmap
+
+
+Miro for fat marker design
 	
 	
