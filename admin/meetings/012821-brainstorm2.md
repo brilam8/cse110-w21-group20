@@ -22,13 +22,10 @@
 - Next Steps for Everyone
 
 ### Open Floor:
-None
+
 ### Next Meeting:
 Thursday 5pm
 ### Meeting Notes:
-
-	- Log distractions during that session
-	- Save to profile (?)
 	
 	
 	
