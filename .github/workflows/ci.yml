@@ -1,4 +1,4 @@
-name: lint CI
+name: CI
 
 on:
   push:
@@ -6,7 +6,11 @@ on:
   pull_request:
     branches: [ dev ]
 
+
+
 jobs:
+  env:
+      working-directory: ./source
   build:
 
     runs-on: ubuntu-latest
@@ -23,19 +27,24 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
+      working-directory: ${{ env.working-directory}}
     - run: npm run test
+      working-directory: ${{ env.working-directory}}
   lint1:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: npx htmlhint ./index.html
+      working-directory: ${{ env.working-directory}}
   lint2:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: npx htmlhint ./sampleFail.html
+      working-directory: ${{ env.working-directory}}
   ESlint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: npx eslint main.js
+      working-directory: ${{ env.working-directory}}
