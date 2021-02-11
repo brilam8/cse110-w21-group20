@@ -33,11 +33,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx htmlhint ./index.html
-  lint2:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: npx htmlhint ./sampleFail.html
+  # lint2:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - run: npx htmlhint ./sampleFail.html
   ESlint:
     runs-on: ubuntu-latest
     steps:
