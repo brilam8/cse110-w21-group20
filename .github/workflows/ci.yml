@@ -43,4 +43,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx eslint main.js
-      # working-directory: ${{ env.working-directory}}
+  Stylelint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: npx stylelint ./style.css
