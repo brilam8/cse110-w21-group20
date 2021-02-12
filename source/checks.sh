@@ -1,11 +1,11 @@
 #!/bin/bash
 
-npm run test
+echo "running linters..."
 
-npx htmlhint ./index.html
+npx htmlhint **/*.html
 echo "done running htmlhint!"
 
-npx stylelint ./style.css
+npx stylelint **/*.css
 echo "done running stylelint!"
 
 npx eslint main.js
