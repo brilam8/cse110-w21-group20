@@ -17,6 +17,7 @@
 - Look through Issues on Github and assign to each person
 - Discuss other Issues that need to be added
 - Assign lead for each Page
+- Daily Check Ins
 - Open Discussion
 
 ### Open Floor:
