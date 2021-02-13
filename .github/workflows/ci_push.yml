@@ -13,7 +13,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npx htmlhint ./HTML/*.html
+    - run: npx htmlhint ./HTML/settings-page.html
+  Stylelint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: npx stylelint **/*.css
   ESlint:
     runs-on: ubuntu-latest
     steps:

@@ -2,13 +2,14 @@
 
 echo "running linters..."
 
-npx htmlhint **/*.html
+# npx htmlhint ./HTML/*.html
+npx htmlhint ./HTML/settings-page.html
 echo "done running htmlhint!"
 
 npx stylelint **/*.css
 echo "done running stylelint!"
 
-npx eslint main.js
+npx eslint ./JS/*.js
 echo "done running eslint!"
 
-echo "Ran all checks!"
+echo "Ran all lint checks!"
