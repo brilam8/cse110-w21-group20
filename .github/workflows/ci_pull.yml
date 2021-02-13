@@ -1,10 +1,9 @@
-name: CI
+name: CI_PULL
 
 on:
-  push:
-    branches: [ dev ]
   pull_request:
     branches: [ dev ]
+    # TO BE CHANGED since it should be the branch you're working on
 
 
 defaults:
@@ -28,18 +27,18 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run test
-  HtmlHint:
+  HTMLHint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npx htmlhint **/*.html
-  ESlint:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: npx eslint main.js
+    - run: npx htmlhint ./HTML/*.html
   Stylelint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: npx stylelint **/*.css
+  ESlint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: npx eslint ./JS/*.js
