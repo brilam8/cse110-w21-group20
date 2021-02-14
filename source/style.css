@@ -93,3 +93,20 @@ body {
 }
 
 /* general setting component style ends here */
+
+.to-landing-page {
+  background-color: rgba(255, 119, 45, 1);
+  border: none;
+  color: white;
+  height: 50px;
+  width: 250px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: larger;
+  transition: all 0.3s ease-in;
+}
+
+.to-landing-page:hover {
+  background-color: rgba(255, 119, 45, 0.8);
+}

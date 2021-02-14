@@ -39,9 +39,9 @@ class GeneralSettingComponent extends HTMLElement {
                 let color = currentText == "On" ? 'black' : 'white';
                 let otherColor = color == "white" ? 'black' : 'white';
                 window.localStorage.setItem('dark-mode', `${color}`);
-                for (const settingslider of settingsliders){
-                    settingslider.style.color = otherColor;
-                }
+                // for (const settingslider of settingsliders){
+                //     settingslider.style.color = otherColor;
+                // }
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
             }
@@ -84,6 +84,9 @@ class GeneralSettingComponent extends HTMLElement {
             align-items: center;
             text-align: center;
             transition: all 0.6s ease-out;
+            cursor: pointer;
+
+            color: white; //just added
           }
           
           .setting-slider-switch .slider-circle {
