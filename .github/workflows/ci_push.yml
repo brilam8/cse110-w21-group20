@@ -28,4 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: sudo npx jsdoc ./JS -r -d ./source/docs
+    - run: sudo npx jsdoc ./JS -r -d ./docs
+    - name: publish-to-git
+      uses: seanmiddleditch/gha-publish-to-git@v2
+      with:
+        branch: docs
+        github_token: '${{ secrets.GITHUB_TOKEN  }}'
+        source_folder: ./docs
+
