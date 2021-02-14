@@ -6,8 +6,3 @@ if (darkmode){
     document.body.style.backgroundColor = color;
     document.body.style.color = otherColor;
 }
-
-// if (window.localStorage.getItem('dark-mode') == "black"){
-//     console.log(document.getElementById('dark-mode-button'));
-//     document.getElementById('dark-mode-button').click();
-//   }
