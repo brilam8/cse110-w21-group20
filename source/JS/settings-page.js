@@ -1,4 +1,3 @@
-
 const timerinputs = document.getElementsByClassName("setting-input");
 const settingsliders = [];
 for (const input of timerinputs){
@@ -9,7 +8,6 @@ for (const input of timerinputs){
         }
     });
 }
-
 
 class GeneralSettingComponent extends HTMLElement {
     constructor(){
@@ -40,6 +38,7 @@ class GeneralSettingComponent extends HTMLElement {
             if (button.id === "dark-mode-button"){
                 let color = currentText == "On" ? 'black' : 'white';
                 let otherColor = color == "white" ? 'black' : 'white';
+                window.localStorage.setItem('dark-mode', `${color}`);
                 for (const settingslider of settingsliders){
                     settingslider.style.color = otherColor;
                 }
