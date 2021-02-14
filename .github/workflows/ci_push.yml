@@ -2,7 +2,7 @@ name: CI_PUSH
 
 on:
   push:
-    branches: [ brian ]
+    branches: [ dev, brian ]
     # TO BE CHANGED since it should be the branch you're working on
 
 defaults:
@@ -28,4 +28,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npm run jsdoc-generation
+    - run: sudo npm run jsdoc-generation
