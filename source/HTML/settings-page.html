@@ -14,22 +14,19 @@
             <p class="page-title">Settings</p>
         </header>
         <main class="settings">
-            <p>Set Timers</p>
+            <p>Set Beeps for Timers</p>
             <section class="timer-settings">
                 <div class="timer-container">
-                    <p>Pomodoro</p>
-                    <input class="timer-input" type="text" id="pomodoro"  maxlength="2" value="25">
-                    <p>mins</p>
+                    <p class="timer-title">Short Break:</p>
+                    <p class="timer-number"><span id="short-beep-number">1</span> Beep</p>
+                    <button class="timer-button" id="short-beep-increment">+</button>
+                    <button class="timer-button" id="short-beep-decrement">-</button>
                 </div>
                 <div class="timer-container">
-                    <p>Short Break</p>
-                    <input  class="timer-input" type="text" id="short-break"  maxlength="2" value="5">
-                    <p>mins</p>
-                </div>
-                <div class="timer-container">
-                    <p>Long Break</p>
-                    <input  class="timer-input" type="text" id="long-break" maxlength="2" value="15">
-                    <p>mins</p>
+                    <p class="timer-title">Long Break:</p>
+                    <p class="timer-number"><span id="long-beep-number">1</span> Beep</p>
+                    <button class="timer-button" id="long-beep-increment">+</button>
+                    <button class="timer-button" id="long-beep-decrement">-</button>
                 </div>
             </section>
             <section id="general-settings" class="general-settings">
@@ -37,10 +34,8 @@
                 </gsetting-component>
                 <gsetting-component button-id="auto-start-button" name="Auto Start Next Pomo?">
                 </gsetting-component>
-
-                <!-- will create component here -->
             </section>
-            <button class="to-landing-page">Return to Start Page</button>
+            <button class="to-landing-page" id="to-landing-page">Return to Start Page</button>
         </main>
         <script type="text/javascript" src="../JS/settings-page.js"></script>
         <script type="text/javascript" src="../JS/main.js"></script>

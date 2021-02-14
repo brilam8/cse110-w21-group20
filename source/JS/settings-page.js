@@ -1,12 +1,28 @@
-const timerinputs = document.getElementsByClassName("setting-input");
 const settingsliders = [];
-for (const input of timerinputs){
-    input.addEventListener("keydown", (event)=>{
-        if (!parseInt(event.key) && event.key != "0" && event.key != "Backspace"){  
-            if (event.preventDefault) event.preventDefault();
-            event.returnValue = false;
-        }
-    });
+const timerbuttons = document.getElementsByClassName("timer-button");
+const shortBeepNum = document.getElementById('short-beep-number');
+const longBeepNum = document.getElementById('long-beep-number');
+
+document.getElementById("to-landing-page").addEventListener('click', ()=> {
+  // window.location.replace("./landing-page.html"); //better but only when landing page is finished
+  window.location.href = "./landing-page.html";
+});
+
+for (const button of timerbuttons){
+  button.addEventListener('click', ()=>{
+    if (button.id == "short-beep-increment"){
+      shortBeepNum.textContent = shortBeepNum.textContent != "5" ? parseInt(shortBeepNum.textContent) + 1 : shortBeepNum.textContent;
+    }
+    else if (button.id == "short-beep-decrement"){
+      shortBeepNum.textContent = shortBeepNum.textContent != "1" ? parseInt(shortBeepNum.textContent) - 1 : shortBeepNum.textContent;
+    }
+    else if (button.id == "long-beep-increment"){
+      longBeepNum.textContent = longBeepNum.textContent != "5" ? parseInt(longBeepNum.textContent) + 1 : longBeepNum.textContent;
+    }
+    else if (button.id == "long-beep-decrement"){
+      longBeepNum.textContent = longBeepNum.textContent != "1" ? parseInt(longBeepNum.textContent) - 1 : longBeepNum.textContent;
+    }
+  });
 }
 
 class GeneralSettingComponent extends HTMLElement {
@@ -96,31 +112,16 @@ class GeneralSettingComponent extends HTMLElement {
         this.shadowRoot.append(style, container);
     }
 
-    // static get observedAttributes() {
-    //     return [`name`, `button-id`];
-    // }
-
-    // attributeChangedCallback(name, oldValue, newValue){
-    //     if (name == 'name'){
-    //         this.name.textContent = newValue;
-    //     }
-    //     else if (name == 'button-id'){
-    //         this.button.setAttribute('id', newValue);
-    //     }
-    // }
 }
 
 customElements.define('gsetting-component', GeneralSettingComponent);
 
 
-// window.addEventListener('DOMContentLoaded', () => {
-//     let darkmode = document.createElement('gsetting-component');
-//     darkmode.setAttribute('name', 'Dark Mode');
-//     darkmode.setAttribute('button-id', 'dark-mode-button');
-//     generalsetting.appendChild(darkmode);
-
-//     let autostart = document.createElement('gsetting-component');
-//     autostart.setAttribute('name', 'Auto Start Next Pomo?');
-//     autostart.setAttribute('button-id', 'auto-start-button');
-//     generalsetting.appendChild(autostart);
-// });
+// for (const input of timerinputs){
+//     input.addEventListener("keydown", (event)=>{
+//         if (!parseInt(event.key) && event.key != "0" && event.key != "Backspace"){  
+//             if (event.preventDefault) event.preventDefault();
+//             event.returnValue = false;
+//         }
+//     });
+// }
