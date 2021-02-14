@@ -24,3 +24,8 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx eslint ./JS/*.js
+  JSDocs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: npm run jsdoc-generation
