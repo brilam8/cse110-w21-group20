@@ -28,7 +28,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: sudo npx jsdoc ./JS -r -d ./out
+      - name: jsDoc
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: ./JS
+          output_dir: ./out
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
