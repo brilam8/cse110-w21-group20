@@ -2,7 +2,7 @@ name: CI_PULL
 
 on:
   pull_request:
-    branches: [ brian ]
+    branches: [ brian, dev ]
     # TO BE CHANGED since it should be the branch you're working on
 
 
