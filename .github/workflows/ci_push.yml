@@ -28,4 +28,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: sudo npm run jsdoc-generation
+    - run: npm run jsdoc-generation
