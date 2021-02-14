@@ -27,12 +27,15 @@ jobs:
   JSDocs:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - run: sudo npx jsdoc ./JS -r -d ./docs
-    - run: ls
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: docs
+      - name: jsDoc
+        uses: andstor/jsdoc-action@v1
+        with:
+          source_dir: ./JS
+          output_dir: ./out
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          publish_branch: docs  
+          publish_dir: ./out
 
