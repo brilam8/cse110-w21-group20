@@ -3,12 +3,18 @@ const timerbuttons = document.getElementsByClassName("timer-button");
 const shortBeepNum = document.getElementById('short-beep-number');
 const longBeepNum = document.getElementById('long-beep-number');
 
+if (!window.localStorage.getItem('slider-clicked')){
+  window.localStorage.setItem('slider-clicked', JSON.stringify({}));
+}
+
+
 document.getElementById("to-landing-page").addEventListener('click', ()=> {
   // window.location.replace("./landing-page.html"); //better but only when landing page is finished
   window.location.href = "./landing-page.html";
 });
 
 for (const button of timerbuttons){
+  //need to add into local storage later
   button.addEventListener('click', ()=>{
     if (button.id == "short-beep-increment"){
       shortBeepNum.textContent = shortBeepNum.textContent != "5" ? parseInt(shortBeepNum.textContent) + 1 : shortBeepNum.textContent;
@@ -49,15 +55,22 @@ class GeneralSettingComponent extends HTMLElement {
         this.button = button;
     
         button.onclick = ()=>{
+            //moves the slider to on or off
             button.classList.toggle("setting-slider-switch");
+
+            //stores settings in local storage
+            let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
+            clickedList[button.id] = clickedList[button.id] == "1" ? "0" : "1";
+            window.localStorage.setItem("slider-clicked", JSON.stringify(clickedList));
+
+            //sets slider tag to on or off
             let currentText = slider.textContent = slider.textContent == "On" ? "Off" : "On";
+
+            //sets background to black if darkmode is on.
             if (button.id === "dark-mode-button"){
                 let color = currentText == "On" ? 'black' : 'white';
                 let otherColor = color == "white" ? 'black' : 'white';
                 window.localStorage.setItem('dark-mode', `${color}`);
-                // for (const settingslider of settingsliders){
-                //     settingslider.style.color = otherColor;
-                // }
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
             }
@@ -109,12 +122,21 @@ class GeneralSettingComponent extends HTMLElement {
             transform: translate(23px);
           }
         `;
+
+        //reclicks sliders on setting page if clicked in local storage
+        let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
+        if (clickedList[button.id] == "1"){
+          button.classList.toggle("setting-slider-switch");
+          slider.textContent = slider.textContent == "On" ? "Off" : "On";
+        }
+
         this.shadowRoot.append(style, container);
     }
 
 }
 
 customElements.define('gsetting-component', GeneralSettingComponent);
+
 
 
 // for (const input of timerinputs){
