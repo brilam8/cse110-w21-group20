@@ -28,4 +28,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: sudo npx jsdoc ./source/JS -r -d ./source/docs
+    - run: sudo npx jsdoc ./JS -r -d ./source/docs
