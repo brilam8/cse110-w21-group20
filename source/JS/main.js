@@ -6,3 +6,7 @@ if (darkmode){
     document.body.style.backgroundColor = color;
     document.body.style.color = otherColor;
 }
+
+module.exports = function sum(a, b) {
+    return a + b;
+};
