@@ -2,7 +2,7 @@ name: CI_PUSH
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ dev , tommy, brian, frankli, Iain]
     # TO BE CHANGED since it should be the branch you're working on
 
 defaults:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npx htmlhint ./HTML/settings-page.html
+    - run: npx htmlhint ./HTML/*.html
   Stylelint:
     runs-on: ubuntu-latest
     steps:

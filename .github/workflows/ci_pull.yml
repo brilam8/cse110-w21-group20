@@ -2,8 +2,8 @@ name: CI_PULL
 
 on:
   pull_request:
-    branches: [ dev ]
-    # TO BE CHANGED since it should be the branch you're working on
+    branches: [ dev , tommy, brian, frankli, Iain]
+    # TO BE CHANGED since it should include the branch you're working on
 
 
 defaults:
