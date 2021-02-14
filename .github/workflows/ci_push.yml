@@ -29,10 +29,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: sudo npx jsdoc ./JS -r -d ./docs
-    - name: publish-to-git
-      uses: seanmiddleditch/gha-publish-to-git@v2
+    - name: Deploy
+      uses: peaceiris/actions-gh-pages@v3
       with:
-        branch: docs
-        github_token: '${{ secrets.GITHUB_TOKEN  }}'
-        source_folder: ./docs
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./docs
 
