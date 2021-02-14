@@ -2,8 +2,7 @@
 
 echo "running linters..."
 
-# npx htmlhint ./HTML/*.html
-npx htmlhint ./HTML/settings-page.html
+npx htmlhint ./HTML/*.html
 echo "done running htmlhint!"
 
 npx stylelint ./*.css
