@@ -2,7 +2,7 @@ let darkmode = window.localStorage.getItem('dark-mode');
 
 if (darkmode){
     let color = darkmode;
-    let otherColor = color == "white" ? 'black' : 'white';
+    let otherColor = color == "white" ? "#1A1A1A" : 'white';
     document.body.style.backgroundColor = color;
     document.body.style.color = otherColor;
 }

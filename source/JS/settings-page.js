@@ -68,8 +68,8 @@ class GeneralSettingComponent extends HTMLElement {
 
             //sets background to black if darkmode is on.
             if (button.id === "dark-mode-button"){
-                let color = currentText == "On" ? 'black' : 'white';
-                let otherColor = color == "white" ? 'black' : 'white';
+                let color = currentText == "On" ? "#1A1A1A" : 'white';
+                let otherColor = color == "white" ? "#1A1A1A" : 'white';
                 window.localStorage.setItem('dark-mode', `${color}`);
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
