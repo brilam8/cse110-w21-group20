@@ -145,12 +145,12 @@ audio {
 
 /* support safari */
 
-@media not all and (min-resolution:.001dpcm) { 
-  @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+@media not all and (min-resolution: 0.001dpcm) {
+  @supports (-webkit-appearance: none) and (stroke-color: transparent) {
     .timer {
       display: flex;
       justify-content: center;
       align-items: center;
     }
-}}
-
+  }
+}
