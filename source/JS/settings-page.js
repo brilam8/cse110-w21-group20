@@ -1,5 +1,5 @@
 const settingsliders = [];
-const timerbuttons = document.getElementsByClassName("timer-button");
+const timerbuttons = document.getElementsByClassName("timer-settings-button");
 const shortBeepNum = document.getElementById('short-beep-number');
 const longBeepNum = document.getElementById('long-beep-number');
 
@@ -68,8 +68,8 @@ class GeneralSettingComponent extends HTMLElement {
 
             //sets background to black if darkmode is on.
             if (button.id === "dark-mode-button"){
-                let color = currentText == "On" ? "#1A1A1A" : 'white';
-                let otherColor = color == "white" ? "#1A1A1A" : 'white';
+                let color = currentText == "On" ? "#1a1a1a" : 'white';
+                let otherColor = color == "white" ? "#1a1a1a" : 'white';
                 window.localStorage.setItem('dark-mode', `${color}`);
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
@@ -79,9 +79,10 @@ class GeneralSettingComponent extends HTMLElement {
         const style = document.createElement('style');
         style.textContent = `
           .general-settings-container {
-                display: flex;
-                margin-top: 20px;
-                margin-left: 10px;
+            display: flex;
+            margin-top: 20px;
+            margin-left: 10px;
+            align-items: center;
           }
           
           .general-container-name {
@@ -90,7 +91,9 @@ class GeneralSettingComponent extends HTMLElement {
             margin: 0 5px;
             border: 4px solid;
             border-radius: 25px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           
           .setting-slider {
