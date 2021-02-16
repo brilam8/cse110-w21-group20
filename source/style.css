@@ -46,7 +46,7 @@ audio {
   visibility: hidden;
 }
 
-/* style for settings-page.html starts here*/
+/* style for settings-page.html starts here */
 .settings-page {
   transition: all 0.6s ease-out;
 }
@@ -96,9 +96,10 @@ audio {
   width: 80%;
   height: 60%;
 }
+
 /* style for settings-page.html ends here */
 
-/* style for pomo-page.html starts here*/
+/* style for pomo-page.html starts here */
 .task {
   height: 50px;
   width: 250px;
@@ -106,19 +107,20 @@ audio {
   font-size: larger;
   border: 2px solid;
   color: #1a1a1a;
-  background-color: #E6E6E6;
+  background-color: #e6e6e6;
   display: flex;
   justify-content: center;
   align-items: center;
-
 }
 
-.timer-container, .timer, .progress-bar {
+.timer-container,
+.timer,
+.progress-bar {
   width: 600px;
   height: 60px;
   border-radius: 10px;
   font-size: 50px;
-} 
+}
 
 .timer-container {
   display: flex;
@@ -138,4 +140,5 @@ audio {
   position: absolute;
   background-color: rgba(242, 71, 38, 0.5);
 }
+
 /* style for pomo-page.html ends here */
