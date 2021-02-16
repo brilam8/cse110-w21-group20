@@ -130,7 +130,7 @@ audio {
 }
 
 .timer {
-  position: absolute;
+  position: absolute!important;
   display: flex;
   justify-content: center;
   align-items: center;
