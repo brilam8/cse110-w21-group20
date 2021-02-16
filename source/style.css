@@ -130,7 +130,7 @@ audio {
 }
 
 .timer {
-  position: absolute !important;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -142,3 +142,15 @@ audio {
 }
 
 /* style for pomo-page.html ends here */
+
+/* support safari */
+
+@media not all and (min-resolution:.001dpcm) { 
+  @supports (-webkit-appearance:none) and (stroke-color:transparent) {
+    .timer {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+}}
+

@@ -43,6 +43,7 @@ function setTimerString(){
     mins = mins < 10 ? "0" + parseInt(mins) : parseInt(mins);
     secs = secs < 10 ? "0" + parseInt(secs) : parseInt(secs);
     timer.innerHTML = mins + ":" + secs;
+    document.title = mins + ":" + secs + " Timer Active";
 }
 
 function reset(){
