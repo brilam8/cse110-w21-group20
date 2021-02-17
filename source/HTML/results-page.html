@@ -2,15 +2,35 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="author" content="NAME HERE">
+        <meta name="author" content="Brian Lam">
         <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="../style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-        <title>Sample Title</title>
+        <link href="https://fonts.googleapis.com/css2?family=Lato&Oswald:wght@700&Open+Sans&display=swap" rel="stylesheet">
+        <title>Results</title>
     </head>
-    <body>
-        <p>Hello World</p>
+    <body style = "background-color: rgb(242, 71, 38, 80%)">
+        <header>
+            <div class="logo">
+                <span class="logo-text">wepomo</span>
+            </div>
+        </header>
+        <main class="container">
+            
+            <h1>Great Job!</h1>
+            <grid class="two-col-grid-container" id="results">
+                <p class="table-header">Tasks completed: </p>
+                <p class="table-header">Tasks left to do: </p>
+                <ol id="complete-items">
+                </ol>
+                <ol id="uncomplete-items">
+                </ol>
+            </grid>
+            <div class="flex-row">
+                <button class="button-gray-back">Assessment</button>
+                <a href="landing-page.html"> <button class="button-gray-back">Restart</button></a>
+            </div>
+        </main>
         <script src="../JS/main.js"></script>
         <script src="../JS/results-page.js"></script>
     </body>
