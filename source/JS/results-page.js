@@ -1,18 +1,21 @@
-localStorage = window.localStorage;
-completedItems = document.getElementById('complete-items');
-uncompletedItems = document.getElementById('uncomplete-items');
+const localStorage = window.localStorage;
+const completedItems = document.getElementById('complete-items');
+const uncompletedItems = document.getElementById('uncomplete-items');
 
+
+/**
+ * Populates the tasks completed and tasks left to do
+ * by checking the tasks stored in local storage
+ */
 window.addEventListener('DOMContentLoaded', () => {
-    
     if (!localStorage.getItem('tasks')) {
         console.log("There are no tasks in the storage?");
-        updateCount();
+        checkEmpty();
       //window.location.replace("landing-page.html");
     }
     else {
-        data = JSON.parse(localStorage.getItem('tasks'));
+        const data = JSON.parse(localStorage.getItem('tasks'));
         for (let i = 0; i < data.length; i++ ) {
-            console.log(data[i]);
             if (data[i].complete === true){
                 let item = completedItems.appendChild(document.createElement("li"));
                 item.setAttribute('class', 'item');
@@ -24,15 +27,17 @@ window.addEventListener('DOMContentLoaded', () => {
                 item.textContent = `${data[i].name}`;
             }
         }
-        updateCount();
+        checkEmpty();
     }
-    //console.log(data[0])
-    
 });
 
-function updateCount(){
-    let complete_count = completedItems.childNodes.length - 1
-    let uncomplete_count = uncompletedItems.childNodes.length - 1
+/**
+ * Checks to see whether either the completed items or uncompleted items 
+ * arrays are empty or not and appropriately adds a message if so
+ */
+function checkEmpty(){
+    let complete_count = completedItems.childNodes.length - 1;
+    let uncomplete_count = uncompletedItems.childNodes.length - 1;
     if (complete_count <= 0) {
         let complete_error = completedItems.appendChild(document.createElement("p"));
         complete_error.setAttribute('class', 'item');

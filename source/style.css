@@ -14,7 +14,7 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(255,255,255, 80%);
+  background-color: rgb(255, 255, 255, 80%);
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;
@@ -33,16 +33,16 @@ body {
   font-family: 'Oswald', sans-serif;
   font-size: 64px;
   font-weight: bold;
-  color: #FFFFFF;
+  color: #FFF;
 }
 
 .table-header {
   font-family: 'Open Sans', sans-serif;
-  color: #FFFFFF;
+  color: #FFF;
   font-size: 24px;
   display: block;
   font-style: normal;
-  margin-block-end: 0em;
+  margin-block-end: 0;
 }
 
 .two-col-grid-container {
@@ -72,28 +72,28 @@ body {
   padding-top: 7px;
   padding-bottom: 7px;
   font-family: 'Open Sans', sans-serif;
-  color: #FFFFFF;
+  color: #fff;
   font-size: 20px;
   font-style: normal;
 }
 
 .flex-row {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   padding-left: 50px;
   padding-right: 50px;
-  margin: 25px
+  margin: 25px;
 }
 
 .button-gray-back {
-  background-color: rgb(255,255,255, 80%);
+  background-color: rgb(255, 255, 255, 80%);
   font-family: "Open Sans", sans-serif;
   font-size: 20px;
   font-weight: bold;
-  color: #F24726;
+  color: #f24726;
   border-style: none;
-  border-radius: 8px; 
+  border-radius: 8px;
   width: 175px;
   height: 50px;
   padding-top: 10px;
@@ -103,19 +103,21 @@ body {
 .button-gray-back:hover {
   border: 2px solid grey;
   background-color: rgba(235, 235, 235, 0.8);
-  cursor:pointer;
-  transition: background-color .5s ease;
+  cursor: pointer;
+  transition: background-color 0.5s ease;
 }
 
 .container {
   width: 75%;
   margin: auto;
-  padding: 30px
+  padding: 30px;
 }
 
-h1, h2, h3 {
+h1, 
+h2, 
+h3 {
   font-family: 'Open Sans', sans-serif;
-  color: #FFFFFF;
+  color: #fff;
   text-align: center;
   display: block;
 }
@@ -245,4 +247,3 @@ h1, h2, h3 {
 .to-landing-page:hover {
   background-color: rgba(255, 119, 45, 0.8);
 }
-
