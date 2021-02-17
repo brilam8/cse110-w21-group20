@@ -1,5 +1,5 @@
 const settingsliders = [];
-const timerbuttons = document.getElementsByClassName("timer-button");
+const timerbuttons = document.getElementsByClassName("timer-settings-button");
 const shortBeepNum = document.getElementById('short-beep-number');
 const longBeepNum = document.getElementById('long-beep-number');
 
@@ -58,7 +58,7 @@ class GeneralSettingComponent extends HTMLElement {
             //moves the slider to on or off
             button.classList.toggle("setting-slider-switch");
 
-            //stores settings in local storage
+            //stores settings state in local storage
             let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
             clickedList[button.id] = clickedList[button.id] == "1" ? "0" : "1";
             window.localStorage.setItem("slider-clicked", JSON.stringify(clickedList));
@@ -68,8 +68,8 @@ class GeneralSettingComponent extends HTMLElement {
 
             //sets background to black if darkmode is on.
             if (button.id === "dark-mode-button"){
-                let color = currentText == "On" ? 'black' : 'white';
-                let otherColor = color == "white" ? 'black' : 'white';
+                let color = currentText == "On" ? "#1a1a1a" : 'white';
+                let otherColor = color == "white" ? "#1a1a1a" : 'white';
                 window.localStorage.setItem('dark-mode', `${color}`);
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
@@ -79,9 +79,10 @@ class GeneralSettingComponent extends HTMLElement {
         const style = document.createElement('style');
         style.textContent = `
           .general-settings-container {
-                display: flex;
-                margin-top: 20px;
-                margin-left: 10px;
+            display: flex;
+            margin-top: 20px;
+            margin-left: 10px;
+            align-items: center;
           }
           
           .general-container-name {
@@ -90,7 +91,9 @@ class GeneralSettingComponent extends HTMLElement {
             margin: 0 5px;
             border: 4px solid;
             border-radius: 25px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           
           .setting-slider {
@@ -106,7 +109,7 @@ class GeneralSettingComponent extends HTMLElement {
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background-color: rgb(255, 119, 45);
+            background-color: rgb(242, 71, 38);
             transform: translate(-3px);
             display: flex;
             justify-content: center;
@@ -123,7 +126,7 @@ class GeneralSettingComponent extends HTMLElement {
           }
         `;
 
-        //reclicks sliders on setting page if clicked in local storage
+        //reclicks sliders on setting page to setting state stored in local storage
         let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
         if (clickedList[button.id] == "1"){
           button.classList.toggle("setting-slider-switch");

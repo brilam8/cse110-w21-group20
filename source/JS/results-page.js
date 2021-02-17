@@ -11,19 +11,18 @@ window.addEventListener('DOMContentLoaded', () => {
     if (!localStorage.getItem('tasks')) {
         console.log("There are no tasks in the storage?");
         checkEmpty();
-      //window.location.replace("landing-page.html");
     }
     else {
         const data = JSON.parse(localStorage.getItem('tasks'));
         for (let i = 0; i < data.length; i++ ) {
             if (data[i].complete === true){
                 let item = completedItems.appendChild(document.createElement("li"));
-                item.setAttribute('class', 'item');
+                item.setAttribute('class', 'li-task');
                 item.textContent = `${data[i].name} (${data[i].pomos} pomos)`;
             }
             else if (data[i].complete === false){
                 let item = uncompletedItems.appendChild(document.createElement("li"));
-                item.setAttribute('class', 'item');
+                item.setAttribute('class', 'li-task');
                 item.textContent = `${data[i].name}`;
             }
         }
@@ -40,13 +39,13 @@ function checkEmpty(){
     let uncomplete_count = uncompletedItems.childNodes.length - 1;
     if (complete_count <= 0) {
         let complete_error = completedItems.appendChild(document.createElement("p"));
-        complete_error.setAttribute('class', 'item');
+        complete_error.setAttribute('class', 'p-body');
         complete_error.textContent = `No completed tasks`;
         
     }
     if (uncomplete_count <= 0) {
         let uncomplete_error = uncompletedItems.appendChild(document.createElement("p"));
-        uncomplete_error.setAttribute('class', 'item');
+        uncomplete_error.setAttribute('class', 'p-body');
         uncomplete_error.textContent = `No tasks uncompleted`;
     }
 }

@@ -1,10 +1,29 @@
 body {
   font-family: 'Lato', sans-serif;
   background-color: white;
-  color: black;
+  color: #1a1a1a;
   margin: 0;
 }
 
+.p-body {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 20px;
+  font-style: normal;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  text-align: center;
+  display: block;
+}
+
+/* custom scrollbar */
 ::-webkit-scrollbar {
   width: 20px;
 }
@@ -23,7 +42,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(226, 226, 226, 0.8);
 }
+/* end of custom scrollbar */
 
+/* results-page css starts here */
 .logo {
   padding-left: 10vw;
   padding-top: 10vh;
@@ -68,7 +89,7 @@ body {
   max-height: 50vh;
 }
 
-.item {
+.li-task {
   padding-top: 7px;
   padding-bottom: 7px;
   font-family: 'Open Sans', sans-serif;
@@ -77,7 +98,7 @@ body {
   font-style: normal;
 }
 
-.flex-row {
+.div-flex-row {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -107,20 +128,18 @@ body {
   transition: background-color 0.5s ease;
 }
 
-.container {
+.results-container {
   width: 75%;
   margin: auto;
   padding: 30px;
+  height: 100%;
+  display: block;
+  flex-direction: none;
+  justify-content: none;
+  align-items: none;
 }
 
-h1,
-h2,
-h3 {
-  font-family: 'Open Sans', sans-serif;
-  color: #fff;
-  text-align: center;
-  display: block;
-}
+/* results-page css ends here */
 
 .settings-page {
   width: 100vw;
@@ -128,22 +147,47 @@ h3 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  transition: all 0.6s ease-out;
 }
 
 .page-title {
-  color: rgb(255, 119, 45);
+  color: rgb(242, 71, 38);
   font-size: 40px;
   font-weight: 800;
 }
 
-.settings {
+main {
   width: 70vw;
   height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.button {
+  background-color: rgba(242, 71, 38, 1);
+  border: none;
+  color: white;
+  height: 50px;
+  width: 250px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: larger;
+  transition: all 0.3s ease-in;
+}
+
+.button:hover {
+  background-color: rgba(242, 71, 38, 0.8);
+}
+
+audio {
+  visibility: hidden;
+}
+
+/* style for settings-page.html starts here */
+.settings-page {
+  transition: all 0.6s ease-out;
 }
 
 .timer-settings {
@@ -157,15 +201,15 @@ h3 {
   border-radius: 25px;
 }
 
-.timer-title,
-.timer-number {
+.timer-settings-title,
+.timer-settings-number {
   width: 100px;
   height: 30px;
   text-align: center;
 }
 
-.timer-container,
-.timer-button {
+.timer-settings-container,
+.timer-settings-button {
   width: 70%;
   height: 20%;
   display: flex;
@@ -174,7 +218,7 @@ h3 {
   align-items: center;
 }
 
-.timer-button {
+.timer-settings-button {
   font-size: x-large;
   width: 35px;
   height: 25px;
@@ -183,7 +227,7 @@ h3 {
   cursor: pointer;
 }
 
-.timer-button:hover {
+.timer-settings-button:hover {
   border: 2px solid grey;
 }
 
@@ -192,58 +236,48 @@ h3 {
   height: 60%;
 }
 
-/* general setting component style starts here */
+/* style for settings-page.html ends here */
 
-.general-settings-container {
-  display: flex;
-  margin-top: 10px;
-  margin-left: 10px;
-}
-
-.general-settings-container p {
-  width: 200px;
-  height: 40px;
-}
-
-.setting-slider {
-  width: 70px;
-  height: 40px;
-  border-radius: 25px;
-  outline: none;
-  border: none;
-}
-
-.slider-circle {
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  transform: translate(-3px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  transition: all 0.6s ease-out;
-}
-
-.setting-slider-switch .slider-circle {
-  transform: translate(23px);
-}
-
-/* general setting component style ends here */
-
-.to-landing-page {
-  background-color: rgba(255, 119, 45, 1);
-  border: none;
-  color: white;
+/* style for pomo-page.html starts here */
+.task {
   height: 50px;
   width: 250px;
   border-radius: 10px;
-  outline: none;
-  cursor: pointer;
   font-size: larger;
-  transition: all 0.3s ease-in;
+  border: 2px solid;
+  color: #1a1a1a;
+  background-color: #e6e6e6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.to-landing-page:hover {
-  background-color: rgba(255, 119, 45, 0.8);
+.timer-container,
+.timer,
+.progress-bar {
+  width: 600px;
+  height: 60px;
+  border-radius: 10px;
+  font-size: 50px;
 }
+
+.timer-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid;
+  margin-bottom: 10px;
+}
+
+.timer {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.progress-bar {
+  position: absolute;
+  background-color: rgba(242, 71, 38, 0.5);
+}
+
+/* style for pomo-page.html ends here */
