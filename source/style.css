@@ -93,3 +93,83 @@ body {
 }
 
 /* general setting component style ends here */
+
+
+
+
+
+/* break page style starts here */
+.break-table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+  height: 200px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:150px;
+}
+
+
+.break-table tr, th {
+  color:orange;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 4px;
+  height:5px;
+  margin:4px;
+}
+
+.break-table tr:nth-child(even) {
+  background-color: #dddddd;
+}
+
+.break-button {
+  background-color: rgba(242, 71, 38, 1);
+  color: white;
+  height: 50px;
+  width: 100px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: larger;
+  transition: all 0.3s ease-in;
+  margin-left:500px;
+  margin-right:0px;
+  margin-top:60px;
+  margin-bottom:0px;
+}
+
+.button:hover {
+  background-color: rgba(242, 71, 38, 0.8);
+}
+
+
+.break-timer-container {
+  display: flex;
+  align-items: center;
+  border: 2px solid;
+  margin-bottom: 10px;
+}
+
+.break-timer {
+  justify-content: center;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 700px;
+  height: 65px;
+  margin-left:100px;
+  border-radius: 5px;
+  font-size: 70px;
+}
+
+.break-timer-container {
+  height: 65px;
+  margin-left:100px;
+  border-radius: 5px;
+  font-size: 70px;
+  width: 800px;
+}
+
+/* break-page style ends here */
+
