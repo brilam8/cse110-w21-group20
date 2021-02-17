@@ -33,12 +33,12 @@ body {
   font-family: 'Oswald', sans-serif;
   font-size: 64px;
   font-weight: bold;
-  color: #FFF;
+  color: #fff;
 }
 
 .table-header {
   font-family: 'Open Sans', sans-serif;
-  color: #FFF;
+  color: #fff;
   font-size: 24px;
   display: block;
   font-style: normal;
@@ -113,8 +113,8 @@ body {
   padding: 30px;
 }
 
-h1, 
-h2, 
+h1,
+h2,
 h3 {
   font-family: 'Open Sans', sans-serif;
   color: #fff;
