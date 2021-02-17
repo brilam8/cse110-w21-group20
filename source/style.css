@@ -42,6 +42,7 @@ h3 {
 ::-webkit-scrollbar-thumb:hover {
   background-color: rgba(226, 226, 226, 0.8);
 }
+
 /* end of custom scrollbar */
 
 /* results-page css starts here */
@@ -140,14 +141,6 @@ h3 {
 }
 
 /* results-page css ends here */
-
-.settings-page {
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .page-title {
   color: rgb(242, 71, 38);
