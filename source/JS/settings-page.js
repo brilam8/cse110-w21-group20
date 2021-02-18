@@ -1,15 +1,35 @@
-
-const timerinputs = document.getElementsByClassName("setting-input");
 const settingsliders = [];
-for (const input of timerinputs){
-    input.addEventListener("keydown", (event)=>{
-        if (!parseInt(event.key) && event.key != "0" && event.key != "Backspace"){  
-            if (event.preventDefault) event.preventDefault();
-            event.returnValue = false;
-        }
-    });
+const timerbuttons = document.getElementsByClassName("timer-settings-button");
+const shortBeepNum = document.getElementById('short-beep-number');
+const longBeepNum = document.getElementById('long-beep-number');
+
+if (!window.localStorage.getItem('slider-clicked')){
+  window.localStorage.setItem('slider-clicked', JSON.stringify({}));
 }
 
+
+document.getElementById("to-landing-page").addEventListener('click', ()=> {
+  // window.location.replace("./landing-page.html"); //better but only when landing page is finished
+  window.location.href = "./landing-page.html";
+});
+
+for (const button of timerbuttons){
+  //need to add into local storage later
+  button.addEventListener('click', ()=>{
+    if (button.id == "short-beep-increment"){
+      shortBeepNum.textContent = shortBeepNum.textContent != "5" ? parseInt(shortBeepNum.textContent) + 1 : shortBeepNum.textContent;
+    }
+    else if (button.id == "short-beep-decrement"){
+      shortBeepNum.textContent = shortBeepNum.textContent != "1" ? parseInt(shortBeepNum.textContent) - 1 : shortBeepNum.textContent;
+    }
+    else if (button.id == "long-beep-increment"){
+      longBeepNum.textContent = longBeepNum.textContent != "5" ? parseInt(longBeepNum.textContent) + 1 : longBeepNum.textContent;
+    }
+    else if (button.id == "long-beep-decrement"){
+      longBeepNum.textContent = longBeepNum.textContent != "1" ? parseInt(longBeepNum.textContent) - 1 : longBeepNum.textContent;
+    }
+  });
+}
 
 class GeneralSettingComponent extends HTMLElement {
     constructor(){
@@ -35,14 +55,22 @@ class GeneralSettingComponent extends HTMLElement {
         this.button = button;
     
         button.onclick = ()=>{
+            //moves the slider to on or off
             button.classList.toggle("setting-slider-switch");
+
+            //stores settings state in local storage
+            let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
+            clickedList[button.id] = clickedList[button.id] == "1" ? "0" : "1";
+            window.localStorage.setItem("slider-clicked", JSON.stringify(clickedList));
+
+            //sets slider tag to on or off
             let currentText = slider.textContent = slider.textContent == "On" ? "Off" : "On";
+
+            //sets background to black if darkmode is on.
             if (button.id === "dark-mode-button"){
-                let color = currentText == "On" ? 'black' : 'white';
-                let otherColor = color == "white" ? 'black' : 'white';
-                for (const settingslider of settingsliders){
-                    settingslider.style.color = otherColor;
-                }
+                let color = currentText == "On" ? "#1a1a1a" : 'white';
+                let otherColor = color == "white" ? "#1a1a1a" : 'white';
+                window.localStorage.setItem('dark-mode', `${color}`);
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
             }
@@ -51,9 +79,10 @@ class GeneralSettingComponent extends HTMLElement {
         const style = document.createElement('style');
         style.textContent = `
           .general-settings-container {
-                display: flex;
-                margin-top: 20px;
-                margin-left: 10px;
+            display: flex;
+            margin-top: 20px;
+            margin-left: 10px;
+            align-items: center;
           }
           
           .general-container-name {
@@ -62,7 +91,9 @@ class GeneralSettingComponent extends HTMLElement {
             margin: 0 5px;
             border: 4px solid;
             border-radius: 25px;
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
           }
           
           .setting-slider {
@@ -78,47 +109,44 @@ class GeneralSettingComponent extends HTMLElement {
             width: 38px;
             height: 38px;
             border-radius: 50%;
-            background-color: rgb(255, 119, 45);
+            background-color: rgb(242, 71, 38);
             transform: translate(-3px);
             display: flex;
             justify-content: center;
             align-items: center;
             text-align: center;
             transition: all 0.6s ease-out;
+            cursor: pointer;
+
+            color: white; //just added
           }
           
           .setting-slider-switch .slider-circle {
             transform: translate(23px);
           }
         `;
+
+        //reclicks sliders on setting page to setting state stored in local storage
+        let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
+        if (clickedList[button.id] == "1"){
+          button.classList.toggle("setting-slider-switch");
+          slider.textContent = slider.textContent == "On" ? "Off" : "On";
+        }
+
         this.shadowRoot.append(style, container);
     }
 
-    // static get observedAttributes() {
-    //     return [`name`, `button-id`];
-    // }
-
-    // attributeChangedCallback(name, oldValue, newValue){
-    //     if (name == 'name'){
-    //         this.name.textContent = newValue;
-    //     }
-    //     else if (name == 'button-id'){
-    //         this.button.setAttribute('id', newValue);
-    //     }
-    // }
 }
 
 customElements.define('gsetting-component', GeneralSettingComponent);
 
 
-// window.addEventListener('DOMContentLoaded', () => {
-//     let darkmode = document.createElement('gsetting-component');
-//     darkmode.setAttribute('name', 'Dark Mode');
-//     darkmode.setAttribute('button-id', 'dark-mode-button');
-//     generalsetting.appendChild(darkmode);
 
-//     let autostart = document.createElement('gsetting-component');
-//     autostart.setAttribute('name', 'Auto Start Next Pomo?');
-//     autostart.setAttribute('button-id', 'auto-start-button');
-//     generalsetting.appendChild(autostart);
-// });
+// for (const input of timerinputs){
+//     input.addEventListener("keydown", (event)=>{
+//         if (!parseInt(event.key) && event.key != "0" && event.key != "Backspace"){  
+//             if (event.preventDefault) event.preventDefault();
+//             event.returnValue = false;
+//         }
+//     });
+// }
