@@ -286,4 +286,69 @@ audio {
   background-color: rgba(242, 71, 38, 0.5);
 }
 
-/* style for pomo-page.html ends here */
+/* style for break-page html */
+.break-table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 90%;
+  height: 200px;
+  margin-left: 200px;
+}
+
+.break-table th {
+  background-color: #808080;
+}
+
+.break-table tr {
+  color: rgba(248, 141, 1, 0.993);
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.break-table tr:nth-child(odd) {
+  background-color: #ddd;
+}
+
+.break-button {
+  background-color: rgba(242, 71, 38, 1);
+  color: white;
+  height: 80px;
+  width: 100px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: larger;
+  transition: all 0.3s ease-in;
+  margin-left: 200px;
+  margin-top: 100px;
+  margin-bottom: 50px;
+}
+
+.break-button:hover {
+  background-color: rgba(242, 71, 38, 0.8);
+}
+
+.break-timer {
+  justify-content: center;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 700px;
+  height: 20px;
+  margin-top: 150px;
+  margin-left: 100px;
+  border-radius: 5px;
+  font-size: 70px;
+}
+
+.break-timer-container {
+  height: 20px;
+  margin-left: 150px;
+  margin-top: 200px;
+  border-radius: 5px;
+  font-size: 70px;
+  width: 800px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
