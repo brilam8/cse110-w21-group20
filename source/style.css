@@ -272,9 +272,6 @@ audio {
   position: absolute;
   background-color: rgba(242, 71, 38, 0.5);
 }
-<<<<<<< HEAD
-
-
 
 
 /* style for break-page html */
@@ -353,6 +350,4 @@ audio {
   border-radius: 5px;
   font-size: 70px;
   width: 800px;
-} 
-=======
->>>>>>> cf523357c2f56919895d003c702404562b277b09
+}
