@@ -142,14 +142,15 @@ h3 {
 
 /* results-page css ends here */
 
-.page-title {
+.p-title {
   color: rgb(242, 71, 38);
   font-size: 40px;
   font-weight: 800;
+  margin-left: 50px;
 }
 
 main {
-  width: 70vw;
+  width: 100vw;
   height: 70vh;
   display: flex;
   flex-direction: column;
@@ -181,6 +182,18 @@ audio {
 /* style for settings-page.html starts here */
 .settings-page {
   transition: all 0.6s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.settings-page > .p-title {
+  margin-left: 0;
+}
+
+.settings-page > main {
+  width: 70vw;
 }
 
 .timer-settings {
