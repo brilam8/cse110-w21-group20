@@ -273,7 +273,6 @@ audio {
   background-color: rgba(242, 71, 38, 0.5);
 }
 
-
 /* style for break-page html */
 .break-table {
   font-family: arial, sans-serif;
@@ -281,7 +280,6 @@ audio {
   width: 90%;
   height: 200px;
   margin-left:200px;
-  /* margin-top:150px; */
 }
 .break-table th{
   background-color: #808080;
@@ -322,11 +320,9 @@ audio {
   background-color: rgba(242, 71, 38, 0.8);
 } 
 
-
 .break-timer-container {
   display: flex;
   align-items: center;
-  /* border: 2px solid; */
   margin-bottom: 10px;
 }
 
