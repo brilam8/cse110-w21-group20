@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 const button = document.getElementById('break-button');
 const timer = document.getElementById('break-timer');
 const tick = document.getElementById('tick');
@@ -58,6 +58,3 @@ function reset(){
     bar.style.width = "600px";
     button.innerHTML = "Start";
 }
-=======
-
->>>>>>> cf523357c2f56919895d003c702404562b277b09
