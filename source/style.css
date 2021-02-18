@@ -296,7 +296,7 @@ audio {
   background-color: #ddd;
 }
 
- .break-button {
+.break-button {
   background-color: rgba(242, 71, 38, 1);
   color: white;
   height: 80px;
@@ -307,14 +307,13 @@ audio {
   font-size: larger;
   transition: all 0.3s ease-in;
   margin-left: 200px;
-  margin-right: 0px;
-  margin-top: 100px;  
-  margin-bottom: 50px;  
+  margin-top: 100px;
+  margin-bottom: 50px;
 }
 
 .break-button:hover {
   background-color: rgba(242, 71, 38, 0.8);
-} 
+}
 
 .break-timer {
   justify-content: center;
