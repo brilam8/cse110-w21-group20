@@ -279,19 +279,15 @@ audio {
   border-collapse: collapse;
   width: 90%;
   height: 200px;
-  margin-left:200px;
+  margin-left: 200px;
 }
 
-.break-table th{
+.break-table th {
   background-color: #808080;
-  /* border: 1px solid #dddddd; */
-/*   padding: 0px 0px 0px 0px;
-  margin:0px;
-  height: 0px; */
 }
 
 .break-table tr {
-  color:rgba(248, 141, 1, 0.993);
+  color: rgba(248, 141, 1, 0.993);
   border: 1px solid #ddd;
   text-align: left;
 }
@@ -310,21 +306,15 @@ audio {
   cursor: pointer;
   font-size: larger;
   transition: all 0.3s ease-in;
-   margin-left:200px;
-  margin-right:0px;
-    margin-top:100px;  
-   margin-bottom:50px;  
+  margin-left: 200px;
+  margin-right: 0px;
+  margin-top: 100px;  
+  margin-bottom: 50px;  
 }
 
-.button:hover {
+.break-button:hover {
   background-color: rgba(242, 71, 38, 0.8);
 } 
-
-.break-timer-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
 
 .break-timer {
   justify-content: center;
@@ -346,4 +336,7 @@ audio {
   border-radius: 5px;
   font-size: 70px;
   width: 800px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
