@@ -89,7 +89,6 @@
   padding: 15px;
 }
 
-
 /* END OF ALL PAGE PIECES */
 body {
   font-family: 'Lato', sans-serif;
@@ -380,25 +379,6 @@ audio {
 }
 
 /* style for break-page html */
-.break-table {
-  border-collapse: collapse;
-  width: 60%;
-  height: 200px;
-  margin-left: 200px;
-}
-
-.break-table th {
-  background-color: #808080;
-}
-
-.break-table tr {
-  color: rgba(242, 71, 38, 0.8);
-  border: 1px solid #e6e6e6;
-}
-
-.break-table tr:nth-child(odd) {
-  background-color: #e6e6e6;
-}
 
 .break-button {
   background-color: rgba(242, 71, 38, 1);
