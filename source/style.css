@@ -42,7 +42,6 @@
   cursor: pointer;
   transition: background-color 0.5s ease;
 }
-
 .ob-button {
   background-color: rgb(255, 255, 255, 80%);
   font-family: "Open Sans", sans-serif;
