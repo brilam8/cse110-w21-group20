@@ -18,16 +18,11 @@
             border-radius: 12px;
             color: white;
             font-family: 'Lato', sans-serif;
-            margin-top: 10px;
-            margin-left: 280px;
             width: 8em;
         }
         .how-to-button:hover {
             background-color: rgb(255, 119, 45, .3);
             cursor: pointer;
-        }
-        .set-up-button {
-            margin-left: 50px;
         }
         .tip-div {
             background-color: rgb(255, 119, 45, .6);
@@ -41,25 +36,44 @@
             height: 95px;
         }
         .instructions-list {
-            margin-left: 50px;
+            margin: auto;
+        }
+        #buttonwrapper {
+            width: 100%;
+            height: 95px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+        #listwrapper {
+            width: 100%;
+            border: none;
+            display: flex;
+            align-items: center;
+            margin-bottom: 40px;
         }
 
     </style>
     </head>
     <body>
         <h1 class="page-title">how to</h1>
-        <ol class="instructions-list">
-            <li>write down your tasks for the day</li>
-            <li>estimate how many pomos each task will take</li>
-            <li>set your work and break timers</li>
-            <li>begin a pomo</li>
-            <li>take a short break after 1 pomo</li>
-            <li>take a longer break after completing 1 cycle (4 pomos)</li>
-            <li>assess your tasks completed and pomo estimates</li>
-            <li>start a new cycle if needed</li>
-        </ol>
-        <button id="to-home-page" class="how-to-button">Home Page</button>
-        <button id="to-set-up-page" class="how-to-button set-up-button">Set Up</button>
+        <div id="listwrapper">
+            <ol class="instructions-list">
+                <li>write down your tasks for the day</li>
+                <li>estimate how many pomos each task will take</li>
+                <li>set your work and break timers</li>
+                <li>begin a pomo</li>
+                <li>take a short break after 1 pomo</li>
+                <li>take a longer break after completing 1 cycle (4 pomos)</li>
+                <li>assess your tasks completed and pomo estimates</li>
+                <li>start a new cycle if needed</li>
+            </ol>
+        </div>
+        <div id="buttonwrapper">
+            <button id="to-home-page" class="how-to-button">Home Page</button>
+            <button id="to-set-up-page" class="how-to-button">Set Up</button>
+        </div>
         <div class="tip-div">
             <p>When working with a Pomodoro Timer, focus entirely on the task at hand and avoid any distractions! Learn more about the Pomodoro Technique at:</p>
             <a href="https://todoist.com/productivity-methods/pomodoro-technique">The Pomodoro Technique by todoist</a>
