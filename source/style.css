@@ -1,3 +1,96 @@
+/* CSS FOR ALL PAGE SIMILAR PIECES */
+
+/* Consistent Titles */
+.wb-page-title{
+  font-family: 'Oswald', sans-serif;
+  position: relative;
+  left: 10%;
+  top: 15px;
+  text-align: left;
+  color: rgb(242, 71, 38, .9);
+  font-size: 40px;
+  font-weight: 800;
+}
+
+.ob-page-title{
+  font-family: 'Oswald', sans-serif;
+  position: relative;
+  left: 10%;
+  top: 15px;
+  text-align: left;
+  color: #FFFFFF;
+  font-size: 40px;
+  font-weight: 800;
+}
+
+/* Consistent Buttons */
+.wb-button{
+  background-color: rgb(242, 71, 38, 0.9);
+  text-align: center;
+  font-size: 16px;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 12px;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  width: 8em;
+}
+
+.wb-button:hover{
+  border: 2px solid grey;
+  background-color:rgba(242, 71, 38, 0.7);
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+
+.ob-button{
+  background-color: rgb(255, 255, 255, 80%);
+  font-family: "Open Sans", sans-serif;
+  font-size: 20px;
+  font-weight: bold;
+  color: #f24726;
+  border-style: none;
+  border-radius: 8px;
+  width: 175px;
+  height: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.ob-button:hover{
+  border: 2px solid grey;
+  background-color: rgba(235, 235, 235, 0.8);
+  cursor: pointer;
+  transition: background-color 0.5s ease;
+}
+
+/* Consistent Tables */
+.wb-table {
+  border-collapse: collapse;
+  width: 90%;
+  height: 200px;
+  margin-left: 200px;
+}
+
+.wb-table th {
+  background-color: #E6E6E6;
+}
+
+.wb-table tr {
+  color: rgba(242, 71, 38, 0.8);
+  border: 1px solid #E6E6E6;
+}
+
+.wb-table tr:nth-child(odd) {
+  background-color: #E6E6E6;
+}
+.wb-table td{
+  padding: 15px;
+}
+
+
+/* END OF ALL PAGE PIECES */
 body {
   font-family: 'Lato', sans-serif;
   background-color: white;
@@ -288,9 +381,8 @@ audio {
 
 /* style for break-page html */
 .break-table {
-  font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 90%;
+  width: 60%;
   height: 200px;
   margin-left: 200px;
 }
@@ -300,13 +392,12 @@ audio {
 }
 
 .break-table tr {
-  color: rgba(248, 141, 1, 0.993);
-  border: 1px solid #ddd;
-  text-align: left;
+  color: rgba(242, 71, 38, 0.8);
+  border: 1px solid #E6E6E6;
 }
 
 .break-table tr:nth-child(odd) {
-  background-color: #ddd;
+  background-color: #E6E6E6;
 }
 
 .break-button {

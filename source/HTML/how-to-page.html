@@ -9,22 +9,6 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
         <title>how to</title>
     <style>
-    .how-to-button {
-      background-color: rgb(255, 119, 45, 0.8);
-      text-align: center;
-      font-size: 16px;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 12px;
-      color: white;
-      font-family: 'Lato', sans-serif;
-      width: 8em;
-    }
-
-    .how-to-button:hover {
-      background-color: rgb(255, 119, 45, 0.3);
-      cursor: pointer;
-    }
 
     .tip-div {
       background-color: rgb(255, 119, 45, 0.6);
@@ -39,7 +23,11 @@
     }
 
     .instructions-list {
-      margin: auto;
+      margin-left:20%;
+    }
+    .instructions-list li{
+      padding: 3px;
+      font-size: 20px;
     }
 
     #buttonwrapper {
@@ -55,14 +43,14 @@
       width: 100%;
       border: none;
       display: flex;
-      align-items: center;
+      padding: 15px;
       margin-bottom: 40px;
     }
 
     </style>
     </head>
     <body>
-        <h1 class="page-title">how to</h1>
+        <h1 class="wb-page-title">how to</h1>
         <div id="listwrapper">
             <ol class="instructions-list">
                 <li>write down your tasks for the day</li>
@@ -76,8 +64,8 @@
             </ol>
         </div>
         <div id="buttonwrapper">
-            <button id="to-home-page" class="how-to-button">Home Page</button>
-            <button id="to-set-up-page" class="how-to-button">Set Up</button>
+            <button id="to-home-page" class="wb-button">Home Page</button>
+            <button id="to-set-up-page" class="wb-button">Set Up</button>
         </div>
         <div class="tip-div">
             <p>When working with a Pomodoro Timer, focus entirely on the task at hand and avoid any distractions! Learn more about the Pomodoro Technique at:</p>
