@@ -391,10 +391,12 @@ audio {
   background-color: #808080;
 }
 
+/*
 .break-table tr {
   color: rgba(242, 71, 38, 0.8);
   border: 1px solid #e6e6e6;
 }
+*/
 
 .break-table tr:nth-child(odd) {
   background-color: #e6e6e6;
