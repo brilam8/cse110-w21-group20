@@ -52,9 +52,31 @@
                 <input class="right" type="number" placeholder="   20 min" 
                     min="15" max="30" step="5" onkeydown="return false">
             </div>    
+            <gsetting-component button-id="dark-mode-button" name="Dark Mode">
+            </gsetting-component>
         </div>
+        <hr>
+        <div class="flex-container">
+            <div class="title">
+                <div class="left"><b>Timer Sounds Setting</b></div>
+                <div class="right"><b>Beeps</b></div>
+            </div>
+            <div class="entry">
+                <div class="left">Short Break:</div>
+                <input class="right" type="number" placeholder="   1" 
+                    min="1" max="5" step="1" onkeydown="return false">
+            </div>
+            <div class="entry">
+                <div class="left">Long Break</div>
+                <input class="right" type="number" placeholder="   5" 
+                    min="1" max="10" step="1" onkeydown="return false">
+            </div>
+        </div>       
         <hr>
         <button class="bButton">Begin</button>
         <p><b>Total Time: 0 minutes</b></p>
+        
+        <script type="text/javascript" src="../JS/set-up-page.js"></script>
+        <script type="text/javascript" src="../JS/main.js"></script>
     </body>
 </html>
