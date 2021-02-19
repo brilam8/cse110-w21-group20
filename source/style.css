@@ -354,16 +354,15 @@ audio {
 }
 
 /* set-up page starts here */
+.setup {
+  text-align: center;
+}
 
 .setup header {
   margin: 5% 10%;
   text-align: left;
   font-size: 35px;
   color: rgb(255, 81, 0);
-}
-
-.setup body {
-  text-align: center;
 }
 
 .setup hr {
