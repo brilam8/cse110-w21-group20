@@ -1,3 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Zongchen Li" >
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+         <title>break-page</title>
+    </head>
+
+    <body>
+        <main>
+            <div class="break-timer-container">
+                <div id="break-progress-bar" class="break-progress-bar"></div> 
+                <p class="break-timer" id="break-timer"></p>
+            </div>
+
+            <button id="break-button" class="break-button">Abort</button>
+
+            <audio id="beep"><source src="./sounds/Beep.mp3"></audio>
+            <audio id="tick"><source src="./sounds/Tick.mp3"></audio>
+            <audio id="click"><source src="./sounds/Click.mp3"></audio>
+
+           <table class="break-table">
+                <tr>
+                    <td>Goal</td>
+                    <td>Complete </td>
+                </tr>
+                <tr>
+                    <td>Finished one parts of the weekly Lab </td>
+                    <td><input type="checkbox" name="name1" /> </td>
+                </tr>
+                <tr>
+                    <td> Watch today's podcast</td>
+                    <td><input type="checkbox" name="name2" /></td>
+                </tr>
+
+                <tr>
+                    <td> Finish the weekly quiz</td>
+                    <td><input type="checkbox" name="name3" /> </td>
+                </tr>
+            </table>
+        </main>
+    <script src="../JS/break-page.js"></script>
+   </body>
 </html>
+
