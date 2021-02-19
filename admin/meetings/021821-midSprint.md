@@ -24,3 +24,9 @@
 ### Next Meeting:
 Thursday 5pm
 ### Meeting Notes:
+
+Jordan:
+Need to discuss Unit Testing
+ADRs
+
+ADR - info for each task needed
