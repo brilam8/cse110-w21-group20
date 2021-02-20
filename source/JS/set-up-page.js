@@ -26,14 +26,24 @@ class TaskComponent extends HTMLElement {
         this.left = left;
         this.right= right;
 
+        let savedtask;
+        let index = null;
+
         left.addEventListener('input', ()=>{
-            if (right.value && right.type == "number"){
-                tasklist.push([left.value, right.value]);
+            if (right.type == "number"){ //only in set up
+                let pomo = right.value ? right.value : 1;
+                if (index == null) { //new task
+                    tasklist.push([left.value, pomo]);
+                    index = tasklist.length - 1;
+                }
+                else{ //replace task
+                    tasklist[index] = [left.value, pomo];
+                }
             }
         });
         right.addEventListener('input', ()=>{
             if (left.value && right.type == "number"){ //only in set up
-                tasklist.push([left.value, right.value]);
+                tasklist[index] = [left.value, right.value ? right.value : 1]; //replaces pomo
             }
             else{
                 if (right.value == 'on'){ //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
@@ -105,16 +115,21 @@ class TaskComponent extends HTMLElement {
 customElements.define('task-component', TaskComponent);
 
 document.getElementById("begin").addEventListener("click", ()=>{
-    if (tasklist.length){
-        for (const task of tasklist){
-            let entry = document.createElement("task-component");
-            entry.setAttribute('type', "checkbox");
-            entry.setAttribute('left-pointer-event', "none");
-            entry.setAttribute('left-task', task[0]);
-            document.getElementById("break-task-container").appendChild(entry);
+    if (tasklist.length && !(tasklist.length == 1 && tasklist[0][0] == "")){ //checks if tasklist is empty
+        for (let i = 0; i < tasklist.length; i++){
+            if (tasklist[i][0] != ""){ //checks for empty tasks
+                let entry = document.createElement("task-component");
+                entry.setAttribute('type', "checkbox");
+                entry.setAttribute('left-pointer-event', "none");
+                entry.setAttribute('left-task', tasklist[i][0]);
+                document.getElementById("break-task-container").appendChild(entry);
+            }
+            else {
+                tasklist.splice(i--, 1); //removes any empty tasks and fix index i
+            }
         }
         window.localStorage.setItem("tasklist", tasklist.join(',')); //stores copy for results page
-        document.getElementById("active-page").style.display = "inline";
+        document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
         startTimer("active");
     }
