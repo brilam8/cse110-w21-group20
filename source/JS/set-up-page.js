@@ -114,7 +114,8 @@ class TaskComponent extends HTMLElement {
 customElements.define('task-component', TaskComponent);
 
 document.getElementById("begin").addEventListener("click", ()=>{
-    if (tasklist.length && !(tasklist.length == 1 && tasklist[0][0] == "")){ //checks if tasklist is empty
+    let notempty = tasklist.filter(task => task[0] != "");
+    if (tasklist.length && notempty.length){ //checks if tasklist is empty
         for (let i = 0; i < tasklist.length; i++){
             if (tasklist[i][0] != ""){ //checks for empty tasks
                 let entry = document.createElement("task-component");
