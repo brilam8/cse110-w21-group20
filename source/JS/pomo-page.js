@@ -102,7 +102,8 @@ function reset(){
 function abortTimer(){
     clearInterval(state);
     beep.play();
-    
-    window.localStorage.setItem("completedlist", completed.toString()); //bryan you can change this since the result page needs the completedlist
-    document.location.replace('../HTML/results-page.html');
+    setTimeout(function(){ 
+        window.localStorage.setItem("completedlist", completed.toString()); //bryan you can change this since the result page needs the completedlist
+        document.location.replace('../HTML/results-page.html');
+    }, 500);
 }
