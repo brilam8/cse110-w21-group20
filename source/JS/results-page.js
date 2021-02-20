@@ -1,7 +1,7 @@
 const localStorage = window.localStorage;
 const completedItems = document.getElementById('complete-items');
 const uncompletedItems = document.getElementById('uncomplete-items');
-
+const message = document.getElementById('message');
 
 /**
  * Populates the tasks completed and tasks left to do
@@ -37,6 +37,7 @@ window.addEventListener('DOMContentLoaded', () => {
 function checkEmpty(){
     let complete_count = completedItems.childNodes.length - 1;
     let uncomplete_count = uncompletedItems.childNodes.length - 1;
+    
     if (complete_count <= 0) {
         let complete_error = completedItems.appendChild(document.createElement("p"));
         complete_error.setAttribute('class', 'p-body');
@@ -47,5 +48,8 @@ function checkEmpty(){
         let uncomplete_error = uncompletedItems.appendChild(document.createElement("p"));
         uncomplete_error.setAttribute('class', 'p-body');
         uncomplete_error.textContent = `No tasks uncompleted`;
+        if (complete_count > 0) {
+            message.textContent = `Congratulations! You finished all your tasks this session!`;
+        }
     }
 }
