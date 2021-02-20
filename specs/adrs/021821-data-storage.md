@@ -7,7 +7,6 @@
 
 ## Context and Problem Statement
 
-[Descri{be the context and problem statement, e.g., in free form using two to three sentences. You may want to articulate the problem in form of a question.]
 How do we want to store information for the site? Specifically for tasks that the user creates: what information do we want to keep and how do we want to keep it?
 
 ## Decision Drivers <!-- optional -->
@@ -23,7 +22,7 @@ How do we want to store information for the site? Specifically for tasks that th
 
 ## Decision Outcome
 
-Chosen option: Local Storage because we all have practice with local storage and it gives quick access to the data.[justification. e.g., only option, which meets k.o. criterion decision driver | which resolves force force | … | comes out best (see below)].
+Chosen option: Local Storage because we all have practice with local storage and it gives quick access to the data.
 
 ### Positive Consequences <!-- optional -->
 
