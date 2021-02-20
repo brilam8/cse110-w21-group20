@@ -1,4 +1,4 @@
-## Meeting Type: Mid Sprint
+## Meeting Type: Sprint 1 Review
 ### Place: via Zoom					Date: 2-18-21 @ 5:00PM
 				
 ### Attendance:   
