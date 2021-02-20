@@ -106,6 +106,49 @@ body {
   font-style: normal;
 }
 
+.section-page {
+  width: 100%;
+  height: 100vh;
+  display: none;
+}
+
+.p-title {
+  color: rgb(242, 71, 38);
+  font-size: 40px;
+  font-weight: 800;
+  margin-left: 50px;
+}
+
+main {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  background-color: rgba(242, 71, 38, 1);
+  border: none;
+  color: white;
+  height: 50px;
+  width: 250px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-size: larger;
+  transition: all 0.3s ease-in;
+}
+
+.button:hover {
+  background-color: rgba(242, 71, 38, 0.8);
+}
+
+audio {
+  visibility: hidden;
+}
+
 h1,
 h2,
 h3 {
@@ -234,43 +277,6 @@ h3 {
 
 /* results-page css ends here */
 
-.p-title {
-  color: rgb(242, 71, 38);
-  font-size: 40px;
-  font-weight: 800;
-  margin-left: 50px;
-}
-
-main {
-  width: 100vw;
-  height: 70vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.button {
-  background-color: rgba(242, 71, 38, 1);
-  border: none;
-  color: white;
-  height: 50px;
-  width: 250px;
-  border-radius: 10px;
-  outline: none;
-  cursor: pointer;
-  font-size: larger;
-  transition: all 0.3s ease-in;
-}
-
-.button:hover {
-  background-color: rgba(242, 71, 38, 0.8);
-}
-
-audio {
-  visibility: hidden;
-}
-
 /* style for settings-page.html starts here */
 .settings-page {
   transition: all 0.6s ease-out;
@@ -339,7 +345,7 @@ audio {
 /* style for pomo-page.html starts here */
 .task {
   height: 50px;
-  width: 250px;
+  width: 350px;
   border-radius: 10px;
   font-size: larger;
   border: 2px solid;
@@ -379,47 +385,122 @@ audio {
 }
 
 /* style for break-page html */
-
-.break-button {
-  background-color: rgba(242, 71, 38, 1);
-  color: white;
-  height: 80px;
-  width: 100px;
-  border-radius: 10px;
-  outline: none;
-  cursor: pointer;
-  font-size: larger;
-  transition: all 0.3s ease-in;
-  margin-left: 200px;
-  margin-top: 100px;
-  margin-bottom: 50px;
-}
-
-.break-button:hover {
-  background-color: rgba(242, 71, 38, 0.8);
-}
-
-.break-timer {
-  justify-content: center;
-  position: absolute;
-  display: flex;
-  align-items: center;
-  width: 700px;
-  height: 20px;
-  margin-top: 150px;
-  margin-left: 100px;
-  border-radius: 5px;
-  font-size: 70px;
+.break-page {
+  text-align: center;
+  margin-bottom: 3%;
 }
 
 .break-timer-container {
-  height: 20px;
-  margin-left: 150px;
-  margin-top: 200px;
-  border-radius: 5px;
-  font-size: 70px;
-  width: 800px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
+  margin-top: 2%;
+  margin-bottom: 5%;
+}
+
+.break-page .p-title {
+  margin: 1% 0;
+}
+
+/* style for break-page ends here */
+
+/* set-up page starts here */
+
+.set-up-page {
+  text-align: center;
+}
+
+.set-up-page .p-title {
+  margin: 5% 0;
+}
+
+hr {
+  border: 1px solid rgb(255, 81, 0);
+  width: 50%;
+  margin: 5% 25%;
+}
+
+.orange-hr {
+  margin-top: 3%;
+}
+
+.flex-container {
+  margin: 0 20%;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-container > div {
+  display: inline-block;
+  border: solid;
+  border-color: lightgrey;
+  border-width: 0 0 2px 0;
+}
+
+.task-title {
+  background-color: lightgrey;
+}
+
+.task-entry {
+  background-color: white;
+}
+
+.task-left {
+  float: left;
+  margin-top: 8px;
+  margin-left: 15px;
+  text-align: left;
+  height: 30px;
+  width: 70%;
+  border: none;
+  color: rgb(255, 81, 0);
+  font-size: 20px;
+}
+
+.task-right {
+  float: right;
+  margin-top: 8px;
+  text-align: center;
+  width: 20%;
+  height: 30px;
+  border: none;
+  color: rgb(255, 81, 0);
+  font-size: 20px;
+}
+
+::placeholder {
+  color: rgb(255, 166, 125);
+  font-size: 18px;
+}
+
+.set-up-page button {
+  width: 150px;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: solid  rgb(255, 81, 0);
+  outline: none;
+}
+
+.set-up-page button:hover {
+  background-color: rgb(255, 166, 125);
+  color: white;
+}
+
+.set-up-page button:active {
+  background-color: rgb(255, 81, 0);
+  color: white;
+}
+
+.cButton {
+  background-color: white;
+  color: rgb(255, 81, 0);
+  margin-top: 1%;
+}
+
+.bButton {
+  background-color: rgb(255, 81, 0);
+  color: white;
 }
