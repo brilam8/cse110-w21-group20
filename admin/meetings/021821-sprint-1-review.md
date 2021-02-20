@@ -30,3 +30,6 @@ Need to discuss Unit Testing
 ADRs
 
 ADR - info for each task needed
+
+Megan:
+Finished up how to page with redirect buttons to landing page and setup page
