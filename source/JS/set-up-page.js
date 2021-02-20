@@ -26,7 +26,6 @@ class TaskComponent extends HTMLElement {
         this.left = left;
         this.right= right;
 
-        let savedtask;
         let index = null;
 
         left.addEventListener('input', ()=>{
