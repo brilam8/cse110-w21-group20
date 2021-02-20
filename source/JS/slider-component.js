@@ -36,10 +36,10 @@ class SliderComponent extends HTMLElement {
             clickedList[button.id] = clickedList[button.id] == "On" ? "Off" : "On";
             window.localStorage.setItem("slider-clicked", JSON.stringify(clickedList));
 
-            //sets slider tag to on or off
+            //sets slider text to on or off
             let currentText = slider.textContent = slider.textContent == "On" ? "Off" : "On";
 
-            //sets background to black if darkmode is on.
+            //sets background to black and text to white if darkmode is on.
             if (button.id === "dark-mode-button"){
                 let color = currentText == "On" ? "#1a1a1a" : 'white';
                 let otherColor = color == "white" ? "#1a1a1a" : 'white';

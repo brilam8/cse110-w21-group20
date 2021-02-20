@@ -60,7 +60,7 @@ class GeneralSettingComponent extends HTMLElement {
 
             //stores settings state in local storage
             let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
-            clickedList[button.id] = clickedList[button.id] == "1" ? "0" : "1";
+            clickedList[button.id] = clickedList[button.id] == "On" ? "Off" : "On";
             window.localStorage.setItem("slider-clicked", JSON.stringify(clickedList));
 
             //sets slider tag to on or off
@@ -128,7 +128,7 @@ class GeneralSettingComponent extends HTMLElement {
 
         //reclicks sliders on setting page to setting state stored in local storage
         let clickedList = JSON.parse(window.localStorage.getItem('slider-clicked'));
-        if (clickedList[button.id] == "1"){
+        if (clickedList[button.id] == "On"){
           button.classList.toggle("setting-slider-switch");
           slider.textContent = slider.textContent == "On" ? "Off" : "On";
         }
