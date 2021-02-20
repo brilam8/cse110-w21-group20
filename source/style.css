@@ -401,18 +401,19 @@ h3 {
 
 .break-page .p-title {
   margin: 1% 0;
-} 
+}
+
 /* style for break-page ends here */
 
-
 /* set-up page starts here */
+
 .set-up-page {
   text-align: center;
 }
 
 .set-up-page .p-title {
   margin: 5% 0;
-} 
+}
 
 hr {
   border: 1px solid rgb(255, 81, 0);

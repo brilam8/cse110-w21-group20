@@ -1,3 +1,4 @@
+/*global startTimer*/
 window.localStorage.removeItem('tasklist');
 window.localStorage.removeItem("completedlist");
 var tasklist = [];
@@ -35,7 +36,7 @@ class TaskComponent extends HTMLElement {
                 tasklist.push([left.value, right.value]);
             }
             else{
-                if (right.value = 'on'){ //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
+                if (right.value == 'on'){ //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
                     if (!completed.includes(left.value)) completed.push(left.value);
                     else completed.splice(completed.indexOf(left.value), 1);
                 }
@@ -107,7 +108,7 @@ document.getElementById("begin").addEventListener("click", ()=>{
     if (tasklist.length){
         for (const task of tasklist){
             let entry = document.createElement("task-component");
-            entry.setAttribute('type', "checkbox")
+            entry.setAttribute('type', "checkbox");
             entry.setAttribute('left-pointer-event', "none");
             entry.setAttribute('left-task', task[0]);
             document.getElementById("break-task-container").appendChild(entry);

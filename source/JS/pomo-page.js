@@ -1,3 +1,5 @@
+/*global tasklist, completed*/
+
 const activebutton = document.getElementById('pomo-button');
 const activetimer = document.getElementById('timer');
 const activebar = document.getElementById('progress-bar');
