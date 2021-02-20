@@ -23,7 +23,7 @@ window.addEventListener('DOMContentLoaded', () => {
             else if (data[i].complete === false){
                 let item = uncompletedItems.appendChild(document.createElement("li"));
                 item.setAttribute('class', 'li-task');
-                item.textContent = `${data[i].name}`;
+                item.textContent = `${data[i].name} (${data[i].pomos} pomos)`;
             }
         }
         checkEmpty();

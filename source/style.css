@@ -204,7 +204,7 @@ h3 {
 
 .two-col-grid-container {
   display: grid;
-  grid-template-columns: 2fr 1.6fr;
+  grid-template-columns: 2fr 2fr;
   grid-template-rows: auto max-content;
   padding-left: 10%;
   padding-right: 6%;
