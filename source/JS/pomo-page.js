@@ -22,6 +22,7 @@ let currTask;
 let completedtask = [];
 
 let abortClicked = false;
+let abortBreak = false;
 
 activebutton.addEventListener('click', ()=>{
     if (abortClicked) abortTimer();
@@ -32,7 +33,10 @@ activebutton.addEventListener('click', ()=>{
 });
 
 breakbutton.addEventListener('click', ()=>{
-    if (abortClicked) redirectToPage("break");
+    if (abortClicked) {
+        abortBreak = true;
+        redirectToPage("break");
+    }
     else {
         alert("Abort will end all pomo sessions, click again if you want to continue");
         abortClicked = true;
@@ -52,7 +56,7 @@ function startTimer(page){
         }
         currTask = task;
     }
-    page == "active" && (task && !abortClicked) ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortClicked ? false : abortTimer();
+    page == "active" && task ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortBreak ? false : abortTimer();
     click.play();
     reset();
     updateCounter(page);
