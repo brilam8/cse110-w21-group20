@@ -42,3 +42,7 @@ Moving forward, I now work along with Ari on the set up page, need to make unit 
 Jiahong:
 Reviewed PR and kept up with relevant issues regarding page under my ownership
 Kept updated with ongoing ADRs such as common CSS conventions and interfacing with local storage
+
+Iain: 
+Finished up core structure to the landing page, included buttons that link to set up, how to page, and settings page.
+Along with the team, need to remove the settings button, and finish the overall layout for the landing page, finish off the minor details.
