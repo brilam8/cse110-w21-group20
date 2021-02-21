@@ -21,7 +21,7 @@ class TaskComponent extends HTMLElement {
         right.setAttribute('class', "right");
         right.type = "number";
         right.placeholder = "   1 pomo";
-        right.onkeydown=()=>{return false;}
+        right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
 
 
