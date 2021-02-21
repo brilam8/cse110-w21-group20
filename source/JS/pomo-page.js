@@ -56,7 +56,7 @@ function startTimer(page){
         }
         currTask = task;
     }
-    page == "active" && task ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortBreak ? false : abortTimer();
+    page == "active" && (task && !abortBreak) ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortBreak ? false : abortTimer();
     click.play();
     reset();
     updateCounter(page);
