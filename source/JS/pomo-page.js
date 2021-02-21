@@ -25,7 +25,10 @@ let abortClicked = false;
 let abortBreak = false;
 
 activebutton.addEventListener('click', ()=>{
-    if (abortClicked) abortTimer();
+    if (abortClicked) {
+        actualpomo[currTask] = pomocount;
+        abortTimer();
+    }
     else {
         alert("Abort will end all pomo sessions, click again if you want to continue");
         abortClicked = true;
