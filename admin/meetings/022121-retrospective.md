@@ -1,5 +1,5 @@
-![Radar] (https://github.com/brilam8/cse110-w21-group20/blob/main/Retro1-radar.png)
-![Mad Sad Glad] (https://github.com/brilam8/cse110-w21-group20/blob/main/Retro1-mad-sad-glad.png)
+Results of Radar: (https://github.com/brilam8/cse110-w21-group20/blob/main/Retro1-radar.png)
+Results of Mad Sad Glad: (https://github.com/brilam8/cse110-w21-group20/blob/main/Retro1-mad-sad-glad.png)
 
 ### Action Items:
 - Ask for help as needed - ask for Zooms
