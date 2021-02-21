@@ -51,3 +51,6 @@ Brian:
 Worked on the results page and finished it with all functionality needed. Uses localstorage to pull the completed tasks and task data, then displays it on the page. 
 Discussed how we're going to handle normalizing CSS across the web page and started looking at and writing unit tests for pages. 
 Moving forward, will polish up remaining pages and work on writing robust tests to handle all cases.
+
+Ari, set-up-page: 
+Add delete button to the right of each task. Change input field to display units like the placeholder does (1 min, 4cyc, ect). Set up local storage for output values. Allow users to organize their task order. Add dark Mode and beep settings under settings. Update page CSS to utilize project CSS. 
