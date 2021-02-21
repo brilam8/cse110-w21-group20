@@ -121,7 +121,7 @@ function abortTimer(){
     beep.play();
     let output = [];
     for (let i = 0; i < copytasklist.length; i++){
-        let objTask = {}
+        let objTask = {};
         objTask.id = i;
         objTask.expectedpomos = copytasklist[i][1];
         objTask.actualpomos = actualpomo[copytasklist[i][0]] ? actualpomo[copytasklist[i][0]] : 0;
