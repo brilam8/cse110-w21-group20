@@ -35,6 +35,6 @@ Megan:
 Finished up how to page with redirect buttons to landing page and setup page
 
 Tommy:
-Basic functionalities of the active and settings page are done. CI/CD pipeline are fine.
+Basic functionalities of the active and settings page are done. CI/CD pipeline is fine.
 As a group we decided to drop the settings page and join it with the set up page. 
 Moving forward, I now work along with Ari on the set up page, need to make unit tests, and need to improve the pipeline.
