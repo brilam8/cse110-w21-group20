@@ -15,11 +15,13 @@ class TaskComponent extends HTMLElement {
         left.setAttribute('class', "left");
         left.type = "text";
         left.placeholder = "Enter Task Here";
+        left.maxLength = 20; // TO CHANGE
 
         const right = container.appendChild(document.createElement('input'));
         right.setAttribute('class', "right");
         right.type = "number";
         right.placeholder = "   1 pomo";
+        right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
 
 
