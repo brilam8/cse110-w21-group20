@@ -36,4 +36,4 @@ Finished up how to page with redirect buttons to landing page and setup page
 
 Tommy:
 Basic functionalities of the active and settings page are done. 
-As a group we decided to drop the settings page and join it with the set up page. Moving forward, I needed to work along with Ari on the set up page.
+As a group we decided to drop the settings page and join it with the set up page. Moving forward, I now work along with Ari on the set up page.
