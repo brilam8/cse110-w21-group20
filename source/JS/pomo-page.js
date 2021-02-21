@@ -1,4 +1,4 @@
-/*global tasklist, completed*/
+/*global tasklist, copytasklist, completed*/
 
 const activebutton = document.getElementById('pomo-button');
 const activetimer = document.getElementById('timer');
@@ -16,6 +16,11 @@ let time = 20; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25min
 let counter = time; 
 let state;
 
+let actualpomo = {};
+let pomocount = 0;
+let currTask;
+let completedtask = [];
+
 let abortClicked = false;
 
 activebutton.addEventListener('click', ()=>{
@@ -27,7 +32,7 @@ activebutton.addEventListener('click', ()=>{
 });
 
 breakbutton.addEventListener('click', ()=>{
-    if (abortClicked) abortTimer();
+    if (abortClicked) redirectToPage("break");
     else {
         alert("Abort will end all pomo sessions, click again if you want to continue");
         abortClicked = true;
@@ -36,7 +41,18 @@ breakbutton.addEventListener('click', ()=>{
 
 function startTimer(page){
     let task = tasklist[0] ? tasklist[0][0] : false;
-    page == "active" && task ? document.getElementById("first-task").textContent = "Task: " + task : task ? false : abortTimer();
+    if (page == "break") {
+        pomocount++;
+    }
+    else {
+        if (completedtask.length){
+            for (const task of completedtask){ actualpomo[task] = pomocount/completedtask.length; }
+            pomocount = 0;
+            completedtask = [];
+        }
+        currTask = task;
+    }
+    page == "active" && (task && !abortClicked) ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortClicked ? false : abortTimer();
     click.play();
     reset();
     updateCounter(page);
@@ -66,6 +82,7 @@ function redirectToPage(curPage){
                 if (completed.includes(tasklist[i][0])){
                     let task = document.getElementById('break-task-container').children[i+1];
                     if (task) document.getElementById('break-task-container').children[i+1].remove();
+                    completedtask.push(tasklist[i][0]);
                     tasklist.splice(i--, 1);
                 }
             }
@@ -102,8 +119,18 @@ function reset(){
 function abortTimer(){
     clearInterval(state);
     beep.play();
-    setTimeout(function(){ 
-        window.localStorage.setItem("completedlist", completed.toString()); //bryan you can change this since the result page needs the completedlist
-        document.location.replace('../HTML/results-page.html');
-    }, 500);
+    let output = [];
+    for (let i = 0; i < copytasklist.length; i++){
+        let objTask = {}
+        objTask.id = i;
+        objTask.expectedpomos = copytasklist[i][1];
+        objTask.actualpomos = actualpomo[copytasklist[i][0]] ? actualpomo[copytasklist[i][0]] : 0;
+        objTask.currrenttask = copytasklist[i][0] == currTask;
+        objTask.completed = completed.includes(copytasklist[i][0]) ? true : false;
+        objTask.taskdescription = copytasklist[i][0];
+        output.push(objTask);
+    }
+    window.localStorage.setItem("tasks", JSON.stringify(output)); //bryan you can change this since the result page needs the completedlist
+    document.location.replace('../HTML/results-page.html');
+    
 }

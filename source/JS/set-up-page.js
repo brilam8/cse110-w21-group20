@@ -1,8 +1,8 @@
 /*global startTimer*/
-window.localStorage.removeItem('tasklist');
-window.localStorage.removeItem("completedlist");
+var copytasklist = [];
 var tasklist = [];
 var completed = [];
+window.localStorage.removeItem('tasks');
 
 class TaskComponent extends HTMLElement {
     constructor(){
@@ -122,13 +122,14 @@ document.getElementById("begin").addEventListener("click", ()=>{
                 entry.setAttribute('type', "checkbox");
                 entry.setAttribute('left-pointer-event', "none");
                 entry.setAttribute('left-task', tasklist[i][0]);
+                copytasklist.push(tasklist[i]);
                 document.getElementById("break-task-container").appendChild(entry);
             }
             else {
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
             }
         }
-        window.localStorage.setItem("tasklist", tasklist.join(',')); //stores copy for results page
+        // window.localStorage.setItem("tasklist", tasklist.join(',')); //stores copy for results page
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
         startTimer("active");
