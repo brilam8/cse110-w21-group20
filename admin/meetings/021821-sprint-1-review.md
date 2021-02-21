@@ -38,3 +38,7 @@ Tommy:
 Basic functionalities of the active and settings page are done. CI/CD pipeline is fine.
 As a group we decided to drop the settings page and join it with the set up page. 
 Moving forward, I now work along with Ari on the set up page, need to make unit tests, and need to improve the pipeline.
+
+Jiahong:
+Reviewed PR and kept up with relevant issues regarding page under my ownership
+Kept updated with ongoing ADRs such as common CSS conventions and interfacing with local storage
