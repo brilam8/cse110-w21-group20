@@ -89,6 +89,9 @@ class TaskComponent extends HTMLElement {
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
+            caret-color: transparent;
+            cursor: default;
+            outline: none;
           }
 
           .deleteTask {
