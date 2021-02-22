@@ -141,3 +141,5 @@ function abortTimer(){
     document.location.replace('../HTML/results-page.html');
     
 }
+
+module.exports = {startTimer, redirectToPage, updateCounter, reset, abortTimer};
