@@ -1,8 +1,8 @@
 /*global startTimer*/
-window.localStorage.removeItem('tasklist');
-window.localStorage.removeItem("completedlist");
+var copytasklist = [];
 var tasklist = [];
 var completed = [];
+window.localStorage.removeItem('tasks');
 
 class TaskComponent extends HTMLElement {
     constructor(){
@@ -15,11 +15,13 @@ class TaskComponent extends HTMLElement {
         left.setAttribute('class', "left");
         left.type = "text";
         left.placeholder = "Enter Task Here";
+        left.maxLength = 20; // TO CHANGE
 
         const right = container.appendChild(document.createElement('input'));
         right.setAttribute('class', "right");
         right.type = "number";
         right.placeholder = "   1 pomo";
+        right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
 
 
@@ -122,13 +124,14 @@ document.getElementById("begin").addEventListener("click", ()=>{
                 entry.setAttribute('type', "checkbox");
                 entry.setAttribute('left-pointer-event', "none");
                 entry.setAttribute('left-task', tasklist[i][0]);
+                copytasklist.push(tasklist[i]);
                 document.getElementById("break-task-container").appendChild(entry);
             }
             else {
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
             }
         }
-        window.localStorage.setItem("tasklist", tasklist.join(',')); //stores copy for results page
+        // window.localStorage.setItem("tasklist", tasklist.join(',')); //stores copy for results page
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
         startTimer("active");
