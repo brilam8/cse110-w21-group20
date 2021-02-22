@@ -48,8 +48,6 @@ we do not have access to previous pomo sessions
 
 ### User profiles and pomo history
 
-[example | description | pointer to more information | …] <!-- optional -->
-
 * Good, because it is robust and provides many avenues to expand (statistic gathering, history of pomo sessions, etc.)
 * Bad, because authentication and security for user profiles can be complex and may involve bringing in other libraries that may bog our application down
 * Bad, because having an account/login system can serve as a barrier of entry to those who just want a small, lightweight pomo timer to use.
