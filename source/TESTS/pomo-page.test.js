@@ -1,9 +1,5 @@
 // sample test
-const res = require("../JS/pomo-page");
-
-
-// sample test
-require("../JS/pomo-page");
+// const pomo = require("../JS/pomo-page");
 global.window = { location: { pathname: null } };
 
 // describe('text here', () => {
@@ -17,19 +13,27 @@ global.window = { location: { pathname: null } };
 //   })
 // });
 
-describe('reset function', () => {
-  const mock = jest.fn(res.reset);
-  test('reseting progressbar', () => {
-    document.body.innerHTML = 
-    `
-    <div class="timer-container">
-        <div id="progress-bar" class="progress-bar"></div> 
-        <p class="timer" id="timer"></p>
-    </div>
-    `
-    mock();
-    const style = getComputedStyle(document.body.innerHTML);
-    expect(mock).toHaveBeenCalled();
-    expect(style.backgroundColor).toBe('rgba(242, 71, 38, 0.5)');
-  })
-});
+
+test('reseting progressbar', () => {
+  document.body.innerHTML = 
+  `
+  <section id="active-page" class="active-page section-page">
+    <p class="p-title">Pomodoro Timer</p>
+    <main>
+        <div class="timer-container">
+            <div id="progress-bar" class="progress-bar" style="width: 300px"></div> 
+            <p class="timer" id="timer"></p>
+        </div>
+        <div>
+            <p id="first-task" class="task">Sample Task 1</p>
+        </div>
+        <button id="pomo-button" class="button">Abort</button>
+    </main>
+    <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
+  </section>
+  `;
+  // const myMock = jest.spyOn(pomo, "reset");
+  // const result = myMock();
+  // const style = getComputedStyle(document.body.innerHTML);
+  expect(document.getElementById("progress-bar").style.width).toBe('300px');
+})
