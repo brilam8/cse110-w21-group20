@@ -163,7 +163,6 @@ document.getElementById("begin").addEventListener("click", ()=>{
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
             }
         }
-        // window.localStorage.setItem("tasklist", tasklist.join(',')); //stores copy for results page
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
         startTimer("active");
@@ -185,5 +184,5 @@ function deleteComponent(index){
         document.getElementById("active-task-container").children[i+1].setAttribute('index', i);
     }
     tasklist.splice(index, 1); //removes task from tasklist 
-    document.getElementById("active-task-container").children[index+1].remove();
+    document.getElementById("active-task-container").children[index+1].remove(); //removes task component
 }
