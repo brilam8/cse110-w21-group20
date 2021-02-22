@@ -24,6 +24,10 @@ class TaskComponent extends HTMLElement {
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
 
+        const deleteButton = container.appendChild(document.createElement('button'));
+        deleteButton.setAttribute('class', 'deleteTask');
+        deleteButton.textContent = "X";
+
 
         this.left = left;
         this.right= right;
@@ -53,6 +57,13 @@ class TaskComponent extends HTMLElement {
                 }
             }
         });
+
+        deleteButton.addEventListener('click', ()=>{
+            if (index != null) {
+                tasklist.splice(index, 1); //removes task from tasklist 
+            }
+            this.shadowRoot.getRootNode().host.remove(); //removes component
+        });
     
         const style = document.createElement('style');
         style.textContent = `
@@ -62,12 +73,13 @@ class TaskComponent extends HTMLElement {
             border: solid;
             border-color: lightgrey;
             border-width: 0 0 2px 0;
+            display: flex;
           }
           
           .left {
-            float: left;
             margin-top: 8px;
             margin-left: 15px;
+            margin-right: 10%;
             text-align: left;
             height: 30px;
             width: 70%;
@@ -77,7 +89,6 @@ class TaskComponent extends HTMLElement {
           }
           
           .right {
-            float: right;
             margin-top: 8px;
             text-align: center;
             width: 20%;
@@ -85,6 +96,27 @@ class TaskComponent extends HTMLElement {
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
+          }
+
+          .deleteTask {
+              position: absolute;
+              height: 35px;
+              width: 35px;
+              right: 16%;
+              transform: translateY(5px);
+              cursor: pointer;
+              outline: none;
+              
+              background-color: white;
+              border: 3.5px solid rgba(242, 71, 38, 0.9);;
+              color: rgba(242, 71, 38, 0.9);
+              font-weight: bold;
+              border-radius: 5px;
+              transition: all 0.3s ease-in;
+          }
+
+          .deleteTask:hover {
+            background-color: rgba(242, 71, 38, 0.2);
           }
           
           ::placeholder {
