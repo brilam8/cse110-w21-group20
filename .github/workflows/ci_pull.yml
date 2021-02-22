@@ -2,8 +2,8 @@ name: CI_PULL
 
 on:
   pull_request:
-    branches: [ dev ]
-    # TO BE CHANGED since it should be the branch you're working on
+    branches: [ dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page]
+    # TO BE CHANGED since it should include the branch you're working on
 
 
 defaults:
@@ -32,6 +32,11 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx htmlhint ./HTML/*.html
+  Stylelint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: npx stylelint ./*.css
   ESlint:
     runs-on: ubuntu-latest
     steps:

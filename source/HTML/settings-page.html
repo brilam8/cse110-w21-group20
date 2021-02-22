@@ -1,1 +1,39 @@
-
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Tommy Tran" >
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <title>Settings</title>
+    </head>
+    <body class="settings-page">
+        <p class="p-title">Settings</p>
+        <main>
+            <p>Set Beeps for Timers</p>
+            <section class="timer-settings">
+                <div class="timer-settings-container">
+                    <p class="timer-settings-title">Short Break:</p>
+                    <p class="timer-settings-number"><span id="short-beep-number">1</span> Beep</p>
+                    <button class="timer-settings-button" id="short-beep-increment">+</button>
+                    <button class="timer-settings-button" id="short-beep-decrement">-</button>
+                </div>
+                <div class="timer-settings-container">
+                    <p class="timer-settings-title">Long Break:</p>
+                    <p class="timer-settings-number"><span id="long-beep-number">1</span> Beep</p>
+                    <button class="timer-settings-button" id="long-beep-increment">+</button>
+                    <button class="timer-settings-button" id="long-beep-decrement">-</button>
+                </div>
+            </section>
+            <section id="general-settings" class="general-settings">
+                <gsetting-component button-id="dark-mode-button" name="Dark Mode">
+                </gsetting-component>
+            </section>
+            <button class="button" id="to-landing-page">Return to Start Page</button>
+        </main>
+        <script type="text/javascript" src="../JS/settings-page.js"></script>
+        <script type="text/javascript" src="../JS/main.js"></script>
+    </body>
+</html>
