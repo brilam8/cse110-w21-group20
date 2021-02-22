@@ -20,7 +20,7 @@
   text-align: left;
   color: #fff;
   font-size: 40px;
-  font-weight: 800;
+  font-weight: bold;
 }
 
 /* Consistent Buttons */
@@ -204,11 +204,10 @@ h3 {
 
 .two-col-grid-container {
   display: grid;
-  grid-template-columns: 2fr 1.6fr;
+  grid-template-columns: 2fr 2fr;
   grid-template-rows: auto max-content;
   padding-left: 10%;
   padding-right: 6%;
-  padding-bottom: 10px;
   column-gap: 30px;
   max-height: 60vh;
 }
