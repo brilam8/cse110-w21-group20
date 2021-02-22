@@ -36,7 +36,7 @@ function populateTasks(){
         }
         checkEmpty();
     }
-};
+}
 
 
 /**
@@ -63,6 +63,6 @@ function checkEmpty(){
             message.textContent = `Congratulations! You finished all your tasks this session!`;
         }
     }
-};
+}
 
 module.exports = {populateTasks, checkEmpty}
