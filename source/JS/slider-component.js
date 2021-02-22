@@ -21,9 +21,6 @@ class SliderComponent extends HTMLElement {
         const slider = button.appendChild(document.createElement('div'));
         slider.setAttribute('class', "slider-circle");
         slider.textContent = "Off";
-
-        this.name = containerName;
-        this.button = button;
     
         button.onclick = ()=>{
             //moves the slider to on or off

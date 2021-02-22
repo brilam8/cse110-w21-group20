@@ -1,14 +1,4 @@
-/*global startTimer*/
-
-/**
- * Global variables that are used in active-break-pages.js
- *      copytasklist :  copy of tasklist used to create task list in local storage. Not manipulated
- *      tasklist     :  Stores tasks that the user sets in set-up page. The variable that is manipulated.
- *      completed    :  Variable to append completed tasks to create task list in local storage.
- */
-var copytasklist = [];
-var tasklist = [];
-var completed = [];
+/*global startTimer, tasklist, copytasklist, completed*/
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
