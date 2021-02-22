@@ -10,5 +10,5 @@ document.getElementById("to-how-to").addEventListener('click', ()=>
 
 document.getElementById("to-set-up").addEventListener('click', ()=>
 {
-    window.location.replace("./set-up-page.html");
+    window.location.replace("./setup-active-break-pages.html");
 });
