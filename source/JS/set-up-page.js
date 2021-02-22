@@ -1,9 +1,23 @@
 /*global startTimer*/
+
+/**
+ * Global variables that are used in active-break-pages.js
+ *      copytasklist :  copy of tasklist used to create task list in local storage. Not manipulated
+ *      tasklist     :  Stores tasks that the user sets in set-up page. The variable that is manipulated.
+ *      completed    :  Variable to append completed tasks to create task list in local storage.
+ */
 var copytasklist = [];
 var tasklist = [];
 var completed = [];
+
+// resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
 
+
+/**
+ * Component used to create tasks in set-up page and break page.
+ * Allows you to manipulate the tasks by deleting, creating and editting tasks
+ */
 class TaskComponent extends HTMLElement {
     constructor(){
         super();
@@ -149,6 +163,10 @@ class TaskComponent extends HTMLElement {
 
 customElements.define('task-component', TaskComponent);
 
+/**
+ * Clicking the begin button create render all the task-components in the break-page,
+ * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
+ */
 document.getElementById("begin").addEventListener("click", ()=>{
     let notempty = tasklist.filter(task => task[0] != "");
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
@@ -175,6 +193,10 @@ document.getElementById("begin").addEventListener("click", ()=>{
     }
 });
 
+/**
+ * Clicking the create button will create a task-component on the set-up page. 
+ * It will only allow 6 task-components.
+ */
 document.getElementById("create").addEventListener("click", ()=>{
     if (document.getElementById("active-task-container").children.length <= 6){
         let entry = document.createElement("task-component");
@@ -182,6 +204,10 @@ document.getElementById("create").addEventListener("click", ()=>{
     }
 });
 
+/**
+ * Function used in TaskComponent to delete the component 
+ * if user clicks the X button next to task on set-up page.
+ */
 function deleteComponent(index){
     for (let i = index; i < tasklist.length; i++){
         document.getElementById("active-task-container").children[i+1].setAttribute('index', i);

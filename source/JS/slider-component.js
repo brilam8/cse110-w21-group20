@@ -1,10 +1,8 @@
-/* copied this over from setting-page.js */
-
 if (!window.localStorage.getItem('slider-clicked')){
   window.localStorage.setItem('slider-clicked', JSON.stringify({}));
 }
 
-
+// component to create slider. Used for dark mode setting
 class SliderComponent extends HTMLElement {
     constructor(){
         super();
