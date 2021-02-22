@@ -2,6 +2,7 @@ name: CI_PULL
 
 on:
   pull_request:
+    types: [opened, reopened]
     branches: [ dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page]
     # TO BE CHANGED since it should include the branch you're working on
 

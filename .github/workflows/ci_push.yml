@@ -2,7 +2,8 @@ name: CI_PUSH
 
 on:
   push:
-    branches: [ dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page]
+    types: [opened, reopened]
+    branches: [dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page]
     # TO BE CHANGED since it should be the branch you're working on
 
 defaults:
