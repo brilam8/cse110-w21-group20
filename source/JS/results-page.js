@@ -65,4 +65,4 @@ function checkEmpty(){
     }
 }
 
-module.exports = {populateTasks, checkEmpty}
+module.exports = {populateTasks, checkEmpty};
