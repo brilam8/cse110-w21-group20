@@ -1,15 +1,23 @@
 const localStorage = window.localStorage;
-const completedItems = document.getElementById('complete-items');
-const uncompletedItems = document.getElementById('uncomplete-items');
-const message = document.getElementById('message');
 
 /**
  * Populates the tasks completed and tasks left to do
- * by checking the tasks stored in local storage
+ * by checking the tasks stored in local storage once
+ * the page loads
  */
 window.addEventListener('DOMContentLoaded', () => {
+    populateTasks();
+});
+
+/**
+ * Using the local storage, populates the two ordered lists containing
+ * completed and uncompleted tasks.
+ */
+function populateTasks(){
+    const completedItems = document.getElementById('complete-items');
+    const uncompletedItems = document.getElementById('uncomplete-items');
     if (!localStorage.getItem('tasks')) {
-        console.log("There are no tasks in the storage?");
+        //console.log("There are no tasks in the storage?");
         checkEmpty();
     }
     else {
@@ -28,20 +36,23 @@ window.addEventListener('DOMContentLoaded', () => {
         }
         checkEmpty();
     }
-});
+};
+
 
 /**
  * Checks to see whether either the completed items or uncompleted items 
  * arrays are empty or not and appropriately adds a message if so
  */
 function checkEmpty(){
+    const completedItems = document.getElementById('complete-items');
+    const uncompletedItems = document.getElementById('uncomplete-items');
     let complete_count = completedItems.childNodes.length - 1;
     let uncomplete_count = uncompletedItems.childNodes.length - 1;
-    
+    const message = document.getElementById('message');
     if (complete_count <= 0) {
         let complete_error = completedItems.appendChild(document.createElement("p"));
         complete_error.setAttribute('class', 'p-body');
-        complete_error.textContent = `No completed tasks`;
+        complete_error.textContent = `No tasks completed`;
         
     }
     if (uncomplete_count <= 0) {
@@ -52,4 +63,6 @@ function checkEmpty(){
             message.textContent = `Congratulations! You finished all your tasks this session!`;
         }
     }
-}
+};
+
+module.exports = {populateTasks, checkEmpty}
