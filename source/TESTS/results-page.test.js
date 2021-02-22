@@ -1,27 +1,4 @@
 const res = require('../JS/results-page');
-class LocalStorageMock {
-  constructor() {
-    this.store = {};
-  }
-
-  clear() {
-    this.store = {};
-  }
-
-  getItem(key) {
-    return this.store[key] || null;
-  }
-
-  setItem(key, value) {
-    this.store[key] = String(value);
-  }
-
-  removeItem(key) {
-    delete this.store[key];
-  }
-}
-
-global.localStorage = new LocalStorageMock;
 
 // sample test
 require('../JS/results-page')
@@ -274,7 +251,7 @@ describe('task list', () => {
     const uncompletedItems = document.getElementById('uncomplete-items');
     let complete_count = completedItems.childNodes.length - 1;
     let uncomplete_count = uncompletedItems.childNodes.length - 1;
-
+    
     expect(localStorage.getItem).toHaveBeenCalled();
     expect(mock).toHaveBeenCalled();
     expect(complete_count).toEqual(1);
