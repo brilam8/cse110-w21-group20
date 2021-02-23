@@ -196,6 +196,8 @@ function abortTimer(){
         output.push(objTask);
     }
     window.localStorage.setItem("tasks", JSON.stringify(output)); 
+    document.getElementById("active-page").style.display = "none";
+    document.getElementById("break-page").style.display = "none";
     document.location.replace('../HTML/results-page.html');
     
 }
