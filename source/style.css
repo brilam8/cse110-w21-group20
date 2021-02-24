@@ -89,6 +89,11 @@
   padding: 15px;
 }
 
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+  opacity: 1;
+}
+
 /* END OF ALL PAGE PIECES */
 body {
   font-family: 'Lato', sans-serif;

@@ -123,6 +123,10 @@ class TaskComponent extends HTMLElement {
             color: rgb(255, 166, 125);
             font-size: 18px;
           }
+          input[type=number]::-webkit-inner-spin-button, 
+          input[type=number]::-webkit-outer-spin-button {  
+            opacity: 1;
+          }
         `;
 
         this.shadowRoot.append(style, container);
