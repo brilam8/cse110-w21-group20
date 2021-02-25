@@ -114,6 +114,7 @@ class TaskComponent extends HTMLElement {
           
           .right {
             width: 100%;
+            height: 30px;
             caret-color: transparent;
             cursor: default;
             outline: none;
@@ -122,7 +123,7 @@ class TaskComponent extends HTMLElement {
 
           .rightsuffix {
             position: absolute;
-            transform: translate(-25px, -25px);
+            transform: translate(-25px, -29px);
             color: rgba(255, 81, 0, 0.6);
           }
 
@@ -166,6 +167,12 @@ class TaskComponent extends HTMLElement {
                 margin-left: 0;
                 transform: translateX(0);
             }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button {  
+                opacity: 1;
+                margin-left: 0;
+                transform: translateX(0);
+            }
             .right {
                 transform: translateX(-6%);
             }
@@ -176,7 +183,7 @@ class TaskComponent extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index'];
+        return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index', 'set-right-input', 'remove-right-suffix'];
     }
     attributeChangedCallback(name, oldValue, newValue){
         if (name == "type"){
@@ -192,10 +199,17 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
-            this.rightsuffix.style.display = newValue;
         }
         else if (name == 'index'){
             this.index -= 1;
+        }
+        else if (name == "set-right-input"){
+            this.right.style.display = "none";
+            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo" 
+            this.rightsuffix.style.transform = "translateX(-55%)";
+        }
+        else if (name == "remove-right-suffix"){
+            this.rightsuffix.style.display = newValue;
         }
     }  
 
@@ -212,13 +226,24 @@ document.getElementById("begin").addEventListener("click", ()=>{
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
         for (let i = 0; i < tasklist.length; i++){
             if (tasklist[i][0] != ""){ //checks for empty tasks
-                let entry = document.createElement("task-component");
-                entry.setAttribute('type', "checkbox");
-                entry.setAttribute('left-pointer-event', "none");
-                entry.setAttribute('left-task', tasklist[i][0]);
-                entry.setAttribute('delete', 'none');
+                if ( document.getElementById("break-task-container").children.length <= 1){
+                    let firstentry = document.createElement("task-component");
+                    firstentry.setAttribute('type', "checkbox");
+                    firstentry.setAttribute('left-task', tasklist[i][0]);
+                    firstentry.setAttribute('left-pointer-event', "none");
+                    firstentry.setAttribute('remove-right-suffix', "none");
+                    firstentry.setAttribute('delete', 'none');
+                    document.getElementById("break-task-container").appendChild(firstentry);
+                }
+                else {
+                    let entry = document.createElement("task-component");
+                    entry.setAttribute('left-pointer-event', "none");
+                    entry.setAttribute('set-right-input', tasklist[i][1]);
+                    entry.setAttribute('left-task', tasklist[i][0]);
+                    entry.setAttribute('delete', 'none');
+                    document.getElementById("incompleted-task-container").appendChild(entry);
+                }
                 copytasklist.push(tasklist[i]);
-                document.getElementById("break-task-container").appendChild(entry);
             }
             else {
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
@@ -254,6 +279,10 @@ function deleteComponent(index){
     }
     tasklist.splice(index, 1); //removes task from tasklist 
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
+}
+
+function moveFromUncompleteToCurr(){
+
 }
 
 module.exports = {deleteComponent};
