@@ -200,6 +200,7 @@ h3 {
   display: block;
   font-style: normal;
   margin-block-end: 0;
+  text-align: center;
 }
 
 .two-col-grid-container {
@@ -214,14 +215,18 @@ h3 {
 
 #complete-items {
   margin-block-start: 0.5em;
+  padding-inline-start: 0px;
   overflow: auto;
   max-height: 50vh;
+  list-style-position: inside;
 }
 
 #uncomplete-items {
   margin-block-start: 0.5em;
+  padding-inline-start: 0px;
   overflow: auto;
   max-height: 50vh;
+  list-style-position: inside;
 }
 
 .li-task {
@@ -272,6 +277,52 @@ h3 {
   flex-direction: none;
   justify-content: none;
   align-items: none;
+}
+
+.task-comp {
+  border-radius: 5px;
+  border: 2px rgba(235, 235, 235, 0.8);
+  background-color: rgba(245, 245, 245, 0.8);
+  width: 70%;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left:auto;
+  margin-right:auto;
+  margin-bottom:15px;
+}
+.task-main {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.task-name {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  padding-left: 10px;
+}
+
+.actual-pomo {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.expected-pomo {
+  font-family: 'Open Sans', sans-serif;
+  color: black;
+  font-size: 15px;
+  font-style: normal;
 }
 
 /* results-page css ends here */
