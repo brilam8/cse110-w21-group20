@@ -6,11 +6,12 @@ const activebutton = document.getElementById('pomo-button');
 const activetimer = document.getElementById('timer');
 const activebar = document.getElementById('progress-bar');
 const barwidth = 600; //600px in style.css
-const breaktitle = document.getElementById("break-title");
+
 
 //Break page button and timer
 const breakbutton = document.getElementById('break-button');
 const breaktimer = document.getElementById('break-timer');
+const breaktitle = document.getElementById("break-title");
 
 //Sounds for both active and break page
 const tick = document.getElementById('tick');
