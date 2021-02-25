@@ -1,4 +1,8 @@
-/*global startTimer, tasklist, copytasklist, completed*/
+/*global startTimer*/
+
+var copytasklist = [];
+var tasklist = [];
+var completed = [];
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
@@ -29,10 +33,11 @@ class TaskComponent extends HTMLElement {
         right.type = "number";
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
+        right.value = "1";
 
         const rightsuffix = rightcontainer.appendChild(document.createElement('span'));
         rightsuffix.setAttribute('class', 'rightsuffix');
-        rightsuffix.textContent = "1 pomo";
+        rightsuffix.textContent = "pomo";
 
         const deleteButton = container.appendChild(document.createElement('button'));
         deleteButton.setAttribute('class', 'deleteTask');
@@ -57,15 +62,12 @@ class TaskComponent extends HTMLElement {
             if (right.type == "number"){ //only in set up
                 tasklist[this.index] = [left.value ? left.value : "", right.value ? right.value : 1]; //replaces pomo
                 
-                //styling for pomo text after input
-                rightsuffix.style.transform = "translate(-25px, -25px)";
                 right.value > 1 ? rightsuffix.textContent = "pomos" : rightsuffix.textContent = "pomo"; 
             }
             else{
-                if (right.value == 'on'){ //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
-                    if (!completed.includes(left.value)) completed.push(left.value);
-                    else completed.splice(completed.indexOf(left.value), 1);
-                }
+                 //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
+                if (!completed.includes(left.value)) completed.push(left.value);
+                else completed.splice(completed.indexOf(left.value), 1);
             }
         });
 
@@ -78,6 +80,7 @@ class TaskComponent extends HTMLElement {
           .entry {
             font-family: 'Oswald', sans-serif;
             height: 40px;
+            width: 59.15vw;
             background-color: white;
             border: solid;
             border-color: lightgrey;
@@ -110,31 +113,31 @@ class TaskComponent extends HTMLElement {
           }
           
           .right {
-            position absolute;
             width: 100%;
+            height: 30px;
             caret-color: transparent;
             cursor: default;
             outline: none;
+            transform: translateX(-3%);
           }
 
           .rightsuffix {
             position: absolute;
-            transform: translate(-40px, -25px);
+            transform: translate(-25px, -29px);
             color: rgba(255, 81, 0, 0.6);
           }
 
           input[type=number]::-webkit-inner-spin-button, 
           input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
-            margin-left: 35%;
+            margin-left: 32%;
           }
 
           .deleteTask {
               position: absolute;
               height: 35px;
               width: 35px;
-              right: 16%;
-              transform: translateY(5px);
+              transform: translate(60vw, 5px);
               cursor: pointer;
               outline: none;
               
@@ -143,7 +146,6 @@ class TaskComponent extends HTMLElement {
               color: rgba(242, 71, 38, 0.9);
               font-weight: bold;
               border-radius: 5px;
-              transition: all 0.3s ease-in;
           }
 
           .deleteTask:hover {
@@ -154,13 +156,34 @@ class TaskComponent extends HTMLElement {
             color: rgb(255, 166, 125);
             font-size: 18px;
           }
+
+          @media only screen and (max-width: 1400px) {
+            .rightsuffix {
+                display: none;
+            }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button {  
+                opacity: 1;
+                margin-left: 0;
+                transform: translateX(0);
+            }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button {  
+                opacity: 1;
+                margin-left: 0;
+                transform: translateX(0);
+            }
+            .right {
+                transform: translateX(-6%);
+            }
+          }
         `;
 
         this.shadowRoot.append(style, container);
     }
 
     static get observedAttributes() {
-        return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index'];
+        return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index', 'set-right-input', 'remove-right-suffix'];
     }
     attributeChangedCallback(name, oldValue, newValue){
         if (name == "type"){
@@ -176,10 +199,17 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
-            this.rightsuffix.style.display = newValue;
         }
         else if (name == 'index'){
             this.index -= 1;
+        }
+        else if (name == "set-right-input"){
+            this.right.style.display = "none";
+            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo";
+            this.rightsuffix.style.transform = "translateX(-55%)";
+        }
+        else if (name == "remove-right-suffix"){
+            this.rightsuffix.style.display = newValue;
         }
     }  
 
@@ -196,13 +226,24 @@ document.getElementById("begin").addEventListener("click", ()=>{
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
         for (let i = 0; i < tasklist.length; i++){
             if (tasklist[i][0] != ""){ //checks for empty tasks
-                let entry = document.createElement("task-component");
-                entry.setAttribute('type', "checkbox");
-                entry.setAttribute('left-pointer-event', "none");
-                entry.setAttribute('left-task', tasklist[i][0]);
-                entry.setAttribute('delete', 'none');
+                if ( document.getElementById("break-task-container").children.length <= 1){
+                    let firstentry = document.createElement("task-component");
+                    firstentry.setAttribute('type', "checkbox");
+                    firstentry.setAttribute('left-task', tasklist[i][0]);
+                    firstentry.setAttribute('left-pointer-event', "none");
+                    firstentry.setAttribute('remove-right-suffix', "none");
+                    firstentry.setAttribute('delete', 'none');
+                    document.getElementById("break-task-container").appendChild(firstentry);
+                }
+                else {
+                    let entry = document.createElement("task-component");
+                    entry.setAttribute('left-pointer-event', "none");
+                    entry.setAttribute('set-right-input', tasklist[i][1]);
+                    entry.setAttribute('left-task', tasklist[i][0]);
+                    entry.setAttribute('delete', 'none');
+                    document.getElementById("incompleted-task-container").appendChild(entry);
+                }
                 copytasklist.push(tasklist[i]);
-                document.getElementById("break-task-container").appendChild(entry);
             }
             else {
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i

@@ -37,7 +37,7 @@
                 <div class="task-entry">
                     <div class="task-left">Total Pomos</div>
                     <input class="task-right" type="number" placeholder="   4 sess" 
-                        min="1" max="5" step="1" onkeydown="return false">
+                        min="1" max="15" step="1" onkeydown="return false">
                 </div>
                 <div class="task-entry">
                     <div class="task-left">Short Break Length in between Pomos</div>
@@ -89,7 +89,7 @@
             <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
         </section>
         <section id="break-page" class="break-page section-page">
-            <p class="p-title">Short Break</p>
+            <p id="break-title" class="p-title">Short Break</p>
             <div class="break-timer-container">
                 <div class="timer-container">
                     <p class="timer" id="break-timer"></p>
@@ -98,11 +98,24 @@
             </div>
             <div id="break-task-container" class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Task List</b></div>
+                    <div class="task-left"><b>Current Task</b></div>
                     <div class="task-right"><b>Mark Done</b></div>
                 </div>
                 <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
             </div>
+            <div id="incompleted-task-container" class="flex-container">
+                <div class="task-title">
+                    <div class="task-left"><b>Incompleted Tasks</b></div>
+                    <div class="task-right"><b>Expected</b></div>
+                </div>
+            </div>
+            <div id="completed-task-container" class="flex-container">
+                <div class="task-title">
+                    <div class="task-left"><b>Completed Tasks</b></div>
+                    <div class="task-right"><b>Actual</b></div>
+                </div>
+            </div>
+
             <a id="to-active-page" href="#active-page" style="visibility: hidden;"></a>
         </section>
         <audio id="beep"><source src="./sounds/Beep.mp3"></audio>
