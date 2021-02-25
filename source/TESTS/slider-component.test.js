@@ -1,12 +1,11 @@
-if (!window.localStorage.getItem('slider-clicked')){
-  window.localStorage.setItem('slider-clicked', JSON.stringify({}));
-}
-
-// component to create slider. Used for dark mode setting
-class SliderComponent extends HTMLElement {
+customElements.define('slider-component', class extends HTMLElement {
     constructor(){
         super();
-        this.attachShadow({mode: 'open'});
+
+        if (!window.localStorage.getItem('slider-clicked')){
+          window.localStorage.setItem('slider-clicked', JSON.stringify({}));
+        }
+
         const container = document.createElement('div');
         container.setAttribute('class', 'general-settings-container');
 
@@ -22,6 +21,9 @@ class SliderComponent extends HTMLElement {
         slider.setAttribute('class', "slider-circle");
         slider.textContent = "Off";
     
+        this.name = containerName;
+        this.button = button;
+
         button.onclick = ()=>{
             //moves the slider to on or off
             button.classList.toggle("setting-slider-switch");
@@ -101,9 +103,47 @@ class SliderComponent extends HTMLElement {
           button.classList.toggle("setting-slider-switch");
           slider.textContent = slider.textContent == "On" ? "Off" : "On";
         }
-        this.shadowRoot.append(style, container);
+        
+        this.append(style, container); 
     }
+})
 
-}
 
-customElements.define('slider-component', SliderComponent);
+describe('dark mode component', () => {
+  jest.spyOn(window.localStorage.__proto__, 'getItem');
+  jest.spyOn(window.localStorage.__proto__, 'setItem');
+  document.body.innerHTML = 
+  `
+  <slider-component id="dark-mode-button" button-id="dark-mode-button" name="Dark Mode">
+  </slider-component>
+  `;
+  document.body.style.backgroundColor = "white";
+  document.body.style.color = "#1a1a1a";
+
+  test('creating dark mode slider component', () => {
+      expect(document.body.innerHTML).toContain('Dark Mode');
+      expect(document.body.innerHTML).toContain('Off');
+      expect(document.getElementById('dark-mode-button').name.textContent).toEqual('Dark Mode'); 
+      expect(window.localStorage.getItem).toHaveBeenCalled();
+  })
+
+  test('checking background and color before clicking', () => {
+    expect(document.body.style.backgroundColor).toEqual("white");
+    expect(document.body.style.color).toEqual("rgb(26, 26, 26)"); // rgb(26, 26, 26) === #1a1a1a
+  })
+
+  test('checking background and color after clicking', () => {
+    document.getElementById('dark-mode-button').button.click();
+    expect(window.localStorage.getItem).toHaveBeenCalled();
+    expect(window.localStorage.setItem).toHaveBeenCalled();
+    expect(document.body.innerHTML).toContain('On');
+    expect(document.body.style.backgroundColor).toEqual("rgb(26, 26, 26)");
+    expect(document.body.style.color).toEqual("white");
+  })
+
+});
+
+test('creating undefined slider component', () => {
+    document.body.innerHTML = `<slider-component></slider-component>`;
+    expect(document.body.innerHTML).toContain('Setting Undefined');
+})

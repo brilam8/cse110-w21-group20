@@ -1,9 +1,13 @@
-/*global startTimer*/
-var copytasklist = [];
-var tasklist = [];
-var completed = [];
+/*global startTimer, tasklist, copytasklist, completed*/
+
+// resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
 
+
+/**
+ * Component used to create tasks in set-up page and break page.
+ * Allows you to manipulate the tasks by deleting, creating and editting tasks
+ */
 class TaskComponent extends HTMLElement {
     constructor(){
         super();
@@ -17,12 +21,18 @@ class TaskComponent extends HTMLElement {
         left.placeholder = "Enter Task Here";
         left.maxLength = 20; // TO CHANGE
 
-        const right = container.appendChild(document.createElement('input'));
+        const rightcontainer = container.appendChild(document.createElement('div'));
+        rightcontainer.setAttribute('class', 'rightcontainer');
+
+        const right = rightcontainer.appendChild(document.createElement('input'));
         right.setAttribute('class', "right");
         right.type = "number";
-        right.placeholder = "   1 pomo";
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
+
+        const rightsuffix = rightcontainer.appendChild(document.createElement('span'));
+        rightsuffix.setAttribute('class', 'rightsuffix');
+        rightsuffix.textContent = "1 pomo";
 
         const deleteButton = container.appendChild(document.createElement('button'));
         deleteButton.setAttribute('class', 'deleteTask');
@@ -31,6 +41,7 @@ class TaskComponent extends HTMLElement {
 
         this.left = left;
         this.right= right;
+        this.rightsuffix = rightsuffix;
         this.deleteButton = deleteButton;
         tasklist.push(["", 1]);
         this.index = tasklist.length - 1;
@@ -45,6 +56,10 @@ class TaskComponent extends HTMLElement {
         right.addEventListener('input', ()=>{
             if (right.type == "number"){ //only in set up
                 tasklist[this.index] = [left.value ? left.value : "", right.value ? right.value : 1]; //replaces pomo
+                
+                //styling for pomo text after input
+                rightsuffix.style.transform = "translate(-25px, -25px)";
+                right.value > 1 ? rightsuffix.textContent = "pomos" : rightsuffix.textContent = "pomo"; 
             }
             else{
                 if (right.value == 'on'){ //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
@@ -61,6 +76,7 @@ class TaskComponent extends HTMLElement {
         const style = document.createElement('style');
         style.textContent = `
           .entry {
+            font-family: 'Oswald', sans-serif;
             height: 40px;
             background-color: white;
             border: solid;
@@ -80,18 +96,37 @@ class TaskComponent extends HTMLElement {
             color: rgb(255, 81, 0);
             font-size: 20px;
           }
-          
-          .right {
-            margin-top: 8px;
-            text-align: center;
-            width: 20%;
-            height: 30px;
+
+          .rightcontainer, .right, .rightsuffix {
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
+            text-align: center;
+          }
+          .rightcontainer {
+            margin-top: 8px;
+            width: 20%;
+            height: 30px;            
+          }
+          
+          .right {
+            position absolute;
+            width: 100%;
             caret-color: transparent;
             cursor: default;
             outline: none;
+          }
+
+          .rightsuffix {
+            position: absolute;
+            transform: translate(-40px, -25px);
+            color: rgba(255, 81, 0, 0.6);
+          }
+
+          input[type=number]::-webkit-inner-spin-button, 
+          input[type=number]::-webkit-outer-spin-button {  
+            opacity: 1;
+            margin-left: 35%;
           }
 
           .deleteTask {
@@ -130,6 +165,8 @@ class TaskComponent extends HTMLElement {
     attributeChangedCallback(name, oldValue, newValue){
         if (name == "type"){
             this.right.type = newValue;
+            this.right.style.height = "100%";
+            this.right.style.margin = "0 0 0 0";
         }
         else if (name == "left-pointer-event"){
             this.left.style['pointer-events'] = newValue;
@@ -139,6 +176,7 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
+            this.rightsuffix.style.display = newValue;
         }
         else if (name == 'index'){
             this.index -= 1;
@@ -149,6 +187,10 @@ class TaskComponent extends HTMLElement {
 
 customElements.define('task-component', TaskComponent);
 
+/**
+ * Clicking the begin button create render all the task-components in the break-page,
+ * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
+ */
 document.getElementById("begin").addEventListener("click", ()=>{
     let notempty = tasklist.filter(task => task[0] != "");
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
@@ -175,6 +217,10 @@ document.getElementById("begin").addEventListener("click", ()=>{
     }
 });
 
+/**
+ * Clicking the create button will create a task-component on the set-up page. 
+ * It will only allow 6 task-components.
+ */
 document.getElementById("create").addEventListener("click", ()=>{
     if (document.getElementById("active-task-container").children.length <= 6){
         let entry = document.createElement("task-component");
@@ -182,6 +228,10 @@ document.getElementById("create").addEventListener("click", ()=>{
     }
 });
 
+/**
+ * Function used in TaskComponent to delete the component 
+ * if user clicks the X button next to task on set-up page.
+ */
 function deleteComponent(index){
     for (let i = index; i < tasklist.length; i++){
         document.getElementById("active-task-container").children[i+1].setAttribute('index', i);
@@ -189,3 +239,5 @@ function deleteComponent(index){
     tasklist.splice(index, 1); //removes task from tasklist 
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
 }
+
+module.exports = {deleteComponent};
