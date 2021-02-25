@@ -1,12 +1,4 @@
-/**
- * Global variables that are used in active-break-pages.js
- *      copytasklist :  copy of tasklist used to create task list in local storage. Not manipulated
- *      tasklist     :  Stores tasks that the user sets in set-up page. The variable that is manipulated.
- *      completed    :  Variable to append completed tasks to create task list in local storage.
- */
-var copytasklist = [];
-var tasklist = [];
-var completed = [];
+/*global tasklist, copytasklist, completed*/
 
 
 //Active page button, timer, and progress bar 
@@ -14,6 +6,7 @@ const activebutton = document.getElementById('pomo-button');
 const activetimer = document.getElementById('timer');
 const activebar = document.getElementById('progress-bar');
 const barwidth = 600; //600px in style.css
+const breaktitle = document.getElementById("break-title");
 
 //Break page button and timer
 const breakbutton = document.getElementById('break-button');
@@ -25,9 +18,12 @@ const click = document.getElementById('click');
 const beep = document.getElementById('beep');
 
 //timer variables
-let time = 20; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
-let counter = time; 
+let activetime = 8; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
+let shortbreaktime = 5; // should be set to break time (5mins /)
+let longbreaktime = 10;
+let counter = activetime; 
 let state;
+let longbreakcounter = 0; // by default, after 4 short breaks, a long break will occur (when set to 3)
 
 /**
  *  Variables to keep track of tasks:
@@ -71,6 +67,7 @@ activebutton.addEventListener('click', ()=>{
  */
 breakbutton.addEventListener('click', ()=>{
     if (abortClicked) {
+        actualpomo[currTask] = pomocount;
         abortBreak = true;
         redirectToPage("break");
     }
@@ -102,13 +99,13 @@ function startTimer(page){
     }
     page == "active" && (task && !abortBreak) ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortBreak ? false : abortTimer();
     click.play();
-    reset();
+    reset(page);
     updateCounter(page);
     state = setInterval(()=>{
         counter -= 1;
         counter == 0 ? redirectToPage(page) : (counter < 6 ? tick.play() : false);
         if (page == "active"){
-            activebar.style.width = ((barwidth*counter)/time).toString() + "px";
+            activebar.style.width = ((barwidth*counter)/activetime).toString() + "px";
             updateCounter("active");
         }
         else updateCounter("break");
@@ -157,11 +154,11 @@ function updateCounter(page){
     secs = secs < 10 ? "0" + parseInt(secs) : parseInt(secs);
     if (page == "active"){
         activetimer.innerHTML = mins + ":" + secs;
-        document.title = mins + ":" + secs + " Timer Active";
+        document.title = mins + ":" + secs + " Active Timer";
     }
     else if (page == "break"){
         breaktimer.innerHTML= mins + ":" + secs;
-        document.title = mins + ":" + secs + " Timer Break";
+        document.title = mins + ":" + secs + " Break Timer";
     }
 }
 
@@ -169,9 +166,21 @@ function updateCounter(page){
  *  Function used in startTimer to reset timer variables, 
  *  warning variable and progress bar.
  */
-function reset(){
+function reset(page){
     state = null;
-    counter =  time;
+    if (page == "active") counter = activetime;
+    else {
+        if (longbreakcounter >= 3) {
+            longbreakcounter = 0;
+            counter = longbreaktime;
+            breaktitle.textContent = "Long Break";
+        }
+        else {
+            longbreakcounter++;
+            counter = shortbreaktime;
+            breaktitle.textContent = "Short Break";
+        }
+    }
     abortClicked = false;
     activebar.style.width = "600px";
 }

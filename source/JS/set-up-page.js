@@ -1,4 +1,8 @@
-/*global startTimer, tasklist, copytasklist, completed*/
+/*global startTimer*/
+
+var copytasklist = [];
+var tasklist = [];
+var completed = [];
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
@@ -61,10 +65,9 @@ class TaskComponent extends HTMLElement {
                 right.value > 1 ? rightsuffix.textContent = "pomos" : rightsuffix.textContent = "pomo"; 
             }
             else{
-                if (right.value == 'on'){ //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
-                    if (!completed.includes(left.value)) completed.push(left.value);
-                    else completed.splice(completed.indexOf(left.value), 1);
-                }
+                 //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
+                if (!completed.includes(left.value)) completed.push(left.value);
+                else completed.splice(completed.indexOf(left.value), 1);
             }
         });
 
