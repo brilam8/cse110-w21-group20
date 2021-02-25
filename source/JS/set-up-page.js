@@ -205,7 +205,7 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == "set-right-input"){
             this.right.style.display = "none";
-            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo" 
+            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo";
             this.rightsuffix.style.transform = "translateX(-55%)";
         }
         else if (name == "remove-right-suffix"){
@@ -279,10 +279,6 @@ function deleteComponent(index){
     }
     tasklist.splice(index, 1); //removes task from tasklist 
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
-}
-
-function moveFromUncompleteToCurr(){
-
 }
 
 module.exports = {deleteComponent};
