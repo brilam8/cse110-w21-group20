@@ -1,4 +1,8 @@
-/*global startTimer, tasklist, copytasklist, completed*/
+/*global startTimer*/
+
+var copytasklist = [];
+var tasklist = [];
+var completed = [];
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
@@ -29,10 +33,11 @@ class TaskComponent extends HTMLElement {
         right.type = "number";
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
+        right.value = "1";
 
         const rightsuffix = rightcontainer.appendChild(document.createElement('span'));
         rightsuffix.setAttribute('class', 'rightsuffix');
-        rightsuffix.textContent = "1 pomo";
+        rightsuffix.textContent = "pomo";
 
         const deleteButton = container.appendChild(document.createElement('button'));
         deleteButton.setAttribute('class', 'deleteTask');
@@ -57,15 +62,12 @@ class TaskComponent extends HTMLElement {
             if (right.type == "number"){ //only in set up
                 tasklist[this.index] = [left.value ? left.value : "", right.value ? right.value : 1]; //replaces pomo
                 
-                //styling for pomo text after input
-                rightsuffix.style.transform = "translate(-25px, -25px)";
                 right.value > 1 ? rightsuffix.textContent = "pomos" : rightsuffix.textContent = "pomo"; 
             }
             else{
-                if (right.value == 'on'){ //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
-                    if (!completed.includes(left.value)) completed.push(left.value);
-                    else completed.splice(completed.indexOf(left.value), 1);
-                }
+                 //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
+                if (!completed.includes(left.value)) completed.push(left.value);
+                else completed.splice(completed.indexOf(left.value), 1);
             }
         });
 
@@ -78,6 +80,7 @@ class TaskComponent extends HTMLElement {
           .entry {
             font-family: 'Oswald', sans-serif;
             height: 40px;
+            width: 59.15vw;
             background-color: white;
             border: solid;
             border-color: lightgrey;
@@ -110,31 +113,30 @@ class TaskComponent extends HTMLElement {
           }
           
           .right {
-            position absolute;
             width: 100%;
             caret-color: transparent;
             cursor: default;
             outline: none;
+            transform: translateX(-3%);
           }
 
           .rightsuffix {
             position: absolute;
-            transform: translate(-40px, -25px);
+            transform: translate(-25px, -25px);
             color: rgba(255, 81, 0, 0.6);
           }
 
           input[type=number]::-webkit-inner-spin-button, 
           input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
-            margin-left: 35%;
+            margin-left: 32%;
           }
 
           .deleteTask {
               position: absolute;
               height: 35px;
               width: 35px;
-              right: 16%;
-              transform: translateY(5px);
+              transform: translate(60vw, 5px);
               cursor: pointer;
               outline: none;
               
@@ -143,7 +145,6 @@ class TaskComponent extends HTMLElement {
               color: rgba(242, 71, 38, 0.9);
               font-weight: bold;
               border-radius: 5px;
-              transition: all 0.3s ease-in;
           }
 
           .deleteTask:hover {
@@ -153,6 +154,21 @@ class TaskComponent extends HTMLElement {
           ::placeholder {
             color: rgb(255, 166, 125);
             font-size: 18px;
+          }
+
+          @media only screen and (max-width: 1400px) {
+            .rightsuffix {
+                display: none;
+            }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button {  
+                opacity: 1;
+                margin-left: 0;
+                transform: translateX(0);
+            }
+            .right {
+                transform: translateX(-6%);
+            }
           }
         `;
 
