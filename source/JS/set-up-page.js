@@ -31,12 +31,13 @@ class TaskComponent extends HTMLElement {
         const right = rightcontainer.appendChild(document.createElement('input'));
         right.setAttribute('class', "right");
         right.type = "number";
+        right.dir = "rtl";
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
         right.value = "1";
 
-        const rightsuffix = rightcontainer.appendChild(document.createElement('span'));
-        rightsuffix.setAttribute('class', 'rightsuffix');
+        const rightsuffix = rightcontainer.appendChild(document.createElement('div'));
+        rightsuffix.setAttribute('class', 'rightcontainer');
         rightsuffix.textContent = "pomo";
 
         const deleteButton = container.appendChild(document.createElement('button'));
@@ -100,30 +101,33 @@ class TaskComponent extends HTMLElement {
             font-size: 20px;
           }
 
-          .rightcontainer, .right, .rightsuffix {
+          .rightcontainer {
+            float: right;
+            margin-top: 3px;
+            padding-right: 10px;
+            text-align:center;
+            height: 30px;
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
-            text-align: center;
-          }
-          .rightcontainer {
-            margin-top: 8px;
-            width: 20%;
-            height: 30px;            
           }
           
-          .right {
-            width: 100%;
-            caret-color: transparent;
-            cursor: default;
+          .right{
+            height: 25px;
+            width: 43px;
+            border: none;
             outline: none;
-            transform: translateX(-3%);
+            text-align: right;
+            padding-right: 1px;
           }
 
           .rightsuffix {
-            position: absolute;
-            transform: translate(-25px, -25px);
-            color: rgba(255, 81, 0, 0.6);
+            height: 25px;
+            width: 43px;
+            border: solid;
+            outline: none;
+            text-align: right;
+            padding-right: 1px;
           }
 
           input[type=number]::-webkit-inner-spin-button, 
@@ -153,7 +157,7 @@ class TaskComponent extends HTMLElement {
           
           ::placeholder {
             color: rgb(255, 166, 125);
-            font-size: 18px;
+            font-size: 20px;
           }
 
           @media only screen and (max-width: 1400px) {

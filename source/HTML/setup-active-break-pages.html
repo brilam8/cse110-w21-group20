@@ -26,47 +26,68 @@
             <hr class="orange-hr">
             <div class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Pomo Setting</b></div>
-                    <div class="task-right"><b>Option</b></div>
+                    <div class="task-left"><b>Pomo Settings</b></div>
+                    <div class="task-right"><b>Options &nbsp&nbsp&nbsp</b></div>
                 </div>
                 <div class="task-entry">
                     <div class="task-left">One Pomo Length</div>
-                    <input class="task-right" type="number" placeholder="   25 min" 
-                        min="20" max="35" step="5" onkeydown="return false">
+                    <div class="task-right">
+                        <div class="task-right">min&nbsp</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="25" 
+                            min="20" max="35" step="5" onkeydown="return false"></input>
+                    </div>
                 </div>
                 <div class="task-entry">
                     <div class="task-left">Total Pomos</div>
-                    <input class="task-right" type="number" placeholder="   4 sess" 
-                        min="1" max="15" step="1" onkeydown="return false">
+                    <div class="task-right">
+                        <div class="task-right">sess</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="4" 
+                            min="1" max="15" step="1" onkeydown="return false"></input>
+                    </div>
+                    
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Short Break Length in between Pomos</div>
-                    <input class="task-right" type="number" placeholder="   5 min" 
-                        min="5" max="10" step="1" onkeydown="return false">
+                    <div class="task-left">Short Breaks Timer</div>
+                    <div class="task-right">
+                        <div class="task-right">min&nbsp</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="5" 
+                            min="5" max="10" step="1" onkeydown="return false"></input>
+                    </div>
                 </div>
                 <div class="task-entry">
                     <div class="task-left">Long Break Timer</div>
-                    <input class="task-right" type="number" placeholder="   20 min" 
-                        min="15" max="30" step="5" onkeydown="return false">
-                </div>    
-                <slider-component button-id="dark-mode-button" name="Dark Mode"></slider-component> 
-                <!--  -->
+                    <div class="task-right">
+                        <div class="task-right">min&nbsp</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="20" 
+                            min="15" max="30" step="5" onkeydown="return false"></input>
+                    </div>
+                </div>       
             </div>
             <hr>
             <div class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Timer Sounds Setting</b></div>
-                    <div class="task-right"><b>Beeps</b></div>
+                    <div class="task-left"><b>Extra Settings</b></div>
+                    <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Short Break:</div>
-                    <input class="task-right" type="number" placeholder="   1" 
-                        min="1" max="5" step="1" onkeydown="return false">
+                    <div class="task-left">Short Break Beeps</div>
+                    <div class="task-right">
+                        <div class="task-right">beeps</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="2" 
+                            min="1" max="5" step="1" onkeydown="return false"></input>
+                    </div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Long Break</div>
-                    <input class="task-right" type="number" placeholder="   5" 
-                        min="1" max="10" step="1" onkeydown="return false">
+                    <div class="task-left">Long Break Beeps</div>
+                    <div class="task-right">
+                        <div class="task-right">beeps</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="5" 
+                            min="1" max="5" step="1" onkeydown="return false"></input>
+                    </div>
+                </div>
+                <div class="task-entry">
+                    <div class="task-left">Dark Mode</div>
+                    <slider-component class ="task-right" button-id="dark-mode-button" ></slider-component> 
                 </div>
             </div>       
             <hr>

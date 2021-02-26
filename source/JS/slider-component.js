@@ -8,11 +8,6 @@ class SliderComponent extends HTMLElement {
         super();
         this.attachShadow({mode: 'open'});
         const container = document.createElement('div');
-        container.setAttribute('class', 'general-settings-container');
-
-        const containerName = container.appendChild(document.createElement('p'));
-        containerName.setAttribute('class', "general-container-name");
-        containerName.textContent = this.hasAttribute('name') ? this.getAttribute('name') : "Setting Undefined";
         
         const button = container.appendChild(document.createElement('button'));
         button.setAttribute('class','setting-slider');
@@ -46,53 +41,35 @@ class SliderComponent extends HTMLElement {
 
         const style = document.createElement('style');
         style.textContent = `
-          .general-settings-container {
-            display: flex;
-            margin-top: 20px;
-            margin-left: 10px;
-            align-items: center;
-          }
-          
-          .general-container-name {
-            width: 200px;
-            height: 40px;
-            margin: 0 5px;
-            border: 4px solid rgb(242, 71, 38);;
-            color: rgb(242, 71, 38);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-          
-          .setting-slider {
-            width: 70px;
-            height: 40px;
-            border: none;
-            border-radius: 25px;
-            outline: none;
-            
-          }
-          
-          .slider-circle {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background-color: rgb(242, 71, 38);
-            transform: translate(-3px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transition: all 0.6s ease-out;
-            cursor: pointer;
+        .setting-slider {
+          width: 70px;
+          height: 32px;
+          border: none;
+          border-radius: 25px;
+          outline: none;
+          margin-top: 0px;
+          margin-right: 25px;
+        }
+        
+        .slider-circle {
+          width: 31px;
+          height: 31px;
+          border-radius: 50%;
+          background-color: rgb(242, 71, 38);
+          transform: translate(-3px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          transition: all 0.6s ease-out;
+          cursor: pointer;
 
-            color: white; //just added
-          }
-          
-          .setting-slider-switch .slider-circle {
-            transform: translate(23px);
-          }
+          color: white; //just added
+        }
+        
+        .setting-slider-switch .slider-circle {
+          transform: translate(30px);
+        }
         `;
 
         //reclicks sliders on setting page to setting state stored in local storage
