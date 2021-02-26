@@ -133,13 +133,13 @@ class TaskComponent extends HTMLElement {
             outline: none;
               
             background-color: rgb(255, 81, 0);
-              border: 3.5px solid rgba(242, 71, 38, 0.9);;
-              color: white;
-              font-weight: bold;
-              border-radius: 5px;
+            border: solid  rgb(255, 81, 0);
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
           }
           .deleteTask:hover {
-            background-color: rgba(242, 71, 38, 0.2);
+            background-color: rgba(255, 81, 0, 0.6);
           }
           
           ::placeholder {

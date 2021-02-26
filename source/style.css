@@ -503,7 +503,7 @@ hr {
 }
 
 .set-up-page button:hover {
-  background-color: rgb(255, 166, 125);
+  background-color: rgba(255, 81, 0, 0.6);
   color: white;
 }
 
@@ -522,6 +522,7 @@ hr {
   background-color: rgb(255, 81, 0);
   color: white;
   margin-bottom: 10%;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 700px) {
