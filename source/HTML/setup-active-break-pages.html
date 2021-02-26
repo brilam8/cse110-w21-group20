@@ -119,11 +119,24 @@
             </div>
             <div id="break-task-container" class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Task List</b></div>
+                    <div class="task-left"><b>Current Task</b></div>
                     <div class="task-right"><b>Mark Done</b></div>
                 </div>
                 <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
             </div>
+            <div id="incompleted-task-container" class="flex-container">
+                <div class="task-title">
+                    <div class="task-left"><b>Incompleted Tasks</b></div>
+                    <div class="task-right"><b>Expected</b></div>
+                </div>
+            </div>
+            <div id="completed-task-container" class="flex-container">
+                <div class="task-title">
+                    <div class="task-left"><b>Completed Tasks</b></div>
+                    <div class="task-right"><b>Actual</b></div>
+                </div>
+            </div>
+
             <a id="to-active-page" href="#active-page" style="visibility: hidden;"></a>
         </section>
         <audio id="beep"><source src="./sounds/Beep.mp3"></audio>

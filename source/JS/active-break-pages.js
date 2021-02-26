@@ -6,11 +6,12 @@ const activebutton = document.getElementById('pomo-button');
 const activetimer = document.getElementById('timer');
 const activebar = document.getElementById('progress-bar');
 const barwidth = 600; //600px in style.css
-const breaktitle = document.getElementById("break-title");
+
 
 //Break page button and timer
 const breakbutton = document.getElementById('break-button');
 const breaktimer = document.getElementById('break-timer');
+const breaktitle = document.getElementById("break-title");
 
 //Sounds for both active and break page
 const tick = document.getElementById('tick');
@@ -128,12 +129,31 @@ function redirectToPage(curPage){
             startTimer("break");
         }
         else if (curPage == "break"){
-            for (let i = 0; i < tasklist.length; i++){
-                if (completed.includes(tasklist[i][0])){
-                    let task = document.getElementById('break-task-container').children[i+1];
-                    if (task) document.getElementById('break-task-container').children[i+1].remove();
-                    completedtask.push(tasklist[i][0]);
-                    tasklist.splice(i--, 1);
+            if (completed.includes(tasklist[0][0])){
+                let task = document.getElementById('break-task-container').children[1];
+                if (task) {
+                    document.getElementById('break-task-container').children[1].remove();
+                    let completed = document.createElement("task-component");
+                    completed.setAttribute('left-pointer-event', "none");
+                    completed.setAttribute('set-right-input', pomocount);
+                    completed.setAttribute('left-task', tasklist[0][0]);
+                    completed.setAttribute('delete', 'none');
+                    document.getElementById("completed-task-container").appendChild(completed);
+                    completedtask.push(tasklist[0][0]);
+                    tasklist.splice(0, 1);
+
+
+                    let newTask = document.getElementById('incompleted-task-container').children[1];
+                    if (newTask){
+                        document.getElementById('incompleted-task-container').children[1].remove();
+                        let newTask = document.createElement("task-component");
+                        newTask.setAttribute('type', "checkbox");
+                        newTask.setAttribute('left-task', tasklist[0][0]);
+                        newTask.setAttribute('left-pointer-event', "none");
+                        newTask.setAttribute('remove-right-suffix', "none");
+                        newTask.setAttribute('delete', 'none');
+                        document.getElementById("break-task-container").appendChild(newTask);
+                    }
                 }
             }
             document.getElementById("active-page").style.display = "inline";

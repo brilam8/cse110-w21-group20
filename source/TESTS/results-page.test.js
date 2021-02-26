@@ -102,33 +102,33 @@ describe('task list', () => {
     localStorage.setItem('tasks', JSON.stringify([
       {
         "id": 1,
-        "pomos": 4,
-        "complete": true,
-        "name": "eat cheese"
+        "actualpomos": 4,
+        "completed": true,
+        "taskdescription": "eat cheese"
       },
       {
         "id": 2,
-        "pomos": 2,
-        "complete": true,
-        "name": "play games"
+        "actualpomos": 2,
+        "completed": true,
+        "taskdescription": "play games"
       },
       {
         "id": 3,
-        "pomos": 3,
-        "complete": false,
-        "name": "finish cse 110"
+        "actualpomos": 3,
+        "completed": false,
+        "taskdescription": "finish cse 110"
       },
       {
         "id": 4,
-        "pomos": 0,
-        "complete": true,
-        "name": "take a trip downtown"
+        "actualpomos": 0,
+        "completed": true,
+        "taskdescription": "take a trip downtown"
       },
       {
         "id": 5,
-        "pomos": 6,
-        "complete": true,
-        "name": "build covid 19 vaccine"
+        "actualpomos": 6,
+        "completed": true,
+        "taskdescription": "build covid 19 vaccine"
       }
     ]));
     mock();
@@ -164,27 +164,27 @@ describe('task list', () => {
     localStorage.setItem('tasks', JSON.stringify([
       {
         "id": 1,
-        "pomos": 4,
-        "complete": true,
-        "name": "eat cheese"
+        "actualpomos": 4,
+        "completed": true,
+        "taskdescription": "eat cheese"
       },
       {
         "id": 2,
-        "pomos": 2,
-        "complete": true,
-        "name": "play games"
+        "actualpomos": 2,
+        "completed": true,
+        "taskdescription": "play games"
       },
       {
         "id": 4,
-        "pomos": 0,
-        "complete": true,
-        "name": "take a trip downtown"
+        "actualpomos": 0,
+        "completed": true,
+        "taskdescription": "take a trip downtown"
       },
       {
         "id": 5,
-        "pomos": 6,
-        "complete": true,
-        "name": "build covid 19 vaccine"
+        "actualpomos": 6,
+        "completed": true,
+        "taskdescription": "build covid 19 vaccine"
       }
     ]));
     mock();
@@ -222,27 +222,27 @@ describe('task list', () => {
     localStorage.setItem('tasks', JSON.stringify([
       {
         "id": 1,
-        "pomos": 4,
-        "complete": false,
-        "name": "eat cheese"
+        "actualpomos": 4,
+        "completed": false,
+        "taskdescription": "eat cheese"
       },
       {
         "id": 2,
-        "pomos": 0,
-        "complete": false,
-        "name": "play games"
+        "actualpomos": 0,
+        "completed": false,
+        "taskdescription": "play games"
       },
       {
         "id": 4,
-        "pomos": 0,
-        "complete": false,
-        "name": "take a trip downtown"
+        "actualpomos": 0,
+        "completed": false,
+        "taskdescription": "take a trip downtown"
       },
       {
         "id": 5,
-        "pomos": 0,
-        "complete": false,
-        "name": "build covid 19 vaccine"
+        "actualpomos": 0,
+        "completed": false,
+        "taskdescription": "build covid 19 vaccine"
       }
     ]));
     mock();

@@ -31,13 +31,12 @@ class TaskComponent extends HTMLElement {
         const right = rightcontainer.appendChild(document.createElement('input'));
         right.setAttribute('class', "right");
         right.type = "number";
-        right.dir = "rtl";
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
         right.value = "1";
 
-        const rightsuffix = rightcontainer.appendChild(document.createElement('div'));
-        rightsuffix.setAttribute('class', 'rightcontainer');
+        const rightsuffix = rightcontainer.appendChild(document.createElement('span'));
+        rightsuffix.setAttribute('class', 'rightsuffix');
         rightsuffix.textContent = "pomo";
 
         const deleteButton = container.appendChild(document.createElement('button'));
@@ -100,42 +99,36 @@ class TaskComponent extends HTMLElement {
             color: rgb(255, 81, 0);
             font-size: 20px;
           }
-
-          .rightcontainer {
-            float: right;
-            margin-top: 3px;
-            padding-right: 10px;
-            text-align:center;
-            height: 30px;
+          .rightcontainer, .right, .rightsuffix {
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
+            text-align: center;
+          }
+          .rightcontainer {
+            margin-top: 8px;
+            width: 20%;
+            height: 30px;            
           }
           
-          .right{
-            height: 25px;
-            width: 43px;
-            border: none;
+          .right {
+            width: 100%;
+            height: 30px;
+            caret-color: transparent;
+            cursor: default;
             outline: none;
-            text-align: right;
-            padding-right: 1px;
+            transform: translateX(-3%);
           }
-
           .rightsuffix {
-            height: 25px;
-            width: 43px;
-            border: solid;
-            outline: none;
-            text-align: right;
-            padding-right: 1px;
+            position: absolute;
+            transform: translate(-25px, -29px);
+            color: rgba(255, 81, 0, 0.6);
           }
-
           input[type=number]::-webkit-inner-spin-button, 
           input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
             margin-left: 32%;
           }
-
           .deleteTask {
               position: absolute;
               height: 35px;
@@ -150,19 +143,23 @@ class TaskComponent extends HTMLElement {
               font-weight: bold;
               border-radius: 5px;
           }
-
           .deleteTask:hover {
             background-color: rgba(242, 71, 38, 0.2);
           }
           
           ::placeholder {
             color: rgb(255, 166, 125);
-            font-size: 20px;
+            font-size: 18px;
           }
-
           @media only screen and (max-width: 1400px) {
             .rightsuffix {
                 display: none;
+            }
+            input[type=number]::-webkit-inner-spin-button, 
+            input[type=number]::-webkit-outer-spin-button {  
+                opacity: 1;
+                margin-left: 0;
+                transform: translateX(0);
             }
             input[type=number]::-webkit-inner-spin-button, 
             input[type=number]::-webkit-outer-spin-button {  
@@ -180,7 +177,7 @@ class TaskComponent extends HTMLElement {
     }
 
     static get observedAttributes() {
-        return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index'];
+        return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index', 'set-right-input', 'remove-right-suffix'];
     }
     attributeChangedCallback(name, oldValue, newValue){
         if (name == "type"){
@@ -196,10 +193,17 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
-            this.rightsuffix.style.display = newValue;
         }
         else if (name == 'index'){
             this.index -= 1;
+        }
+        else if (name == "set-right-input"){
+            this.right.style.display = "none";
+            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo";
+            this.rightsuffix.style.transform = "translateX(-55%)";
+        }
+        else if (name == "remove-right-suffix"){
+            this.rightsuffix.style.display = newValue;
         }
     }  
 
@@ -216,13 +220,24 @@ document.getElementById("begin").addEventListener("click", ()=>{
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
         for (let i = 0; i < tasklist.length; i++){
             if (tasklist[i][0] != ""){ //checks for empty tasks
-                let entry = document.createElement("task-component");
-                entry.setAttribute('type', "checkbox");
-                entry.setAttribute('left-pointer-event', "none");
-                entry.setAttribute('left-task', tasklist[i][0]);
-                entry.setAttribute('delete', 'none');
+                if ( document.getElementById("break-task-container").children.length <= 1){
+                    let firstentry = document.createElement("task-component");
+                    firstentry.setAttribute('type', "checkbox");
+                    firstentry.setAttribute('left-task', tasklist[i][0]);
+                    firstentry.setAttribute('left-pointer-event', "none");
+                    firstentry.setAttribute('remove-right-suffix', "none");
+                    firstentry.setAttribute('delete', 'none');
+                    document.getElementById("break-task-container").appendChild(firstentry);
+                }
+                else {
+                    let entry = document.createElement("task-component");
+                    entry.setAttribute('left-pointer-event', "none");
+                    entry.setAttribute('set-right-input', tasklist[i][1]);
+                    entry.setAttribute('left-task', tasklist[i][0]);
+                    entry.setAttribute('delete', 'none');
+                    document.getElementById("incompleted-task-container").appendChild(entry);
+                }
                 copytasklist.push(tasklist[i]);
-                document.getElementById("break-task-container").appendChild(entry);
             }
             else {
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
