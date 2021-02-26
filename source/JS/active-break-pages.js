@@ -11,6 +11,7 @@ const barwidth = 600; //600px in style.css
 //Break page button and timer
 const breakbutton = document.getElementById('break-button');
 const breaktimer = document.getElementById('break-timer');
+const breakbar = document.getElementById("break-bar");
 const breaktitle = document.getElementById("break-title");
 
 //Sounds for both active and break page
@@ -109,7 +110,10 @@ function startTimer(page){
             activebar.style.width = ((barwidth*counter)/activetime).toString() + "px";
             updateCounter("active");
         }
-        else updateCounter("break");
+        else {
+            breakbar.style.width = breaktitle.textContent == "Long Break" ? ((barwidth*counter)/longbreaktime).toString() + "px" : ((barwidth*counter)/shortbreaktime).toString() + "px";
+            updateCounter("break");
+        }
     },1000);
 }
 
@@ -203,6 +207,7 @@ function reset(page){
     }
     abortClicked = false;
     activebar.style.width = "600px";
+    breakbar.style.width = "600px";
 }
 
 /**
