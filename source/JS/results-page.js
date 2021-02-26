@@ -1,6 +1,8 @@
 const localStorage = window.localStorage;
 const checkmarkPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z"
 const xPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z"
+const ns = 'http://www.w3.org/2000/svg';
+
 class TaskItem extends HTMLElement {
     static get observedAttributes() {
         return ['completed', 'name', 'actualpomos', 'expectedpomos']
@@ -28,13 +30,13 @@ class TaskItem extends HTMLElement {
                 margin-right:auto;
                 margin-bottom:15px;
             }
-              .task-main {
+            .task-main {
                 display: flex;
                 flex-direction: row;
                 align-items: center;
             }
 
-              .task-name {
+            .task-name {
                 font-family: 'Open Sans', sans-serif;
                 color: black;
                 font-size: 18px;
@@ -43,7 +45,7 @@ class TaskItem extends HTMLElement {
                 padding-left: 10px;
             }
 
-              .actual-pomo {
+            .actual-pomo {
                 font-family: 'Open Sans', sans-serif;
                 color: black;
                 font-size: 18px;
@@ -51,11 +53,20 @@ class TaskItem extends HTMLElement {
                 font-weight: bold;
             }
 
-              .expected-pomo {
+            .expected-pomo {
                 font-family: 'Open Sans', sans-serif;
                 color: black;
                 font-size: 15px;
                 font-style: normal;
+            }
+
+            .checkMark {
+                d: path("M 12 0 c -6.627 0 -12 5.373 -12 12 s 5.373 12 12 12 s 12 -5.373 12 -12 s -5.373 -12 -12 -12 Z m -1.25 17.292 l -4.5 -4.364 l 1.857 -1.858 l 2.643 2.506 l 5.643 -5.784 l 1.857 1.857 l -7.5 7.643 Z");
+            }
+
+            .svgIcon {
+                width: 24px;
+                height: 24px;
             }
         `
 
@@ -63,12 +74,11 @@ class TaskItem extends HTMLElement {
         container.setAttribute('class', 'task-comp');
         const taskMain = container.appendChild(document.createElement('div'));
         taskMain.setAttribute('class', 'task-main')
-        const svg = taskMain.appendChild(document.createElement("svg"));
-        svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+        const svg = taskMain.appendChild(document.createElementNS(ns, "svg"));
         svg.setAttribute("width", "24");
         svg.setAttribute("height", "24");
         svg.setAttribute("viewBox", "0 0 24 24");
-        const path = svg.appendChild(document.createElement("path"));
+        const path = svg.appendChild(document.createElementNS(ns, "path"));
         this.path = path;
         path.setAttribute("d", checkmarkPATH);
         path.setAttribute("style", "fill: green;");
@@ -105,26 +115,26 @@ class TaskItem extends HTMLElement {
             this.actualPomos.textContent = newValue;
         }
         else if (name == 'expectedpomos'){
-            this.expectedPomos.textContent = newValue;
+            this.expectedPomos.textContent = `/${newValue} pomos`;
         }
         else if (name == "completed") {
-            updatePath(newValue);
+            this.updatePath(newValue);
         }
     }  
 
     updatePath(compValue){
         if (compValue == "true"){
-            this.path.setAttribute("d", checkmarkPATH);
-            if (Number(this.actualPomos.textContent) > Number(this.expectedPomos.textContent)) {
-                this.path.setAttribute("style", "fill:yellow")
+            if (Number(this.getAttribute("actualpomos")) > Number(this.getAttribute("expectedpomos"))) {
+                this.path.setAttribute("style", "fill:rgb(255, 115, 1)")
             }
             else {
                 this.path.setAttribute("style", "fill:green")
             }
+            this.path.setAttribute("d", checkmarkPATH);
         }
         else {
-            this.path.setAttribute("d", xPATH);
             this.path.setAttribute("style", "fill:red")
+            this.path.setAttribute("d", xPATH);
         }
         
     }
@@ -132,15 +142,15 @@ class TaskItem extends HTMLElement {
 
 customElements.define('task-item', TaskItem);
 
-
-
-
 /**
  * Populates the tasks completed and tasks left to do
  * by checking the tasks stored in local storage once
  * the page loads
  */
 window.addEventListener('DOMContentLoaded', () => {
+    const progBar = document.getElementById("prog-bar-fill");
+    
+    //move()
     populateTasks();
 });
 
@@ -157,18 +167,44 @@ function populateTasks(){
     }
     else {
         const data = JSON.parse(localStorage.getItem('tasks'));
+        const totTasks = data.length;
+        let totComplete = 0;
         for (let i = 0; i < data.length; i++ ) {
             if (data[i].completed === true){
-                let item = completedItems.appendChild(document.createElement("li"));
-                item.setAttribute('class', 'li-task');
-                item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
+                totComplete++;
+                let item = completedItems.appendChild(document.createElement("task-item"));
+                item.setAttribute("name", data[i].taskdescription)
+                item.setAttribute("actualpomos", data[i].actualpomos)
+                item.setAttribute("expectedpomos", data[i].expectedpomos)
+                item.setAttribute("completed", true)
+                //let item = completedItems.appendChild(document.createElement("li"));
+                //item.setAttribute('class', 'li-task');
+                //item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
             }
             else if (data[i].completed === false){
-                let item = uncompletedItems.appendChild(document.createElement("li"));
-                item.setAttribute('class', 'li-task');
-                item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
+                let item = uncompletedItems.appendChild(document.createElement("task-item"));
+                item.setAttribute("name", data[i].taskdescription)
+                item.setAttribute("actualpomos", data[i].actualpomos)
+                item.setAttribute("expectedpomos", data[i].expectedpomos)
+                item.setAttribute("completed", false)
+                //let item = uncompletedItems.appendChild(document.createElement("li"));
+                //item.setAttribute('class', 'li-task');
+                //item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
             }
         }
+        //moveProgBar(totTasks, totComplete);
+        const thresh = totComplete/totTasks*100
+        var elem = document.getElementById("prog-bar-fill");
+        elem.offsetHeight
+        elem.style.width = thresh+"%";
+        if (thresh >= 66) {
+            elem.style["background-color"] = "green"
+        }
+        else if (thresh >= 33){
+            elem.style["background-color"] = "yellow"
+        }
+        var num = document.getElementById("prog-num");
+        num.textContent = `${totComplete}/${totTasks} tasks completed!`
         checkEmpty();
     }
 }
@@ -188,12 +224,13 @@ function checkEmpty(){
         let complete_error = completedItems.appendChild(document.createElement("p"));
         complete_error.setAttribute('class', 'p-body');
         complete_error.textContent = `No tasks completed`;
-        
+        complete_error.style['text-align'] = "center";
     }
     if (uncomplete_count <= 0) {
         let uncomplete_error = uncompletedItems.appendChild(document.createElement("p"));
         uncomplete_error.setAttribute('class', 'p-body');
         uncomplete_error.textContent = `No tasks uncompleted`;
+        uncomplete_error.style['text-align'] = "center";
         if (complete_count > 0) {
             message.textContent = `Congratulations! You finished all your tasks this session!`;
         }

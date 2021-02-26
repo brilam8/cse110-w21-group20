@@ -325,6 +325,35 @@ h3 {
   font-style: normal;
 }
 
+.task-progress-bar {
+  margin:auto;
+  width: 50%;
+  height: 3.5em;
+  background-color: rgba(242, 71, 38, 0.5);
+  border-radius: 3px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.progress-bar-fill {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: #da1515;
+  border-radius: 3px;
+  transition: width 2s ease-in-out,
+              background-color 5s ease;
+}
+
+#prog-num {
+  font-family: 'Open Sans', sans-serif;
+  color: #fff;
+  font-size: 20px;
+  font-style: normal;
+  text-align:center;
+  margin: auto;
+  width: 100%;
+}
+
 /* results-page css ends here */
 
 /* style for settings-page.html starts here */
@@ -353,6 +382,7 @@ h3 {
   align-items: center;
   border: 5px solid;
   border-radius: 25px;
+  
 }
 
 .timer-settings-title,
