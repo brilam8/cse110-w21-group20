@@ -33,8 +33,6 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v1
-    # - name: Cypress run
-    #   uses: cypress-io/github-action@v1
     - run : npx cypress run
       with:
         wait-on: http://localhost:5500
