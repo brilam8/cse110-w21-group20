@@ -251,5 +251,3 @@ function deleteComponent(index){
     tasklist.splice(index, 1); //removes task from tasklist 
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
 }
-
-module.exports = {deleteComponent};
