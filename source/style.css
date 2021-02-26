@@ -342,8 +342,8 @@ h3 {
   background: #da1515;
   border-radius: 3px;
   transition:
-        width 2s ease-in-out,
-        background-color 5s ease;
+    width 2s ease-in-out,
+    background-color 5s ease;
 }
 
 #prog-num {
