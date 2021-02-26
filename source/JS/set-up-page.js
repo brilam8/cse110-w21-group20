@@ -24,7 +24,7 @@ class TaskComponent extends HTMLElement {
         left.setAttribute('class', "task-left");
         left.type = "text";
         left.placeholder = "Enter Task Here";
-        left.maxLength = 10; // TO CHANGE
+        left.maxLength = 20; // TO CHANGE
 
         const rightcontainer = container.appendChild(document.createElement('div'));
         rightcontainer.setAttribute('class', 'task-right');
@@ -84,6 +84,10 @@ class TaskComponent extends HTMLElement {
             border-color: lightgrey;
             border-width: 0 0 2px 0;
         }
+
+        .entry *{
+            background-color: transparent;
+        }
         .task-left {
             float: left;
             margin-top: 7px;
@@ -114,6 +118,7 @@ class TaskComponent extends HTMLElement {
             outline: none;
             text-align: right;
             padding-right: 3px;
+            caret-color: transparent;
           }
 
           input[type=number]::-webkit-inner-spin-button, 
@@ -141,23 +146,6 @@ class TaskComponent extends HTMLElement {
             color: rgb(255, 166, 125);
             font-size: 20px;
           }
-          @media only screen and (max-width: 1400px) {
-            .rightsuffix {
-                display: none;
-            }
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button {  
-                opacity: 1;
-                margin-left: 0;
-                transform: translateX(0);
-            }
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button {  
-                opacity: 1;
-                margin-left: 0;
-                transform: translateX(0);
-            }
-          }
         `;
 
         this.shadowRoot.append(style, container);
@@ -180,14 +168,15 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
+            this.right.style.transform = "translate(-59px, 3px)";
         }
         else if (name == 'index'){
             this.index -= 1;
         }
         else if (name == "set-right-input"){
             this.right.style.display = "none";
-            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo";
-            this.rightsuffix.style.transform = "translateX(-55%)";
+            this.rightsuffix.textContent = parseInt(newValue) + " pomo";
+            this.rightsuffix.style.transform = "translateX(-43%)";
         }
         else if (name == "remove-right-suffix"){
             this.rightsuffix.style.display = newValue;
