@@ -1,40 +1,11 @@
-const settingsliders = [];
-const timerbuttons = document.getElementsByClassName("timer-settings-button");
-const shortBeepNum = document.getElementById('short-beep-number');
-const longBeepNum = document.getElementById('long-beep-number');
-
-if (!window.localStorage.getItem('slider-clicked')){
-  window.localStorage.setItem('slider-clicked', JSON.stringify({}));
-}
-
-
-document.getElementById("to-landing-page").addEventListener('click', ()=> {
-  // window.location.replace("./landing-page.html"); //better but only when landing page is finished
-  window.location.href = "./landing-page.html";
-});
-
-for (const button of timerbuttons){
-  //need to add into local storage later
-  button.addEventListener('click', ()=>{
-    if (button.id == "short-beep-increment"){
-      shortBeepNum.textContent = shortBeepNum.textContent != "5" ? parseInt(shortBeepNum.textContent) + 1 : shortBeepNum.textContent;
-    }
-    else if (button.id == "short-beep-decrement"){
-      shortBeepNum.textContent = shortBeepNum.textContent != "1" ? parseInt(shortBeepNum.textContent) - 1 : shortBeepNum.textContent;
-    }
-    else if (button.id == "long-beep-increment"){
-      longBeepNum.textContent = longBeepNum.textContent != "5" ? parseInt(longBeepNum.textContent) + 1 : longBeepNum.textContent;
-    }
-    else if (button.id == "long-beep-decrement"){
-      longBeepNum.textContent = longBeepNum.textContent != "1" ? parseInt(longBeepNum.textContent) - 1 : longBeepNum.textContent;
-    }
-  });
-}
-
-class GeneralSettingComponent extends HTMLElement {
+customElements.define('slider-component', class extends HTMLElement {
     constructor(){
         super();
-        this.attachShadow({mode: 'open'});
+
+        if (!window.localStorage.getItem('slider-clicked')){
+          window.localStorage.setItem('slider-clicked', JSON.stringify({}));
+        }
+
         const container = document.createElement('div');
         container.setAttribute('class', 'general-settings-container');
 
@@ -49,11 +20,10 @@ class GeneralSettingComponent extends HTMLElement {
         const slider = button.appendChild(document.createElement('div'));
         slider.setAttribute('class', "slider-circle");
         slider.textContent = "Off";
-        settingsliders.push(slider);
-
+    
         this.name = containerName;
         this.button = button;
-    
+
         button.onclick = ()=>{
             //moves the slider to on or off
             button.classList.toggle("setting-slider-switch");
@@ -63,10 +33,10 @@ class GeneralSettingComponent extends HTMLElement {
             clickedList[button.id] = clickedList[button.id] == "On" ? "Off" : "On";
             window.localStorage.setItem("slider-clicked", JSON.stringify(clickedList));
 
-            //sets slider tag to on or off
+            //sets slider text to on or off
             let currentText = slider.textContent = slider.textContent == "On" ? "Off" : "On";
 
-            //sets background to black if darkmode is on.
+            //sets background to black and text to white if darkmode is on.
             if (button.id === "dark-mode-button"){
                 let color = currentText == "On" ? "#1a1a1a" : 'white';
                 let otherColor = color == "white" ? "#1a1a1a" : 'white';
@@ -89,8 +59,9 @@ class GeneralSettingComponent extends HTMLElement {
             width: 200px;
             height: 40px;
             margin: 0 5px;
-            border: 4px solid;
-            border-radius: 25px;
+            border: 4px solid rgb(242, 71, 38);;
+            color: rgb(242, 71, 38);
+            border-radius: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -132,21 +103,47 @@ class GeneralSettingComponent extends HTMLElement {
           button.classList.toggle("setting-slider-switch");
           slider.textContent = slider.textContent == "On" ? "Off" : "On";
         }
-
-        this.shadowRoot.append(style, container);
+        
+        this.append(style, container); 
     }
-
-}
-
-customElements.define('gsetting-component', GeneralSettingComponent);
+})
 
 
+describe('dark mode component', () => {
+  jest.spyOn(window.localStorage.__proto__, 'getItem');
+  jest.spyOn(window.localStorage.__proto__, 'setItem');
+  document.body.innerHTML = 
+  `
+  <slider-component id="dark-mode-button" button-id="dark-mode-button" name="Dark Mode">
+  </slider-component>
+  `;
+  document.body.style.backgroundColor = "white";
+  document.body.style.color = "#1a1a1a";
 
-// for (const input of timerinputs){
-//     input.addEventListener("keydown", (event)=>{
-//         if (!parseInt(event.key) && event.key != "0" && event.key != "Backspace"){  
-//             if (event.preventDefault) event.preventDefault();
-//             event.returnValue = false;
-//         }
-//     });
-// }
+  test('creating dark mode slider component', () => {
+      expect(document.body.innerHTML).toContain('Dark Mode');
+      expect(document.body.innerHTML).toContain('Off');
+      expect(document.getElementById('dark-mode-button').name.textContent).toEqual('Dark Mode'); 
+      expect(window.localStorage.getItem).toHaveBeenCalled();
+  })
+
+  test('checking background and color before clicking', () => {
+    expect(document.body.style.backgroundColor).toEqual("white");
+    expect(document.body.style.color).toEqual("rgb(26, 26, 26)"); // rgb(26, 26, 26) === #1a1a1a
+  })
+
+  test('checking background and color after clicking', () => {
+    document.getElementById('dark-mode-button').button.click();
+    expect(window.localStorage.getItem).toHaveBeenCalled();
+    expect(window.localStorage.setItem).toHaveBeenCalled();
+    expect(document.body.innerHTML).toContain('On');
+    expect(document.body.style.backgroundColor).toEqual("rgb(26, 26, 26)");
+    expect(document.body.style.color).toEqual("white");
+  })
+
+});
+
+test('creating undefined slider component', () => {
+    document.body.innerHTML = `<slider-component></slider-component>`;
+    expect(document.body.innerHTML).toContain('Setting Undefined');
+})
