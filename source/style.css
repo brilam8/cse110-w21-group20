@@ -207,8 +207,8 @@ h3 {
   display: grid;
   grid-template-columns: 2fr 2fr;
   grid-template-rows: auto max-content;
-  padding-left: 10%;
-  padding-right: 6%;
+  padding-left: 8%;
+  padding-right: 8%;
   column-gap: 30px;
   max-height: 60vh;
 }
