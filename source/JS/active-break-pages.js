@@ -1,4 +1,4 @@
-/*global tasklist, copytasklist, completed, setup-value */
+global tasklist, copytasklist, completed, setup-value 
 
 
 //Active page button, timer, and progress bar 
