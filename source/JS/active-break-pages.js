@@ -1,4 +1,5 @@
 /*global tasklist, copytasklist, completed, setup_value*/
+/* eslint-disable no-unused-vars */
 
 
 //Active page button, timer, and progress bar 
