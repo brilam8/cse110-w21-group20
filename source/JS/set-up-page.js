@@ -231,6 +231,7 @@ document.getElementById("begin").addEventListener("click", ()=>{
 
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
+        set_time();
         startTimer("active");
     }
     else{
