@@ -31,8 +31,7 @@ jobs:
   Cypress:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
+    - uses: actions/checkout@v1
     - run : npx cypress run
       with:
         wait-on: http://localhost:5500
