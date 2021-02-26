@@ -16,8 +16,8 @@
 - Review Agenda
 - Merge Dev to Main
 - ADR for combining pages
-- Long Breaks
-- Results Page
+- Long Breaks Feature
+- Results Page Ideas
 
 ### Open Floor:
 
