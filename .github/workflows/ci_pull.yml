@@ -29,7 +29,7 @@ jobs:
     - run: npm run test
 
   Cypress:
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: ubuntu-latest
     container: cypress/included:3.8.3
     steps:
       - uses: actions/checkout@v2
