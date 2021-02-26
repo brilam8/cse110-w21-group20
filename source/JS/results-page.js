@@ -1,18 +1,18 @@
 const localStorage = window.localStorage;
-const checkmarkPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z"
-const xPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z"
+const checkmarkPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.25 17.292l-4.5-4.364 1.857-1.858 2.643 2.506 5.643-5.784 1.857 1.857-7.5 7.643z";
+const xPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z";
 const ns = 'http://www.w3.org/2000/svg';
 
 class TaskItem extends HTMLElement {
     static get observedAttributes() {
-        return ['completed', 'name', 'actualpomos', 'expectedpomos']
+        return ['completed', 'name', 'actualpomos', 'expectedpomos'];
     }
 
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
     
-        let style = document.createElement('style')
+        let style = document.createElement('style');
         style.textContent = `
             .task-comp {
                 border-radius: 5px;
@@ -68,12 +68,12 @@ class TaskItem extends HTMLElement {
                 width: 24px;
                 height: 24px;
             }
-        `
+        `;
 
         const container = document.createElement('div');
         container.setAttribute('class', 'task-comp');
         const taskMain = container.appendChild(document.createElement('div'));
-        taskMain.setAttribute('class', 'task-main')
+        taskMain.setAttribute('class', 'task-main');
         const svg = taskMain.appendChild(document.createElementNS(ns, "svg"));
         svg.setAttribute("width", "24");
         svg.setAttribute("height", "24");
@@ -88,7 +88,7 @@ class TaskItem extends HTMLElement {
         this.taskName = taskName;
 
         const taskInfo = container.appendChild(document.createElement('div'));
-        taskInfo.setAttribute('class', 'task-info')
+        taskInfo.setAttribute('class', 'task-info');
 
 
         const actualPomos = taskInfo.appendChild(document.createElement("span"));
@@ -103,7 +103,7 @@ class TaskItem extends HTMLElement {
 
         
 
-        this.shadowRoot.append(style, container)
+        this.shadowRoot.append(style, container);
 
     }
 
@@ -125,15 +125,15 @@ class TaskItem extends HTMLElement {
     updatePath(compValue){
         if (compValue == "true"){
             if (Number(this.getAttribute("actualpomos")) > Number(this.getAttribute("expectedpomos"))) {
-                this.path.setAttribute("style", "fill:rgb(255, 115, 1)")
+                this.path.setAttribute("style", "fill:rgb(255, 115, 1)");
             }
             else {
-                this.path.setAttribute("style", "fill:green")
+                this.path.setAttribute("style", "fill:green");
             }
             this.path.setAttribute("d", checkmarkPATH);
         }
         else {
-            this.path.setAttribute("style", "fill:red")
+            this.path.setAttribute("style", "fill:red");
             this.path.setAttribute("d", xPATH);
         }
         
@@ -148,9 +148,6 @@ customElements.define('task-item', TaskItem);
  * the page loads
  */
 window.addEventListener('DOMContentLoaded', () => {
-    const progBar = document.getElementById("prog-bar-fill");
-    
-    //move()
     populateTasks();
 });
 
@@ -173,38 +170,38 @@ function populateTasks(){
             if (data[i].completed === true){
                 totComplete++;
                 let item = completedItems.appendChild(document.createElement("task-item"));
-                item.setAttribute("name", data[i].taskdescription)
-                item.setAttribute("actualpomos", data[i].actualpomos)
-                item.setAttribute("expectedpomos", data[i].expectedpomos)
-                item.setAttribute("completed", true)
+                item.setAttribute("name", data[i].taskdescription);
+                item.setAttribute("actualpomos", data[i].actualpomos);
+                item.setAttribute("expectedpomos", data[i].expectedpomos);
+                item.setAttribute("completed", true);
                 //let item = completedItems.appendChild(document.createElement("li"));
                 //item.setAttribute('class', 'li-task');
                 //item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
             }
             else if (data[i].completed === false){
                 let item = uncompletedItems.appendChild(document.createElement("task-item"));
-                item.setAttribute("name", data[i].taskdescription)
-                item.setAttribute("actualpomos", data[i].actualpomos)
-                item.setAttribute("expectedpomos", data[i].expectedpomos)
-                item.setAttribute("completed", false)
+                item.setAttribute("name", data[i].taskdescription);
+                item.setAttribute("actualpomos", data[i].actualpomos);
+                item.setAttribute("expectedpomos", data[i].expectedpomos);
+                item.setAttribute("completed", false);
                 //let item = uncompletedItems.appendChild(document.createElement("li"));
                 //item.setAttribute('class', 'li-task');
                 //item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
             }
         }
         //moveProgBar(totTasks, totComplete);
-        const thresh = totComplete/totTasks*100
+        const thresh = totComplete/totTasks*100;
         var elem = document.getElementById("prog-bar-fill");
-        elem.offsetHeight
+        elem.offsetHeight;
         elem.style.width = thresh+"%";
         if (thresh >= 66) {
-            elem.style["background-color"] = "green"
+            elem.style["background-color"] = "green";
         }
         else if (thresh >= 33){
-            elem.style["background-color"] = "yellow"
+            elem.style["background-color"] = "yellow";
         }
         var num = document.getElementById("prog-num");
-        num.textContent = `${totComplete}/${totTasks} tasks completed!`
+        num.textContent = `${totComplete}/${totTasks} tasks completed!`;
         checkEmpty();
     }
 }
