@@ -27,7 +27,6 @@ var counter = activetime;
 var state;
 var longbreakcounter = 0; // by default, after 4 short breaks, a long break will occur (when set to 3)
 
-
 /*function that set up timer based on user's set-up values.
 (default timer/counter is 8,) (default shortbreaktime = 5, default longbreaktime = 10)
 */
