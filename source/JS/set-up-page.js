@@ -1,7 +1,5 @@
 /*global startTimer*/
-
-/*global set_time /
-
+/*global set_time*/
 
 var copytasklist = [];
 var tasklist = [];
