@@ -248,11 +248,11 @@ document.getElementById("begin").addEventListener("click", ()=>{
  */
 function setup_localStore(){
     arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"]
-    for(i=0;i<4;i++){
+    for(let i=0;i<4;i++){
         set_value=document.getElementById(arr[i]).value;
         setup_value.push(set_value)
     }
-}
+};
 
 
 /**
