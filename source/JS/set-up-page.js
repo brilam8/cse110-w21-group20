@@ -221,6 +221,7 @@ document.getElementById("begin").addEventListener("click", ()=>{
         }
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
+        document.getElementById("to-how-to-page").style.display = "none";
         startTimer("active");
     }
     else{
