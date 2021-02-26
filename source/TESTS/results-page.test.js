@@ -438,8 +438,6 @@ describe('task list', () => {
     let complete_count = completedItems.childNodes.length - 1;
     let uncomplete_count = uncompletedItems.childNodes.length - 1;
     
-    console.log(uncompletedItems.innerHTML)
-    console.log(uncompletedItems.firstElementChild.taskName.textContent)
     expect(localStorage.getItem).toHaveBeenCalled();
     expect(mock).toHaveBeenCalled();
     expect(complete_count).toEqual(1);

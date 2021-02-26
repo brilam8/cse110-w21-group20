@@ -234,4 +234,4 @@ function checkEmpty(){
     }
 }
 
-module.exports = {populateTasks, checkEmpty};
+exports.populateTasks = populateTasks
