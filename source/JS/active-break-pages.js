@@ -25,7 +25,23 @@ const click = document.getElementById('click');
 const beep = document.getElementById('beep');
 
 //timer variables
-let time = 20; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
+
+
+//function that changes the initial timer to corresponding set-up value.
+function update_timer(){
+    setting_value = JSON.parse(localStorage.getItem('set-up'));
+    if(setting_value == null){
+        return
+    }else{
+        console.log(setting_value);
+    }
+}
+
+update_timer();
+
+
+
+let time = 1500; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
 let counter = time; 
 let state;
 
@@ -53,6 +69,7 @@ let abortBreak = false;
  *  end the timer and redirect to results page
  */
 activebutton.addEventListener('click', ()=>{
+    update_timer();
     if (abortClicked) {
         actualpomo[currTask] = pomocount;
         abortTimer();

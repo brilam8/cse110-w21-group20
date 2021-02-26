@@ -2,7 +2,7 @@
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
-
+window.localStorage.removeItem('set-up');
 
 /**
  * Component used to create tasks in set-up page and break page.
@@ -182,7 +182,6 @@ class TaskComponent extends HTMLElement {
             this.index -= 1;
         }
     }  
-
 }
 
 customElements.define('task-component', TaskComponent);
@@ -192,6 +191,7 @@ customElements.define('task-component', TaskComponent);
  * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
  */
 document.getElementById("begin").addEventListener("click", ()=>{
+
     let notempty = tasklist.filter(task => task[0] != "");
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
         for (let i = 0; i < tasklist.length; i++){
@@ -208,6 +208,10 @@ document.getElementById("begin").addEventListener("click", ()=>{
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
             }
         }
+        //calling the fucntion to store set-up values.
+             setup_localStore();
+
+
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
         startTimer("active");
@@ -215,7 +219,23 @@ document.getElementById("begin").addEventListener("click", ()=>{
     else{
         alert("Please add a task before beginning Pomo Session");
     }
+
+
 });
+
+
+
+/**
+ * Function stores set-up page values, stringifying and send them to local-storage.
+ */
+function setup_localStore(){
+    set_length =  document.getElementById("task-right-len").value;
+    set_total = document.getElementById("task-right-total").value;
+    set_break_btw = document.getElementById("task-right-break-btw").value;
+    set_long_break = document.getElementById("task-right-long-break").value;
+    localStorage.setItem("set-up", JSON.stringify({set_length,set_total,set_break_btw,set_long_break }))
+}
+
 
 /**
  * Clicking the create button will create a task-component on the set-up page. 
