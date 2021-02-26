@@ -479,7 +479,7 @@ hr {
   border: none;
   outline: none;
   text-align: right;
-  padding-right: 1px;
+  padding-right: 3px;
 }
 
 
@@ -508,14 +508,15 @@ hr {
 }
 
 .cButton {
-  background-color: white;
-  color: rgb(255, 81, 0);
+  background-color: rgb(255, 81, 0);
+  color: white;
   margin-top: 1%;
 }
 
 .bButton {
   background-color: rgb(255, 81, 0);
   color: white;
+  margin-bottom: 10%;
 }
 
 @media only screen and (max-width: 700px) {

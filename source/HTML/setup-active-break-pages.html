@@ -17,10 +17,9 @@
             <div id="active-task-container" class="flex-container">
                 <div class="task-title">
                     <div class="task-left"><b>Task List</b></div>
-                    <div class="task-right"><b>Estimate</b></div>
+                    <div class="task-right"><b>Estimate &nbsp &nbsp &nbsp &nbsp</b></div>
                 </div>
                 <task-component></task-component>
-                
             </div>
             <button id="create" class="cButton">Create</button>
             <hr class="orange-hr">
@@ -30,17 +29,17 @@
                     <div class="task-right"><b>Options &nbsp&nbsp&nbsp</b></div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">One Pomo Length</div>
+                    <div class="task-left">Pomo Length</div>
                     <div class="task-right">
-                        <div class="task-right">min&nbsp</div>
+                        <div class="task-right">mins&nbsp&nbsp</div>
                         <input type="number" class="task-right" dir="rtl" placeholder="25" 
                             min="20" max="35" step="5" onkeydown="return false"></input>
                     </div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Total Pomos</div>
+                    <div class="task-left">Pomos Until Long Break</div>
                     <div class="task-right">
-                        <div class="task-right">sess</div>
+                        <div class="task-right">pomo</div>
                         <input type="number" class="task-right" dir="rtl" placeholder="4" 
                             min="1" max="15" step="1" onkeydown="return false"></input>
                     </div>
@@ -49,7 +48,7 @@
                 <div class="task-entry">
                     <div class="task-left">Short Breaks Timer</div>
                     <div class="task-right">
-                        <div class="task-right">min&nbsp</div>
+                        <div class="task-right">mins&nbsp&nbsp</div>
                         <input type="number" class="task-right" dir="rtl" placeholder="5" 
                             min="5" max="10" step="1" onkeydown="return false"></input>
                     </div>
@@ -57,7 +56,7 @@
                 <div class="task-entry">
                     <div class="task-left">Long Break Timer</div>
                     <div class="task-right">
-                        <div class="task-right">min&nbsp</div>
+                        <div class="task-right">mins&nbsp&nbsp</div>
                         <input type="number" class="task-right" dir="rtl" placeholder="20" 
                             min="15" max="30" step="5" onkeydown="return false"></input>
                     </div>
@@ -91,8 +90,8 @@
                 </div>
             </div>       
             <hr>
-            <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
             <p><b>Total Time: 0 minutes</b></p>
+            <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
         </section>
         <section id="active-page" class="active-page section-page">
             <p class="p-title">Pomodoro Timer</p>
