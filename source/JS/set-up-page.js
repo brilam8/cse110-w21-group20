@@ -247,12 +247,12 @@ document.getElementById("begin").addEventListener("click", ()=>{
  * Function stores set-up page values, stringifying and send them to local-storage.
  */
 function setup_localStore(){
-    arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"]
+    var arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"]
     for(let i=0;i<4;i++){
-        set_value=document.getElementById(arr[i]).value;
-        setup_value.push(set_value)
+        var set_value=document.getElementById(arr[i]).value;
+        setup_value.push(set_value);
     }
-};
+}
 
 
 /**
