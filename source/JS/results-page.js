@@ -234,4 +234,4 @@ function checkEmpty(){
     }
 }
 
-exports.populateTasks = populateTasks
+exports.populateTasks = populateTasks;
