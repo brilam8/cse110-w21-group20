@@ -1,4 +1,4 @@
-/*global tasklist, copytasklist, completed*/
+/*global tasklist, copytasklist, completed, setup-value */
 
 
 //Active page button, timer, and progress bar 
@@ -17,13 +17,40 @@ const tick = document.getElementById('tick');
 const click = document.getElementById('click');
 const beep = document.getElementById('beep');
 
+
+
 //timer variables
-let activetime = 8; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
-let shortbreaktime = 5; // should be set to break time (5mins /)
-let longbreaktime = 10;
-let counter = activetime; 
-let state;
-let longbreakcounter = 0; // by default, after 4 short breaks, a long break will occur (when set to 3)
+var activetime = 8; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
+var shortbreaktime = 5; // should be set to break time (5mins /)
+var longbreaktime = 10;
+var counter = activetime; 
+var state;
+var longbreakcounter = 0; // by default, after 4 short breaks, a long break will occur (when set to 3)
+
+/*function that set up timer based on user's set-up values.
+(default timer/counter is 8,) (default shortbreaktime = 5, default longbreaktime = 10)
+*/
+function set_time(){   
+    console.log(setup_value);
+    if(setup_value[0]==''){
+        activetime=8;
+    }
+    else{
+        activetime = 60 * setup_value[0];
+    }
+    if(setup_value[2]==''){
+        shortbreaktime = 5;
+    }
+    else{
+        activetime = 60 * setup_value[2];
+    }
+    if(setup_value[3]==''){
+        longbreaktime  = 0;
+    }
+    else{
+        longbreaktime  = 60 * setup_value[3];
+    }
+}
 
 /**
  *  Variables to keep track of tasks:
@@ -49,7 +76,6 @@ let abortBreak = false;
  *  end the timer and redirect to results page
  */
 activebutton.addEventListener('click', ()=>{
-    update_timer();
     if (abortClicked) {
         actualpomo[currTask] = pomocount;
         abortTimer();

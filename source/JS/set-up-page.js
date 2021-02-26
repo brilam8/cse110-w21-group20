@@ -3,6 +3,7 @@
 var copytasklist = [];
 var tasklist = [];
 var completed = [];
+var setup_value=[];
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
@@ -225,7 +226,7 @@ document.getElementById("begin").addEventListener("click", ()=>{
             }
         }
         //calling the fucntion to store set-up values.
-             setup_localStore();
+        setup_localStore();
 
 
         document.getElementById("active-page").style.display = "inline"; //redirect to active
@@ -245,11 +246,11 @@ document.getElementById("begin").addEventListener("click", ()=>{
  * Function stores set-up page values, stringifying and send them to local-storage.
  */
 function setup_localStore(){
-    set_length =  document.getElementById("task-right-len").value;
-    set_total = document.getElementById("task-right-total").value;
-    set_break_btw = document.getElementById("task-right-break-btw").value;
-    set_long_break = document.getElementById("task-right-long-break").value;
-    localStorage.setItem("set-up", JSON.stringify({set_length,set_total,set_break_btw,set_long_break }))
+    arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"]
+    for(i=0;i<4;i++){
+        set_value=document.getElementById(arr[i]).value;
+        setup_value.push(set_value)
+    }
 }
 
 
