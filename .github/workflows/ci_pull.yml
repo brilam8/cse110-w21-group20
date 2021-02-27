@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - run: npx http-server . &
+      - run: npx http-server -a localhost -p 5500 . &
       - run: npx cypress run
   HTMLHint:
     runs-on: ubuntu-latest
