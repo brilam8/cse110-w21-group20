@@ -2,13 +2,22 @@ name: CI_PUSH
 
 on:
   push:
-    branches: [dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page]
+    branches: [dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page, try-cypress]
     # TO BE CHANGED since it should be the branch you're working on
 
 defaults:
   run:
     working-directory: source
 jobs:
+  Cypress:
+    runs-on: ubuntu-latest
+    container: cypress/included:3.8.3
+    steps:
+      - uses: actions/checkout@v2
+      - run: npx http-server http://localhost:5500/
+      - run: npm cypress run
+        with:
+          wait-on: 'http://localhost:5500/'
   HTMLHint:
     runs-on: ubuntu-latest
     steps:
