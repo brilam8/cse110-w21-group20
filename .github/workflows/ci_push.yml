@@ -14,7 +14,7 @@ jobs:
     container: cypress/included:3.8.3
     steps:
       - uses: actions/checkout@v2
-      - run: npx http-server
+      - run: npx http-server . &
       - run: npm cypress run
   HTMLHint:
     runs-on: ubuntu-latest
