@@ -1,6 +1,6 @@
 describe('results page Tests', () => {
     beforeEach(() => {
-        cy.on('uncaught:exception', (err, runnable) => { 
+        cy.on('uncaught:exception', () => { 
             // cypress conflicts with jest for your file. throws error "module is not defined"
             // this ignores it
             return false;

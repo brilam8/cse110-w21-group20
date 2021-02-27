@@ -115,7 +115,7 @@ describe('active Tests', () => {
         cy.on('window:alert',(txt)=>{
             expect(txt).to.equal('Abort will end all pomo sessions, click again if you want to continue');
         })
-        cy.on('uncaught:exception', (err, runnable) => {
+        cy.on('uncaught:exception', () => {
             return false;
         })
         cy.get('#pomo-button').click();
@@ -132,7 +132,6 @@ describe('break Tests', () => {
     beforeEach(() => {
         cy.clock(); //sets up clock for cypress
         cy.visit('http://127.0.0.1:5500/HTML/setup-active-break-pages.html'); 
-
 
         //this will enter active from setup with 2 tasks
         cy.get('#create').click();
@@ -161,7 +160,7 @@ describe('break Tests', () => {
         cy.on('window:alert',(txt)=>{
             expect(txt).to.equal('Abort will end all pomo sessions, click again if you want to continue');
         })
-        cy.on('uncaught:exception', (err, runnable) => {
+        cy.on('uncaught:exception', () => {
             return false;
         })
         cy.get('#break-button').click();
@@ -173,4 +172,6 @@ describe('break Tests', () => {
         cy.url().should('eq', 'http://127.0.0.1:5500/HTML/setup-active-break-pages.html#active-page');
     });
 
+
+    // WILL ADD MORE TESTS FOR TASK LIST
 });

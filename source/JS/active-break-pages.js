@@ -41,8 +41,6 @@ let completedtask = [];
 //warning variable, bool for warning prompt when clicking on abort, second click will abort pomo
 let abortClicked = false;
 
-//used to update actual pomo when aborting out of break page
-let abortBreak = false;
 
 
 /**
