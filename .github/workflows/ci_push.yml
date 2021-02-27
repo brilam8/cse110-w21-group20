@@ -16,8 +16,6 @@ jobs:
       - uses: actions/checkout@v2
       - run: npx http-server http://localhost:5500/
       - run: npm cypress run
-        with:
-          wait-on: 'http://localhost:5500/'
   HTMLHint:
     runs-on: ubuntu-latest
     steps:
