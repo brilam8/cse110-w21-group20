@@ -70,8 +70,11 @@ activebutton.addEventListener('click', ()=>{
 breakbutton.addEventListener('click', ()=>{
     if (abortClicked) {
         actualpomo[currTask] = pomocount;
-        abortBreak = true;
-        redirectToPage("break");
+        if (completed.includes(tasklist[0][0])){
+            tasklist.splice(0, 1);
+            currTask = tasklist[0] ? tasklist[0][0] : false;
+        }
+        abortTimer();
     }
     else {
         alert("Abort will end all pomo sessions, click again if you want to continue");
@@ -99,7 +102,7 @@ function startTimer(page){
         }
         currTask = task;
     }
-    page == "active" && (task && !abortBreak) ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortBreak ? false : abortTimer();
+    page == "active" && task ? document.getElementById("first-task").textContent = "Task: " + task : task ? false : abortTimer();
     click.play();
     reset(page);
     updateCounter(page);
