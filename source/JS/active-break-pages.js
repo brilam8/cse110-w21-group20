@@ -23,12 +23,12 @@ const beep = document.getElementById('beep');
 
 
 //timer variables
-var activetime = 8; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
-var shortbreaktime = 5; // should be set to break time (5mins /)
-var longbreaktime = 10;
-var counter = activetime; 
-var state;
-var longbreakcounter = 0; // by default, after 4 short breaks, a long break will occur (when set to 3)
+let activetime = 8; //should be set to pomodoro timer (1500s/ 1800s/ 2100s) == (25mins/ 30mins/ 35mins)
+let shortbreaktime = 5; // should be set to break time (5mins /)
+let longbreaktime = 10;
+let counter = activetime; 
+let state;
+let longbreakcounter = 0; // by default, after 4 short breaks, a long break will occur (when set to 3)
 
 /*function that set up timer based on user's set-up values.
 (default timer/counter is 8,) (default shortbreaktime = 5, default longbreaktime = 10)
@@ -48,7 +48,7 @@ function set_time(){
         shortbreaktime = 60 * setup_value[2];
     }
     if(setup_value[3]==''){
-        longbreaktime  = 0;
+        longbreaktime  = 10;
     }
     else{
         longbreaktime  = 60 * setup_value[3];
@@ -69,8 +69,6 @@ let completedtask = [];
 //warning variable, bool for warning prompt when clicking on abort, second click will abort pomo
 let abortClicked = false;
 
-//used to update actual pomo when aborting out of break page
-let abortBreak = false;
 
 
 /**
@@ -98,8 +96,11 @@ activebutton.addEventListener('click', ()=>{
 breakbutton.addEventListener('click', ()=>{
     if (abortClicked) {
         actualpomo[currTask] = pomocount;
-        abortBreak = true;
-        redirectToPage("break");
+        if (completed.includes(tasklist[0][0])){
+            tasklist.splice(0, 1);
+            currTask = tasklist[0] ? tasklist[0][0] : false;
+        }
+        abortTimer();
     }
     else {
         alert("Abort will end all pomo sessions, click again if you want to continue");
@@ -127,7 +128,7 @@ function startTimer(page){
         }
         currTask = task;
     }
-    page == "active" && (task && !abortBreak) ? document.getElementById("first-task").textContent = "Task: " + task : task && !abortBreak ? false : abortTimer();
+    page == "active" && task ? document.getElementById("first-task").textContent = "Task: " + task : task ? false : abortTimer();
     click.play();
     reset(page);
     updateCounter(page);
@@ -263,5 +264,3 @@ function abortTimer(){
     document.location.replace('../HTML/results-page.html');
     
 }
-
-module.exports = {startTimer, redirectToPage, updateCounter, reset, abortTimer};
