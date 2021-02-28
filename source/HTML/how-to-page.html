@@ -23,7 +23,8 @@
     }
 
     .instructions-list {
-      margin-left: 20%;
+      padding-left: 0;
+      text-align: left;
     }
 
     .instructions-list li {
@@ -37,7 +38,7 @@
       border: none;
       display: flex;
       align-items: center;
-      justify-content: space-evenly;
+      justify-content: center;
     }
 
     #listwrapper {
@@ -46,12 +47,25 @@
       display: flex;
       padding: 15px;
       margin-bottom: 40px;
+      justify-content: center;
     }
+
+    .wb-button.setup {
+      margin-left: 150px;
+    }
+
+    /* .howtoTitle {
+      display: flex;
+      width: 100%;
+      justify-content: left;
+    } */
 
     </style>
     </head>
     <body>
+      <!-- <div class="howtoTitle"> -->
         <h1 class="wb-page-title">how to</h1>
+      <!-- </div> -->
         <div id="listwrapper">
             <ol class="instructions-list">
                 <li>write down your tasks for the day</li>
@@ -65,8 +79,8 @@
             </ol>
         </div>
         <div id="buttonwrapper">
-            <button id="to-home-page" class="wb-button">Home Page</button>
-            <button id="to-set-up-page" class="wb-button">Set Up</button>
+          <a href="landing-page.html" id="to-home-page"><button class="wb-button">Home Page</button></a>
+          <a href="setup-active-break-pages.html" id="to-set-up-page"><button class="wb-button setup">Set Up</button></a>
         </div>
         <div class="tip-div">
             <p>When working with a Pomodoro Timer, focus entirely on the task at hand and avoid any distractions! Learn more about the Pomodoro Technique at:</p>
