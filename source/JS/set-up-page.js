@@ -1,5 +1,4 @@
-/*global startTimer*/
-/*global set_time*/
+/*global startTimer, set_time*/
 
 var copytasklist = [];
 var tasklist = [];
@@ -244,9 +243,9 @@ document.getElementById("begin").addEventListener("click", ()=>{
  * Function stores set-up page values, stringifying and send them to local-storage.
  */
 function setup_localStore(){
-    var arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
+    let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
     for(let i=0;i<4;i++){
-        var set_value=document.getElementById(arr[i]).value;
+        let set_value=document.getElementById(arr[i]).value;
         setup_value.push(set_value);
     }
 }
