@@ -10,68 +10,90 @@
 		<title>Set Up</title>
     </head>
     <body>
+        <a id="to-how-to-page" href="how-to-page.html"><button class="to-how-to-page bButton" 
+        style="position: absolute; right: 21%; width: 25px; height: 25px; border: solid  rgb(255, 81, 0); border-radius: 50%; outline: none; font-weight: bold;">?</button></a>
         <section id="setup" class="set-up-page">
             <header>
-                <p class="p-title">SETUP</p>
+                <p class="p-title">Set Up</p>
             </header>
             <div id="active-task-container" class="flex-container">
                 <div class="task-title">
                     <div class="task-left"><b>Task List</b></div>
-                    <div class="task-right"><b>Estimate</b></div>
+                    <div class="task-right"><b>Estimate &nbsp &nbsp &nbsp &nbsp</b></div>
                 </div>
                 <task-component></task-component>
-                
             </div>
             <button id="create" class="cButton">Create</button>
             <hr class="orange-hr">
             <div class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Pomo Setting</b></div>
-                    <div class="task-right"><b>Option</b></div>
+                    <div class="task-left"><b>Pomo Settings</b></div>
+                    <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">One Pomo Length</div>
-                    <input class="task-right" type="number" placeholder="   25 min" 
-                        min="20" max="35" step="5" onkeydown="return false">
+                    <div class="task-left">Pomo Length</div>
+                    <div class="task-right">
+                        <div class="task-right">mins&nbsp&nbsp</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="25" 
+                            min="20" max="35" step="5" onkeydown="return false">
+                    </div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Total Pomos</div>
-                    <input class="task-right" type="number" placeholder="   4 sess" 
-                        min="1" max="15" step="1" onkeydown="return false">
+                    <div class="task-left">Pomos Until Long Break</div>
+                    <div class="task-right">
+                        <div class="task-right" style="margin-left: -4px; margin-right: 3px;">pomo</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="4" 
+                            min="1" max="15" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+                    </div>
+                    
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Short Break Length in between Pomos</div>
-                    <input class="task-right" type="number" placeholder="   5 min" 
-                        min="5" max="10" step="1" onkeydown="return false">
+                    <div class="task-left">Short Breaks Timer</div>
+                    <div class="task-right">
+                        <div class="task-right">mins&nbsp&nbsp</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="5" 
+                            min="5" max="10" step="1" onkeydown="return false">
+                    </div>
                 </div>
                 <div class="task-entry">
                     <div class="task-left">Long Break Timer</div>
-                    <input class="task-right" type="number" placeholder="   20 min" 
-                        min="15" max="30" step="5" onkeydown="return false">
-                </div>    
-                <slider-component button-id="dark-mode-button" name="Dark Mode"></slider-component> 
-                <!--  -->
+                    <div class="task-right">
+                        <div class="task-right">mins&nbsp&nbsp</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="20" 
+                            min="15" max="30" step="5" onkeydown="return false">
+                    </div>
+                </div>       
             </div>
             <hr>
             <div class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Timer Sounds Setting</b></div>
-                    <div class="task-right"><b>Beeps</b></div>
+                    <div class="task-left"><b>Extra Settings</b></div>
+                    <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Short Break:</div>
-                    <input class="task-right" type="number" placeholder="   1" 
-                        min="1" max="5" step="1" onkeydown="return false">
+                    <div class="task-left">Short Break Beeps</div>
+                    <div class="task-right">
+                        <div class="task-right">beeps</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="2" 
+                            min="1" max="5" step="1" onkeydown="return false">
+                    </div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Long Break</div>
-                    <input class="task-right" type="number" placeholder="   5" 
-                        min="1" max="10" step="1" onkeydown="return false">
+                    <div class="task-left">Long Break Beeps</div>
+                    <div class="task-right">
+                        <div class="task-right">beeps</div>
+                        <input type="number" class="task-right" dir="rtl" placeholder="5" 
+                            min="1" max="5" step="1" onkeydown="return false">
+                    </div>
+                </div>
+                <div class="task-entry">
+                    <div class="task-left">Dark Mode</div>
+                    <slider-component class ="task-right" button-id="dark-mode-button" ></slider-component> 
                 </div>
             </div>       
             <hr>
-            <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
             <p><b>Total Time: 0 minutes</b></p>
+            <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
         </section>
         <section id="active-page" class="active-page section-page">
             <p class="p-title">Pomodoro Timer</p>
@@ -92,6 +114,7 @@
             <p id="break-title" class="p-title">Short Break</p>
             <div class="break-timer-container">
                 <div class="timer-container">
+                    <div id="break-bar" class="progress-bar"></div> 
                     <p class="timer" id="break-timer"></p>
                 </div>
                 <button id="break-button" class="button">Abort</button>
@@ -99,20 +122,20 @@
             <div id="break-task-container" class="flex-container">
                 <div class="task-title">
                     <div class="task-left"><b>Current Task</b></div>
-                    <div class="task-right"><b>Mark Done</b></div>
+                    <div class="task-right"><b>Mark Done &nbsp&nbsp&nbsp &nbsp</b></div>
                 </div>
                 <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
             </div>
             <div id="incompleted-task-container" class="flex-container">
                 <div class="task-title">
                     <div class="task-left"><b>Incompleted Tasks</b></div>
-                    <div class="task-right"><b>Expected</b></div>
+                    <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
                 </div>
             </div>
             <div id="completed-task-container" class="flex-container">
                 <div class="task-title">
                     <div class="task-left"><b>Completed Tasks</b></div>
-                    <div class="task-right"><b>Actual</b></div>
+                    <div class="task-right"><b>Actual &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</b></div>
                 </div>
             </div>
 

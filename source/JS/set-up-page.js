@@ -16,33 +16,36 @@ class TaskComponent extends HTMLElement {
     constructor(){
         super();
         this.attachShadow({mode: 'open'});
+        
         const container = document.createElement('div');
-        container.setAttribute('class', 'entry');
-
+        container.setAttribute('class', "entry");
+        
         const left = container.appendChild(document.createElement('input'));
-        left.setAttribute('class', "left");
+        left.setAttribute('class', "task-left");
         left.type = "text";
         left.placeholder = "Enter Task Here";
         left.maxLength = 20; // TO CHANGE
 
         const rightcontainer = container.appendChild(document.createElement('div'));
-        rightcontainer.setAttribute('class', 'rightcontainer');
+        rightcontainer.setAttribute('class', 'task-right');
+
+        const deleteButton = rightcontainer.appendChild(document.createElement('button'));
+        deleteButton.setAttribute('class', 'deleteTask');
+        deleteButton.textContent = "X";
+        
+        const rightsuffix = rightcontainer.appendChild(document.createElement('div'));
+        rightsuffix.setAttribute('class', 'task-right');
+        rightsuffix.textContent = "pomo";
 
         const right = rightcontainer.appendChild(document.createElement('input'));
-        right.setAttribute('class', "right");
+        right.setAttribute('class', "task-right");
         right.type = "number";
+        right.dir = "rtl";
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
         right.value = "1";
 
-        const rightsuffix = rightcontainer.appendChild(document.createElement('span'));
-        rightsuffix.setAttribute('class', 'rightsuffix');
-        rightsuffix.textContent = "pomo";
-
-        const deleteButton = container.appendChild(document.createElement('button'));
-        deleteButton.setAttribute('class', 'deleteTask');
-        deleteButton.textContent = "X";
-
+        
 
         this.left = left;
         this.right= right;
@@ -61,8 +64,6 @@ class TaskComponent extends HTMLElement {
         right.addEventListener('input', ()=>{
             if (right.type == "number"){ //only in set up
                 tasklist[this.index] = [left.value ? left.value : "", right.value ? right.value : 1]; //replaces pomo
-                
-                right.value > 1 ? rightsuffix.textContent = "pomos" : rightsuffix.textContent = "pomo"; 
             }
             else{
                  //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
@@ -77,105 +78,73 @@ class TaskComponent extends HTMLElement {
     
         const style = document.createElement('style');
         style.textContent = `
-          .entry {
-            font-family: 'Oswald', sans-serif;
+        .entry {
             height: 40px;
-            width: 59.15vw;
-            background-color: white;
             border: solid;
             border-color: lightgrey;
             border-width: 0 0 2px 0;
-            display: flex;
-          }
-          
-          .left {
-            margin-top: 8px;
-            margin-left: 15px;
-            margin-right: 10%;
+        }
+
+        .entry *{
+            background-color: transparent;
+        }
+        .task-left {
+            float: left;
+            margin-top: 7px;
+            margin-left: 20px;
             text-align: left;
             height: 30px;
-            width: 70%;
+            width: 50%;
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
           }
 
-          .rightcontainer, .right, .rightsuffix {
-            border: none;
-            color: rgb(255, 81, 0);
-            font-size: 20px;
-            text-align: center;
-          }
-          .rightcontainer {
-            margin-top: 8px;
-            width: 20%;
-            height: 30px;            
-          }
-          
-          .right {
-            width: 100%;
+          .task-right {
+            float: right;
+            margin-top: 3px;
+            
+            padding-right: 10px;
+            text-align:center;
             height: 30px;
-            caret-color: transparent;
-            cursor: default;
-            outline: none;
-            transform: translateX(-3%);
+            border: none;
+            color: rgb(255, 81, 0);
+            font-size: 20px;
           }
-
-          .rightsuffix {
-            position: absolute;
-            transform: translate(-25px, -29px);
-            color: rgba(255, 81, 0, 0.6);
+          .task-right > input {
+            height: 25px;
+            width: 35px;
+            border: none;
+            outline: none;
+            text-align: right;
+            padding-right: 3px;
+            caret-color: transparent;
           }
 
           input[type=number]::-webkit-inner-spin-button, 
           input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
-            margin-left: 32%;
           }
-
           .deleteTask {
-              position: absolute;
-              height: 35px;
-              width: 35px;
-              transform: translate(60vw, 5px);
-              cursor: pointer;
-              outline: none;
+            float: right;
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+            outline: none;
               
-              background-color: white;
-              border: 3.5px solid rgba(242, 71, 38, 0.9);;
-              color: rgba(242, 71, 38, 0.9);
-              font-weight: bold;
-              border-radius: 5px;
+            background-color: rgb(255, 81, 0);
+            border: solid  rgb(255, 81, 0);
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
           }
-
           .deleteTask:hover {
-            background-color: rgba(242, 71, 38, 0.2);
+            background-color: rgba(255, 81, 0, 0.6);
           }
           
           ::placeholder {
             color: rgb(255, 166, 125);
-            font-size: 18px;
-          }
-
-          @media only screen and (max-width: 1400px) {
-            .rightsuffix {
-                display: none;
-            }
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button {  
-                opacity: 1;
-                margin-left: 0;
-                transform: translateX(0);
-            }
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button {  
-                opacity: 1;
-                margin-left: 0;
-                transform: translateX(0);
-            }
-            .right {
-                transform: translateX(-6%);
-            }
+            font-size: 20px;
           }
         `;
 
@@ -199,14 +168,15 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
+            this.right.style.transform = "translate(-59px, 3px)";
         }
         else if (name == 'index'){
             this.index -= 1;
         }
         else if (name == "set-right-input"){
             this.right.style.display = "none";
-            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo";
-            this.rightsuffix.style.transform = "translateX(-55%)";
+            this.rightsuffix.textContent = parseInt(newValue) + " pomo";
+            this.rightsuffix.style.transform = "translateX(-43%)";
         }
         else if (name == "remove-right-suffix"){
             this.rightsuffix.style.display = newValue;
@@ -251,6 +221,7 @@ document.getElementById("begin").addEventListener("click", ()=>{
         }
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
+        document.getElementById("to-how-to-page").style.display = "none";
         startTimer("active");
     }
     else{
