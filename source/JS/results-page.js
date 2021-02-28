@@ -23,15 +23,15 @@ function populateTasks(){
     else {
         const data = JSON.parse(localStorage.getItem('tasks'));
         for (let i = 0; i < data.length; i++ ) {
-            if (data[i].complete === true){
+            if (data[i].completed === true){
                 let item = completedItems.appendChild(document.createElement("li"));
                 item.setAttribute('class', 'li-task');
-                item.textContent = `${data[i].name} (${data[i].pomos} pomos)`;
+                item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
             }
-            else if (data[i].complete === false){
+            else if (data[i].completed === false){
                 let item = uncompletedItems.appendChild(document.createElement("li"));
                 item.setAttribute('class', 'li-task');
-                item.textContent = `${data[i].name} (${data[i].pomos} pomos)`;
+                item.textContent = `${data[i].taskdescription} (${data[i].actualpomos} pomos)`;
             }
         }
         checkEmpty();
