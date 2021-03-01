@@ -8,78 +8,66 @@
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
         <title>Landing Page</title> 
+    </head>
     <style>
         body
         {
-            color: white;
+            background-color: rgb(255, 119, 45) ! important;
         }
-        .page-title
+        .wb-page-title
         {
-            color: rgb(255, 119, 45);
-            position: absolute;
-            top: 10%;
+            color: white;
+            max-width: 50%;
+            position: fixed;
+            top: 5%;
             left: 20%;
+            font-size: 60px;
         }
-        .fun-facts
+        .ob-button
         {
-            color:rgb(255, 119, 45);
-            position: absolute;
-            font-size: 12px;
-            text-align: center;
-            top: 50%;
+            width: 350px;
         }
-        .landing-buttons
+        .p-body
         {
-            background-color: rgb(255, 119, 45);
-            text-align: center;
-            font-size:16px;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
-            color: white;
-            font-family: 'Lato', sans-serif;
-            margin-top: 10px;
-            margin-left: 280px;
-        }
-        .landing-buttons:hover
-        {
-            background-color: rgb(255, 119, 45, .3);
-            cursor: pointer;
-        }
-        #to-settings
-        {
-            position: absolute;
-            top: 10%;
-            right: 15%;
+            position: fixed;
+            top: 20%;
+            left: 42%;
         }
         #to-set-up
         {
-            width: 40%;
-            position: absolute;
+            position: fixed;
+            left: 40%;
             top: 30%;
-            left: 15%;
         }
         #to-how-to
         {
-            width: 40%;
-            position: absolute;
+            position: fixed;
+            left: 40%;
             top: 40%;
-            left: 15%;
+        }
+        #fun-facts
+        {
+            color: white;
+            position: fixed;
+            left: 42%;
+            top: 50%;
+            text-align: center;
+            max-width: 15%;
         }
     </style>
-    </head>
-    
     <body class="landing-page" id="landing">
-        <h1 class="page-title">Welcome to wepomo</h1>
+        <!--Probably gonna input logo of some sort/different font-->
+        <h1 class="wb-page-title">wepomo</h1>
+        <p class="p-body">Good luck on your work today!</p>
+        <button id="to-set-up" class="ob-button">Start</button>
+        <br>
+        <br>
+        <br>
+        <button id="to-how-to" class="ob-button">How To</button>
 
-        <!--Prob will replace text with image of a cog wheel-->
-        <button id="to-settings" class="landing-buttons">Settings Page</button>
-        
-        <button id="to-set-up" class="landing-buttons">Start</button>
-        
-        <button id="to-how-to" class="landing-buttons">How To</button>
-
-        <p class="fun-facts">Placeholder text for now</p>
+        <br>
+        <br>
+        <div id='fun-facts'>Fun Fact: Pomodoro is Tomato in Italian!</div>
         <script src="../JS/main.js"></script>
         <script src="../JS/landing-page.js"></script>
     </body>
