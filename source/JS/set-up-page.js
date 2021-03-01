@@ -220,13 +220,10 @@ document.getElementById("begin").addEventListener("click", ()=>{
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
             }
         }
-        //calling the fucntion to store set-up values.
-        setup_localStore();
-
-
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
         document.getElementById("to-how-to-page").style.display = "none";
+        setup_localStore();
         set_time();
         startTimer("active");
     }
@@ -237,20 +234,6 @@ document.getElementById("begin").addEventListener("click", ()=>{
 
 });
 
-
-
-/**
- * Function stores set-up page values, stringifying and send them to local-storage.
- */
-function setup_localStore(){
-    let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
-    for(let i=0;i<4;i++){
-        let set_value=document.getElementById(arr[i]).value;
-        setup_value.push(set_value);
-    }
-}
-
-
 /**
  * Clicking the create button will create a task-component on the set-up page. 
  * It will only allow 6 task-components.
@@ -260,6 +243,12 @@ document.getElementById("create").addEventListener("click", ()=>{
         let entry = document.createElement("task-component");
         document.getElementById("active-task-container").appendChild(entry);
     }
+});
+
+//updates text for setting
+document.getElementById('task-right-total').addEventListener('change', ()=>{
+    let value = document.getElementById('task-right-total').value
+    document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
 });
 
 /**
@@ -273,3 +262,16 @@ function deleteComponent(index){
     tasklist.splice(index, 1); //removes task from tasklist 
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
 }
+
+
+/**
+ * Function stores set-up page values, stringifying and send them to local-storage.
+ */
+function setup_localStore(){
+    let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
+    for(let i=0;i<4;i++){
+        let set_value=document.getElementById(arr[i]).value;
+        setup_value.push(set_value);
+    }
+}
+

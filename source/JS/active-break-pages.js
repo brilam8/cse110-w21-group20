@@ -28,7 +28,8 @@ let shortbreaktime = 5; // should be set to break time (5mins /)
 let longbreaktime = 10;
 let counter = activetime; 
 let state;
-let longbreakcounter = 0; // by default, after 4 short breaks, a long break will occur (when set to 3)
+let longbreakindicator = 3; // by default, after 3 short breaks, a long break will occur (when set to 3)
+let longbreakcounter = 0; // by default, after 3 short breaks, a long break will occur (when set to 3)
 
 /*function that set up timer based on user's set-up values.
 (default timer/counter is 8,) (default shortbreaktime = 5, default longbreaktime = 10)
@@ -40,6 +41,9 @@ function set_time(){
     }
     else{
         activetime = 60 * setup_value[0];
+    }
+    if(setup_value[1]!=''){
+        longbreakindicator = setup_value[1] - 1;
     }
     if(setup_value[2]==''){
         shortbreaktime = 5;
@@ -223,7 +227,7 @@ function reset(page){
     state = null;
     if (page == "active") counter = activetime;
     else {
-        if (longbreakcounter >= 3) {
+        if (longbreakcounter >= longbreakindicator) {
             longbreakcounter = 0;
             counter = longbreaktime;
             breaktitle.textContent = "Long Break";
