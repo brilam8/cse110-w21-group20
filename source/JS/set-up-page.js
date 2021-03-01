@@ -147,6 +147,12 @@ class TaskComponent extends HTMLElement {
             color: rgb(255, 166, 125);
             font-size: 20px;
           }
+
+          @media only screen and (max-width: 600px) {
+            .task-left {
+              width: 30%;
+            }
+          }          
         `;
 
         this.shadowRoot.append(style, container);

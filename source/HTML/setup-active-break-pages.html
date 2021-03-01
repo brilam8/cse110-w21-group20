@@ -71,25 +71,24 @@
                     <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Short Break Beeps</div>
-                    <div class="task-right">
-                        <div class="task-right">beeps</div>
-                        <input type="number" class="task-right" dir="rtl" placeholder="2" 
-                            min="1" max="5" step="1" onkeydown="return false">
-                    </div>
-                </div>
-                <div class="task-entry">
-                    <div class="task-left">Long Break Beeps</div>
-                    <div class="task-right">
-                        <div class="task-right">beeps</div>
-                        <input type="number" class="task-right" dir="rtl" placeholder="5" 
-                            min="1" max="5" step="1" onkeydown="return false">
-                    </div>
-                </div>
-                <div class="task-entry">
                     <div class="task-left">Dark Mode</div>
                     <slider-component class ="task-right" button-id="dark-mode-button" ></slider-component> 
                 </div>
+                <div class="task-entry">
+                    <div class="task-left">Alert Every <span id="alert-number">10</span> mins</div>
+                    <slider-component class ="task-right" button-id="alert-button" ></slider-component> 
+                    <div id="alert-right-container" class="task-right" style="display: none;">
+                        <div class="task-right">mins&nbsp&nbsp</div>
+                        <input type="number" class="task-right" id="alert-frequency" dir="rtl"
+                            min="5" max="15" step="5" onkeydown="return false" value="10">
+                    </div>
+                </div>
+                <!-- <div id="alert-sound" class="task-entry" style="display: none;">
+                    <div class="task-left">Set Alert Sound</div>
+                    <input type="radio" class="task-right" dir="rtl" name="alert">
+                    <input type="radio" class="task-right" dir="rtl" name="alert">
+                    <input type="radio" class="task-right" dir="rtl" name="alert" checked>
+                </div> -->
             </div>       
             <hr>
             <p><b>Total Time: 0 minutes</b></p>
@@ -128,7 +127,7 @@
             </div>
             <div id="incompleted-task-container" class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Incompleted Tasks</b></div>
+                    <div class="task-left"><b>Incomplete Tasks</b></div>
                     <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
                 </div>
             </div>

@@ -37,6 +37,16 @@ class SliderComponent extends HTMLElement {
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
             }
+            else if (button.id == "alert-button"){
+              if (currentText == "On"){
+                // document.getElementById('alert-sound').style.display = "inline";
+                document.getElementById('alert-right-container').style.display = "inline";
+              }
+              else {
+                // document.getElementById('alert-sound').style.display = "none";
+                document.getElementById('alert-right-container').style.display = "none";
+              }
+            }
         };
 
         const style = document.createElement('style');
@@ -77,6 +87,10 @@ class SliderComponent extends HTMLElement {
         if (clickedList[button.id] == "On"){
           button.classList.toggle("setting-slider-switch");
           slider.textContent = slider.textContent == "On" ? "Off" : "On";
+          if (button.id == "alert-button") {
+              // document.getElementById('alert-sound').style.display = "inline";
+              document.getElementById('alert-right-container').style.display = "inline";
+          }
         }
         this.shadowRoot.append(style, container);
     }
@@ -84,3 +98,7 @@ class SliderComponent extends HTMLElement {
 }
 
 customElements.define('slider-component', SliderComponent);
+
+document.getElementById("alert-frequency").addEventListener('change', ()=>{
+  document.getElementById("alert-number").textContent = document.getElementById("alert-frequency").value;
+});

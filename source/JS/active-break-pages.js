@@ -31,8 +31,14 @@ let state;
 let longbreakindicator = 3; // by default, after 3 short breaks, a long break will occur (when set to 3)
 let longbreakcounter = 0; // by default, after 3 short breaks, a long break will occur (when set to 3)
 
-/*function that set up timer based on user's set-up values.
-(default timer/counter is 8,) (default shortbreaktime = 5, default longbreaktime = 10)
+
+//alert sound that plays every X mins
+let alertsound;
+let alertfrequency; // the X mins, options are every 5, 10, or 15 mins
+
+/*
+    function that set up timer based on user's set-up values.
+    (default timer/counter is 8, default shortbreaktime = 5, default longbreaktime = 10)
 */
 function set_time(){   
     console.log(setup_value);
@@ -136,9 +142,11 @@ function startTimer(page){
     click.play();
     reset(page);
     updateCounter(page);
+    setAlert();
     state = setInterval(()=>{
         counter -= 1;
         counter == 0 ? redirectToPage(page) : (counter < 6 ? tick.play() : false);
+        alertsound ? (counter % (alertfrequency*60) == 0 ? beep.play() : false) : false;   
         if (page == "active"){
             activebar.style.width = ((barwidth*counter)/activetime).toString() + "px";
             updateCounter("active");
@@ -267,4 +275,9 @@ function abortTimer(){
     document.getElementById("break-page").style.display = "none";
     document.location.replace('../HTML/results-page.html');
     
+}
+
+function setAlert(){
+    alertsound = document.getElementById("alert-right-container").style.display == "inline" ? true : false;
+    alertfrequency = document.getElementById("alert-frequency").value; // the X mins, options are every 5, 10, or 15 mins
 }
