@@ -97,22 +97,32 @@ class TaskComponent extends HTMLElement {
             height: 30px;
             width: 50%;
             border: none;
+            outline: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
-          }
+        }
 
-          .task-right {
+        .entry > .task-left:hover , .entry > .task-left:focus {
+            border: 2px solid lightgrey;
+            border-radius: 10px;
+            transform: translate(-2px, -2px);
+            outline: none;
+            margin-top: 6px;
+            margin-left: 19px;
+        }
+
+        .task-right {
             float: right;
             margin-top: 3px;
-            
             padding-right: 10px;
             text-align:center;
             height: 30px;
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
-          }
-          .task-right > input {
+        }
+
+        .task-right > input {
             height: 25px;
             width: 35px;
             border: none;
@@ -120,39 +130,40 @@ class TaskComponent extends HTMLElement {
             text-align: right;
             padding-right: 3px;
             caret-color: transparent;
-          }
+        }
 
-          input[type=number]::-webkit-inner-spin-button, 
-          input[type=number]::-webkit-outer-spin-button {  
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
-          }
-          .deleteTask {
+        }
+
+        .deleteTask {
             float: right;
             height: 30px;
             width: 30px;
             cursor: pointer;
             outline: none;
-              
-            background-color: rgb(255, 81, 0);
-            border: solid  rgb(255, 81, 0);
+            background-color: rgba(242, 71, 38, 1);
+            border: none;
             color: white;
             font-weight: bold;
             border-radius: 5px;
-          }
-          .deleteTask:hover {
-            background-color: rgba(255, 81, 0, 0.6);
-          }
-          
-          ::placeholder {
-            color: rgb(255, 166, 125);
+            transition: all 0.3s ease-in;
+        }
+        .deleteTask:hover {
+            background-color: rgba(242, 71, 38, 0.8);
+        }
+        
+        ::placeholder {
             font-size: 20px;
-          }
+            color: rgb(255, 81, 0);
+        }
 
-          @media only screen and (max-width: 600px) {
+        @media only screen and (max-width: 600px) {
             .task-left {
-              width: 30%;
+                width: 30%;
             }
-          }          
+        }          
         `;
 
         this.shadowRoot.append(style, container);

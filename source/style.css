@@ -580,31 +580,29 @@ hr {
   font-weight: bold;
   padding: 10px 30px;
   border-radius: 10px;
-  border: solid  rgb(255, 81, 0);
+  border: none;
   outline: none;
-}
-
-.set-up-page button:hover {
-  background-color: rgba(255, 81, 0, 0.6);
-  color: white;
-}
-
-.set-up-page button:active {
-  background-color: rgb(255, 81, 0);
-  color: white;
+  cursor: pointer;
 }
 
 .cButton {
-  background-color: rgb(255, 81, 0);
-  color: white;
   margin-top: 1%;
 }
 
 .bButton {
-  background-color: rgb(255, 81, 0);
-  color: white;
   margin-bottom: 10%;
-  cursor: pointer;
+}
+
+.to-how-to-page {
+  position: absolute; 
+  right: 21%; 
+  width: 25px; 
+  height: 25px; 
+  border: none;
+  border-radius: 50%; 
+  outline: none; 
+  font-weight: bold;
+  font-size: smaller;
 }
 
 @media only screen and (max-width: 800px) {
