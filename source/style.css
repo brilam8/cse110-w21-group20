@@ -173,7 +173,7 @@ h3 {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgb(255, 255, 255, 80%);
+  background-color: rgba(226, 226, 226, 0.8);
   border-radius: 20px;
   border: 6px solid transparent;
   background-clip: content-box;
