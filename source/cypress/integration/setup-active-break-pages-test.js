@@ -44,7 +44,7 @@ describe('setup Tests', () => {
 
     it('clicking dark mode should set background to black', () => {
         cy.get('body').should('have.css', 'background-color', 'rgb(255, 255, 255)');
-        cy.get('#setup').find('slider-component').shadow().find('button').click();
+        cy.get('#darkmode').find('slider-component').shadow().find('button').click();
         cy.get('body').should('have.css', 'background-color', 'rgb(26, 26, 26)')
     });
 
