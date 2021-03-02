@@ -160,7 +160,7 @@ function populateTasks(){
     const uncompletedItems = document.getElementById('uncomplete-items');
     if (!localStorage.getItem('tasks')) {
         //console.log("There are no tasks in the storage?");
-        var num = document.getElementById("prog-num");
+        let num = document.getElementById("prog-num");
         num.textContent = `No tasks were found`;
         checkEmpty();
     }
@@ -204,7 +204,7 @@ function populateTasks(){
                 elem.style["background-color"] = "yellow";
             }
         }
-        var num = document.getElementById("prog-num");
+        let num = document.getElementById("prog-num");
         num.textContent = `${totComplete}/${totTasks} tasks completed!`;
         checkEmpty();
     }
