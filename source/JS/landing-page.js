@@ -11,27 +11,18 @@ document.getElementById("to-set-up").addEventListener('click', ()=>
     //window.location.replace("./setup-active-break-pages.html");
 });
 
-var facts = ['Fun Fact: Pomodoro means Tomato in Italian!',
+let facts = ['Fun Fact: Pomodoro means Tomato in Italian!',
             'Fun Fact: Francesco Cirillo was the original creator of the Pomodoro Timer!', 
             'Fun Fact: The Pomodoro timer was inspiried by a tomato shaped timer!', 
-            'Remember: The Pomodoro timer\'s biggest strength is its simplicity!'];
+            "Remember: The Pomodoro timer's biggest strength is its simplicity!"];
 
-funFacts(1);
-function funFacts(index)
+
+let num = 0;
+
+setInterval(function()
 {
-    let num = index;
-    if(num < facts.length)
-    {
-        setTimeout(function()
-        {
-            document.getElementById('fun-facts').innerHTML = facts[num];
-            num++;
-            funFacts(num);
-        }, 7000);
-    }
-    else if(num == facts.length)
-    {
-        funFacts(num);
-    }
+    if (num >= facts.length) num = 0;
+    document.getElementById('fun-facts').innerHTML = facts[num];
+    num++;
+}, 5000);
 
-}
