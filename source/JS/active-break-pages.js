@@ -30,7 +30,7 @@ let counter = activetime;
 let state;
 let longbreakindicator = 3; // by default, after 3 short breaks, a long break will occur (when set to 3)
 let longbreakcounter = 0; // by default, after 3 short breaks, a long break will occur (when set to 3)
-
+let pomos;
 
 //alert sound that plays every X mins
 let alertsound;
@@ -139,7 +139,7 @@ function startTimer(page){
         }
         currTask = task;
     }
-    if (totalpomo == 0){
+    if (pomos == 0){
         currTask ? actualpomo[currTask] = pomocount : false;
         abortTimer();
     }
@@ -208,7 +208,7 @@ function redirectToPage(curPage){
                     }
                 }
             }
-            totalpomo--;
+            pomos--;
             document.getElementById("active-page").style.display = "inline";
             document.getElementById("break-page").style.display = "none";
             startTimer("active");
@@ -241,6 +241,7 @@ function updateCounter(page){
  *  warning variable and progress bar.
  */
 function reset(page){
+    if (!pomos) pomos = totalpomo;
     state = null;
     if (page == "active") counter = activetime;
     else {

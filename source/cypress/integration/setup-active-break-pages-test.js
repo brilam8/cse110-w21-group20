@@ -123,7 +123,7 @@ describe('active Tests', () => {
     });
 
     it('When in active page, after X mins, page should redirect to break page', () => {
-        cy.tick(9000); //jumps clock to pass 9 secs
+        cy.tick(1501000); //jumps clock to pass 25 mins
         cy.url().should('eq', 'http://127.0.0.1:5500/HTML/setup-active-break-pages.html#break-page');
     });
 });
@@ -141,7 +141,7 @@ describe('break Tests', () => {
         cy.get('#begin').click();
     });
     it('When in break page, clicking abort once should warn user about abort', () => {
-        cy.tick(9000); //jumps clock by 9 secs, will enter break page
+        cy.tick(1501000); //jumps clock by 25 mins, will enter break page
         cy.get('#break-button').then($el =>{
             expect($el).to.have.prop('textContent','Abort');
         });
@@ -152,7 +152,7 @@ describe('break Tests', () => {
     });
 
     it('When in break page, clicking abort twice should redirect to results page', () => {
-        cy.tick(9000); //jumps clock by 9 secs, will enter break page
+        cy.tick(1501000); //jumps clock by 25 mins, will enter break page
         cy.get('#break-button').then($el =>{
             expect($el).to.have.prop('textContent','Abort');
         });
@@ -168,7 +168,7 @@ describe('break Tests', () => {
     });
 
     it('When in break page, after X mins, page should redirect to active page', () => {
-        cy.tick(14000); //jumps clock by 14 secs, will enter break page and exit break page
+        cy.tick(1801000); //jumps clock by 30mins, will enter break page and exit break page
         cy.url().should('eq', 'http://127.0.0.1:5500/HTML/setup-active-break-pages.html#active-page');
     });
 

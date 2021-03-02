@@ -280,7 +280,7 @@ arr.forEach(ele =>{
     document.getElementById(ele).addEventListener('change', ()=>{
         calculateTotalTime();
     });
-})
+});
 
 /**
  * Function used in TaskComponent to delete the component 
