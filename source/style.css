@@ -594,13 +594,13 @@ hr {
 }
 
 .to-how-to-page {
-  position: absolute; 
-  right: 21%; 
-  width: 25px; 
-  height: 25px; 
+  position: absolute;
+  right: 21%;
+  width: 25px;
+  height: 25px;
   border: none;
-  border-radius: 50%; 
-  outline: none; 
+  border-radius: 50%;
+  outline: none;
   font-weight: bold;
   font-size: smaller;
 }

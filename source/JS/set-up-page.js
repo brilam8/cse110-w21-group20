@@ -264,7 +264,7 @@ document.getElementById("create").addEventListener("click", ()=>{
 
 //updates text for setting
 document.getElementById('task-right-total').addEventListener('change', ()=>{
-    let value = document.getElementById('task-right-total').value
+    let value = document.getElementById('task-right-total').value;
     document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
 });
 
