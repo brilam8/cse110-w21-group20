@@ -10,8 +10,7 @@
 		<title>Set Up</title>
     </head>
     <body>
-        <a href="how-to-page.html"><button id="to-how-to-page" class="to-how-to-page bButton" 
-        style="position: absolute; right: 21%; width: 25px; height: 25px; border: solid  rgb(255, 81, 0); border-radius: 50%; outline: none; font-weight: bold;">?</button></a>
+        <a href="how-to-page.html"><button id="to-how-to-page" class="to-how-to-page button">?</button></a>
         <section id="setup" class="set-up-page">
             <header>
                 <p class="p-title">Set Up</p>
@@ -23,7 +22,7 @@
                 </div>
                 <task-component></task-component>
             </div>
-            <button id="create" class="cButton">Create</button>
+            <button id="create" class="button cButton">Create</button>
             <hr class="orange-hr">
             <div class="flex-container">
                 <div class="task-title">
@@ -39,11 +38,11 @@
                     </div>
                 </div>
                 <div class="task-entry">
-                    <div class="task-left">Pomos Until Long Break</div>
+                    <div class="task-left">Long Break on every <span id="long-break-indicator">4th</span> Pomo</div>
                     <div class="task-right">
                         <div class="task-right" style="margin-left: -4px; margin-right: 3px;">pomo</div>
                         <input type="number" class="task-right" id="task-right-total" dir="rtl" placeholder="4" 
-                            min="1" max="15" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+                            min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
                     </div>
                     
                 </div>
@@ -70,30 +69,29 @@
                     <div class="task-left"><b>Extra Settings</b></div>
                     <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
                 </div>
-                <div class="task-entry">
-                    <div class="task-left">Short Break Beeps</div>
-                    <div class="task-right">
-                        <div class="task-right">beeps</div>
-                        <input type="number" class="task-right" dir="rtl" placeholder="2" 
-                            min="1" max="5" step="1" onkeydown="return false">
-                    </div>
-                </div>
-                <div class="task-entry">
-                    <div class="task-left">Long Break Beeps</div>
-                    <div class="task-right">
-                        <div class="task-right">beeps</div>
-                        <input type="number" class="task-right" dir="rtl" placeholder="5" 
-                            min="1" max="5" step="1" onkeydown="return false">
-                    </div>
-                </div>
-                <div class="task-entry">
+                <div id="darkmode" class="task-entry">
                     <div class="task-left">Dark Mode</div>
                     <slider-component class ="task-right" button-id="dark-mode-button" ></slider-component> 
                 </div>
+                <div class="task-entry">
+                    <div class="task-left">Alert Every <span id="alert-number">10</span> mins</div>
+                    <slider-component class ="task-right" button-id="alert-button" ></slider-component> 
+                    <div id="alert-right-container" class="task-right" style="display: none;">
+                        <div class="task-right">mins&nbsp&nbsp</div>
+                        <input type="number" class="task-right" id="alert-frequency" dir="rtl"
+                            min="5" max="15" step="5" onkeydown="return false" value="10">
+                    </div>
+                </div>
+                <!-- <div id="alert-sound" class="task-entry" style="display: none;">
+                    <div class="task-left">Set Alert Sound</div>
+                    <input type="radio" class="task-right" dir="rtl" name="alert">
+                    <input type="radio" class="task-right" dir="rtl" name="alert">
+                    <input type="radio" class="task-right" dir="rtl" name="alert" checked>
+                </div> -->
             </div>       
             <hr>
             <p><b>Total Time: 0 minutes</b></p>
-            <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
+            <a href="#active-page"><button id="begin" class="button bButton">Begin</button></a>
         </section>
         <section id="active-page" class="active-page section-page">
             <p class="p-title">Pomodoro Timer</p>
@@ -128,7 +126,7 @@
             </div>
             <div id="incompleted-task-container" class="flex-container">
                 <div class="task-title">
-                    <div class="task-left"><b>Incompleted Tasks</b></div>
+                    <div class="task-left"><b>Incomplete Tasks</b></div>
                     <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
                 </div>
             </div>

@@ -147,7 +147,7 @@ main {
 }
 
 .button:hover {
-  background-color: rgba(242, 71, 38, 0.8);
+  background-color: rgba(242, 71, 38, 0.7);
 }
 
 audio {
@@ -580,35 +580,34 @@ hr {
   font-weight: bold;
   padding: 10px 30px;
   border-radius: 10px;
-  border: solid  rgb(255, 81, 0);
+  border: none;
   outline: none;
-}
-
-.set-up-page button:hover {
-  background-color: rgba(255, 81, 0, 0.6);
-  color: white;
-}
-
-.set-up-page button:active {
-  background-color: rgb(255, 81, 0);
-  color: white;
+  cursor: pointer;
 }
 
 .cButton {
-  background-color: rgb(255, 81, 0);
-  color: white;
   margin-top: 1%;
 }
 
 .bButton {
-  background-color: rgb(255, 81, 0);
-  color: white;
   margin-bottom: 10%;
-  cursor: pointer;
 }
 
-@media only screen and (max-width: 700px) {
-  .task-title > .task-right {
-    transform: translateX(-20px);
+.to-how-to-page {
+  position: absolute;
+  right: 21%;
+  width: 25px;
+  height: 25px;
+  border: none;
+  border-radius: 50%;
+  outline: none;
+  font-weight: bold;
+  font-size: smaller;
+  transition: all 0.15s ease-in;
+}
+
+@media only screen and (max-width: 800px) {
+  .task-title > .task-left {
+    width: 50%;
   }
 }

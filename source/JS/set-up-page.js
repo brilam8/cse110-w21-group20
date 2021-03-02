@@ -97,22 +97,32 @@ class TaskComponent extends HTMLElement {
             height: 30px;
             width: 50%;
             border: none;
+            outline: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
-          }
+        }
 
-          .task-right {
+        .entry > .task-left:hover , .entry > .task-left:focus {
+            border: 2px solid lightgrey;
+            border-radius: 10px;
+            transform: translate(-2px, -2px);
+            outline: none;
+            margin-top: 6px;
+            margin-left: 19px;
+        }
+
+        .task-right {
             float: right;
             margin-top: 3px;
-            
             padding-right: 10px;
             text-align:center;
             height: 30px;
             border: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
-          }
-          .task-right > input {
+        }
+
+        .task-right > input {
             height: 25px;
             width: 35px;
             border: none;
@@ -120,33 +130,40 @@ class TaskComponent extends HTMLElement {
             text-align: right;
             padding-right: 3px;
             caret-color: transparent;
-          }
+        }
 
-          input[type=number]::-webkit-inner-spin-button, 
-          input[type=number]::-webkit-outer-spin-button {  
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
-          }
-          .deleteTask {
+        }
+
+        .deleteTask {
             float: right;
             height: 30px;
             width: 30px;
             cursor: pointer;
             outline: none;
-              
-            background-color: rgb(255, 81, 0);
-            border: solid  rgb(255, 81, 0);
+            background-color: rgba(242, 71, 38, 1);
+            border: none;
             color: white;
             font-weight: bold;
             border-radius: 5px;
-          }
-          .deleteTask:hover {
-            background-color: rgba(255, 81, 0, 0.6);
-          }
-          
-          ::placeholder {
-            color: rgb(255, 166, 125);
+            transition: all 0.3s ease-in;
+        }
+        .deleteTask:hover {
+            background-color: rgba(242, 71, 38, 0.8);
+        }
+        
+        ::placeholder {
             font-size: 20px;
-          }
+            color: rgb(255, 81, 0);
+        }
+
+        @media only screen and (max-width: 600px) {
+            .task-left {
+                width: 30%;
+            }
+        }          
         `;
 
         this.shadowRoot.append(style, container);
@@ -220,13 +237,10 @@ document.getElementById("begin").addEventListener("click", ()=>{
                 tasklist.splice(i--, 1); //removes any empty tasks and fix index i
             }
         }
-        //calling the fucntion to store set-up values.
-        setup_localStore();
-
-
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
         document.getElementById("to-how-to-page").style.display = "none";
+        setup_localStore();
         set_time();
         startTimer("active");
     }
@@ -237,20 +251,6 @@ document.getElementById("begin").addEventListener("click", ()=>{
 
 });
 
-
-
-/**
- * Function stores set-up page values, stringifying and send them to local-storage.
- */
-function setup_localStore(){
-    let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
-    for(let i=0;i<4;i++){
-        let set_value=document.getElementById(arr[i]).value;
-        setup_value.push(set_value);
-    }
-}
-
-
 /**
  * Clicking the create button will create a task-component on the set-up page. 
  * It will only allow 6 task-components.
@@ -260,6 +260,12 @@ document.getElementById("create").addEventListener("click", ()=>{
         let entry = document.createElement("task-component");
         document.getElementById("active-task-container").appendChild(entry);
     }
+});
+
+//updates text for setting
+document.getElementById('task-right-total').addEventListener('change', ()=>{
+    let value = document.getElementById('task-right-total').value;
+    document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
 });
 
 /**
@@ -273,3 +279,16 @@ function deleteComponent(index){
     tasklist.splice(index, 1); //removes task from tasklist 
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
 }
+
+
+/**
+ * Function stores set-up page values, stringifying and send them to local-storage.
+ */
+function setup_localStore(){
+    let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
+    for(let i=0;i<4;i++){
+        let set_value=document.getElementById(arr[i]).value;
+        setup_value.push(set_value);
+    }
+}
+
