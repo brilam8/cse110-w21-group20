@@ -35,6 +35,7 @@ let longbreakcounter = 0; // by default, after 3 short breaks, a long break will
 //alert sound that plays every X mins
 let alertsound;
 let alertfrequency; // the X mins, options are every 5, 10, or 15 mins
+let alertindicator = null;
 
 /*
     function that set up timer based on user's set-up values.
@@ -142,11 +143,11 @@ function startTimer(page){
     click.play();
     reset(page);
     updateCounter(page);
-    setAlert();
+    setAlert(page);
     state = setInterval(()=>{
         counter -= 1;
         counter == 0 ? redirectToPage(page) : (counter < 6 ? tick.play() : false);
-        alertsound ? (counter % (alertfrequency*60) == 0 ? beep.play() : false) : false;   
+        if (alertsound) (counter%(alertfrequency*60)) == alertindicator ? beep.play() : false;
         if (page == "active"){
             activebar.style.width = ((barwidth*counter)/activetime).toString() + "px";
             updateCounter("active");
@@ -246,6 +247,7 @@ function reset(page){
             breaktitle.textContent = "Short Break";
         }
     }
+    alertindicator = null;
     abortClicked = false;
     activebar.style.width = "600px";
     breakbar.style.width = "600px";
@@ -277,7 +279,9 @@ function abortTimer(){
     
 }
 
-function setAlert(){
+function setAlert(page){
     alertsound = document.getElementById("alert-right-container").style.display == "inline" ? true : false;
     alertfrequency = document.getElementById("alert-frequency").value; // the X mins, options are every 5, 10, or 15 mins
+    if (alertindicator == null && page == "active") alertindicator = activetime % (alertfrequency*60);
+    else if (alertindicator == null && page == "break") alertindicator = breaktitle.textContent == "Short Break" ? shortbreaktime % (alertfrequency*60) : longbreaktime % (alertfrequency*60);
 }

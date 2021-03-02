@@ -147,7 +147,7 @@ main {
 }
 
 .button:hover {
-  background-color: rgba(242, 71, 38, 0.8);
+  background-color: rgba(242, 71, 38, 0.7);
 }
 
 audio {
@@ -603,6 +603,7 @@ hr {
   outline: none;
   font-weight: bold;
   font-size: smaller;
+  transition: all 0.15s ease-in;
 }
 
 @media only screen and (max-width: 800px) {
