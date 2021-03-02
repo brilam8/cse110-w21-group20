@@ -160,6 +160,8 @@ function populateTasks(){
     const uncompletedItems = document.getElementById('uncomplete-items');
     if (!localStorage.getItem('tasks')) {
         //console.log("There are no tasks in the storage?");
+        var num = document.getElementById("prog-num");
+        num.textContent = `No tasks were found`;
         checkEmpty();
     }
     else {
@@ -190,15 +192,17 @@ function populateTasks(){
             }
         }
         //moveProgBar(totTasks, totComplete);
-        const thresh = totComplete/totTasks*100;
-        var elem = document.getElementById("prog-bar-fill");
-        elem.offsetHeight;
-        elem.style.width = thresh+"%";
-        if (thresh >= 66) {
-            elem.style["background-color"] = "green";
-        }
-        else if (thresh >= 33){
-            elem.style["background-color"] = "yellow";
+        if (totTasks > 0){
+            const thresh = totComplete/totTasks*100;
+            var elem = document.getElementById("prog-bar-fill");
+            elem.offsetHeight;
+            elem.style.width = thresh+"%";
+            if (thresh >= 66) {
+                elem.style["background-color"] = "green";
+            }
+            else if (thresh >= 33){
+                elem.style["background-color"] = "yellow";
+            }
         }
         var num = document.getElementById("prog-num");
         num.textContent = `${totComplete}/${totTasks} tasks completed!`;
