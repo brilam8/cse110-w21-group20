@@ -1,20 +1,13 @@
-/* copied this over from setting-page.js */
-
 if (!window.localStorage.getItem('slider-clicked')){
   window.localStorage.setItem('slider-clicked', JSON.stringify({}));
 }
 
-
+// component to create slider. Used for dark mode setting
 class SliderComponent extends HTMLElement {
     constructor(){
         super();
         this.attachShadow({mode: 'open'});
         const container = document.createElement('div');
-        container.setAttribute('class', 'general-settings-container');
-
-        const containerName = container.appendChild(document.createElement('p'));
-        containerName.setAttribute('class', "general-container-name");
-        containerName.textContent = this.hasAttribute('name') ? this.getAttribute('name') : "Setting Undefined";
         
         const button = container.appendChild(document.createElement('button'));
         button.setAttribute('class','setting-slider');
@@ -23,9 +16,6 @@ class SliderComponent extends HTMLElement {
         const slider = button.appendChild(document.createElement('div'));
         slider.setAttribute('class', "slider-circle");
         slider.textContent = "Off";
-
-        this.name = containerName;
-        this.button = button;
     
         button.onclick = ()=>{
             //moves the slider to on or off
@@ -47,57 +37,49 @@ class SliderComponent extends HTMLElement {
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
             }
+            else if (button.id == "alert-button"){
+              if (currentText == "On"){
+                // document.getElementById('alert-sound').style.display = "inline";
+                document.getElementById('alert-right-container').style.display = "inline";
+              }
+              else {
+                // document.getElementById('alert-sound').style.display = "none";
+                document.getElementById('alert-right-container').style.display = "none";
+              }
+            }
         };
 
         const style = document.createElement('style');
         style.textContent = `
-          .general-settings-container {
-            display: flex;
-            margin-top: 20px;
-            margin-left: 10px;
-            align-items: center;
-          }
-          
-          .general-container-name {
-            width: 200px;
-            height: 40px;
-            margin: 0 5px;
-            border: 4px solid rgb(242, 71, 38);;
-            color: rgb(242, 71, 38);
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-          }
-          
-          .setting-slider {
-            width: 70px;
-            height: 40px;
-            border: none;
-            border-radius: 25px;
-            outline: none;
-            
-          }
-          
-          .slider-circle {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background-color: rgb(242, 71, 38);
-            transform: translate(-3px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            transition: all 0.6s ease-out;
-            cursor: pointer;
+        .setting-slider {
+          width: 70px;
+          height: 32px;
+          border: none;
+          border-radius: 25px;
+          outline: none;
+          margin-top: 0px;
+          margin-right: 25px;
+        }
+        
+        .slider-circle {
+          width: 31px;
+          height: 31px;
+          border-radius: 50%;
+          background-color: rgb(242, 71, 38);
+          transform: translate(-3px);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          text-align: center;
+          transition: all 0.6s ease-out;
+          cursor: pointer;
 
-            color: white; //just added
-          }
-          
-          .setting-slider-switch .slider-circle {
-            transform: translate(23px);
-          }
+          color: white; //just added
+        }
+        
+        .setting-slider-switch .slider-circle {
+          transform: translate(30px);
+        }
         `;
 
         //reclicks sliders on setting page to setting state stored in local storage
@@ -105,6 +87,10 @@ class SliderComponent extends HTMLElement {
         if (clickedList[button.id] == "On"){
           button.classList.toggle("setting-slider-switch");
           slider.textContent = slider.textContent == "On" ? "Off" : "On";
+          if (button.id == "alert-button") {
+              // document.getElementById('alert-sound').style.display = "inline";
+              document.getElementById('alert-right-container').style.display = "inline";
+          }
         }
         this.shadowRoot.append(style, container);
     }
@@ -112,3 +98,7 @@ class SliderComponent extends HTMLElement {
 }
 
 customElements.define('slider-component', SliderComponent);
+
+document.getElementById("alert-frequency").addEventListener('change', ()=>{
+  document.getElementById("alert-number").textContent = document.getElementById("alert-frequency").value;
+});
