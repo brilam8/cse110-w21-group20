@@ -4,7 +4,7 @@
   "description": "TBD",
   "main": "main.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "jsdoc-generation": "jsdoc ./JS -r"
   },
   "repository": {
