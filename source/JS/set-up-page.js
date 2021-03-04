@@ -4,6 +4,10 @@ var copytasklist = [];
 var tasklist = [];
 var completed = [];
 var setup_value=[];
+var totalpomo = 0;
+
+let totaltime = 0;
+let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
@@ -60,11 +64,13 @@ class TaskComponent extends HTMLElement {
                 //replaces task
                 let pomo = right.value ? right.value : 1;
                 tasklist[this.index] = [left.value, pomo];
+                calculateTotalTime();
             }
         });
         right.addEventListener('input', ()=>{
             if (right.type == "number"){ //only in set up
                 tasklist[this.index] = [left.value ? left.value : "", right.value ? right.value : 1]; //replaces pomo
+                calculateTotalTime();
             }
             else{
                  //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
@@ -75,6 +81,7 @@ class TaskComponent extends HTMLElement {
 
         deleteButton.addEventListener('click', ()=>{
             deleteComponent(this.index);
+            calculateTotalTime();
         });
     
         const style = document.createElement('style');
@@ -266,6 +273,13 @@ document.getElementById("create").addEventListener("click", ()=>{
 document.getElementById('task-right-total').addEventListener('change', ()=>{
     let value = document.getElementById('task-right-total').value;
     document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
+    calculateTotalTime();
+});
+
+arr.forEach(ele =>{
+    document.getElementById(ele).addEventListener('change', ()=>{
+        calculateTotalTime();
+    });
 });
 
 /**
@@ -285,10 +299,28 @@ function deleteComponent(index){
  * Function stores set-up page values, stringifying and send them to local-storage.
  */
 function setup_localStore(){
-    let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
     for(let i=0;i<4;i++){
         let set_value=document.getElementById(arr[i]).value;
         setup_value.push(set_value);
     }
 }
 
+function calculateTotalTime(){
+    totaltime = 0;
+    totalpomo = 0;
+    for (let i = 0; i < tasklist.length; i ++){
+        if (tasklist[i][0] != ""){
+            totaltime += tasklist[i][1] * document.getElementById("task-right-len").value;
+            totalpomo += parseInt(tasklist[i][1]);
+        }
+    }
+    if (totaltime){
+        let numOfLongBrk = Math.floor(totalpomo/document.getElementById("task-right-total").value);
+        totaltime += numOfLongBrk*document.getElementById("task-right-long-break").value + (totalpomo-numOfLongBrk)*document.getElementById("task-right-break-btw").value;
+
+        document.getElementById('total').textContent = Math.floor(totaltime/60) + " hours and " + totaltime%60;
+    }
+    else{
+        document.getElementById('total').textContent = "0";
+    }
+}
