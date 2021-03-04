@@ -53,18 +53,29 @@
     .wb-button.setup {
       margin-left: 150px;
     }
+    
+    @media only screen and (min-width: 1200px) {
+    .howtoTitle {
+      left: 20%;
+    }
 
-    /* .howtoTitle {
-      display: flex;
-      width: 100%;
-      justify-content: left;
-    } */
+    @media only screen and (min-width: 1600px) {
+    .howtoTitle {
+      left: 25%;
+    }
+
+    @media only screen and (min-width: 1800px) {
+    .howtoTitle {
+      left: 30%;
+    }
+  }
 
     </style>
     </head>
     <body>
+      <div>
       <!-- <div class="howtoTitle"> -->
-        <h1 class="wb-page-title">how to</h1>
+        <h1 class="wb-page-title howtoTitle">how to</h1>
       <!-- </div> -->
         <div id="listwrapper">
             <ol class="instructions-list">
@@ -78,6 +89,9 @@
                 <li>start a new cycle if needed</li>
             </ol>
         </div>
+
+      </div>
+
         <div id="buttonwrapper">
           <a href="landing-page.html" id="to-home-page"><button class="wb-button">Home Page</button></a>
           <a href="setup-active-break-pages.html" id="to-set-up-page"><button class="wb-button setup">Set Up</button></a>
