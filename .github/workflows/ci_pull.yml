@@ -46,8 +46,9 @@ jobs:
         tar.exe -a -c -f wepomo-win32-x64.zip wepomo-win32-x64
     - name: Commit zip file
       run: |
+        git config --global user.email "emailexample1#gmail.com"
         git config --global user.name "group20updatesWindows"
-        git add wepomo-win32-x64.zip
+        git add wepomo-win32-x64.zip 
         git commit -m "update Win Electron app" -a
     - name: Deploy Win ElectronApp
       uses: ad-m/github-push-action@master
@@ -63,6 +64,7 @@ jobs:
         tar.exe -a -c -f wepomo-darwin-x64.zip wepomo-darwin-x64
     - name: Commit zip file
       run: |
+        git config --global user.email "emailexample2#gmail.com"
         git config --global user.name "group20updatesMac"
         git add wepomo-darwin-x64.zip
         git commit -m "update Mac Electron app" -a
@@ -80,6 +82,7 @@ jobs:
         tar.exe -a -c -f wepomo-linux-x64.zip wepomo-linux-x64
     - name: Commit zip file
       run: |
+        git config --global user.email "emailexample3#gmail.com"
         git config --global user.name "group20updatesLinux"
         git add wepomo-linux-x64.zip
         git commit -m "update Linux Electron app" -a
