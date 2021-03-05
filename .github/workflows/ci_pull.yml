@@ -37,7 +37,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx eslint ./JS/*.js
-  GenerateElectronAppWindows:
+  GenerateElectronApp:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
@@ -52,7 +52,7 @@ jobs:
       run: |
         git config --global user.email "totran@ucsd.edu"
         git config --global user.name "group20"
-        git add wepomo-win32-x64.zip wepomo-darwin-x64.zip wepomo-linux-x64.zip
+        git add wepomo-win32-x64.zip wepomo-darwin-x64.zip wepomo-linux-x64.zip -A
         git commit -m "update Electron app versions" -a
     - name: Deploy Electron App
       uses: ad-m/github-push-action@master
