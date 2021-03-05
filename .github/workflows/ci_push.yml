@@ -24,8 +24,3 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx eslint ./JS/*.js
-  GenerateElectronApp:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - run: npx electron-packager . wepomo --electron-version=9.4.4 --platform=win32 --icon "./logo/logo.ico"
