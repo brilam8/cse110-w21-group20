@@ -31,8 +31,8 @@ jobs:
     # - run: rm -r wepomo-win32-x64.zip
     - run: npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=win32 --icon "./logo/logo.ico"
     - run: zip -r wepomo-win32-x64.zip wepomo-win32-x64
+        shell: bash
     - run: rm -r wepomo-win32-x64
-    - shell: bash
   Jest:
     runs-on: ubuntu-latest
     steps:
