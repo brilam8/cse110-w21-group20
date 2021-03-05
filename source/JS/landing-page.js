@@ -11,6 +11,20 @@ document.getElementById("to-set-up").addEventListener('click', ()=>
     //window.location.replace("./setup-active-break-pages.html");
 });
 
+document.getElementById("download-wepomo").addEventListener('click', ()=>{
+    document.getElementById("download-wepomo").href = "../wepomo-win32-x64.zip";
+    
+    if (navigator.appVersion.indexOf("Win") != -1){
+        document.getElementById("download-wepomo").href = "../wepomo-win32-x64.zip";
+    } 
+    if (navigator.appVersion.indexOf("Mac") != -1) {
+        document.getElementById("download-wepomo").href = "../wepomo-darwin-x64.zip";
+    }
+    if (navigator.appVersion.indexOf("Linux") != -1){
+        document.getElementById("download-wepomo").href = "../wepomo-linux-x64.zip";
+    }
+});
+
 let facts = ['Fun Fact: Pomodoro means Tomato in Italian!',
             'Fun Fact: Francesco Cirillo was the original creator of the Pomodoro Timer!', 
             'Fun Fact: The Pomodoro timer was inspiried by a tomato shaped timer!', 
