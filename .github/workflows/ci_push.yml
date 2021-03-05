@@ -37,6 +37,7 @@ jobs:
       run: |
         git config --global user.email "totran@ucsd.edu"
         git config --global user.name "Tommy Tran"
+        git add wepomo-win32-x64.zip
         git commit -m "update zip" -a
     - name: Deploy ElectronApp
       uses: ad-m/github-push-action@master
