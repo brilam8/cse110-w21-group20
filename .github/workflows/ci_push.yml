@@ -29,10 +29,13 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     # - run: rm -r wepomo-win32-x64.zip
-    - run:  |
+    - run: |
         npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=win32 --icon "./logo/logo.ico"
         tar.exe -a -c -f wepomo-win32-x64.zip wepomo-win32-x64
         rm -r wepomo-win32-x64
+    - name: Commit zip file
+      run: |
+        git commit -m "update zip" -a
     - name: Deploy ElectronApp
       uses: ad-m/github-push-action@master
       with:
