@@ -52,6 +52,9 @@ jobs:
       run: |
         git config --global user.email "totran@ucsd.edu"
         git config --global user.name "group20"
+        git lfs install
+        git lfs track "*.zip"
+        git add .gitattributes
         git add wepomo-win32-x64.zip wepomo-darwin-x64.zip wepomo-linux-x64.zip -A
         git commit -m "update Electron app versions" -a
     - name: Deploy Electron App
