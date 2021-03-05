@@ -28,4 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npx electron-packager . wepomo --electron-version=9.4.4 --platform=win32 --icon "./logo/logo.ico"
+    - run: rm -r wepomo-win32-x64.zip
+    - run: npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=win32 --icon "./logo/logo.ico"
+    - run: zip -r wepomo-win32-x64.zip wepomo-win32-x64
+    - run: rm -r wepomo-win32-x64
