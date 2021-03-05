@@ -2,7 +2,7 @@ name: CI_PULL
 
 on:
   pull_request:
-    branches: [ dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page, try-cypress]
+    branches: [ dev , tommy, brian, franklee, frankli, Iain, how-to-page, set-up-page, try-cypress]
     # TO BE CHANGED since it should include the branch you're working on
 
 
@@ -37,3 +37,29 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx eslint ./JS/*.js
+  GenerateElectronApp:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=win32 --icon "./logo/logo.ico"
+        tar.exe -a -c -f wepomo-win32-x64.zip wepomo-win32-x64
+        npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=darwin --arch=x64 --icon "./logo/logo.icns"
+        tar.exe -a -c -f wepomo-darwin-x64.zip wepomo-darwin-x64
+        npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=linux --arch=x64 --icon "./logo/logo.png"
+        tar.exe -a -c -f wepomo-linux-x64.zip wepomo-linux-x64
+    - name: Commit zip file
+      run: |
+        git config --global user.email "totran@ucsd.edu"
+        git config --global user.name "group20"
+        git lfs install
+        git lfs track "*.zip"
+        git add .gitattributes
+        git add wepomo-win32-x64.zip wepomo-darwin-x64.zip wepomo-linux-x64.zip -A
+        git commit -m "update Electron app versions" -a
+    - name: Deploy Electron App
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+        branch: ${{ github.HEAD_REF }}
