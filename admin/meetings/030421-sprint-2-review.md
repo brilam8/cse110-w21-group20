@@ -24,3 +24,4 @@
 ### Next Meeting:
 Thursday 5pm
 ### Meeting Notes:
+Iain: Worked on the overall style on the landing page, making it more similar to the initial design choice, added the fun-facts functionality, and added a little message at the top of the page.
