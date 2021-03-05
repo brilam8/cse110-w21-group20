@@ -9,7 +9,7 @@ function createWindow () {
     icon: __dirname + './logo/logo.ico'
   })
 
-  win.loadFile('./HTML/landing-page.html')
+  win.loadFile('./HTML/landing-pagev2.html')
   win.setMenuBarVisibility(false)
 }
 
