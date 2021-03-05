@@ -27,14 +27,17 @@ jobs:
   GenerateElectronApp:
     runs-on: windows-latest
     steps:
-    - uses: ad-m/github-push-action@master
+    - uses: actions/checkout@v2
+    # - run: rm -r wepomo-win32-x64.zip
+    - run:  |
+        npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=win32 --icon "./logo/logo.ico"
+        tar.exe -a -c -f wepomo-win32-x64.zip wepomo-win32-x64
+        rm -r wepomo-win32-x64
+    - name: Deploy ElectronApp
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-    # - run: rm -r wepomo-win32-x64.zip
-    - run: npx electron-packager . wepomo --overwrite --electron-version=12.0.0 --platform=win32 --icon "./logo/logo.ico"
-    - run: tar.exe -a -c -f wepomo-win32-x64.zip wepomo-win32-x64
-    - run: rm -r wepomo-win32-x64
   Jest:
     runs-on: ubuntu-latest
     steps:
