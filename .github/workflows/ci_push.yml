@@ -37,7 +37,7 @@ jobs:
       uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+        force: true
   Jest:
     runs-on: ubuntu-latest
     steps:
