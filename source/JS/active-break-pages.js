@@ -35,7 +35,7 @@ let pomos;
 //alert sound that plays every X mins
 let alertsound;
 let alertfrequency; // the X mins, options are every 5, 10, or 15 mins
-let alertindicator = null;
+let alertindicator = null; 
 let totalcounter = 0;
 
 /*
