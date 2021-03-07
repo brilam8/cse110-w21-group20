@@ -204,4 +204,4 @@ describe('set up page', () => {
     expect(document.getElementById('task1').deleteButton.style.display).toEqual("none");
     expect(document.getElementById('task1').index).toEqual(0);
   });
-})
+}) 

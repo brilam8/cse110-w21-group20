@@ -18,7 +18,7 @@ describe('active page', () => {
   </main>
   <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
 </section>
-<audio id="beep"><source src="./sounds/Beep.mp3"></audio>
+<audio id="beep"><source src="./sounds/Beep.mp3"></audio> 
 <audio id="tick"><source src="./sounds/Tick.mp3"></audio>
 <audio id="click"><source src="./sounds/Click.mp3"></audio>
   `;

@@ -277,7 +277,7 @@ document.getElementById('task-right-total').addEventListener('change', ()=>{
 });
 
 arr.forEach(ele =>{
-    document.getElementById(ele).addEventListener('change', ()=>{
+    document.getElementById(ele).addEventListener('change', ()=>{ 
         calculateTotalTime();
     });
 });

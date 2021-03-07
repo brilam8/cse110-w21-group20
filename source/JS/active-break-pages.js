@@ -293,4 +293,4 @@ function setAlert(page){
     alertfrequency = document.getElementById("alert-frequency").value; // the X mins, options are every 5, 10, or 15 mins
     // if (alertindicator == null && page == "active") alertindicator = activetime % (alertfrequency*60);
     // else if (alertindicator == null && page == "break") alertindicator = breaktitle.textContent == "Short Break" ? shortbreaktime % (alertfrequency*60) : longbreaktime % (alertfrequency*60);
-}
+} 

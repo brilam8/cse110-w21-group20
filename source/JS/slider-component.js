@@ -10,7 +10,7 @@ class SliderComponent extends HTMLElement {
         const container = document.createElement('div');
         
         const button = container.appendChild(document.createElement('button'));
-        button.setAttribute('class','setting-slider');
+        button.setAttribute('class','setting-slider'); 
         button.id =  this.hasAttribute('button-id') ? this.getAttribute('button-id') : "default-id";
 
         const slider = button.appendChild(document.createElement('div'));
