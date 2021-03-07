@@ -1,8 +1,8 @@
 name: CI_PULL
 
 on:
-  pull_request: 
-    branches: [ dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page, try-cypress]
+  pull_request:
+    branches: [ dev , tommy-2, brian, franklee, frankli, Iain, how-to-page, set-up-page, try-cypress]
     # TO BE CHANGED since it should include the branch you're working on
 
 

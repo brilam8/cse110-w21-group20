@@ -1,5 +1,6 @@
 /*global startTimer, set_time*/
 
+// variables used in active and break pages
 var copytasklist = [];
 var tasklist = [];
 var completed = [];
@@ -7,7 +8,7 @@ var setup_value=[];
 var totalpomo = 0;
 
 let totaltime = 0;
-let arr=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
+let timersettingIDs=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
@@ -219,9 +220,17 @@ document.getElementById("begin").addEventListener("click", ()=>{
 
     let notempty = tasklist.filter(task => task[0] != "");
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
+        let dups = {};
         for (let i = 0; i < tasklist.length; i++){
             if (tasklist[i][0] != ""){ //checks for empty tasks
-                if ( document.getElementById("break-task-container").children.length <= 1){
+                for (const task of copytasklist){ // checks for duplicate task descriptions
+                    if (task[0] == tasklist[i][0]){
+                        dups[task[0]] ? dups[task[0]] += 1 : dups[task[0]] = 1; //store amount of copies
+                        tasklist[i][0] = tasklist[i][0] + "-" + dups[task[0]]; //changes description name
+                        break;
+                    }
+                }
+                if ( document.getElementById("break-task-container").children.length <= 1){ //first task is set in current break task
                     let firstentry = document.createElement("task-component");
                     firstentry.setAttribute('type', "checkbox");
                     firstentry.setAttribute('left-task', tasklist[i][0]);
@@ -231,7 +240,7 @@ document.getElementById("begin").addEventListener("click", ()=>{
                     document.getElementById("break-task-container").appendChild(firstentry);
                 }
                 else {
-                    let entry = document.createElement("task-component");
+                    let entry = document.createElement("task-component"); //rest of task are set in incomplete tasks
                     entry.setAttribute('left-pointer-event', "none");
                     entry.setAttribute('set-right-input', tasklist[i][1]);
                     entry.setAttribute('left-task', tasklist[i][0]);
@@ -269,15 +278,20 @@ document.getElementById("create").addEventListener("click", ()=>{
     }
 });
 
-//updates text for setting
+/** 
+ * Updates span for 'long break on every 4th pomo' setting
+ */ 
 document.getElementById('task-right-total').addEventListener('change', ()=>{
     let value = document.getElementById('task-right-total').value;
     document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
     calculateTotalTime();
 });
 
-arr.forEach(ele =>{
-    document.getElementById(ele).addEventListener('change', ()=>{ 
+/**
+ * Everytime input for timer settings is changed, update the totaltime
+ */
+timersettingIDs.forEach(ele =>{
+    document.getElementById(ele).addEventListener('change', ()=>{
         calculateTotalTime();
     });
 });
@@ -296,28 +310,35 @@ function deleteComponent(index){
 
 
 /**
- * Function stores set-up page values, stringifying and send them to local-storage.
+ * Function sets the timer settings for active and break pages
  */
 function setup_localStore(){
     for(let i=0;i<4;i++){
-        let set_value=document.getElementById(arr[i]).value;
+        let set_value=document.getElementById(timersettingIDs[i]).value;
         setup_value.push(set_value);
     }
 }
 
+/**
+ * Function used to set the total time. It is used in any every of the set up page that changes task list or timer
+ */
 function calculateTotalTime(){
     totaltime = 0;
     totalpomo = 0;
     for (let i = 0; i < tasklist.length; i ++){
         if (tasklist[i][0] != ""){
+            // gets total time for all tasks
             totaltime += tasklist[i][1] * document.getElementById("task-right-len").value;
+            // gets total pomo for all tasks
             totalpomo += parseInt(tasklist[i][1]);
         }
     }
     if (totaltime){
+        // gets time for all long and short breaks based on number of pomos
         let numOfLongBrk = Math.floor(totalpomo/document.getElementById("task-right-total").value);
         totaltime += numOfLongBrk*document.getElementById("task-right-long-break").value + (totalpomo-numOfLongBrk)*document.getElementById("task-right-break-btw").value;
 
+        // sets total time span
         document.getElementById('total').textContent = Math.floor(totaltime/60) + " hours and " + totaltime%60;
     }
     else{
