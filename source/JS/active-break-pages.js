@@ -77,8 +77,6 @@ let pomocount = 0;
 let currTask;
 let completedtask = [];
 
-//warning variable, bool for warning prompt when clicking on abort, second click will abort pomo
-let abortClicked = false;
 
 
 
@@ -88,13 +86,9 @@ let abortClicked = false;
  *  end the timer and redirect to results page
  */
 activebutton.addEventListener('click', ()=>{
-    if (abortClicked) {
+    if (confirm("Abort will end all pomo sessions, click ok if you want to continue")) {
         actualpomo[currTask] = pomocount;
         abortTimer();
-    }
-    else {
-        alert("Abort will end all pomo sessions, click again if you want to continue");
-        abortClicked = true;
     }
 });
 
@@ -105,17 +99,13 @@ activebutton.addEventListener('click', ()=>{
  *  local storage, and redirect to results page
  */
 breakbutton.addEventListener('click', ()=>{
-    if (abortClicked) {
+    if (confirm("Abort will end all pomo sessions, click ok if you want to continue")) {
         actualpomo[currTask] = pomocount;
         if (completed.includes(tasklist[0][0])){
             tasklist.splice(0, 1);
             currTask = tasklist[0] ? tasklist[0][0] : false;
         }
         abortTimer();
-    }
-    else {
-        alert("Abort will end all pomo sessions, click again if you want to continue");
-        abortClicked = true;
     }
 });
 
