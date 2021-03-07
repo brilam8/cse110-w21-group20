@@ -1,3 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Iain Ro">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+        <title>Landing Page</title> 
+    </head>
+    <style>
+        body {
+            background-color: rgb(242, 71, 38, 80%) ! important;
+        }
+        .ob-page-title{
+            position: relative;
+            font-size: 60px;
+            margin-top: 5%;
+            width: 50vw;
+        }
+        body > main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 40vh;
+        }
+        .ob-button {
+            width: 350px;
+            margin: 10px 0;
+        }
+        #fun-facts {
+            color: white;
+            text-align: center;
+            margin-top: 10px;
+            max-width: 320px;
+            height: 80px;
+        }
+        @media only screen and (max-height: 250px) {
+            .ob-page-title{
+                visibility: hidden;
+            }
+        }
+    </style>
+    <body class="landing-page" id="landing">
+        <!--Probably gonna input logo of some sort/different font-->
+        <p class="ob-page-title">wepomo</p>
+        
+        <main>
+            <p class="p-body">Good luck on your work today!</p>
+            <button id="to-set-up" class="ob-button">Start</button>
+            <button id="to-how-to" class="ob-button">How To</button>
+            <div id="fun-facts">Fun Fact: Pomodoro is Tomato in Italian!</div>
+            <a id="download-wepomo" href="" style="color: #fff; position: fixed; transform: translateY(300px); text-align: center;" download>download wepomo</a>
+        </main>
+        
+        <script src="../JS/landing-page.js"></script>
+    </body>
 </html>

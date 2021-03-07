@@ -2,7 +2,7 @@ name: CI_PUSH
 
 on:
   push:
-    branches: [ dev , tommy, brian, frankli, Iain]
+    branches: [dev , tommy, brian, franklee, frankli, Iain, how-to-page, set-up-page, try-cypress]
     # TO BE CHANGED since it should be the branch you're working on
 
 defaults:
@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - run: npx stylelint **/*.css
+    - run: npx stylelint ./*.css
   ESlint:
     runs-on: ubuntu-latest
     steps:
