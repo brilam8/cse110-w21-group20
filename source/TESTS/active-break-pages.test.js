@@ -1,36 +1,33 @@
 describe('active page', () => {
-  jest.spyOn(window.localStorage.__proto__, 'getItem');
-  jest.spyOn(window.localStorage.__proto__, 'setItem');
-  document.body.innerHTML = 
-  `
-<section id="active-page" class="active-page section-page">
-  <p class="p-title">Pomodoro Timer</p>
-  <main>
-      <div class="timer-container">
-          <div id="progress-bar" class="progress-bar"></div> 
-          <p class="timer" id="timer"></p>
-      </div>
-      <div>
-          <p id="first-task" class="task">Sample Task 1</p>
-      </div>
-      
-      <button id="pomo-button" class="button">Abort</button>
-  </main>
-  <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
-</section>
-<audio id="beep"><source src="./sounds/Beep.mp3"></audio>
-<audio id="tick"><source src="./sounds/Tick.mp3"></audio>
-<audio id="click"><source src="./sounds/Click.mp3"></audio>
-  `;
-    test('temp', () => {
-      expect(document.body.innerHTML).toContain('Task');
+    test('active', () => {
+      document.body.innerHTML = 
+        `
+      <section id="active-page" class="active-page section-page">
+        <p class="p-title">Pomodoro Timer</p>
+        <main>
+            <div class="timer-container">
+                <div id="progress-bar" class="progress-bar"></div> 
+                <p class="timer" id="timer"></p>
+            </div>
+            <div>
+                <p id="first-task" class="task">Sample Task 1</p>
+            </div>
+            
+            <button id="pomo-button" class="button">Abort</button>
+        </main>
+        <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
+      </section>
+      <audio id="beep"><source src="./sounds/Beep.mp3"></audio>
+      <audio id="tick"><source src="./sounds/Tick.mp3"></audio>
+      <audio id="click"><source src="./sounds/Click.mp3"></audio>
+        `;
+      expect(document.body.innerHTML).toContain('Pomodoro Timer');
     })
 });
 
 describe('break page', () => {
-  jest.spyOn(window.localStorage.__proto__, 'getItem');
-  jest.spyOn(window.localStorage.__proto__, 'setItem');
-  document.body.innerHTML = 
+    test('break page', () => {
+      document.body.innerHTML = 
     `
     <section id="break-page" class="break-page section-page">
       <p class="p-title">Short Break</p>
@@ -53,8 +50,6 @@ describe('break page', () => {
     <audio id="tick"><source src="./sounds/Tick.mp3"></audio>
     <audio id="click"><source src="./sounds/Click.mp3"></audio>
     `;
-
-    test('temp', () => {
       expect(document.body.innerHTML).toContain('Short Break');
     })
 })
