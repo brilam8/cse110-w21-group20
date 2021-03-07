@@ -25,3 +25,9 @@
 ### Next Meeting:
 Thursday 5pm
 ### Meeting Notes:
+
+Iain: Worked on the overall style on the landing page, making it more similar to the initial design choice, added the fun-facts functionality, and added a little message at the top of the page.
+
+Jiahong: Reviewed PR and kept up with relevant issues regarding page under my ownership. Kept updated with ongoing ADRs such as common CSS conventions and interfacing with local storage. Was unfortunately somewhat indisposed due to high workload from other courses.
+
+Tommy: Worked on style for most pages, electron app, and integrated cypress within pipeline.
