@@ -35,8 +35,6 @@ class TaskComponent extends HTMLElement {
         rightcontainer.setAttribute('class', 'task-right');
 
         const deleteButton = rightcontainer.appendChild(document.createElement('button'));
-        deleteButton.setAttribute('class', 'deleteTask');
-        deleteButton.textContent = "X";
         
         const rightsuffix = rightcontainer.appendChild(document.createElement('div'));
         rightsuffix.setAttribute('class', 'task-right');
@@ -49,8 +47,6 @@ class TaskComponent extends HTMLElement {
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
         right.value = "1";
-
-        
 
         this.left = left;
         this.right= right;
@@ -143,20 +139,25 @@ class TaskComponent extends HTMLElement {
         input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
         }
-
-        .deleteTask {
+        
+        button {
             float: right;
             height: 30px;
             width: 30px;
             cursor: pointer;
             outline: none;
-            background-color: rgba(242, 71, 38, 1);
             border: none;
             color: white;
             font-weight: bold;
             border-radius: 5px;
             transition: all 0.3s ease-in;
+            pointer-events: none;
         }
+        .deleteTask {
+            background-color: rgba(242, 71, 38, 1);
+            pointer-events: auto;
+        }
+
         .deleteTask:hover {
             background-color: rgba(242, 71, 38, 0.8);
         }
@@ -165,7 +166,7 @@ class TaskComponent extends HTMLElement {
             font-size: 20px;
             color: rgb(255, 81, 0);
         }
-
+        
         @media only screen and (max-width: 600px) {
             .task-left {
                 width: 30%;
@@ -263,9 +264,26 @@ document.getElementById("begin").addEventListener("click", ()=>{
  * It will only allow 6 task-components.
  */
 document.getElementById("create").addEventListener("click", ()=>{
-    if (document.getElementById("active-task-container").children.length <= 6){
+    let ATContainer = document.getElementById("active-task-container");
+    let ATCLength = ATContainer.children.length;
+    let container = ATContainer.children[ATCLength-1].shadowRoot.children[1];
+    let input = container.children[0];
+    
+    if (ATCLength<=6 && input.value.length!=0){
+        let input = container.children[0];
+        input.style.pointerEvents = "none";
+        
+        let wheel = container.children[1].children[2];
+        wheel.type = "text";
+        wheel.style.pointerEvents = "none";
+        
+        let button = container.children[1].children[0];
+        button.setAttribute('class', 'deleteTask');
+        button.textContent = "X";
+        
+        
         let entry = document.createElement("task-component");
-        document.getElementById("active-task-container").appendChild(entry);
+        ATContainer.append(entry);
     }
 });
 
