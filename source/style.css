@@ -1,27 +1,15 @@
 /* CSS FOR ALL PAGE SIMILAR PIECES */
 
 /* Consistent Titles */
-.wb-page-title {
+header {
   font-family: 'Oswald', sans-serif;
-  position: relative;
-  left: 10%;
-  top: 15px;
-  text-align: left;
-  color: rgb(242, 71, 38, 0.9);
-  font-size: 40px;
-  font-weight: 800;
-}
-
-.ob-page-title {
-  font-family: 'Oswald', sans-serif;
-  position: relative;
-  left: 10%;
-  top: 15px;
-  text-align: left;
-  color: #fff;
   font-size: 40px;
   font-weight: bold;
+  color: rgb(242, 71, 38, 0.9);
+  padding: 25px 10%;
 }
+.logo {color: white; font-size: 60px;}
+
 
 /* Consistent Buttons */
 .wb-button {
@@ -117,13 +105,6 @@ body {
   display: none;
 }
 
-.p-title {
-  color: rgb(242, 71, 38);
-  font-size: 40px;
-  font-weight: 800;
-  margin-left: 50px;
-}
-
 main {
   width: 100%;
   height: 70vh;
@@ -186,17 +167,6 @@ h3 {
 /* end of custom scrollbar */
 
 /* results-page css starts here */
-.logo {
-  padding-left: 10vw;
-  padding-top: 10vh;
-}
-
-.logo-text {
-  font-family: 'Oswald', sans-serif;
-  font-size: 64px;
-  font-weight: bold;
-  color: #fff;
-}
 
 .table-header {
   font-family: 'Open Sans', sans-serif;
@@ -363,71 +333,6 @@ h3 {
 
 /* results-page css ends here */
 
-/* style for settings-page.html starts here */
-.settings-page {
-  transition: all 0.6s ease-out;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.settings-page > .p-title {
-  margin-left: 0;
-}
-
-.settings-page > main {
-  width: 70vw;
-}
-
-.timer-settings {
-  width: 100%;
-  height: 30%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 5px solid;
-  border-radius: 25px;
-}
-
-.timer-settings-title,
-.timer-settings-number {
-  width: 100px;
-  height: 30px;
-  text-align: center;
-}
-
-.timer-settings-container,
-.timer-settings-button {
-  width: 70%;
-  height: 20%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.timer-settings-button {
-  font-size: x-large;
-  width: 35px;
-  height: 25px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.timer-settings-button:hover {
-  border: 2px solid grey;
-}
-
-.general-settings {
-  width: 80%;
-  height: 60%;
-}
-
-/* style for settings-page.html ends here */
-
 /* style for pomo-page.html starts here */
 .task {
   height: 50px;
@@ -485,7 +390,7 @@ h3 {
   margin-bottom: 5%;
 }
 
-.break-page .p-title {
+.break-page{
   margin: 1% 0;
 }
 
@@ -497,7 +402,7 @@ h3 {
   text-align: center;
 }
 
-.set-up-page .p-title {
+.set-up-page{
   margin: 5% 0;
 }
 
