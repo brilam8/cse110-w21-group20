@@ -2,7 +2,7 @@ name: DOCUMENTATION_GENERATION
 
 on:
   push:
-    branches: [ main ] 
+    branches: [ main ]
     # TO BE CHANGED since it should be the branch you're working on
 
 defaults:
