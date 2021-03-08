@@ -234,30 +234,20 @@ describe('active Tests', () => {
     });
 
 
-    it('When in active page, clicking abort once should warn user about abort', () => {
+    it('When in active page, clicking abort should warn user about abort then clicking ok will redirect to results page', () => {
         cy.get('#pomo-button').then($el =>{
             expect($el).to.have.prop('textContent','Abort');
         });
         cy.get('#pomo-button').click();
-        cy.on('window:alert',(txt)=>{
-            expect(txt).to.equal('Abort will end all pomo sessions, click again if you want to continue');
-        })
-    });
-
-    it('When in active page, clicking abort twice should redirect to results page', () => {
-        cy.get('#pomo-button').then($el =>{
-            expect($el).to.have.prop('textContent','Abort');
-        });
-        cy.get('#pomo-button').click();
-        cy.on('window:alert',(txt)=>{
-            expect(txt).to.equal('Abort will end all pomo sessions, click again if you want to continue');
+        cy.on('window:confirm',(txt)=>{
+            expect(txt).to.equal('Abort will end all pomo sessions, click ok if you want to continue');
         })
         cy.on('uncaught:exception', () => {
             return false;
         })
-        cy.get('#pomo-button').click();
         cy.url().should('eq', 'http://127.0.0.1:5500/HTML/results-page.html');
     });
+
 
     it('When in active page, after X mins, page should redirect to break page', () => {
         cy.tick(1501000); //jumps clock to pass 25 mins
@@ -277,18 +267,7 @@ describe('break Tests', () => {
         cy.get('#active-task-container').find('task-component:nth-child(3)').shadow().find('input[type=number]').invoke("val", 2).trigger('change');
         cy.get('#begin').click();
     });
-    it('When in break page, clicking abort once should warn user about abort', () => {
-        cy.tick(1501000); //jumps clock by 25 mins, will enter break page
-        cy.get('#break-button').then($el =>{
-            expect($el).to.have.prop('textContent','Abort');
-        });
-        cy.get('#break-button').click();
-        cy.on('window:alert',(txt)=>{
-            expect(txt).to.equal('Abort will end all pomo sessions, click again if you want to continue');
-        })
-    });
-
-    it('When in break page, clicking abort twice should redirect to results page', () => {
+    it('When in break page, clicking abort  should warn user about abort then clicking ok should redirect to results page', () => {
         cy.tick(1501000); //jumps clock by 25 mins, will enter break page
         cy.get('#break-button').then($el =>{
             expect($el).to.have.prop('textContent','Abort');
@@ -300,7 +279,6 @@ describe('break Tests', () => {
         cy.on('uncaught:exception', () => {
             return false;
         })
-        cy.get('#break-button').click();
         cy.url().should('eq', 'http://127.0.0.1:5500/HTML/results-page.html');
     });
 
