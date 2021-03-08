@@ -265,7 +265,6 @@ function reset(page){
         }
     }
     alertindicator = null;
-    abortClicked = false;
     activebar.style.width = "600px";
     breakbar.style.width = "600px";
 }
