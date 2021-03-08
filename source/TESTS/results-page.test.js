@@ -44,15 +44,22 @@ describe('task list', () => {
     document.body.innerHTML =
     `
     <grid class="two-col-grid-container" id="results">
-      <p class="table-header">Tasks completed: </p>
-      <p class="table-header">Tasks left to do: </p>
-      <ol id="complete-items">
-      </ol>
-      <ol id="uncomplete-items">
-      </ol>
+        <p class="table-header">Tasks completed: </p>
+        <p class="table-header">Tasks left to do: </p>
+        <ol id="complete-items">
+        </ol>
+        <ol id="uncomplete-items">
+        </ol>
     </grid>
     <div style="text-align: center;">
-      <p class="p-body" id="message"></p>
+        <p class="p-body" id="prog-num"></p>
+    </div>
+    <div class="task-progress-bar">
+        <div class="progress-bar-fill" id="prog-bar-fill">
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <p class="p-body" id="message"></p>
     </div>
     `;
     
@@ -65,15 +72,22 @@ describe('task list', () => {
     document.body.innerHTML =
     `
     <grid class="two-col-grid-container" id="results">
-      <p class="table-header">Tasks completed: </p>
-      <p class="table-header">Tasks left to do: </p>
-      <ol id="complete-items">
-      </ol>
-      <ol id="uncomplete-items">
-      </ol>
+        <p class="table-header">Tasks completed: </p>
+        <p class="table-header">Tasks left to do: </p>
+        <ol id="complete-items">
+        </ol>
+        <ol id="uncomplete-items">
+        </ol>
     </grid>
     <div style="text-align: center;">
-      <p class="p-body" id="message"></p>
+        <p class="p-body" id="prog-num"></p>
+    </div>
+    <div class="task-progress-bar">
+        <div class="progress-bar-fill" id="prog-bar-fill">
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <p class="p-body" id="message"></p>
     </div>
     `;
     
@@ -88,45 +102,57 @@ describe('task list', () => {
     document.body.innerHTML =
     `
     <grid class="two-col-grid-container" id="results">
-      <p class="table-header">Tasks completed: </p>
-      <p class="table-header">Tasks left to do: </p>
-      <ol id="complete-items">
-      </ol>
-      <ol id="uncomplete-items">
-      </ol>
+        <p class="table-header">Tasks completed: </p>
+        <p class="table-header">Tasks left to do: </p>
+        <ol id="complete-items">
+        </ol>
+        <ol id="uncomplete-items">
+        </ol>
     </grid>
     <div style="text-align: center;">
-      <p class="p-body" id="message"></p>
+        <p class="p-body" id="prog-num"></p>
+    </div>
+    <div class="task-progress-bar">
+        <div class="progress-bar-fill" id="prog-bar-fill">
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <p class="p-body" id="message"></p>
     </div>
     `;
     localStorage.setItem('tasks', JSON.stringify([
       {
         "id": 1,
         "actualpomos": 4,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "eat cheese"
       },
       {
         "id": 2,
         "actualpomos": 2,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "play games"
       },
       {
         "id": 3,
         "actualpomos": 3,
+        "expectedpomos" : 5,
         "completed": false,
         "taskdescription": "finish cse 110"
       },
       {
         "id": 4,
         "actualpomos": 0,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "take a trip downtown"
       },
       {
         "id": 5,
         "actualpomos": 6,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "build covid 19 vaccine"
       }
@@ -142,47 +168,58 @@ describe('task list', () => {
     expect(mock).toHaveBeenCalled();
     expect(complete_count).toEqual(4);
     expect(uncomplete_count).toEqual(1);
-    expect(uncompletedItems.children[0].textContent).toEqual("finish cse 110 (3 pomos)");
-    expect(completedItems.children[0].textContent).toEqual("eat cheese (4 pomos)");
+    expect(uncompletedItems.firstElementChild.taskName.textContent).toEqual("finish cse 110");
+    expect(completedItems.firstElementChild.taskName.textContent).toEqual("eat cheese");
   });
   test('displays congratulations message if all tasks completed', () => {
     jest.spyOn(window.localStorage.__proto__, 'getItem');
     document.body.innerHTML =
     `
     <grid class="two-col-grid-container" id="results">
-      <p class="table-header">Tasks completed: </p>
-      <p class="table-header">Tasks left to do: </p>
-      <ol id="complete-items">
-      </ol>
-      <ol id="uncomplete-items">
-      </ol>
+        <p class="table-header">Tasks completed: </p>
+        <p class="table-header">Tasks left to do: </p>
+        <ol id="complete-items">
+        </ol>
+        <ol id="uncomplete-items">
+        </ol>
     </grid>
     <div style="text-align: center;">
-      <p class="p-body" id="message"></p>
+        <p class="p-body" id="prog-num"></p>
+    </div>
+    <div class="task-progress-bar">
+        <div class="progress-bar-fill" id="prog-bar-fill">
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <p class="p-body" id="message"></p>
     </div>
     `;
     localStorage.setItem('tasks', JSON.stringify([
       {
         "id": 1,
         "actualpomos": 4,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "eat cheese"
       },
       {
         "id": 2,
         "actualpomos": 2,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "play games"
       },
       {
         "id": 4,
         "actualpomos": 0,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "take a trip downtown"
       },
       {
         "id": 5,
         "actualpomos": 6,
+        "expectedpomos" : 5,
         "completed": true,
         "taskdescription": "build covid 19 vaccine"
       }
@@ -199,7 +236,7 @@ describe('task list', () => {
     expect(mock).toHaveBeenCalled();
     expect(complete_count).toEqual(4);
     expect(uncomplete_count).toEqual(1);
-    expect(completedItems.children[0].textContent).toEqual("eat cheese (4 pomos)");
+    expect(completedItems.firstElementChild.taskName.textContent).toEqual("eat cheese");
     expect(document.getElementsByClassName('p-body')[0].textContent).toEqual("No tasks uncompleted");
     expect(message.textContent).toEqual("Congratulations! You finished all your tasks this session!");
   });
@@ -208,39 +245,50 @@ describe('task list', () => {
     document.body.innerHTML =
     `
     <grid class="two-col-grid-container" id="results">
-      <p class="table-header">Tasks completed: </p>
-      <p class="table-header">Tasks left to do: </p>
-      <ol id="complete-items">
-      </ol>
-      <ol id="uncomplete-items">
-      </ol>
+        <p class="table-header">Tasks completed: </p>
+        <p class="table-header">Tasks left to do: </p>
+        <ol id="complete-items">
+        </ol>
+        <ol id="uncomplete-items">
+        </ol>
     </grid>
     <div style="text-align: center;">
-      <p class="p-body" id="message"></p>
+        <p class="p-body" id="prog-num"></p>
+    </div>
+    <div class="task-progress-bar">
+        <div class="progress-bar-fill" id="prog-bar-fill">
+        </div>
+    </div>
+    <div style="text-align: center;">
+        <p class="p-body" id="message"></p>
     </div>
     `;
     localStorage.setItem('tasks', JSON.stringify([
       {
         "id": 1,
         "actualpomos": 4,
+        "expectedpomos" : 5,
         "completed": false,
         "taskdescription": "eat cheese"
       },
       {
         "id": 2,
         "actualpomos": 0,
+        "expectedpomos" : 5,
         "completed": false,
         "taskdescription": "play games"
       },
       {
         "id": 4,
         "actualpomos": 0,
+        "expectedpomos" : 5,
         "completed": false,
         "taskdescription": "take a trip downtown"
       },
       {
         "id": 5,
         "actualpomos": 0,
+        "expectedpomos" : 5,
         "completed": false,
         "taskdescription": "build covid 19 vaccine"
       }
@@ -256,7 +304,7 @@ describe('task list', () => {
     expect(mock).toHaveBeenCalled();
     expect(complete_count).toEqual(1);
     expect(uncomplete_count).toEqual(4);
-    expect(uncompletedItems.children[0].textContent).toEqual("eat cheese (4 pomos)");
+    expect(uncompletedItems.firstElementChild.taskName.textContent).toEqual("eat cheese");
     expect(document.getElementsByClassName('p-body')[0].textContent).toEqual("No tasks completed");
   });
 });

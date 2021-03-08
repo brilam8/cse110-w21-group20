@@ -2,7 +2,7 @@ name: CI_PULL
 
 on:
   pull_request:
-    branches: [ dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page]
+    branches: [ dev , tommy, brian, franklee, frankli, Iain, how-to-page, set-up-page, try-cypress]
     # TO BE CHANGED since it should include the branch you're working on
 
 
@@ -10,23 +10,18 @@ defaults:
   run:
     working-directory: source
 jobs:
-  build:
-
+  Jest:
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
     - run: npm ci
     - run: npm run test
+  Cypress:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npx http-server -a localhost -p 5500 . &
+      - run: npx cypress run
   HTMLHint:
     runs-on: ubuntu-latest
     steps:

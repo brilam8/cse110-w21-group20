@@ -2,9 +2,9 @@
   "name": "source",
   "version": "1.0.0",
   "description": "TBD",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "jsdoc-generation": "jsdoc ./JS -r"
   },
   "repository": {
@@ -17,6 +17,7 @@
   "author": "TBD",
   "license": "ISC",
   "devDependencies": {
+    "cypress": "^6.5.0",
     "eslint": "^7.19.0",
     "htmlhint": "^0.14.2",
     "jest": "^26.6.3",
@@ -24,5 +25,7 @@
     "stylelint": "^13.10.0",
     "stylelint-config-standard": "^20.0.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "http-server": "^0.12.3"
+  }
 }

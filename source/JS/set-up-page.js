@@ -1,12 +1,18 @@
-/*global startTimer*/
+/*global startTimer, set_time*/
 
+// variables used in active and break pages
 var copytasklist = [];
 var tasklist = [];
 var completed = [];
+var setup_value=[];
+var totalpomo = 0;
+
+let totaltime = 0;
+let timersettingIDs=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
 
 // resets tasks list in localstorage every time user enters set-up page
 window.localStorage.removeItem('tasks');
-
+window.localStorage.removeItem('set-up');
 
 /**
  * Component used to create tasks in set-up page and break page.
@@ -16,33 +22,36 @@ class TaskComponent extends HTMLElement {
     constructor(){
         super();
         this.attachShadow({mode: 'open'});
+        
         const container = document.createElement('div');
-        container.setAttribute('class', 'entry');
-
+        container.setAttribute('class', "entry");
+        
         const left = container.appendChild(document.createElement('input'));
-        left.setAttribute('class', "left");
+        left.setAttribute('class', "task-left");
         left.type = "text";
         left.placeholder = "Enter Task Here";
         left.maxLength = 20; // TO CHANGE
 
         const rightcontainer = container.appendChild(document.createElement('div'));
-        rightcontainer.setAttribute('class', 'rightcontainer');
+        rightcontainer.setAttribute('class', 'task-right');
+
+        const deleteButton = rightcontainer.appendChild(document.createElement('button'));
+        deleteButton.setAttribute('class', 'deleteTask');
+        deleteButton.textContent = "X";
+        
+        const rightsuffix = rightcontainer.appendChild(document.createElement('div'));
+        rightsuffix.setAttribute('class', 'task-right');
+        rightsuffix.textContent = "pomo";
 
         const right = rightcontainer.appendChild(document.createElement('input'));
-        right.setAttribute('class', "right");
+        right.setAttribute('class', "task-right");
         right.type = "number";
+        right.dir = "rtl";
         right.onkeydown=()=>{return false;};
         right.min = "1"; right.max = "5"; right.step = "1";
         right.value = "1";
 
-        const rightsuffix = rightcontainer.appendChild(document.createElement('span'));
-        rightsuffix.setAttribute('class', 'rightsuffix');
-        rightsuffix.textContent = "pomo";
-
-        const deleteButton = container.appendChild(document.createElement('button'));
-        deleteButton.setAttribute('class', 'deleteTask');
-        deleteButton.textContent = "X";
-
+        
 
         this.left = left;
         this.right= right;
@@ -56,13 +65,13 @@ class TaskComponent extends HTMLElement {
                 //replaces task
                 let pomo = right.value ? right.value : 1;
                 tasklist[this.index] = [left.value, pomo];
+                calculateTotalTime();
             }
         });
         right.addEventListener('input', ()=>{
             if (right.type == "number"){ //only in set up
                 tasklist[this.index] = [left.value ? left.value : "", right.value ? right.value : 1]; //replaces pomo
-                
-                right.value > 1 ? rightsuffix.textContent = "pomos" : rightsuffix.textContent = "pomo"; 
+                calculateTotalTime();
             }
             else{
                  //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
@@ -73,110 +82,96 @@ class TaskComponent extends HTMLElement {
 
         deleteButton.addEventListener('click', ()=>{
             deleteComponent(this.index);
+            calculateTotalTime();
         });
     
         const style = document.createElement('style');
         style.textContent = `
-          .entry {
-            font-family: 'Oswald', sans-serif;
+        .entry {
             height: 40px;
-            width: 59.15vw;
-            background-color: white;
             border: solid;
             border-color: lightgrey;
             border-width: 0 0 2px 0;
-            display: flex;
-          }
-          
-          .left {
-            margin-top: 8px;
-            margin-left: 15px;
-            margin-right: 10%;
+        }
+
+        .entry *{
+            background-color: transparent;
+        }
+        .task-left {
+            float: left;
+            margin-top: 7px;
+            margin-left: 20px;
             text-align: left;
             height: 30px;
-            width: 70%;
+            width: 50%;
             border: none;
-            color: rgb(255, 81, 0);
-            font-size: 20px;
-          }
-
-          .rightcontainer, .right, .rightsuffix {
-            border: none;
-            color: rgb(255, 81, 0);
-            font-size: 20px;
-            text-align: center;
-          }
-          .rightcontainer {
-            margin-top: 8px;
-            width: 20%;
-            height: 30px;            
-          }
-          
-          .right {
-            width: 100%;
-            height: 30px;
-            caret-color: transparent;
-            cursor: default;
             outline: none;
-            transform: translateX(-3%);
-          }
+            color: rgb(255, 81, 0);
+            font-size: 20px;
+        }
 
-          .rightsuffix {
-            position: absolute;
-            transform: translate(-25px, -29px);
-            color: rgba(255, 81, 0, 0.6);
-          }
+        .entry > .task-left:hover , .entry > .task-left:focus {
+            border: 2px solid lightgrey;
+            border-radius: 10px;
+            transform: translate(-2px, -2px);
+            outline: none;
+            margin-top: 6px;
+            margin-left: 19px;
+        }
 
-          input[type=number]::-webkit-inner-spin-button, 
-          input[type=number]::-webkit-outer-spin-button {  
+        .task-right {
+            float: right;
+            margin-top: 3px;
+            padding-right: 10px;
+            text-align:center;
+            height: 30px;
+            border: none;
+            color: rgb(255, 81, 0);
+            font-size: 20px;
+        }
+
+        .task-right > input {
+            height: 25px;
+            width: 35px;
+            border: none;
+            outline: none;
+            text-align: right;
+            padding-right: 3px;
+            caret-color: transparent;
+        }
+
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button {  
             opacity: 1;
-            margin-left: 32%;
-          }
+        }
 
-          .deleteTask {
-              position: absolute;
-              height: 35px;
-              width: 35px;
-              transform: translate(60vw, 5px);
-              cursor: pointer;
-              outline: none;
-              
-              background-color: white;
-              border: 3.5px solid rgba(242, 71, 38, 0.9);;
-              color: rgba(242, 71, 38, 0.9);
-              font-weight: bold;
-              border-radius: 5px;
-          }
+        .deleteTask {
+            float: right;
+            height: 30px;
+            width: 30px;
+            cursor: pointer;
+            outline: none;
+            background-color: rgba(242, 71, 38, 1);
+            border: none;
+            color: white;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: all 0.3s ease-in;
+        }
+        .deleteTask:hover {
+            background-color: rgba(242, 71, 38, 0.8);
+        }
+        
+        ::placeholder {
+            font-size: 20px;
+            color: rgb(255, 81, 0);
+        }
 
-          .deleteTask:hover {
-            background-color: rgba(242, 71, 38, 0.2);
-          }
-          
-          ::placeholder {
-            color: rgb(255, 166, 125);
-            font-size: 18px;
-          }
-
-          @media only screen and (max-width: 1400px) {
-            .rightsuffix {
-                display: none;
+        @media only screen and (max-width: 600px) {
+            .task-left {
+                width: 30%;
             }
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button {  
-                opacity: 1;
-                margin-left: 0;
-                transform: translateX(0);
-            }
-            input[type=number]::-webkit-inner-spin-button, 
-            input[type=number]::-webkit-outer-spin-button {  
-                opacity: 1;
-                margin-left: 0;
-                transform: translateX(0);
-            }
-            .right {
-                transform: translateX(-6%);
-            }
-          }
+        }          
         `;
 
         this.shadowRoot.append(style, container);
@@ -199,20 +194,20 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
+            this.right.style.transform = "translate(-59px, 3px)";
         }
         else if (name == 'index'){
             this.index -= 1;
         }
         else if (name == "set-right-input"){
             this.right.style.display = "none";
-            this.rightsuffix.textContent = newValue > 1 ? parseInt(newValue) + " pomos" : parseInt(newValue) + " pomo";
-            this.rightsuffix.style.transform = "translateX(-55%)";
+            this.rightsuffix.textContent = parseInt(newValue) + " pomo";
+            this.rightsuffix.style.transform = "translateX(-43%)";
         }
         else if (name == "remove-right-suffix"){
             this.rightsuffix.style.display = newValue;
         }
     }  
-
 }
 
 customElements.define('task-component', TaskComponent);
@@ -222,11 +217,20 @@ customElements.define('task-component', TaskComponent);
  * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
  */
 document.getElementById("begin").addEventListener("click", ()=>{
+
     let notempty = tasklist.filter(task => task[0] != "");
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
+        let dups = {};
         for (let i = 0; i < tasklist.length; i++){
             if (tasklist[i][0] != ""){ //checks for empty tasks
-                if ( document.getElementById("break-task-container").children.length <= 1){
+                for (const task of copytasklist){ // checks for duplicate task descriptions
+                    if (task[0] == tasklist[i][0]){
+                        dups[task[0]] ? dups[task[0]] += 1 : dups[task[0]] = 1; //store amount of copies
+                        tasklist[i][0] = tasklist[i][0] + "-" + dups[task[0]]; //changes description name
+                        break;
+                    }
+                }
+                if ( document.getElementById("break-task-container").children.length <= 1){ //first task is set in current break task
                     let firstentry = document.createElement("task-component");
                     firstentry.setAttribute('type', "checkbox");
                     firstentry.setAttribute('left-task', tasklist[i][0]);
@@ -236,7 +240,7 @@ document.getElementById("begin").addEventListener("click", ()=>{
                     document.getElementById("break-task-container").appendChild(firstentry);
                 }
                 else {
-                    let entry = document.createElement("task-component");
+                    let entry = document.createElement("task-component"); //rest of task are set in incomplete tasks
                     entry.setAttribute('left-pointer-event', "none");
                     entry.setAttribute('set-right-input', tasklist[i][1]);
                     entry.setAttribute('left-task', tasklist[i][0]);
@@ -251,11 +255,16 @@ document.getElementById("begin").addEventListener("click", ()=>{
         }
         document.getElementById("active-page").style.display = "inline"; //redirect to active
         document.getElementById("setup").style.display = "none";
+        document.getElementById("to-how-to-page").style.display = "none";
+        setup_localStore();
+        set_time();
         startTimer("active");
     }
     else{
         alert("Please add a task before beginning Pomo Session");
     }
+
+
 });
 
 /**
@@ -267,6 +276,24 @@ document.getElementById("create").addEventListener("click", ()=>{
         let entry = document.createElement("task-component");
         document.getElementById("active-task-container").appendChild(entry);
     }
+});
+
+/** 
+ * Updates span for 'long break on every 4th pomo' setting
+ */ 
+document.getElementById('task-right-total').addEventListener('change', ()=>{
+    let value = document.getElementById('task-right-total').value;
+    document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
+    calculateTotalTime();
+});
+
+/**
+ * Everytime input for timer settings is changed, update the totaltime
+ */
+timersettingIDs.forEach(ele =>{
+    document.getElementById(ele).addEventListener('change', ()=>{
+        calculateTotalTime();
+    });
 });
 
 /**
@@ -281,4 +308,40 @@ function deleteComponent(index){
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
 }
 
-module.exports = {deleteComponent};
+
+/**
+ * Function sets the timer settings for active and break pages
+ */
+function setup_localStore(){
+    for(let i=0;i<4;i++){
+        let set_value=document.getElementById(timersettingIDs[i]).value;
+        setup_value.push(set_value);
+    }
+}
+
+/**
+ * Function used to set the total time. It is used in any every of the set up page that changes task list or timer
+ */
+function calculateTotalTime(){
+    totaltime = 0;
+    totalpomo = 0;
+    for (let i = 0; i < tasklist.length; i ++){
+        if (tasklist[i][0] != ""){
+            // gets total time for all tasks
+            totaltime += tasklist[i][1] * document.getElementById("task-right-len").value;
+            // gets total pomo for all tasks
+            totalpomo += parseInt(tasklist[i][1]);
+        }
+    }
+    if (totaltime){
+        // gets time for all long and short breaks based on number of pomos
+        let numOfLongBrk = Math.floor(totalpomo/document.getElementById("task-right-total").value);
+        totaltime += numOfLongBrk*document.getElementById("task-right-long-break").value + (totalpomo-numOfLongBrk)*document.getElementById("task-right-break-btw").value;
+
+        // sets total time span
+        document.getElementById('total').textContent = Math.floor(totaltime/60) + " hours and " + totaltime%60;
+    }
+    else{
+        document.getElementById('total').textContent = "0";
+    }
+}

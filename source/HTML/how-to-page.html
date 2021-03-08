@@ -9,11 +9,18 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
         <title>how to</title>
     <style>
+    body {
+      width: 100vw;
+    }
+
+    h1 {
+      width: 30%;
+    }
 
     .tip-div {
       background-color: rgb(255, 119, 45, 0.6);
       color: black;
-      padding: 7px 20px;
+      padding: 7px 0;
       text-align: center;
       font-size: 14px;
       margin-top: 40px;
@@ -37,6 +44,7 @@
       height: 95px;
       border: none;
       display: flex;
+      padding: 15px 0;
       align-items: center;
       justify-content: center;
     }
@@ -45,7 +53,6 @@
       width: 100%;
       border: none;
       display: flex;
-      padding: 15px;
       margin-bottom: 40px;
       justify-content: center;
     }
@@ -71,10 +78,16 @@
         left: 30%;
       }
     }
+
+    .browser-reqs {
+      text-align:center;
+      margin-left: 30px;
+      margin-right: 30px;
+      color: rgb(242, 71, 38, 0.9);
+    }
   </style>
     </head>
     <body>
-      <div>
         <h1 class="wb-page-title howtoTitle">how to</h1>
         <div id="listwrapper">
             <ol class="instructions-list">
@@ -89,7 +102,9 @@
             </ol>
         </div>
 
-      </div>
+        <div class="browser-reqs">
+          <p>*This timer was made for Chrome. Local download availabe for Windows devices only. Look forward to updates that will include Safari and Mac!</p>
+        </div>
 
         <div id="buttonwrapper">
           <a href="landing-page.html" id="to-home-page"><button class="wb-button">Home Page</button></a>

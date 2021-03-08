@@ -1,3 +1,4 @@
+
 describe ('redirect buttons', () => {
   test('redirects to landing page', () => {
     document.body.innerHTML =
