@@ -548,12 +548,8 @@ hr {
 }
 
 /* how-to-page starts here */
-body {
+.how-to-body {
   width: 100vw;
-}
-
-h1 {
-  width: 30%;
 }
 
 .tip-div {
@@ -619,7 +615,7 @@ h1 {
 }
 
 .browser-reqs {
-  text-align:center;
+  text-align: center;
   margin-left: 30px;
   margin-right: 30px;
   color: rgb(242, 71, 38, 0.9);
