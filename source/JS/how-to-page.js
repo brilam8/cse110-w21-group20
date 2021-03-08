@@ -6,3 +6,4 @@ document.getElementById("to-home-page").addEventListener('click', ()=> {
   document.getElementById("to-set-up-page").addEventListener('click', ()=> {
     window.location.href = "./setup-active-break-pages.html";
   });
+ 

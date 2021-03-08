@@ -307,4 +307,4 @@ describe('task list', () => {
     expect(uncompletedItems.firstElementChild.taskName.textContent).toEqual("eat cheese");
     expect(document.getElementsByClassName('p-body')[0].textContent).toEqual("No tasks completed");
   });
-});
+}); 

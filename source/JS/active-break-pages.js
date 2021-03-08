@@ -35,12 +35,12 @@ let pomos;
 //alert sound that plays every X mins
 let alertsound;
 let alertfrequency; // the X mins, options are every 5, 10, or 15 mins
-let alertindicator = null;
+let alertindicator = null; 
 let totalcounter = 0;
 
 /*
     function that set up timer based on user's set-up values.
-    (default timer/counter is 8, default shortbreaktime = 5, default longbreaktime = 10)
+    As default (timer/counter is 8, default shortbreaktime = 5, default longbreaktime = 10) for testing
 */
 function set_time(){   
     if(setup_value[0]==''){
@@ -66,19 +66,13 @@ function set_time(){
     }
 }
 
-/**
- *  Variables to keep track of tasks:
- *  store how many pomos you spend on a task
- *  During break page, check off tasks is stored completetask
- *  After break page, checked off task is moved to actualpomo
- */
-let actualpomo = {};
-let pomocount = 0;
-let currTask;
-let completedtask = [];
 
-//warning variable, bool for warning prompt when clicking on abort, second click will abort pomo
-let abortClicked = false;
+// Variables to keep track of tasks:
+let actualpomo = {}; //store how many pomos you spend on a task
+let pomocount = 0; 
+let currTask;
+let completedtask = []; // During break page, check off tasks is stored in completetask and after break page, checked off task is moved to actualpomo
+
 
 
 
@@ -88,13 +82,9 @@ let abortClicked = false;
  *  end the timer and redirect to results page
  */
 activebutton.addEventListener('click', ()=>{
-    if (abortClicked) {
+    if (confirm("Abort will end all pomo sessions, click ok if you want to continue")) {
         actualpomo[currTask] = pomocount;
         abortTimer();
-    }
-    else {
-        alert("Abort will end all pomo sessions, click again if you want to continue");
-        abortClicked = true;
     }
 });
 
@@ -105,17 +95,13 @@ activebutton.addEventListener('click', ()=>{
  *  local storage, and redirect to results page
  */
 breakbutton.addEventListener('click', ()=>{
-    if (abortClicked) {
+    if (confirm("Abort will end all pomo sessions, click ok if you want to continue")) {
         actualpomo[currTask] = pomocount;
         if (completed.includes(tasklist[0][0])){
             tasklist.splice(0, 1);
             currTask = tasklist[0] ? tasklist[0][0] : false;
         }
         abortTimer();
-    }
-    else {
-        alert("Abort will end all pomo sessions, click again if you want to continue");
-        abortClicked = true;
     }
 });
 
@@ -125,39 +111,53 @@ breakbutton.addEventListener('click', ()=>{
  *  Sets timer to count down in active and break page
  *  Once timer reaches zero, either redirect to active or break page if there are still tasks left or
  *  if there is no more tasks, redirect to results page
+ *  @param {string} page - current page of user
  */
 function startTimer(page){
+    // gets current task
     let task = tasklist[0] ? tasklist[0][0] : false;
     if (page == "break") {
-        pomocount++;
+        pomocount++; //as user enters break page, increment pomo count of current task
     }
     else {
-        if (completedtask.length){
+        if (completedtask.length){ // as user enters active page, reset pomo count if task was checked off from break page
             for (const task of completedtask){ actualpomo[task] = pomocount/completedtask.length; }
             pomocount = 0;
             completedtask = [];
         }
-        currTask = task;
+        currTask = task; //update new current task if task was checked off from break page
     }
-    if (pomos == 0){
+    if (pomos == 0){ // if user runs out of time, end session
         currTask ? actualpomo[currTask] = pomocount : false;
         abortTimer();
     }
-    page == "active" && task ? document.getElementById("first-task").textContent = "Task: " + task : task ? false : abortTimer();
+
+    // updates current task displayed on active page or if user runs of tasks, end sesson
+    page == "active" && task ? document.getElementById("first-task").textContent = "Task: " + task : task ? false : abortTimer(); 
+
+    //plays sound as user enters different page
     click.play();
+
+    //refreshes page and variables for pages
     reset(page);
+
+    //sets start timer
     updateCounter(page);
-    setAlert(page);
+
+    //sets alert settings
+    setAlert();
+
+    //timer
     state = setInterval(()=>{
-        totalcounter++;
-        counter -= 1;
-        counter == 0 ? redirectToPage(page) : (counter < 6 ? tick.play() : false);
-        if (alertsound) (totalcounter%(alertfrequency*60)) == 0 ? beep.play() : false;
-        if (page == "active"){
+        totalcounter++; //counter used for alert settings
+        counter -= 1; //decrement timer
+        counter == 0 ? redirectToPage(page) : (counter < 6 ? tick.play() : false); // redirects pages when timer hits 0 and plays ticks last 5 secs
+        if (alertsound) (totalcounter%(alertfrequency*60)) == 0 ? beep.play() : false; // alert user every (5, 10, or 15) mins
+        if (page == "active"){ //updates progress bar and timer as timer decrements on active page
             activebar.style.width = ((barwidth*counter)/activetime).toString() + "px";
             updateCounter("active");
         }
-        else {
+        else { //updates progress bar and timer as timer decrements on break page
             breakbar.style.width = breaktitle.textContent == "Long Break" ? ((barwidth*counter)/longbreaktime).toString() + "px" : ((barwidth*counter)/shortbreaktime).toString() + "px";
             updateCounter("break");
         }
@@ -168,12 +168,14 @@ function startTimer(page){
  *  Function used in startTimer to redirect to active or break page. If came from active page
  *  hide active page and transition to break page. Else if came from break page hide break page,
  *  remove all tasks that are checked off from task list, and transition to active page.
+ *  @param {string} curPage - current page of user to know which page to switch to
  */
 function redirectToPage(curPage){
     clearInterval(state);
     beep.play();
     setTimeout(function(){ 
         if (curPage == "active"){
+            // if user is on active page, redirect to break page
             document.getElementById("active-page").style.display = "none";
             document.getElementById("break-page").style.display = "inline";
             document.getElementById("to-break-page").click();
@@ -181,9 +183,12 @@ function redirectToPage(curPage){
             
         }
         else if (curPage == "break"){
+            // if user is on break page, redirect to active page with updated task
             if (completed.includes(tasklist[0][0])){
+                // if user checked off a task on break page, update tasklist variable and break page
                 let task = document.getElementById('break-task-container').children[1];
                 if (task) {
+                    //updates break page tasks
                     document.getElementById('break-task-container').children[1].remove();
                     let completed = document.createElement("task-component");
                     completed.setAttribute('left-pointer-event', "none");
@@ -208,6 +213,7 @@ function redirectToPage(curPage){
                     }
                 }
             }
+            //decrements amount of pomos remaining, when hits 0, end session
             pomos--;
             document.getElementById("active-page").style.display = "inline";
             document.getElementById("break-page").style.display = "none";
@@ -220,6 +226,7 @@ function redirectToPage(curPage){
 
 /**
  *  Used in startTimer to display timer countdown on html title and timer p element.
+ *  @param {string} page - current page of user
  */
 function updateCounter(page){
     let mins = Math.floor(counter / 60);
@@ -238,7 +245,8 @@ function updateCounter(page){
 
 /**
  *  Function used in startTimer to reset timer variables, 
- *  warning variable and progress bar.
+ *  warning variable, and progress bar.
+ *  @param {string} page - current page of user
  */
 function reset(page){
     if (!pomos) pomos = totalpomo;
@@ -257,7 +265,6 @@ function reset(page){
         }
     }
     alertindicator = null;
-    abortClicked = false;
     activebar.style.width = "600px";
     breakbar.style.width = "600px";
 }
@@ -271,6 +278,7 @@ function abortTimer(){
     clearInterval(state);
     beep.play();
     let output = [];
+    // sets the JSON data to save to local storage for results page
     for (let i = 0; i < copytasklist.length; i++){
         let objTask = {};
         objTask.id = i;
@@ -288,9 +296,10 @@ function abortTimer(){
     
 }
 
-function setAlert(page){
+/**
+ * Function used in startTimer() as user enters active page to set alert sounds that is played every (5, 10, or 15) mins 
+ */
+function setAlert(){
     alertsound = document.getElementById("alert-right-container").style.display == "inline" ? true : false;
     alertfrequency = document.getElementById("alert-frequency").value; // the X mins, options are every 5, 10, or 15 mins
-    // if (alertindicator == null && page == "active") alertindicator = activetime % (alertfrequency*60);
-    // else if (alertindicator == null && page == "break") alertindicator = breaktitle.textContent == "Short Break" ? shortbreaktime % (alertfrequency*60) : longbreaktime % (alertfrequency*60);
 }
