@@ -27,6 +27,8 @@
   },
   "dependencies": {
     "http-server": "^0.12.3",
-    "jsdoc-template": "git+https://github.com/braintree/jsdoc-template.git"
+    "jsdoc-baseline": "https://github.com/hegemonic/baseline/tarball/master",
+    "jsdoc-template": "git+https://github.com/braintree/jsdoc-template.git",
+    "tui-jsdoc-template": "^1.2.2"
   }
 }
