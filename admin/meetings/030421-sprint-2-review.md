@@ -33,3 +33,5 @@ Jiahong: Reviewed PR and kept up with relevant issues regarding page under my ow
 Tommy: Worked on style for most pages, electron app, and integrated cypress within pipeline.
 
 Zongchen: did the cypress testing for the pomo-setting opitions and timer/task-lists/checkboxes in break-page.
+
+Brian: Revamped the results page to make it more graphically pleasing. Made Cypress tests for results page, polished up results page CSS and styling. 
