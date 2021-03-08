@@ -1,55 +1,52 @@
-/* CSS FOR ALL PAGE SIMILAR PIECES */
-
 /* Consistent Titles */
 header {
   font-family: 'Oswald', sans-serif;
   font-size: 40px;
   font-weight: bold;
   color: rgb(242, 71, 38, 0.9);
-  padding: 25px 10%;
+  padding: 60px 10%;
+  display: inline-block;
+  width: 85%;
 }
 .logo {color: white; font-size: 60px;}
 
+header > a {
+  float: right;
+}
 
 /* Consistent Buttons */
-.wb-button {
-  background-color: rgb(242, 71, 38, 0.9);
-  text-align: center;
-  font-size: 16px;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
+button {
+  height: 45px;
+  width: 150px;
+  margin: 10px 50px;
   color: white;
-  font-family: 'Lato', sans-serif;
-  width: 8em;
-}
-
-.wb-button:hover {
-  border: 2px solid grey;
-  background-color: rgba(242, 71, 38, 0.7);
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-
-.ob-button {
-  background-color: rgb(255, 255, 255, 80%);
-  font-family: "Open Sans", sans-serif;
+  background-color: rgb(242, 71, 38, 0.9);
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-family: 'Oswald', sans-serif;
   font-size: 20px;
   font-weight: bold;
-  color: #f24726;
-  border-style: none;
-  border-radius: 8px;
-  width: 175px;
+}
+.ob-button {
+  background-color: rgb(255, 255, 255, 80%);
+  color: #f24726; 
+  width: 375px;
   height: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
 }
 
-.ob-button:hover {
-  border: 2px solid grey;
-  background-color: rgba(235, 235, 235, 0.8);
+button:hover {
+  background-color: rgba(242, 71, 38, 0.7);
+  outline: none;
   cursor: pointer;
-  transition: background-color 0.5s ease;
+}
+.ob-button:hover {
+  background-color: rgba(235, 235, 235, 0.8);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
 }
 
 /* Consistent Tables */
@@ -59,7 +56,7 @@ header {
   height: 200px;
   margin-left: 200px;
 }
-
+ 
 .wb-table th {
   background-color: #e6e6e6;
 }
@@ -75,11 +72,6 @@ header {
 
 .wb-table td {
   padding: 15px;
-}
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  opacity: 1;
 }
 
 /* END OF ALL PAGE PIECES */
@@ -112,23 +104,6 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.button {
-  background-color: rgba(242, 71, 38, 1);
-  border: none;
-  color: white;
-  height: 50px;
-  width: 250px;
-  border-radius: 10px;
-  outline: none;
-  cursor: pointer;
-  font-size: larger;
-  transition: all 0.3s ease-in;
-}
-
-.button:hover {
-  background-color: rgba(242, 71, 38, 0.7);
 }
 
 audio {
@@ -220,27 +195,6 @@ h3 {
   padding-left: 50px;
   padding-right: 50px;
   margin: 25px;
-}
-
-.button-gray-back {
-  background-color: rgb(255, 255, 255, 80%);
-  font-family: "Open Sans", sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  color: #f24726;
-  border-style: none;
-  border-radius: 8px;
-  width: 175px;
-  height: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.button-gray-back:hover {
-  border: 2px solid grey;
-  background-color: rgba(235, 235, 235, 0.8);
-  cursor: pointer;
-  transition: background-color 0.5s ease;
 }
 
 .results-container {
@@ -400,10 +354,7 @@ h3 {
 
 .set-up-page {
   text-align: center;
-}
-
-.set-up-page{
-  margin: 5% 0;
+  padding-bottom: 100px;
 }
 
 hr {
@@ -477,25 +428,6 @@ hr {
 
 ::placeholder {
   color: rgb(255, 81, 0);
-}
-
-.set-up-page button {
-  width: 150px;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px 30px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.cButton {
-  margin-top: 1%;
-}
-
-.bButton {
-  margin-bottom: 10%;
 }
 
 .to-how-to-page {
