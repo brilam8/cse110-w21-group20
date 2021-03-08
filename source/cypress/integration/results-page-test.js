@@ -13,7 +13,7 @@ describe('results page Tests', () => {
     });
     it(`should call Print dialog`, () => {
         let printStub;
-        cy.window().then(win => {
+        cy.window().then(win => { 
             printStub = cy.stub(win, 'print');
             cy.get('#print').click();
             cy.wasCalled(printStub);
