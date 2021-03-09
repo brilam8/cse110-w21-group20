@@ -37,3 +37,5 @@ Zongchen: did the cypress testing for the pomo-setting opitions and timer/task-l
 Brian: Revamped the results page to make it more graphically pleasing. Made Cypress tests for results page, polished up results page CSS and styling. 
 
 Iain: Adjusted some of the landing page css, added in the fun facts and the welcoming message to the landing page.
+
+Megan: Centralized and changed spacing for elements on how to page. Add browser/local download support information.
