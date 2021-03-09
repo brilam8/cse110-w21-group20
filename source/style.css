@@ -7,7 +7,10 @@ header {
   display: inline-block;
   width: 85%;
 }
-.logo {color: white; font-size: 60px;}
+
+.logo {
+  color: white; font-size: 60px;
+}
 
 header > a {
   float: right;
@@ -26,6 +29,7 @@ button {
   font-size: 20px;
   font-weight: bold;
 }
+
 .ob-button {
   background-color: rgb(255, 255, 255, 80%);
   color: #f24726; 
@@ -38,6 +42,7 @@ button:hover {
   outline: none;
   cursor: pointer;
 }
+
 .ob-button:hover {
   background-color: rgba(235, 235, 235, 0.8);
 }
@@ -77,6 +82,7 @@ body {
   font-family: 'Oswald', sans-serif;
  
 }
+
 .orange {
   background-color: rgb(242, 71, 38, 80%);
   color: white;
@@ -339,12 +345,9 @@ h3 {
   margin-bottom: 5%;
 }
 
-
 /* style for break-page ends here */
 
 /* set-up page starts here */
-
-
 
 hr {
   border: 1px solid rgb(255, 81, 0);
