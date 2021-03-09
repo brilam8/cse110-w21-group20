@@ -13,7 +13,7 @@ const barwidth = 600; //600px in style.css
 const breakbutton = document.getElementById('break-button');
 const breaktimer = document.getElementById('break-timer');
 const breakbar = document.getElementById("break-bar");
-const breaktitle = document.getElementById("break-title");
+const breaktitle = document.getElementById("pTitle");
 
 //Sounds for both active and break page
 const tick = document.getElementById('tick');
@@ -50,7 +50,7 @@ function set_time(){
         activetime = 60 * setup_value[0];
     }
     if(setup_value[1]!=''){
-        longbreakindicator = setup_value[1] - 1;
+        longbreakindicator = setup_value[1]-1;
     }
     if(setup_value[2]==''){
         shortbreaktime = 5;
@@ -217,6 +217,7 @@ function redirectToPage(curPage){
             pomos--;
             document.getElementById("active-page").style.display = "inline";
             document.getElementById("break-page").style.display = "none";
+            breaktitle.textContent = "Pomodoro Timer";
             startTimer("active");
             document.getElementById("to-active-page").click();
             
