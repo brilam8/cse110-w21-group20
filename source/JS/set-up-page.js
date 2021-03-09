@@ -291,7 +291,6 @@ document.getElementById("create").addEventListener("click", ()=>{
         button.setAttribute('class', 'deleteTask');
         button.textContent = "X";
         
-        
         let entry = document.createElement("task-component");
         ATContainer.append(entry);
     }
