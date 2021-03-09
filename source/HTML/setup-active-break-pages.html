@@ -9,20 +9,21 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 		<title>Set Up</title>
     </head>
+
     <body>
-        <a href="how-to-page.html"><button id="to-how-to-page" class="to-how-to-page button">?</button></a>
+        <header id="pTitle">Set Up
+            <a href="how-to-page.html"><button id="to-how-to-page">How To</button></a>
+        </header>
+    
         <section id="setup" class="set-up-page">
-            <header>
-                <p class="p-title">Set Up</p>
-            </header>
             <div id="active-task-container" class="flex-container">
                 <div class="task-title">
                     <div class="task-left"><b>Task List</b></div>
                     <div class="task-right"><b>Estimate &nbsp &nbsp &nbsp &nbsp</b></div>
                 </div>
-                <task-component></task-component>
+                <task-component className="prompt"></task-component>
             </div>
-            <button id="create" class="button cButton">Create</button>
+            <button id="create">Create</button>
             <hr class="orange-hr">
             <div class="flex-container">
                 <div class="task-title">
@@ -90,11 +91,10 @@
                 </div> -->
             </div>       
             <hr>
-            <p><b>Total Time: <span id="total">0</span> minutes</b></p>
-            <a href="#active-page"><button id="begin" class="button bButton">Begin</button></a>
+            <div><b>Total Time: <span id="total">0</span> minutes</b></div>
+            <a href="#active-page"><button id="begin">Begin</button></a>
         </section>
         <section id="active-page" class="active-page section-page">
-            <p class="p-title">Pomodoro Timer</p>
             <main>
                 <div class="timer-container">
                     <div id="progress-bar" class="progress-bar"></div> 
@@ -104,18 +104,18 @@
                     <p id="first-task" class="task">Sample Task 1</p>
                 </div>
                 
-                <button id="pomo-button" class="button">Abort</button>
+                <button id="pomo-button">Abort</button>
             </main>
             <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
         </section>
         <section id="break-page" class="break-page section-page">
             <p id="break-title" class="p-title">Short Break</p>
             <div class="break-timer-container">
-                <div class="timer-container">
+                <div class="timer-container"> 
                     <div id="break-bar" class="progress-bar"></div> 
                     <p class="timer" id="break-timer"></p>
                 </div>
-                <button id="break-button" class="button">Abort</button>
+                <button id="break-button">Abort</button>
             </div>
             <div id="break-task-container" class="flex-container">
                 <div class="task-title">

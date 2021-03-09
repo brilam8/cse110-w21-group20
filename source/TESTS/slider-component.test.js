@@ -145,5 +145,5 @@ describe('dark mode component', () => {
 
 test('creating undefined slider component', () => {
     document.body.innerHTML = `<slider-component></slider-component>`;
-    expect(document.body.innerHTML).toContain('Setting Undefined');
+    expect(document.body.innerHTML).toContain('Setting Undefined'); 
 })
