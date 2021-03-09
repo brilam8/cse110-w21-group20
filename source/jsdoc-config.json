@@ -1,0 +1,25 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc"]
+    },
+    "source": {
+        "include": ["JS", "package.json"],
+        "includePattern": ".js$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "referenceTitle": "WePomo's Pomo Timer",
+        "disableSort": false,
+        "collapse": true
+    },
+    "opts": {
+        "destination": "./out/",
+        "encoding": "utf8",
+        "private": true,
+        "recurse": true
+    }
+}
