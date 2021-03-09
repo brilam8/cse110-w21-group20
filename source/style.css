@@ -9,7 +9,8 @@ header {
 }
 
 .logo {
-  color: white; font-size: 60px;
+  color: white; 
+  font-size: 60px;
 }
 
 header > a {
@@ -32,7 +33,7 @@ button {
 
 .ob-button {
   background-color: rgb(255, 255, 255, 80%);
-  color: #f24726; 
+  color: #f24726;
   width: 375px;
   height: 50px;
 }
@@ -59,7 +60,7 @@ input[type=number]::-webkit-outer-spin-button {
   height: 200px;
   margin-left: 200px;
 }
- 
+
 .wb-table th {
   background-color: #e6e6e6;
 }
@@ -80,7 +81,6 @@ input[type=number]::-webkit-outer-spin-button {
 /* END OF ALL PAGE PIECES */
 body {
   font-family: 'Oswald', sans-serif;
- 
 }
 
 .orange {
