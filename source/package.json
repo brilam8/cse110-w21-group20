@@ -2,9 +2,9 @@
   "name": "source",
   "version": "1.0.0",
   "description": "TBD",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --collect-coverage",
     "jsdoc-generation": "jsdoc ./JS -r"
   },
   "repository": {

@@ -2,6 +2,11 @@ if (!window.localStorage.getItem('slider-clicked')){
   window.localStorage.setItem('slider-clicked', JSON.stringify({}));
 }
 
+document.getElementById("alert-frequency").addEventListener('change', ()=>{
+  document.getElementById("alert-number").textContent = document.getElementById("alert-frequency").value;
+});
+
+
 // component to create slider. Used for dark mode setting
 class SliderComponent extends HTMLElement {
     constructor(){
@@ -10,7 +15,7 @@ class SliderComponent extends HTMLElement {
         const container = document.createElement('div');
         
         const button = container.appendChild(document.createElement('button'));
-        button.setAttribute('class','setting-slider');
+        button.setAttribute('class','setting-slider'); 
         button.id =  this.hasAttribute('button-id') ? this.getAttribute('button-id') : "default-id";
 
         const slider = button.appendChild(document.createElement('div'));
@@ -98,7 +103,3 @@ class SliderComponent extends HTMLElement {
 }
 
 customElements.define('slider-component', SliderComponent);
-
-document.getElementById("alert-frequency").addEventListener('change', ()=>{
-  document.getElementById("alert-number").textContent = document.getElementById("alert-frequency").value;
-});
