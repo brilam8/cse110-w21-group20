@@ -16,6 +16,10 @@ jobs:
     - uses: actions/checkout@v2
     - run: npm ci
     - run: npm run test
+    - uses: romeovs/lcov-reporter-action@v0.2.16
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        lcov-file: ./source/coverage/lcov.info
   Cypress:
     runs-on: ubuntu-latest
     steps:

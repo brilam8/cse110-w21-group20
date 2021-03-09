@@ -1,4 +1,7 @@
 
+const how = require('../JS/how-to-page');
+global.window = { location: { pathname: null } };
+
 describe ('redirect buttons', () => {
   test('redirects to landing page', () => {
     document.body.innerHTML =
@@ -8,8 +11,12 @@ describe ('redirect buttons', () => {
     </a>
 
     `
-    const homeButton = document.getElementById("to-home-page");
-    expect(homeButton.getAttribute('href')).toEqual('landing-page.html');
+    delete window.location;
+    window.location = { href: jest.fn() }
+
+    const mock = jest.fn(how.toLanding);
+    mock();
+    expect(window.location.href).toEqual('./landing-page.html');
   });
 
   test('redirects to set-up page', () => {
@@ -20,8 +27,12 @@ describe ('redirect buttons', () => {
     </a>
 
     `
-    const setupButton = document.getElementById("to-set-up-page");
-    expect(setupButton.getAttribute('href')).toEqual('setup-active-break-pages.html');
+    delete window.location;
+    window.location = { href: jest.fn() }
+
+    const mock = jest.fn(how.toSetUp);
+    mock();
+    expect(window.location.href).toEqual('./setup-active-break-pages.html');
   });
 });
 
