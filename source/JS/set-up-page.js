@@ -95,13 +95,12 @@ class TaskComponent extends HTMLElement {
         }
         .task-left {
             float: left;
-            margin-top: 7px;
+            margin-top: 8px;
             margin-left: 20px;
             text-align: left;
             height: 30px;
             width: 50%;
             border: none;
-            outline: none;
             color: rgb(255, 81, 0);
             font-size: 20px;
         }
@@ -119,7 +118,7 @@ class TaskComponent extends HTMLElement {
             float: right;
             margin-top: 3px;
             padding-right: 10px;
-            text-align:center;
+            text-align: center;
             height: 30px;
             border: none;
             color: rgb(255, 81, 0);
@@ -166,13 +165,7 @@ class TaskComponent extends HTMLElement {
         ::placeholder {
             font-size: 20px;
             color: rgb(255, 81, 0);
-        }
-        
-        @media only screen and (max-width: 600px) {
-            .task-left {
-                width: 30%;
-            }
-        }          
+        }       
         `;
 
         this.shadowRoot.append(style, container);

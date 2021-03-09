@@ -435,7 +435,7 @@ hr {
   transition: all 0.15s ease-in;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   .task-title > .task-left {
     width: 50%;
   }
