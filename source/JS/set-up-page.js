@@ -10,10 +10,45 @@ var totalpomo = 0;
 let totaltime = 0;
 let timersettingIDs=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
 
-// resets tasks list in localstorage every time user enters set-up page
-window.localStorage.removeItem('tasks');
-window.localStorage.removeItem('set-up');
+window.addEventListener('DOMContentLoaded', () => {
+    // resets tasks list in localstorage every time user enters set-up page
+    window.localStorage.removeItem('tasks');
+    window.localStorage.removeItem('set-up');
 
+    /**
+     * Clicking the begin button create render all the task-components in the break-page,
+     * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
+     */
+    document.getElementById("begin").addEventListener("click", ()=>{
+        exitSetUp();
+    });
+
+    /**
+     * Clicking the create button will create a task-component on the set-up page. 
+     * It will only allow 6 task-components.
+     */
+    document.getElementById("create").addEventListener("click", ()=>{
+        createTask();
+    });
+
+    /** 
+     * Updates span for 'long break on every 4th pomo' setting
+     */ 
+    document.getElementById('task-right-total').addEventListener('change', ()=>{
+        let value = document.getElementById('task-right-total').value;
+        document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
+        calculateTotalTime();
+    });
+
+    /**
+     * Everytime input for timer settings is changed, update the totaltime
+     */
+    timersettingIDs.forEach(ele =>{
+        document.getElementById(ele).addEventListener('change', ()=>{
+            calculateTotalTime();
+        });
+    });
+});
 /**
  * Component used to create tasks in set-up page and break page.
  * Allows you to manipulate the tasks by deleting, creating and editting tasks
@@ -58,19 +93,15 @@ class TaskComponent extends HTMLElement {
 
         left.addEventListener('input', ()=>{
             if (right.type == "number"){ //only in set up
-                //replaces task
-                let pomo = right.value ? right.value : 1;
-                tasklist[this.index] = [left.value, pomo];
-                calculateTotalTime();
+                updateTaskList(this.index, left.value, right.value);
             }
         });
         right.addEventListener('input', ()=>{
             if (right.type == "number"){ //only in set up
-                tasklist[this.index] = [left.value ? left.value : "", right.value ? right.value : 1]; //replaces pomo
-                calculateTotalTime();
+                updateTaskList(this.index, left.value, right.value);
             }
             else{
-                 //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
+                //only in break-page. If checkbox checked, then move checked task to completed, if unchecked, keep in tasklist
                 if (!completed.includes(left.value)) completed.push(left.value);
                 else completed.splice(completed.indexOf(left.value), 1);
             }
@@ -78,7 +109,6 @@ class TaskComponent extends HTMLElement {
 
         deleteButton.addEventListener('click', ()=>{
             deleteComponent(this.index);
-            calculateTotalTime();
         });
     
         const style = document.createElement('style');
@@ -95,7 +125,7 @@ class TaskComponent extends HTMLElement {
         }
         .task-left {
             float: left;
-            margin-top: 8px;
+            margin-top: 7px;
             margin-left: 20px;
             text-align: left;
             height: 30px;
@@ -188,7 +218,7 @@ class TaskComponent extends HTMLElement {
         }
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
-            this.right.style.transform = "translate(-59px, 3px)";
+            this.right.style.transform = "translate(-74px, 3px)";
         }
         else if (name == 'index'){
             this.index -= 1;
@@ -196,7 +226,7 @@ class TaskComponent extends HTMLElement {
         else if (name == "set-right-input"){
             this.right.style.display = "none";
             this.rightsuffix.textContent = parseInt(newValue) + " pomo";
-            this.rightsuffix.style.transform = "translateX(-43%)";
+            this.rightsuffix.style.transform = "translateX(-60%)";
         }
         else if (name == "remove-right-suffix"){
             this.rightsuffix.style.display = newValue;
@@ -206,12 +236,90 @@ class TaskComponent extends HTMLElement {
 
 customElements.define('task-component', TaskComponent);
 
-/**
- * Clicking the begin button create render all the task-components in the break-page,
- * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
- */
-document.getElementById("begin").addEventListener("click", ()=>{
 
+/**
+ * Function used in TaskComponent to delete the component 
+ * if user clicks the X button next to task on set-up page.
+ */
+function deleteComponent(index){
+    for (let i = index; i < tasklist.length; i++){
+        document.getElementById("active-task-container").children[i+1].setAttribute('index', i);
+    }
+    tasklist.splice(index, 1); //removes task from tasklist 
+    document.getElementById("active-task-container").children[index+1].remove(); //removes task component
+    calculateTotalTime();
+}
+
+
+/**
+ * Function sets the timer settings for active and break pages
+ */
+function setup_localStore(){
+    for(let i=0;i<4;i++){
+        let set_value=document.getElementById(timersettingIDs[i]).value;
+        setup_value.push(set_value);
+    }
+}
+
+/**
+ * Function used to set the total time. It is used in any every of the set up page that changes task list or timer
+ */
+function calculateTotalTime(){
+    totaltime = 0;
+    totalpomo = 0;
+    for (let i = 0; i < tasklist.length; i ++){
+        if (tasklist[i][0] != ""){
+            // gets total time for all tasks
+            totaltime += tasklist[i][1] * document.getElementById("task-right-len").value;
+            // gets total pomo for all tasks
+            totalpomo += parseInt(tasklist[i][1]);
+        }
+    }
+    if (totaltime){
+        // gets time for all long and short breaks based on number of pomos
+        let numOfLongBrk = Math.floor(totalpomo/document.getElementById("task-right-total").value);
+        totaltime += numOfLongBrk*document.getElementById("task-right-long-break").value + (totalpomo-numOfLongBrk)*document.getElementById("task-right-break-btw").value;
+
+        // sets total time span
+        document.getElementById('total').textContent = Math.floor(totaltime/60) + " hours and " + totaltime%60;
+    }
+    else{
+        document.getElementById('total').textContent = "0";
+    }
+}
+
+/**
+ * Function used in Create button click event. It will create a new task if task input is filled. 
+ * There is also a only a maximum of 6 task
+ */
+function createTask(){
+    let ATContainer = document.getElementById("active-task-container");
+    let ATCLength = ATContainer.children.length;
+    let container = ATContainer.children[ATCLength-1].shadowRoot.children[1];
+    let input = container.children[0];
+    
+    if (ATCLength<=6 && input.value.length!=0){
+        let input = container.children[0];
+        input.style.pointerEvents = "none";
+        
+        let wheel = container.children[1].children[2];
+        wheel.type = "text";
+        wheel.style.pointerEvents = "none";
+        
+        let button = container.children[1].children[0];
+        button.setAttribute('class', 'deleteTask');
+        button.textContent = "X";
+        
+        let entry = document.createElement("task-component");
+        ATContainer.append(entry);
+    }
+}
+
+/**
+ * Function used in Begin button click event. It will start the pomo session once a user has entered atleast 1 task
+ * It will redirect to active page.
+ */
+function exitSetUp(){
     let notempty = tasklist.filter(task => task[0] != "");
     if (tasklist.length && notempty.length){ //checks if tasklist is empty
         let dups = {};
@@ -258,101 +366,35 @@ document.getElementById("begin").addEventListener("click", ()=>{
     else{
         alert("Please add a task before beginning Pomo Session");
     }
+}
 
-
-});
 
 /**
- * Clicking the create button will create a task-component on the set-up page. 
- * It will only allow 6 task-components.
+ * Function used for jest testing to set task description
+ * @param {int} i = task index in container
+ * @param {string} name = descroption of task
  */
-document.getElementById("create").addEventListener("click", ()=>{
-    let ATContainer = document.getElementById("active-task-container");
-    let ATCLength = ATContainer.children.length;
-    let container = ATContainer.children[ATCLength-1].shadowRoot.children[1];
-    let input = container.children[0];
-    
-    if (ATCLength<=6 && input.value.length!=0){
-        let input = container.children[0];
-        input.style.pointerEvents = "none";
-        
-        let wheel = container.children[1].children[2];
-        wheel.type = "text";
-        wheel.style.pointerEvents = "none";
-        
-        let button = container.children[1].children[0];
-        button.setAttribute('class', 'deleteTask');
-        button.textContent = "X";
-        
-        let entry = document.createElement("task-component");
-        ATContainer.append(entry);
-    }
-});
+function setTaskName(i, name){
+    document.getElementById("active-task-container").children[i+1].setAttribute('left-task', name);
+}
 
-/** 
- * Updates span for 'long break on every 4th pomo' setting
- */ 
-document.getElementById('task-right-total').addEventListener('change', ()=>{
-    let value = document.getElementById('task-right-total').value;
-    document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
+/**
+ * Functuon used in task-component to update tasklist 
+ * as user changes task description and pomo count
+ * @param {int} index = task in tasklist
+ * @param {string} left = new task description
+ * @param {int} right = new pomo count
+ */
+function updateTaskList(index, left, right){
+    tasklist[index] = [left ? left : "", right ? right : 1]; //replaces pomo
     calculateTotalTime();
-});
-
-/**
- * Everytime input for timer settings is changed, update the totaltime
- */
-timersettingIDs.forEach(ele =>{
-    document.getElementById(ele).addEventListener('change', ()=>{
-        calculateTotalTime();
-    });
-});
-
-/**
- * Function used in TaskComponent to delete the component 
- * if user clicks the X button next to task on set-up page.
- */
-function deleteComponent(index){
-    for (let i = index; i < tasklist.length; i++){
-        document.getElementById("active-task-container").children[i+1].setAttribute('index', i);
-    }
-    tasklist.splice(index, 1); //removes task from tasklist 
-    document.getElementById("active-task-container").children[index+1].remove(); //removes task component
 }
 
 
-/**
- * Function sets the timer settings for active and break pages
- */
-function setup_localStore(){
-    for(let i=0;i<4;i++){
-        let set_value=document.getElementById(timersettingIDs[i]).value;
-        setup_value.push(set_value);
-    }
-}
-
-/**
- * Function used to set the total time. It is used in any every of the set up page that changes task list or timer
- */
-function calculateTotalTime(){
-    totaltime = 0;
-    totalpomo = 0;
-    for (let i = 0; i < tasklist.length; i ++){
-        if (tasklist[i][0] != ""){
-            // gets total time for all tasks
-            totaltime += tasklist[i][1] * document.getElementById("task-right-len").value;
-            // gets total pomo for all tasks
-            totalpomo += parseInt(tasklist[i][1]);
-        }
-    }
-    if (totaltime){
-        // gets time for all long and short breaks based on number of pomos
-        let numOfLongBrk = Math.floor(totalpomo/document.getElementById("task-right-total").value);
-        totaltime += numOfLongBrk*document.getElementById("task-right-long-break").value + (totalpomo-numOfLongBrk)*document.getElementById("task-right-break-btw").value;
-
-        // sets total time span
-        document.getElementById('total').textContent = Math.floor(totaltime/60) + " hours and " + totaltime%60;
-    }
-    else{
-        document.getElementById('total').textContent = "0";
-    }
-}
+exports.deleteComponent = deleteComponent;
+exports.setup_localStore = setup_localStore;
+exports.calculateTotalTime = calculateTotalTime;
+exports.createTask = createTask;
+exports.exitSetUp = exitSetUp;
+exports.setTaskName = setTaskName;
+exports.updateTaskList = updateTaskList;
