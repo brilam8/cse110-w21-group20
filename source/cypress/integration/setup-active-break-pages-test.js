@@ -48,7 +48,7 @@ describe('setup Tests', () => {
         cy.get('#active-task-container').children().shadow().find('input[type=number]').invoke("val", 2).trigger('change');
         cy.get('#active-task-container').children().shadow().find('input[type=number]').should('contain.value', 2);
     });
-
+  
     it('Active and Break page should have display as none as Default', () => {
         cy.get('#active-page').should('have.css', 'display', 'none');
         cy.get('#break-page').should('have.css', 'display', 'none');
@@ -294,4 +294,127 @@ describe('break Tests', () => {
 
 
     // WILL ADD MORE TESTS FOR TASK LIST
+});
+
+
+
+
+
+describe('Pomo-Setting Tests', () => {
+    beforeEach(() => {
+        cy.clock(); //sets up clock for cypress
+        cy.visit('http://127.0.0.1:5500/HTML/setup-active-break-pages.html'); 
+    });
+
+    it('When set pomo-lenth to 20/25/30/35 minutes in pomo-setting, the corresponding timers in active page updated.', () => {
+        let arr = [20,25,30,35]
+        var loop = Array.from({length:4},(v,k)=>k+1)
+        cy.wrap(loop).each((index)=>{
+            cy.get('#create').click();
+            cy.get('#active-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').invoke("val", "task 1").trigger('input');
+            cy.get('#task-right-len').invoke("val", arr[index-1]).trigger('input');
+            cy.get('#begin').click();
+
+            cy.get('#timer').then(($el) =>{
+                expect($el).to.have.prop('innerHTML',arr[index-1]+":00");
+            });
+            cy.visit('http://127.0.0.1:5500/HTML/setup-active-break-pages.html'); 
+           
+        })
+    });
+
+
+    it('When set short-break timer to 5/6/7/8/9/10 minutes in pomo-setting, the corresponding timers in break page updated.', () => {
+        let arr = [5,6,7,8,9,10]
+        var loop = Array.from({length:6},(v,k)=>k+1)
+        cy.wrap(loop).each((index)=>{
+            cy.get('#create').click();
+            cy.get('#active-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').invoke("val", "task 1").trigger('input');
+            cy.get('#task-right-break-btw').invoke("val", arr[index-1]).trigger('input');
+            cy.get('#begin').click();
+            cy.tick(1000*60*25);
+            cy.tick(1000);
+            cy.get('#break-timer').then(($el) =>{
+                if(arr[index-1]==10){
+                    expect($el).to.have.prop('innerHTML',arr[index-1]+":00");
+                }else{
+                    expect($el).to.have.prop('innerHTML',"0"+arr[index-1]+":00");
+                }
+            });
+
+            cy.visit('http://127.0.0.1:5500/HTML/setup-active-break-pages.html'); 
+           
+        })
+    });
+
+    it('When set long-break timer to 15/20/25/30 minutes in pomo-setting, the corresponding timers in break page updated.', () => {
+        let arr = [15,20,25,30]
+        var loop = Array.from({length:4},(v,k)=>k+1)
+        
+        cy.wrap(loop).each((index)=>{
+            let set = [2,3,4,5,6,7]
+            for(let i=0;i<5;i++){
+                cy.get('#create').click();
+                cy.get('#active-task-container').find('task-component:nth-child('+set[i]+')').shadow().find('input[type=text]').invoke("val", "task "+set[i]).trigger('input');
+            }
+            cy.get('#task-right-long-break').invoke("val", arr[index-1]).trigger('input');
+            cy.get('#begin').click();
+            cy.tick(1000*60*(25*4+5*3));
+            cy.tick(4000)
+            cy.get('#break-timer').then(($el) =>{
+                    expect($el).to.have.prop('innerHTML',arr[index-1]+":00");
+                });
+            cy.visit('http://127.0.0.1:5500/HTML/setup-active-break-pages.html'); 
+           
+        })
+    });
+
+    
+    it('When set long break on every 4th/5th in pomo-setting, the break timer will function in each case.', () => {
+        let arr = [4,5]
+        var loop = Array.from({length:2},(v,k)=>k+1)
+        
+        cy.wrap(loop).each((index)=>{
+           
+            let set = [2,3,4,5,6,7]
+            for(let i=0;i<5;i++){
+                cy.get('#create').click();
+                cy.get('#active-task-container').find('task-component:nth-child('+set[i]+')').shadow().find('input[type=text]').invoke("val", "task "+set[i]).trigger('input');
+            }
+
+            cy.get('#task-right-total').invoke("val", arr[index-1]).trigger('input');
+            cy.get('#begin').click();
+
+            cy.tick(1000*60*(25*arr[index-1]+5*(arr[index-1]-1)));
+            cy.tick(1000*arr[index-1])
+
+            cy.get('#break-timer').then(($el) =>{
+                    expect($el).to.have.prop('innerHTML',"20:00");
+                });
+
+            cy.visit('http://127.0.0.1:5500/HTML/setup-active-break-pages.html'); 
+           
+        })
+    });
+
+    it('When check off one task from current task container, it goes to the completed task container', () => {
+        
+            let set = [2,3,4,5]
+            for(let i=0;i<4;i++){
+                cy.get('#create').click();
+                cy.get('#active-task-container').find('task-component:nth-child('+set[i]+')').shadow().find('input[type=text]').invoke("val", "task "+set[i]).trigger('input');
+            }
+            cy.get('#begin').click();
+            var loop = Array.from({length:3},(v,k)=>k+1)
+            cy.wrap(loop).each((index)=>{
+                cy.tick(1000*60*26)
+                cy.tick(1000)
+                cy.get('#break-task-container').find('task-component:nth-child(2)').shadow().find('input[type=checkbox]').click();
+                cy.tick(1000*60*5)
+                cy.get('#completed-task-container').find('task-component:nth-child('+set[index-1]+')').then($el =>{
+                    console.log($el);
+                    expect($el).to.have.attr('left-task',"task "+set[index-1]);
+                 });
+    })
+    });
 });
