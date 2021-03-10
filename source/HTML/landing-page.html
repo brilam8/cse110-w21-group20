@@ -7,80 +7,55 @@
         <link rel="stylesheet" type="text/css" href="../style.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+        <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
         <title>Landing Page</title> 
+    </head>
     <style>
-        body
-        {
+        body {
+            background-color: rgb(242, 71, 38, 80%) ! important;
+        }
+        .ob-page-title{
+            position: relative;
+            font-size: 60px;
+            margin-top: 5%;
+            width: 50vw;
+        }
+        body > main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 40vh;
+        }
+        .ob-button {
+            width: 350px;
+            margin: 10px 0;
+        }
+        #fun-facts {
             color: white;
-        }
-        .page-title
-        {
-            color: rgb(255, 119, 45);
-            position: absolute;
-            top: 10%;
-            left: 20%;
-        }
-        .fun-facts
-        {
-            color:rgb(255, 119, 45);
-            position: absolute;
-            font-size: 12px;
             text-align: center;
-            top: 50%;
-        }
-        .landing-buttons
-        {
-            background-color: rgb(255, 119, 45);
-            text-align: center;
-            font-size:16px;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 12px;
-            color: white;
-            font-family: 'Lato', sans-serif;
             margin-top: 10px;
-            margin-left: 280px;
+            max-width: 320px;
+            height: 80px;
         }
-        .landing-buttons:hover
-        {
-            background-color: rgb(255, 119, 45, .3);
-            cursor: pointer;
-        }
-        #to-settings
-        {
-            position: absolute;
-            top: 10%;
-            right: 15%;
-        }
-        #to-set-up
-        {
-            width: 40%;
-            position: absolute;
-            top: 30%;
-            left: 15%;
-        }
-        #to-how-to
-        {
-            width: 40%;
-            position: absolute;
-            top: 40%;
-            left: 15%;
+        @media only screen and (max-height: 250px) {
+            .ob-page-title{
+                visibility: hidden;
+            }
         }
     </style>
-    </head>
-    
     <body class="landing-page" id="landing">
-        <h1 class="page-title">Welcome to wepomo</h1>
-
-        <!--Prob will replace text with image of a cog wheel-->
-        <button id="to-settings" class="landing-buttons">Settings Page</button>
+        <!--Probably gonna input logo of some sort/different font-->
+        <p class="ob-page-title">wepomo</p>
         
-        <button id="to-set-up" class="landing-buttons">Start</button>
+        <main>
+            <p class="p-body">Good luck on your work today!</p>
+            <button id="to-set-up" class="ob-button">Start</button>
+            <button id="to-how-to" class="ob-button">How To</button>
+            <div id="fun-facts">Fun Fact: Pomodoro is Tomato in Italian!</div>
+            <a href="../wepomo-win32-x64.zip" style="color: #fff; position: fixed; transform: translateY(300px); text-align: center;" download>download wepomo</a>
+        </main>
         
-        <button id="to-how-to" class="landing-buttons">How To</button>
-
-        <p class="fun-facts">Placeholder text for now</p>
-        <script src="../JS/main.js"></script>
         <script src="../JS/landing-page.js"></script>
     </body>
 </html>
