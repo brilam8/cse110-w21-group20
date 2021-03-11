@@ -1,0 +1,3 @@
+/coverage/
+
+# ignores any checks from the coverage generated bu jest
