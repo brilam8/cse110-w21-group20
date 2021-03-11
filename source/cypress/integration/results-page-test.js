@@ -8,12 +8,12 @@ describe('results page Tests', () => {
         cy.visit('http://127.0.0.1:5500/HTML/results-page.html');
     });
     it('Clicking restart button will redirect to landing page', () => {
-        cy.get('#restartBtn').click();
+        cy.get('#to-landing').click();
         cy.url().should('eq', 'http://127.0.0.1:5500/HTML/landing-page.html');
     });
     it(`should call Print dialog`, () => {
         let printStub;
-        cy.window().then(win => {
+        cy.window().then(win => { 
             printStub = cy.stub(win, 'print');
             cy.get('#print').click();
             cy.wasCalled(printStub);

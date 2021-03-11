@@ -2,19 +2,21 @@
   "name": "source",
   "version": "1.0.0",
   "description": "TBD",
-  "main": "main.js",
+  "main": "app.js",
   "scripts": {
-    "test": "jest",
-    "jsdoc-generation": "jsdoc ./JS -r"
+    "test": "jest --collect-coverage",
+    "jsdoc-generation": "jsdoc ./JS -r",
+    "cypress": "cypress run",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
     "url": "TBD"
   },
   "keywords": [
-    "TBD"
+    "wepomo"
   ],
-  "author": "TBD",
+  "author": "Ari, Jack, Megan, Jiahong, Brian, Iain, Zongchen, and Tommy",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^6.5.0",
@@ -26,6 +28,7 @@
     "stylelint-config-standard": "^20.0.0"
   },
   "dependencies": {
-    "http-server": "^0.12.3"
+    "http-server": "^0.12.3",
+    "tui-jsdoc-template": "^1.2.2"
   }
 }

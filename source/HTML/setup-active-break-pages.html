@@ -9,12 +9,13 @@
         <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 		<title>Set Up</title>
     </head>
+
     <body>
-        <a href="how-to-page.html"><button id="to-how-to-page" class="to-how-to-page button">?</button></a>
+        <header id="pTitle">Set Up
+            <a href="how-to-page.html"><button id="to-how-to-page">How To</button></a>
+        </header>
+    
         <section id="setup" class="set-up-page">
-            <header>
-                <p class="p-title">Set Up</p>
-            </header>
             <div id="active-task-container" class="flex-container">
                 <div class="task-title">
                     <div class="task-left"><b>Task List</b></div>
@@ -22,7 +23,7 @@
                 </div>
                 <task-component></task-component>
             </div>
-            <button id="create" class="button cButton">Create</button>
+            <button id="create">Create</button>
             <hr class="orange-hr">
             <div class="flex-container">
                 <div class="task-title">
@@ -73,7 +74,7 @@
                     <div class="task-left">Dark Mode</div>
                     <slider-component class ="task-right" button-id="dark-mode-button" ></slider-component> 
                 </div>
-                <div class="task-entry">
+                <div id="alertcontainer" class="task-entry">
                     <div class="task-left">Alert Every <span id="alert-number">10</span> mins</div>
                     <slider-component class ="task-right" button-id="alert-button" ></slider-component> 
                     <div id="alert-right-container" class="task-right" style="display: none;">
@@ -90,11 +91,10 @@
                 </div> -->
             </div>       
             <hr>
-            <p><b>Total Time: <span id="total">0</span> minutes</b></p>
-            <a href="#active-page"><button id="begin" class="button bButton">Begin</button></a>
+            <div><b>Total Time: <span id="total">0</span> minutes</b></div>
+            <a href="#active-page"><button id="begin">Begin</button></a>
         </section>
-        <section id="active-page" class="active-page section-page">
-            <p class="p-title">Pomodoro Timer</p>
+        <section id="active-page" class="section-page">
             <main>
                 <div class="timer-container">
                     <div id="progress-bar" class="progress-bar"></div> 
@@ -104,48 +104,61 @@
                     <p id="first-task" class="task">Sample Task 1</p>
                 </div>
                 
-                <button id="pomo-button" class="button">Abort</button>
+                <button id="pomo-button">Abort</button>
             </main>
             <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
         </section>
-        <section id="break-page" class="break-page section-page">
-            <p id="break-title" class="p-title">Short Break</p>
-            <div class="break-timer-container">
-                <div class="timer-container">
-                    <div id="break-bar" class="progress-bar"></div> 
-                    <p class="timer" id="break-timer"></p>
+        <section id="break-page" class="break-page">
+            <main>
+                <div class="break-timer-container">
+                    <div class="timer-container"> 
+                        <div id="break-bar" class="progress-bar"></div> 
+                        <p class="timer" id="break-timer"></p>
+                    </div>
+                    <button id="break-button">Abort</button>
                 </div>
-                <button id="break-button" class="button">Abort</button>
-            </div>
-            <div id="break-task-container" class="flex-container">
-                <div class="task-title">
-                    <div class="task-left"><b>Current Task</b></div>
-                    <div class="task-right"><b>Mark Done &nbsp&nbsp&nbsp &nbsp</b></div>
+                <div id="break-task-container" class="flex-container">
+                    <div class="task-title">
+                        <div class="task-left"><b>Current Task</b></div>
+                        <div class="task-right"><b>Mark Done &nbsp&nbsp&nbsp &nbsp</b></div>
+                    </div>
+                    <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
                 </div>
-                <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
-            </div>
-            <div id="incompleted-task-container" class="flex-container">
-                <div class="task-title">
-                    <div class="task-left"><b>Incomplete Tasks</b></div>
-                    <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
+                <div id="incompleted-task-container" class="flex-container">
+                    <div class="task-title">
+                        <div class="task-left"><b>Incomplete Tasks</b></div>
+                        <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
+                    </div>
                 </div>
-            </div>
-            <div id="completed-task-container" class="flex-container">
-                <div class="task-title">
-                    <div class="task-left"><b>Completed Tasks</b></div>
-                    <div class="task-right"><b>Actual &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</b></div>
+                <div id="completed-task-container" class="flex-container">
+                    <div class="task-title">
+                        <div class="task-left"><b>Completed Tasks</b></div>
+                        <div class="task-right"><b>Actual &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</b></div>
+                    </div>
                 </div>
-            </div>
-
+            </main>
             <a id="to-active-page" href="#active-page" style="visibility: hidden;"></a>
         </section>
         <audio id="beep"><source src="./sounds/Beep.mp3"></audio>
         <audio id="tick"><source src="./sounds/Tick.mp3"></audio>
         <audio id="click"><source src="./sounds/Click.mp3"></audio>
+        <script>let exports = {};</script>
         <script type="text/javascript" src="../JS/main.js"></script>
         <script type="text/javascript" src="../JS/slider-component.js"></script>
         <script type="text/javascript" src="../JS/set-up-page.js"></script>
         <script type="text/javascript" src="../JS/active-break-pages.js"></script>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                        pageLanguage: 'en', 
+                        includedLanguages: 'ko,ja,fr,es,de,zh-CN,zh-TW', 
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                        }, 
+                    'google_translate_element'
+                );
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     </body>
     
 </html>

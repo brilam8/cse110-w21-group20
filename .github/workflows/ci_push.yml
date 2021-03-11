@@ -2,7 +2,7 @@ name: CI_PUSH
 
 on:
   push:
-    branches: [dev , tommy, brian, FrankLi-break_page, Iain, how-to-page, set-up-page, try-cypress]
+    branches: [dev , tommy-2, brian, franklee, frankli, Iain, how-to-page, set-up-page, try-cypress]
     # TO BE CHANGED since it should be the branch you're working on
 
 defaults:
