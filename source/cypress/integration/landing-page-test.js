@@ -13,6 +13,6 @@ describe('landing page Tests', () => {
 
     it("How to goes to correct page", () => {
         cy.get('#to-how-to').click();
-        cy.url().should('eq', 'http://127.0.0.1:5500/HTML/how-to.html');
+        cy.url().should('eq', 'http://127.0.0.1:5500/HTML/how-to-page.html');
     });
 });
