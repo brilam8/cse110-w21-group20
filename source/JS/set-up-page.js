@@ -1,5 +1,4 @@
-/* global chrome */
-/*global startTimer, set_time*/
+/*global startTimer, set_time, webkitSpeechRecognition*/
 
 // variables used in active and break pages
 var copytasklist = [];
