@@ -29,8 +29,8 @@
         </div>
 
         <div id="buttonwrapper">
-          <a href="landing-page.html" id="to-home-page"><button>Home Page</button></a>
-          <a href="setup-active-break-pages.html" id="to-set-up-page"><button>Set Up</button></a>
+          <a href="landing-page.html" id="to-home-page"><button>Home</button></a>
+          <a href="setup-active-break-pages.html" id="to-set-up-page"><button>Start</button></a>
         </div>
         <div class="tip-div">
             <p>When working with a Pomodoro Timer, focus entirely on the task at hand and avoid any distractions! Learn more about the Pomodoro Technique at:</p>
@@ -41,7 +41,14 @@
         <script src="../JS/how-to-page.js"></script>
         <script type="text/javascript">
             function googleTranslateElementInit() {
-                new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+                function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                        pageLanguage: 'en', 
+                        includedLanguages: 'ko,ja,fr,es,de,zh-CN,zh-TW', 
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                        }, 
+                    'google_translate_element');
+                }
             }
         </script>
         <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>

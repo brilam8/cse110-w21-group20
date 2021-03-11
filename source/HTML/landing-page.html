@@ -38,6 +38,7 @@
             <a id="download-wepomo" href="" style="color: #fff; position: fixed; transform: translateY(170px);" download>download wepomo</a>
         </main>
         <p id="output">TESTING SPEECH HERE<p>
+        
         <script>let exports = {};</script>
         <script src="../JS/landing-page.js"></script>
 
@@ -74,6 +75,12 @@
             recognition.onresult = function(event) {
             var recieved = event.results[0][0].transcript;
             diagnostic.textContent = 'Result received: ' + recieved + '.';
+            if ((diagnostic.textContent).includes("start")){
+                document.getElementById("to-set-up").click();
+            }
+            else if ((diagnostic.textContent).includes("how to")){
+                document.getElementById("to-how-to").click();
+            }
             console.log('Confidence: ' + event.results[0][0].confidence);
             }
         
@@ -82,7 +89,7 @@
             }
         
             recognition.onnomatch = function(event) {
-            diagnostic.textContent = "I didn't recognise that color.";
+            diagnostic.textContent = "I didn't recognise that.";
             }
         
             recognition.onerror = function(event) {
