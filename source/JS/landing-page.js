@@ -25,7 +25,7 @@ let index = 0;
 setInterval(function()
 {
     if (index >= facts.length) index = 0;
-    document.getElementById('fun-facts').innerHTML = facts[num];
-    num++;
+    document.getElementById('fun-facts').innerHTML = facts[index];
+    index++;
 }, 5000);
 
