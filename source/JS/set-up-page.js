@@ -7,6 +7,12 @@ var completed = [];
 var setup_value=[];
 var totalpomo = 0;
 
+//recording input variables
+var recognition;
+var recordstart;
+var savedbackground;
+var savedcolor;
+
 let totaltime = 0;
 let timersettingIDs=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
 
@@ -252,8 +258,23 @@ customElements.define('task-component', TaskComponent);
  * Function used in Speech to text 
  */
 function record(){
-    var recognition = new webkitSpeechRecognition();
+    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    recognition = new SpeechRecognition();
+    recognition.grammars = new SpeechGrammarList();
     recognition.interimResults = false;
+    recognition.maxAlternatives = 2;
+
+    //changes background to focus on input
+    recordstart = true;
+    recognition.interimResults = false;
+    savedbackground = document.body.style.backgroundColor;
+    savedcolor =  document.body.style.color;
+    document.body.style.background = "rgba(0,0,0,0.2)";
+    document.getElementById("active-task-container").style.background = savedbackground;
+    document.body.style.pointerEvents = "none";
+
+
     recognition.start();
 
     let ATContainer = document.getElementById("active-task-container");
@@ -261,14 +282,31 @@ function record(){
     let container = ATContainer.children[ATCLength-1].shadowRoot.children[1];
     let input = container.children[0];
 
+
     recognition.onresult = function(e) {
+        //updates input
         input.value = e.results[0][0].transcript;
-        recognition.stop();
+        input.dispatchEvent(new Event("input"));
+
+        recordingEnd();
     };
+
+    recognition.onend = function(e) {
+        recordingEnd()
+    }
 
     recognition.onerror = function() {
         recognition.stop();
     };
+}
+
+function recordingEnd(){
+    //resets background
+    recordstart = false;
+    document.body.style.background = savedbackground;
+    document.getElementById("active-task-container").style.background = "";
+    document.body.style.pointerEvents = "all";
+    recognition.stop();
 }
 
 /**
@@ -332,6 +370,8 @@ function createTask(){
     let input = container.children[0];
     
     if (ATCLength<=6 && input.value.length!=0){
+        if (recordstart) recordingEnd();
+        
         let input = container.children[0];
         input.style.pointerEvents = "none";
         
