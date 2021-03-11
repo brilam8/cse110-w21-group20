@@ -264,9 +264,9 @@ function record(){
         recognition.stop();
     };
 
-    recognition.onerror = function(e) {
+    recognition.onerror = function() {
         recognition.stop();
-    }
+    };
 }
 
 /**
