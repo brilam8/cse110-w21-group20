@@ -61,17 +61,12 @@ input[type=number]::-webkit-outer-spin-button {
   margin-left: 200px;
 }
 
-.wb-table th {
+.wb-table th,.wb-table tr:nth-child(odd),.wb-table tr {
   background-color: #e6e6e6;
 }
 
 .wb-table tr {
   color: rgba(242, 71, 38, 0.8);
-  border: 1px solid #e6e6e6;
-}
-
-.wb-table tr:nth-child(odd) {
-  background-color: #e6e6e6;
 }
 
 .wb-table td {
@@ -109,11 +104,7 @@ main {
   padding-bottom: 100px;
 }
 
-.break-page {
-  display: none;
-}
-
-.section-page {
+.break-page,.section-page {
   display: none;
 }
 
