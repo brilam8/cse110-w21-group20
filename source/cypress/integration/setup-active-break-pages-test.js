@@ -269,7 +269,10 @@ describe('break Tests', () => {
         cy.get('#active-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').invoke("val", "task 1").trigger('input');
         cy.get('#create').click();
         cy.get('#active-task-container').find('task-component:nth-child(3)').shadow().find('input[type=text]').invoke("val", "task 2").trigger('input');
-        cy.get('#active-task-container').find('task-component:nth-child(3)').shadow().find('input[type=number]').invoke("val", 2).trigger('change');
+        cy.get('#active-task-container').find('task-component:nth-child(3)').shadow().find('input[type=number]').invoke("val", 2).trigger('input');
+        cy.get('#create').click();
+        cy.get('#active-task-container').find('task-component:nth-child(4)').shadow().find('input[type=text]').invoke("val", "task 3").trigger('input');
+        cy.get('#active-task-container').find('task-component:nth-child(4)').shadow().find('input[type=number]').invoke("val", 3).trigger('input');
         cy.get('#begin').click();
     });
     it('When in break page, clicking abort  should warn user about abort then clicking ok should redirect to results page', () => {
@@ -292,12 +295,49 @@ describe('break Tests', () => {
         cy.url().should('eq', SetupActiveBreakURL+'#active-page');
     });
 
+    it('Marking off a task in current task should move task to completed. It should also move one task from incompleted to current', ()=>{
+        cy.tick(25*60*1000 + 1*1000);
+        //current task has 'task 1'
+        cy.get('#break-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').should('contain.value', 'task 1');
 
-    // WILL ADD MORE TESTS FOR TASK LIST
+        //incomplete task should have 'task 2' and 'task 3'
+        cy.get('#incompleted-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').should('contain.value', 'task 2');
+        cy.get('#incompleted-task-container').find('task-component:nth-child(3)').shadow().find('input[type=text]').should('contain.value', 'task 3');
+        cy.get('#incompleted-task-container').find('task-component:nth-child(2)').shadow().find('div').find('div').find('div').then(($el) =>{
+            expect($el).to.have.prop('textContent','2 pomo');
+        });
+        cy.get('#incompleted-task-container').find('task-component:nth-child(3)').shadow().find('div').find('div').find('div').then(($el) =>{
+            expect($el).to.have.prop('textContent','3 pomo');
+        });
+        cy.get('#incompleted-task-container').children().should('have.length', 3);
+
+        //complete task is empty
+        cy.get('#completed-task-container').children().should('have.length', 1);
+
+        //check off 'task 1'
+        cy.get('#break-task-container').find('task-component:nth-child(2)').shadow().find('input[type=checkbox]').click();
+        cy.tick(30*60*1000 + 2*1000);
+
+        //current task should have 'task 2'
+        cy.get('#break-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').should('contain.value', 'task 2');
+
+        //incomplete task should have 'task 3'
+        cy.get('#incompleted-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').should('contain.value', 'task 3');
+        cy.get('#incompleted-task-container').find('task-component:nth-child(2)').shadow().find('div').find('div').find('div').then(($el) =>{
+            expect($el).to.have.prop('textContent','3 pomo');
+        });
+        cy.get('#incompleted-task-container').children().should('have.length', 2);
+
+        //complete task should have 'task 1'
+        cy.get('#completed-task-container').find('task-component:nth-child(2)').shadow().find('input[type=text]').should('contain.value', 'task 1');
+        cy.get('#completed-task-container').find('task-component:nth-child(2)').shadow().find('div').find('div').find('div').then(($el) =>{
+            expect($el).to.have.prop('textContent','1 pomo');
+        });
+        cy.get('#completed-task-container').children().should('have.length', 2);
+
+    });
+
 });
-
-
-
 
 
 describe('Pomo-Setting Tests', () => {
