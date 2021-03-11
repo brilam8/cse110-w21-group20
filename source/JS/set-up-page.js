@@ -89,6 +89,7 @@ class TaskComponent extends HTMLElement {
 
         this.left = left;
         this.right= right;
+        this.speaker = speaker;
         this.rightsuffix = rightsuffix;
         this.deleteButton = deleteButton;
         tasklist.push(["", 1]);
@@ -229,6 +230,7 @@ class TaskComponent extends HTMLElement {
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
             this.right.style.transform = "translate(-74px, 3px)";
+            this.speaker.style.display = newValue;
         }
         else if (name == 'index'){
             this.index -= 1;

@@ -5,16 +5,17 @@ header {
   color: rgb(242, 71, 38, 0.9);
   padding: 60px 10%;
   display: inline-block;
-  width: 85%;
+  width: 65%;
+}
+
+header > a {
+  float: right;
+  transform: translateX(20vw);
 }
 
 .logo {
   color: white;
   font-size: 60px;
-}
-
-header > a {
-  float: right;
 }
 
 /* Consistent Buttons */
@@ -411,19 +412,6 @@ hr {
 
 ::placeholder {
   color: rgb(255, 81, 0);
-}
-
-.to-how-to-page {
-  position: absolute;
-  right: 21%;
-  width: 25px;
-  height: 25px;
-  border: none;
-  border-radius: 50%;
-  outline: none;
-  font-weight: bold;
-  font-size: smaller;
-  transition: all 0.15s ease-in;
 }
 
 @media only screen and (max-width: 1000px) {
