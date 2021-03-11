@@ -5,16 +5,18 @@
   "main": "app.js",
   "scripts": {
     "test": "jest --collect-coverage",
-    "jsdoc-generation": "jsdoc ./JS -r"
+    "jsdoc-generation": "jsdoc ./JS -r",
+    "cypress": "cypress run",
+    "cypress:open": "cypress open"
   },
   "repository": {
     "type": "git",
     "url": "TBD"
   },
   "keywords": [
-    "TBD"
+    "wepomo"
   ],
-  "author": "TBD",
+  "author": "Ari, Jack, Megan, Jiahong, Brian, Iain, Zongchen, and Tommy",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^6.5.0",
