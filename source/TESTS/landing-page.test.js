@@ -42,7 +42,7 @@ describe ('test landing page', () => {
     mock();
     expect(document.getElementById('fun-facts').innerHTML).toEqual('Fun Fact: Francesco Cirillo was the original creator of the Pomodoro Timer!');
     mock();
-    expect(document.getElementById('fun-facts').innerHTML).toEqual('Fun Fact: The Pomodoro timer was inspiried by a tomato shaped timer!');
+    expect(document.getElementById('fun-facts').innerHTML).toEqual('Fun Fact: The Pomodoro timer was inspired by a tomato shaped timer!');
 
   });
 });
