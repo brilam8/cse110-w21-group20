@@ -1,3 +1,4 @@
+/* global chrome */
 /*global startTimer, set_time*/
 
 // variables used in active and break pages
