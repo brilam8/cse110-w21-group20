@@ -41,6 +41,11 @@ class SliderComponent extends HTMLElement {
                 window.localStorage.setItem('dark-mode', `${color}`);
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
+
+                //update mic color
+                let task = document.getElementById("active-task-container").children[document.getElementById("active-task-container").children.length-1]
+                let microphone = task.shadowRoot.children[1].children[1];
+                microphone.style.filter = color == "#1a1a1a" ? "invert(1)" : "";
             }
             else if (button.id == "alert-button"){
               if (currentText == "On"){

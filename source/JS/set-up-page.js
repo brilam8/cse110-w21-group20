@@ -74,7 +74,12 @@ class TaskComponent extends HTMLElement {
         left.maxLength = 20; // TO CHANGE
 
         const speaker = container.appendChild(document.createElement('img'));
-        speaker.src = "../mic.gif";
+        speaker.src = "../assets/microphone.png";
+        speaker.style.margin = "6px 0 0 0";
+        speaker.width = "30";
+        speaker.height = "30";
+        speaker.id = "mic";
+        if (window.localStorage.getItem('dark-mode')) window.localStorage.getItem('dark-mode') == "#1a1a1a" ? speaker.style.filter = "invert(1)" : "";
         
         const rightcontainer = container.appendChild(document.createElement('div'));
         rightcontainer.setAttribute('class', 'task-right');
@@ -270,7 +275,7 @@ function record(){
     recognition.interimResults = false;
     savedbackground = document.body.style.backgroundColor;
     savedcolor =  document.body.style.color;
-    document.body.style.background = "rgba(0,0,0,0.2)";
+    document.body.style.background = "rgba(0,0,0,0.1)";
     document.getElementById("active-task-container").style.background = savedbackground;
     document.body.style.pointerEvents = "none";
 
