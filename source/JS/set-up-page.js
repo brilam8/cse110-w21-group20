@@ -260,7 +260,7 @@ class TaskComponent extends HTMLElement {
 customElements.define('task-component', TaskComponent);
 
 /**
- * Function used in Speech to text 
+ * Function to enable Speech to text for task input
  */
 function record(){
     var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
@@ -287,26 +287,21 @@ function record(){
     let container = ATContainer.children[ATCLength-1].shadowRoot.children[1];
     let input = container.children[0];
 
-
+    //updates input
     recognition.onresult = function(e) {
-        //updates input
         input.value = e.results[0][0].transcript;
         input.dispatchEvent(new Event("input"));
-
         recordingEnd();
     };
 
-    recognition.onend = function(e) {
-        recordingEnd()
-    }
-
-    recognition.onerror = function() {
-        recognition.stop();
-    };
+    recognition.onend = recordingEnd();
+    
 }
 
+/**
+ * Function used by function record to resets background after recording ends.
+ */
 function recordingEnd(){
-    //resets background
     recordstart = false;
     document.body.style.background = savedbackground;
     document.getElementById("active-task-container").style.background = "";
@@ -375,7 +370,6 @@ function createTask(){
     let input = container.children[0];
     
     if (ATCLength<=6 && input.value.length!=0){
-        if (recordstart) recordingEnd();
         
         let input = container.children[0];
         input.style.pointerEvents = "none";
