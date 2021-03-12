@@ -15,6 +15,13 @@ describe('setup Tests', () => {
         cy.get('#to-how-to-page').click();
         cy.url().should('eq', HowToURL);
     });
+
+    it('Clicking record button should change background color', () => {
+        cy.get('#active-task-container').find('task-component:nth-child(2)').shadow().find('img').click();
+        cy.get("body").should('have.css', 'background-color', 'rgba(0, 0, 0, 0.1)');
+        cy.get("#active-task-container").should("have.css", "background-color", "rgb(255, 255, 255)");
+    });
+
  
     it('Task list should be length 2', () => {
         cy.get('#active-task-container').children().should('have.length', 2);
