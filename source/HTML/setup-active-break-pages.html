@@ -26,7 +26,7 @@
             <button id="create">Create</button>
             <hr class="orange-hr">
             <div class="flex-container">
-                <div class="task-title">
+                <div class="task-title settingtitle">
                     <div class="task-left"><b>Pomo Settings</b></div>
                     <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
                 </div>
@@ -43,7 +43,7 @@
                     <div class="task-right">
                         <div class="task-right" style="margin-left: -4px; margin-right: 3px;">pomo</div>
                         <input type="number" class="task-right" id="task-right-total" dir="rtl" value="4" 
-                            min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+                            min="4" max="5" step="1" onkeydown="return false" style="width: 42.5px; margin-right: 5px;">
                     </div>
                     
                 </div>
@@ -66,7 +66,7 @@
             </div>
             <hr>
             <div class="flex-container">
-                <div class="task-title">
+                <div class="task-title settingtitle">
                     <div class="task-left"><b>Extra Settings</b></div>
                     <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
                 </div>
@@ -95,7 +95,7 @@
             <a href="#active-page"><button id="begin">Begin</button></a>
         </section>
         <section id="active-page" class="section-page">
-            <main>
+            <main style="height: 60vh;">
                 <div class="timer-container">
                     <div id="progress-bar" class="progress-bar"></div> 
                     <p class="timer" id="timer"></p>
@@ -119,20 +119,20 @@
                 </div>
                 <div id="break-task-container" class="flex-container">
                     <div class="task-title">
-                        <div class="task-left"><b>Current Task</b></div>
+                        <div class="task-left"><b>Current <span class="to-delete">Tasks</span></b></div>
                         <div class="task-right"><b>Mark Done &nbsp&nbsp&nbsp &nbsp</b></div>
                     </div>
                     <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
                 </div>
                 <div id="incompleted-task-container" class="flex-container">
                     <div class="task-title">
-                        <div class="task-left"><b>Incomplete Tasks</b></div>
+                        <div class="task-left"><b>Incomplete <span class="to-delete">Tasks</span></b></div>
                         <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
                     </div>
                 </div>
                 <div id="completed-task-container" class="flex-container">
                     <div class="task-title">
-                        <div class="task-left"><b>Completed Tasks</b></div>
+                        <div class="task-left"><b>Completed <span class="to-delete">Tasks</span></b></div>
                         <div class="task-right"><b>Actual &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</b></div>
                     </div>
                 </div>

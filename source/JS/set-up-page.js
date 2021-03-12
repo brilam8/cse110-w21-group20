@@ -16,7 +16,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // resets tasks list in localstorage every time user enters set-up page
     window.localStorage.removeItem('tasks');
     window.localStorage.removeItem('set-up');
-
     /**
      * Clicking the begin button create render all the task-components in the break-page,
      * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
@@ -24,7 +23,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("begin").addEventListener("click", ()=>{
         exitSetUp();
     });
-
     /**
      * Clicking the create button will create a task-component on the set-up page. 
      * It will only allow 6 task-components.
@@ -32,7 +30,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("create").addEventListener("click", ()=>{
         createTask();
     });
-
     /** 
      * Updates span for 'long break on every 4th pomo' setting
      */ 
@@ -41,7 +38,6 @@ window.addEventListener('DOMContentLoaded', () => {
         document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
         calculateTotalTime();
     });
-
     /**
      * Everytime input for timer settings is changed, update the totaltime
      */
@@ -201,6 +197,7 @@ class TaskComponent extends HTMLElement {
             transition: all 0.3s ease-in;
             pointer-events: none;
         }
+
         .deleteTask {
             background-color: rgba(242, 71, 38, 1);
             pointer-events: auto;
@@ -213,7 +210,14 @@ class TaskComponent extends HTMLElement {
         ::placeholder {
             font-size: 20px;
             color: rgb(255, 81, 0);
-        }       
+        }
+
+        @media only screen and (max-width: 700px) {
+            .task-left {
+                width: 30%;
+            }
+          }
+
         `;
 
         this.shadowRoot.append(style, container);
@@ -259,12 +263,6 @@ customElements.define('task-component', TaskComponent);
  * Function to enable Speech to text for task input
  */
 function record(){
-    // var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-    // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-    // var recognition = new SpeechRecognition();
-    // recognition.grammars = new SpeechGrammarList();
-    // recognition.interimResults = false;
-    // recognition.maxAlternatives = 2;
 
     var recognition = new webkitSpeechRecognition();
     recognition.interimResults = false;
@@ -287,9 +285,7 @@ function record(){
         input.dispatchEvent(inputEvent);
         recordingEnd(recognition, savedbackground);
     };
-
-    recognition.onend = (e)=> recordingEnd(recognition, savedbackground);
-    
+    recognition.onend = ()=> recordingEnd(recognition, savedbackground);
 }
 
 /**
@@ -467,3 +463,5 @@ exports.createTask = createTask;
 exports.exitSetUp = exitSetUp;
 exports.setTaskName = setTaskName;
 exports.updateTaskList = updateTaskList;
+exports.record = record;
+exports.recordingEnd = recordingEnd;
