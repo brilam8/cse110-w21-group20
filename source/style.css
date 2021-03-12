@@ -441,14 +441,15 @@ hr {
 }
 
 .instructions-list {
-  counter-reset: li; 
+  padding-left:0;
   text-align: left;
   list-style:none;
+  counter-reset: li; 
 }
 
 .instructions-list li {
-  font-size: 18px;
-  padding: 2px;
+  padding: 3px;
+  font-size: 20px;
 }
 
 .instructions-list a{
