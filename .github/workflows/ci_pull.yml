@@ -42,11 +42,11 @@ jobs:
     - uses: actions/checkout@v2
     - run: npx eslint ./JS/*.js
   GenerateElectronApp:
-    runs-on: linux-latest
+    runs-on: windows-latest
     steps:
     - uses: actions/checkout@v2
     - run: |
-        sudo apt-get install zip gzip tar
+        choco install zip
         npx electron-packager . wepomo --overwrite --electron-version=11.3.0 --platform=win32 --icon "./assets/logo.ico"
         zip -r wepomo-win32-x64.zip wepomo-win32-x64
     - name: Commit zip file
