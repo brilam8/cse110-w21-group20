@@ -61,12 +61,17 @@ input[type=number]::-webkit-outer-spin-button {
   margin-left: 200px;
 }
 
-.wb-table th,.wb-table tr:nth-child(odd),.wb-table tr {
+.wb-table th {
   background-color: #e6e6e6;
 }
 
 .wb-table tr {
   color: rgba(242, 71, 38, 0.8);
+  border: 1px solid #e6e6e6;
+}
+
+.wb-table tr:nth-child(odd) {
+  background-color: #e6e6e6;
 }
 
 .wb-table td {
@@ -441,10 +446,10 @@ hr {
 }
 
 .instructions-list {
-  padding-left:0;
+  padding-left: 0;
   text-align: left;
-  list-style:none;
-  counter-reset: li; 
+  list-style: none;
+  counter-reset: li;
 }
 
 .instructions-list li {
@@ -452,7 +457,7 @@ hr {
   font-size: 20px;
 }
 
-.instructions-list a{
+.instructions-list a {
   position: relative;
   padding: 8px 8px 8px 8px;
   background: rgb(255, 119, 45, 0.6);
@@ -462,7 +467,7 @@ hr {
   display: block;
 }
 
-.instructions-list a:before{
+.instructions-list a::before {
   height: 30px;
   width: 30px;
   text-align: center;
