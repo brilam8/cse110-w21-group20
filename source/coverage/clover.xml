@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1615522018118" clover="3.2.0">
-  <project timestamp="1615522018118" name="All files">
+<coverage generated="1615530843037" clover="3.2.0">
+  <project timestamp="1615530843037" name="All files">
     <metrics statements="500" coveredstatements="456" conditionals="174" coveredconditionals="120" methods="62" coveredmethods="39" elements="736" coveredelements="615" complexity="0" loc="500" ncloc="500" packages="1" files="5" classes="5"/>
     <file name="active-break-pages.js" path="C:\Users\PC\Documents\GitHub\cse110-w21-group20\source\JS\active-break-pages.js">
       <metrics statements="164" coveredstatements="155" conditionals="80" coveredconditionals="54" methods="18" coveredmethods="13"/>
