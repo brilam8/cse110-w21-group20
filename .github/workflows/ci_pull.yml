@@ -55,6 +55,7 @@ jobs:
         rm -r wepomo-win32-x64.zip
         npx electron-packager . wepomo --overwrite --electron-version=11.3.0 --platform=win32 --icon "./assets/logo.ico"
         zip -r wepomo-win32-x64.zip wepomo-win32-x64
+        rm -r wepomo-win32-x64
     - name: Commit zip file
       run: |
         git config --global user.email "totran@ucsd.edu"
