@@ -52,6 +52,7 @@ jobs:
         sudo apt-add-repository "deb https://dl.winehq.org/wine-builds/ubuntu $(lsb_release -cs) main"
         sudo apt install --install-recommends winehq-stable
         sudo apt-get install zip
+        rm -r wepomo-win32-x64.zip
         npx electron-packager . wepomo --overwrite --electron-version=11.3.0 --platform=win32 --icon "./assets/logo.ico"
         zip -r wepomo-win32-x64.zip wepomo-win32-x64
     - name: Commit zip file

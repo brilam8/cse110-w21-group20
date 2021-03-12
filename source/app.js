@@ -9,7 +9,7 @@ function createWindow () {
     icon: __dirname + './assets/logo.ico'
   })
 
-  win.loadFile('./HTML/landing-page.html')
+  win.loadFile('./ElectronApp/landing-page.html')
   win.setMenuBarVisibility(false)
 }
 
