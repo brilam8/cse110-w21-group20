@@ -263,12 +263,15 @@ customElements.define('task-component', TaskComponent);
  * Function to enable Speech to text for task input
  */
 function record(){
-    var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
-    var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-    recognition = new SpeechRecognition();
-    recognition.grammars = new SpeechGrammarList();
+    // var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
+    // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
+    // recognition = new SpeechRecognition();
+    // recognition.grammars = new SpeechGrammarList();
+    // recognition.interimResults = false;
+    // recognition.maxAlternatives = 2;
+
+    recognition = new webkitSpeechRecognition();
     recognition.interimResults = false;
-    recognition.maxAlternatives = 2;
 
     //changes background to focus on input
     recordstart = true;
@@ -294,7 +297,7 @@ function record(){
         recordingEnd();
     };
 
-    recognition.onend = recordingEnd();
+    recognition.onend = (e)=> recordingEnd();
     
 }
 
