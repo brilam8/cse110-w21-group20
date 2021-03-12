@@ -7,11 +7,7 @@ var completed = [];
 var setup_value=[];
 var totalpomo = 0;
 
-//recording input variables
-var recognition;
-var recordstart;
-var savedbackground;
-var savedcolor;
+let inputEvent = new Event("input");
 
 let totaltime = 0;
 let timersettingIDs=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
@@ -78,8 +74,8 @@ class TaskComponent extends HTMLElement {
         speaker.style.margin = "6px 0 0 0";
         speaker.width = "30";
         speaker.height = "30";
-        speaker.id = "mic";
-        if (window.localStorage.getItem('dark-mode')) window.localStorage.getItem('dark-mode') == "#1a1a1a" ? speaker.style.filter = "invert(1)" : "";
+        let color = window.localStorage.getItem('dark-mode');
+        if (color) color == "#1a1a1a" ? speaker.style.filter = "invert(1)" : "";
         
         const rightcontainer = container.appendChild(document.createElement('div'));
         rightcontainer.setAttribute('class', 'task-right');
@@ -265,25 +261,20 @@ customElements.define('task-component', TaskComponent);
 function record(){
     // var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition;
     // var SpeechGrammarList = SpeechGrammarList || webkitSpeechGrammarList;
-    // recognition = new SpeechRecognition();
+    // var recognition = new SpeechRecognition();
     // recognition.grammars = new SpeechGrammarList();
     // recognition.interimResults = false;
     // recognition.maxAlternatives = 2;
 
-    recognition = new webkitSpeechRecognition();
+    var recognition = new webkitSpeechRecognition();
     recognition.interimResults = false;
+    recognition.start();
 
     //changes background to focus on input
-    recordstart = true;
-    recognition.interimResults = false;
-    savedbackground = document.body.style.backgroundColor;
-    savedcolor =  document.body.style.color;
+    let savedbackground = document.body.style.backgroundColor;
     document.body.style.background = "rgba(0,0,0,0.1)";
-    document.getElementById("active-task-container").style.background = savedbackground;
+    document.getElementById("active-task-container").style.background = savedbackground == "" ? "white" : savedbackground;
     document.body.style.pointerEvents = "none";
-
-
-    recognition.start();
 
     let ATContainer = document.getElementById("active-task-container");
     let ATCLength = ATContainer.children.length;
@@ -293,19 +284,18 @@ function record(){
     //updates input
     recognition.onresult = function(e) {
         input.value = e.results[0][0].transcript;
-        input.dispatchEvent(new Event("input"));
-        recordingEnd();
+        input.dispatchEvent(inputEvent);
+        recordingEnd(recognition, savedbackground);
     };
 
-    recognition.onend = (e)=> recordingEnd();
+    recognition.onend = (e)=> recordingEnd(recognition, savedbackground);
     
 }
 
 /**
  * Function used by function record to resets background after recording ends.
  */
-function recordingEnd(){
-    recordstart = false;
+function recordingEnd(recognition, savedbackground){
     document.body.style.background = savedbackground;
     document.getElementById("active-task-container").style.background = "";
     document.body.style.pointerEvents = "all";
