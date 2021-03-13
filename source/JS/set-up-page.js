@@ -270,7 +270,7 @@ function record(){
 
     //changes background to focus on input
     let savedbackground = document.body.style.backgroundColor;
-    document.body.style.background = "rgba(0,0,0,0.1)";
+    document.body.style.background = "rgba(0, 0, 0, 0.1)";
     document.getElementById("active-task-container").style.background = savedbackground == "" ? "white" : savedbackground;
     document.body.style.pointerEvents = "none";
 

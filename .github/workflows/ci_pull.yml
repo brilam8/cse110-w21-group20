@@ -2,7 +2,7 @@ name: CI_PULL
 
 on:
   pull_request:
-    branches: [ dev , tommy-2, brian, franklee, frankli, Iain, how-to-page, set-up-page, try-cypress]
+    branches: [ dev , tommy-2, brian, franklee, frankli, Iain, how-to-page, set-up-page, electron-pipeline]
     # TO BE CHANGED since it should include the branch you're working on
 
 
@@ -41,3 +41,30 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: npx eslint ./JS/*.js
+  GenerateElectronApp:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        sudo dpkg --add-architecture i386
+        wget -qO - https://dl.winehq.org/wine-builds/winehq.key | sudo apt-key add -
+        sudo add-apt-repository ppa:cybermax-dexter/sdl2-backport
+        sudo apt-add-repository "deb https://dl.winehq.org/wine-builds/ubuntu $(lsb_release -cs) main"
+        sudo apt install --install-recommends winehq-stable
+        sudo apt-get install zip
+        rm -r wepomo-win32-x64.zip
+        npx electron-packager . wepomo --overwrite --electron-version=11.3.0 --platform=win32 --icon "./assets/logo.ico"
+        zip -r wepomo-win32-x64.zip wepomo-win32-x64
+        rm -r wepomo-win32-x64
+    - name: Commit zip file
+      run: |
+        git config --global user.email "totran@ucsd.edu"
+        git config --global user.name "tommytran-8"
+        git add wepomo-win32-x64.zip
+        git commit -m "update Electron app" -a
+    - name: Deploy Electron App
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        force: true
+        branch: ${{ github.HEAD_REF }}

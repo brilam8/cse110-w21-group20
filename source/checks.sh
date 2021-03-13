@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo "running linters..."
+echo "running linters...."
 
 npx htmlhint ./HTML/*.html
 echo "done running htmlhint!"

@@ -44,8 +44,10 @@ class SliderComponent extends HTMLElement {
 
                 //update mic color
                 let task = document.getElementById("active-task-container").children[document.getElementById("active-task-container").children.length-1];
-                let microphone = task.shadowRoot.children[1].children[1];
-                microphone.style.filter = color == "#1a1a1a" ? "invert(1)" : "";
+                if (task.shadowRoot.children[1].children.length == 3){
+                  let microphone = task.shadowRoot.children[1].children[1];
+                  microphone.style.filter = color == "#1a1a1a" ? "invert(1)" : "";
+                }
             }
             else if (button.id == "alert-button"){
               if (currentText == "On"){
