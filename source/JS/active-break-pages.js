@@ -284,7 +284,7 @@ function abortTimer(){
     window.localStorage.setItem("tasks", JSON.stringify(output)); 
     document.getElementById("active-page").style.display = "none";
     document.getElementById("break-page").style.display = "none";
-    window.location.replace('../HTML/results-page.html');
+    window.location.replace('./results-page.html');
     
 }
 
