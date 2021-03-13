@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="Brian Lam">
+        <meta name="viewpoint" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="../style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Lato&Oswald:wght@700&Open+Sans&display=swap" rel="stylesheet">
+        <title>Results</title>
+    </head>
+    <body class = "orange">
+        <header class="logo">wepomo</header>
+    
+        <main class="results-container">
+            
+            <h1>Great Job!</h1>
+            <grid class="two-col-grid-container" id="results">
+                <p class="table-header">Tasks completed: </p>
+                <p class="table-header">Tasks left to do: </p>
+                <ol id="complete-items">
+                </ol>
+                <ol id="uncomplete-items">
+                </ol> 
+            </grid>
+            <div style="text-align: center;">
+                <p class="p-body" id="prog-num"></p>
+            </div>
+            <div class="task-progress-bar">
+                <div class="progress-bar-fill" id="prog-bar-fill">
+                </div>
+            </div>
+            <div style="text-align: center;">
+                <p class="p-body" id="message"></p>
+            </div>
+            <div class="div-flex-row">
+                <button class="ob-button" id="print" onclick="print()">Assessment</button>
+                <button id="to-landing" class="ob-button">Restart</button>
+            </div>
+        </main>
+        <script>let exports = {};</script>
+        <script src="../JS/results-page.js"></script>
+        <!-- <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                        pageLanguage: 'en', 
+                        includedLanguages: 'ko,ja,fr,es,de,zh-CN,zh-TW', 
+                        layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                        }, 
+                    'google_translate_element'
+                );
+            }
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script> -->
+    </body>
+</html>

@@ -1,176 +1,8 @@
-customElements.define('task-component', class extends HTMLElement {
-  constructor(){
-      super();
-      const container = document.createElement('div');
-      container.setAttribute('class', 'entry');
-
-      const left = container.appendChild(document.createElement('input'));
-      left.setAttribute('class', "left");
-      left.type = "text";
-      left.placeholder = "Enter Task Here";
-      left.maxLength = 20; // TO CHANGE
-
-      const right = container.appendChild(document.createElement('input'));
-      right.setAttribute('class', "right");
-      right.type = "number";
-      right.placeholder = "   1 pomo";
-      right.onkeydown=()=>{return false;};
-      right.min = "1"; right.max = "5"; right.step = "1";
-
-      const deleteButton = container.appendChild(document.createElement('button'));
-      deleteButton.setAttribute('class', 'deleteTask');
-      deleteButton.textContent = "X";
-
-
-      this.left = left;
-      this.right= right;
-      this.deleteButton = deleteButton;
-      this.index = 1;
-
-      deleteButton.addEventListener('click', ()=>{
-          deleteComponent();
-      });
-      function deleteComponent(){
-        document.getElementById("active-task-container").children[1].remove(); //removes task component
-      }
-  
-      const style = document.createElement('style');
-      style.textContent = `
-        .entry {
-          height: 40px;
-          background-color: white;
-          border: solid;
-          border-color: lightgrey;
-          border-width: 0 0 2px 0;
-          display: flex;
-        }
-        
-        .left {
-          margin-top: 8px;
-          margin-left: 15px;
-          margin-right: 10%;
-          text-align: left;
-          height: 30px;
-          width: 70%;
-          border: none;
-          color: rgb(255, 81, 0);
-          font-size: 20px;
-        }
-        
-        .right {
-          margin-top: 8px;
-          text-align: center;
-          width: 20%;
-          height: 30px;
-          border: none;
-          color: rgb(255, 81, 0);
-          font-size: 20px;
-          caret-color: transparent;
-          cursor: default;
-          outline: none;
-        }
-
-        .deleteTask {
-            position: absolute;
-            height: 35px;
-            width: 35px;
-            right: 16%;
-            transform: translateY(5px);
-            cursor: pointer;
-            outline: none;
-            
-            background-color: white;
-            border: 3.5px solid rgba(242, 71, 38, 0.9);;
-            color: rgba(242, 71, 38, 0.9);
-            font-weight: bold;
-            border-radius: 5px;
-            transition: all 0.3s ease-in;
-        }
-
-        .deleteTask:hover {
-          background-color: rgba(242, 71, 38, 0.2);
-        }
-        
-        ::placeholder {
-          color: rgb(255, 166, 125);
-          font-size: 18px;
-        }
-      `;
-
-      this.append(style, container);
-  }
-
-  static get observedAttributes() {
-      return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index'];
-  }
-  attributeChangedCallback(name, oldValue, newValue){
-      if (name == "type"){
-          this.right.type = newValue;
-      }
-      else if (name == "left-pointer-event"){
-          this.left.style['pointer-events'] = newValue;
-      }
-      else if (name == 'left-task'){
-          this.left.value = newValue;
-      }
-      else if (name == 'delete'){
-          this.deleteButton.style.display = newValue;
-      }
-      else if (name == 'index'){
-          this.index -= 1;
-      }
-  }  
-})
-
 describe('set up page', () => {
-  document.body.innerHTML = 
-    `
-    <section id="setup" class="set-up-page">
-      <div id="active-task-container" class="flex-container">
-          <div class="task-title">
-              <div class="task-left"><b>Task List</b></div>
-              <div class="task-right"><b>Estimate</b></div>
-          </div>
-          <task-component id="task1"></task-component>
-      </div> 
-      <button id="create" class="cButton">Create</button>
-      <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
-    </section>
-    `;
-  document.getElementById("begin").addEventListener('click', ()=>{
-    document.getElementById("setup").style.display = "none";
-  });
-  document.getElementById("create").addEventListener("click", ()=>{
-    if (document.getElementById("active-task-container").children.length <= 6){
-        document.getElementById("active-task-container").appendChild(document.createElement("div"));
-    }
-  });
-    
-  test('Checking page title', () => {
-    expect(document.body.innerHTML).toContain('Begin');
-    expect(document.getElementById("setup").style.display).toEqual("") //not set
-  })
-
-  test('Checking number of children in active-task-container div', () => {
-    expect(document.getElementById("active-task-container").children.length).toEqual(2);
-  })
-
-  test('Checking number of children in active-task-container div after clicking create', () => {
-    document.getElementById("create").click();
-    expect(document.getElementById("active-task-container").children.length).toEqual(3);
-  })
-
-  test('Checking number of children in active-task-container div after clicking delete', () => {
-    document.getElementById("task1").deleteButton.click();
-    expect(document.getElementById("active-task-container").children.length).toEqual(2);
-  })
-
-  test('Checking setup after clicking begin', () => {
-    document.getElementById("begin").click();
-    expect(document.getElementById("setup").style.display).toEqual("none");
-  })
-
-  test("Checking setAttribute for task-component", ()=>{
+  const set = require('../JS/set-up-page');
+  global.window = { location: { pathname: null } };
+  test("test deleteComponent", ()=>{
+    const mock = jest.fn(set.deleteComponent);
     document.body.innerHTML = 
     `
     <section id="setup" class="set-up-page">
@@ -182,26 +14,440 @@ describe('set up page', () => {
           <task-component id="task1"></task-component>
       </div> 
       <button id="create" class="cButton">Create</button>
+      <input type="number" class="task-right" id="task-right-len" dir="rtl" value="25" 
+      min="20" max="35" step="5" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-total" dir="rtl" value="4" 
+          min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+      <input type="number" class="task-right" id="task-right-break-btw" dir="rtl" value="5" 
+          min="5" max="10" step="1" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-long-break" dir="rtl" value="20" 
+          min="15" max="30" step="5" onkeydown="return false">
+      <div><b>Total Time: <span id="total">0</span> minutes</b></div>
       <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
     </section>
     `;
-    expect(document.getElementById('task1').right.type).toEqual("number");
-    expect(document.getElementById('task1').left.style['pointer-events']).toEqual("");
-    expect(document.getElementById('task1').left.value).toEqual("");
-    expect(document.getElementById('task1').deleteButton.style.display).toEqual("");
-    expect(document.getElementById('task1').index).toEqual(1);
-
-
-    document.getElementById('task1').setAttribute('type', 'checkbox');
-    document.getElementById('task1').setAttribute('left-pointer-event', 'none');
-    document.getElementById('task1').setAttribute('left-task', 'sample task');
-    document.getElementById('task1').setAttribute('delete', 'none');
-    document.getElementById('task1').setAttribute('index', '1');
-    
-    expect(document.getElementById('task1').right.type).toEqual("checkbox");
-    expect(document.getElementById('task1').left.style['pointer-events']).toEqual("none");
-    expect(document.getElementById('task1').left.value).toEqual("sample task");
-    expect(document.getElementById('task1').deleteButton.style.display).toEqual("none");
-    expect(document.getElementById('task1').index).toEqual(0);
+    expect(document.getElementById("active-task-container").children.length).toEqual(2);
+    mock(0);
+    expect(mock).toHaveBeenCalled();
+    expect(document.getElementById("active-task-container").children.length).toEqual(1);
   });
-})
+  test("test setup_localStore", ()=>{
+    const mock = jest.fn(set.setup_localStore);
+    document.body.innerHTML = 
+    `
+    <section id="setup" class="set-up-page">
+      <div class="flex-container">
+        <div class="task-title">
+            <div class="task-left"><b>Pomo Settings</b></div>
+            <div class="task-right"><b>Options &nbsp &nbsp &nbsp</b></div>
+        </div>
+        <div class="task-entry">
+            <div class="task-left">Pomo Length</div>
+            <div class="task-right">
+                <div class="task-right">mins&nbsp&nbsp</div>
+                <input type="number" class="task-right" id="task-right-len" dir="rtl" value="25" 
+                    min="20" max="35" step="5" onkeydown="return false">
+            </div>
+        </div>
+        <div class="task-entry">
+            <div class="task-left">Long Break on every <span id="long-break-indicator">4th</span> Pomo</div>
+            <div class="task-right">
+                <div class="task-right" style="margin-left: -4px; margin-right: 3px;">pomo</div>
+                <input type="number" class="task-right" id="task-right-total" dir="rtl" value="4" 
+                    min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+            </div>
+            
+        </div>
+        <div class="task-entry">
+            <div class="task-left">Short Breaks Timer</div>
+            <div class="task-right">
+                <div class="task-right">mins&nbsp&nbsp</div>
+                <input type="number" class="task-right" id="task-right-break-btw" dir="rtl" value="5" 
+                    min="5" max="10" step="1" onkeydown="return false">
+            </div>
+        </div>
+        <div class="task-entry">
+            <div class="task-left">Long Break Timer</div>
+            <div class="task-right">
+                <div class="task-right">mins&nbsp&nbsp</div>
+                <input type="number" class="task-right" id="task-right-long-break" dir="rtl" value="20" 
+                    min="15" max="30" step="5" onkeydown="return false">
+            </div>
+        </div>       
+      </div>
+    </section>
+    `;
+    mock();
+    expect(mock).toHaveBeenCalled();
+  });
+  test("test createTask", ()=>{
+    const mock = jest.fn(set.createTask);
+    const mockname =  jest.fn(set.setTaskName);
+    document.body.innerHTML = 
+    `
+    <section id="setup" class="set-up-page">
+      <div id="active-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Task List</b></div>
+              <div class="task-right"><b>Estimate</b></div>
+          </div>
+          <task-component id="task1"></task-component>
+      </div> 
+      <button id="create" class="cButton">Create</button>
+      <input type="number" class="task-right" id="task-right-len" dir="rtl" value="25" 
+      min="20" max="35" step="5" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-total" dir="rtl" value="4" 
+          min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+      <input type="number" class="task-right" id="task-right-break-btw" dir="rtl" value="5" 
+          min="5" max="10" step="1" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-long-break" dir="rtl" value="20" 
+          min="15" max="30" step="5" onkeydown="return false">
+      <div><b>Total Time: <span id="total">0</span> minutes</b></div>
+      <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
+    </section>
+    `;
+    expect(document.getElementById("active-task-container").children.length).toEqual(2);
+    mockname(0, "task1");
+    mock();
+    expect(mock).toHaveBeenCalled();
+    expect(mockname).toHaveBeenCalled();
+    expect(document.getElementById("active-task-container").children.length).toEqual(3);
+  });
+  test("test setTaskName and calculateTotalTime", ()=>{
+    const mockname = jest.fn(set.setTaskName);
+    const mocktime = jest.fn(set.calculateTotalTime);
+    const mocktask = jest.fn(set.updateTaskList);
+    document.body.innerHTML=
+    `
+    <section id="setup" class="set-up-page">
+        <div id="active-task-container" class="flex-container">
+            <div class="task-title">
+                <div class="task-left"><b>Task List</b></div>
+                <div class="task-right"><b>Estimate &nbsp &nbsp &nbsp &nbsp</b></div>
+            </div>
+            <task-component></task-component>
+        </div>
+        <input type="number" class="task-right" id="task-right-len" dir="rtl" value="25" 
+            min="20" max="35" step="5" onkeydown="return false">
+        <input type="number" class="task-right" id="task-right-total" dir="rtl" value="4" 
+            min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+        <input type="number" class="task-right" id="task-right-break-btw" dir="rtl" value="5" 
+            min="5" max="10" step="1" onkeydown="return false">
+        <input type="number" class="task-right" id="task-right-long-break" dir="rtl" value="20" 
+            min="15" max="30" step="5" onkeydown="return false">
+      <div><b>Total Time: <span id="total">0</span> minutes</b></div>
+    </section>
+    `;
+    expect(document.getElementById("task-right-len").value).toEqual("25");
+    expect(document.getElementById("task-right-break-btw").value).toEqual("5");
+    expect(document.getElementById("total").textContent).toEqual("0");
+    mockname(0, "task1");
+    mocktask(0, "task1", 1);
+    mocktime();
+    expect(mockname).toHaveBeenCalled();
+    expect(mocktime).toHaveBeenCalled();
+    expect(mocktask).toHaveBeenCalled();
+    expect(document.getElementById("total").textContent).toEqual("0 hours and 30");
+  });
+
+  test("test clicking begin with no tasks", ()=>{
+    global.alert = jest.fn();
+    global.set_time = ()=>{return true};
+    global.startTimer = (page)=>{return page};
+    const mockname = jest.fn(set.setTaskName);
+    const mocktask = jest.fn(set.updateTaskList);
+    const mockbegin = jest.fn(set.exitSetUp);
+    document.body.innerHTML=
+    `
+    <header id="pTitle">Set Up
+      <a href="how-to-page.html"><button id="to-how-to-page">How To</button></a>
+    </header>
+    <section id="setup" class="set-up-page">
+      <div id="active-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Task List</b></div>
+              <div class="task-right"><b>Estimate</b></div>
+          </div>
+          <task-component id="task1"></task-component>
+      </div> 
+      <button id="create" class="cButton">Create</button>
+      <input type="number" class="task-right" id="task-right-len" dir="rtl" value="25" 
+      min="20" max="35" step="5" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-total" dir="rtl" value="4" 
+          min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+      <input type="number" class="task-right" id="task-right-break-btw" dir="rtl" value="5" 
+          min="5" max="10" step="1" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-long-break" dir="rtl" value="20" 
+          min="15" max="30" step="5" onkeydown="return false">
+      <div><b>Total Time: <span id="total">0</span> minutes</b></div>
+      <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
+    </section>
+    <section id="active-page" class="section-page">
+      <main>
+        <div class="timer-container">
+            <div id="progress-bar" class="progress-bar"></div> 
+            <p class="timer" id="timer"></p>
+        </div>
+        <div>
+            <p id="first-task" class="task">Sample Task 1</p>
+        </div>
+        
+        <button id="pomo-button">Abort</button>
+      </main>
+      <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
+    </section>
+    <section id="break-page" class="break-page">
+      <main>
+        <div class="break-timer-container">
+          <div class="timer-container"> 
+              <div id="break-bar" class="progress-bar"></div> 
+              <p class="timer" id="break-timer"></p>
+          </div>
+          <button id="break-button">Abort</button>
+        </div>
+        <div id="break-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Current Task</b></div>
+              <div class="task-right"><b>Mark Done &nbsp&nbsp&nbsp &nbsp</b></div>
+          </div>
+          <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
+        </div>
+        <div id="incompleted-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Incomplete Tasks</b></div>
+              <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
+          </div>
+        </div>
+        <div id="completed-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Completed Tasks</b></div>
+              <div class="task-right"><b>Actual &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</b></div>
+          </div>
+        </div>
+      </main>
+      <a id="to-active-page" href="#active-page" style="visibility: hidden;"></a>
+    </section>
+    `;
+    document.getElementById("active-page").style.display = "none";
+    mockname(0, ""); // no task
+    mocktask(0, "", 1);
+    mockbegin();
+    expect(alert).toHaveBeenCalled();
+    expect(document.getElementById("active-page").style.display).toEqual("none");
+  });
+
+  test("test clicking begin after making two tasks", ()=>{
+    global.set_time = ()=>{return true};
+    global.startTimer = (page)=>{return page};
+    const mockname = jest.fn(set.setTaskName);
+    const mocktask = jest.fn(set.updateTaskList);
+    const mockbegin = jest.fn(set.exitSetUp);
+    const mockcreate = jest.fn(set.createTask);
+    document.body.innerHTML=
+    `
+    <header id="pTitle">Set Up
+      <a href="how-to-page.html"><button id="to-how-to-page">How To</button></a>
+    </header>
+    <section id="setup" class="set-up-page">
+      <div id="active-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Task List</b></div>
+              <div class="task-right"><b>Estimate</b></div>
+          </div>
+          <task-component id="task1"></task-component>
+      </div> 
+      <button id="create" class="cButton">Create</button>
+      <input type="number" class="task-right" id="task-right-len" dir="rtl" value="25" 
+      min="20" max="35" step="5" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-total" dir="rtl" value="4" 
+          min="4" max="5" step="1" onkeydown="return false" style="width: 39px; margin-right: 5px;">
+      <input type="number" class="task-right" id="task-right-break-btw" dir="rtl" value="5" 
+          min="5" max="10" step="1" onkeydown="return false">
+      <input type="number" class="task-right" id="task-right-long-break" dir="rtl" value="20" 
+          min="15" max="30" step="5" onkeydown="return false">
+      <div><b>Total Time: <span id="total">0</span> minutes</b></div>
+      <a href="#active-page"><button id="begin" class="bButton">Begin</button></a>
+    </section>
+    <section id="active-page" class="section-page">
+      <main>
+        <div class="timer-container">
+            <div id="progress-bar" class="progress-bar"></div> 
+            <p class="timer" id="timer"></p>
+        </div>
+        <div>
+            <p id="first-task" class="task">Sample Task 1</p>
+        </div>
+        
+        <button id="pomo-button">Abort</button>
+      </main>
+      <a id="to-break-page" href="#break-page" style="visibility: hidden;"></a>
+    </section>
+    <section id="break-page" class="break-page">
+      <main>
+        <div class="break-timer-container">
+          <div class="timer-container"> 
+              <div id="break-bar" class="progress-bar"></div> 
+              <p class="timer" id="break-timer"></p>
+          </div>
+          <button id="break-button">Abort</button>
+        </div>
+        <div id="break-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Current Task</b></div>
+              <div class="task-right"><b>Mark Done &nbsp&nbsp&nbsp &nbsp</b></div>
+          </div>
+          <!-- <task-component type="checkbox" left-pointer-event="none"></task-component> -->
+        </div>
+        <div id="incompleted-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Incomplete Tasks</b></div>
+              <div class="task-right"><b>Expected &nbsp &nbsp &nbsp &nbsp</b></div>
+          </div>
+        </div>
+        <div id="completed-task-container" class="flex-container">
+          <div class="task-title">
+              <div class="task-left"><b>Completed Tasks</b></div>
+              <div class="task-right"><b>Actual &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp</b></div>
+          </div>
+        </div>
+      </main>
+      <a id="to-active-page" href="#active-page" style="visibility: hidden;"></a>
+    </section>
+    `;
+    document.getElementById("active-page").style.display = "none";
+    mockname(0, "task"); // add a task
+    mocktask(0, "task", 1);
+    mockcreate();
+    mockname(1, "task"); // add second task
+    mocktask(1, "task", 1);
+    mockbegin();
+    expect(mockname).toHaveBeenCalled();
+    expect(mocktask).toHaveBeenCalled();
+    expect(mockbegin).toHaveBeenCalled();
+    expect(mockcreate).toHaveBeenCalled();
+    expect(document.getElementById("setup").style.display).toEqual("none");
+    expect(document.getElementById("active-page").style.display).toEqual("inline");
+  });
+
+  test("test recording with white background", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      start(){
+        return true;
+      }
+    }
+    global.webkitSpeechRecognition= object;
+    const mock = jest.fn(set.record);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    mock();
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("rgba(0, 0, 0, 0.1)");
+    expect(document.getElementById("active-task-container").style.background).toEqual("white");
+    expect(document.body.style.pointerEvents).toEqual("none");
+
+  });
+
+  test("test recording with dark mode (black background)", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      start(){
+        return true;
+      }
+    }
+    global.webkitSpeechRecognition= object;
+    const mock = jest.fn(set.record);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    document.body.style.background = "#1a1a1a";
+    mock();
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("rgba(0, 0, 0, 0.1)");
+    expect(document.getElementById("active-task-container").style.background).toEqual("rgb(26, 26, 26)"); //#1a1a1a equivalent
+    expect(document.body.style.pointerEvents).toEqual("none");
+
+  });
+
+  test("test recordingEnd, should return to white background", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      stop(){
+        return false;
+      }
+    }
+    var recognition = new object;
+    var savedbackground = "white";
+    const mock = jest.fn(set.recordingEnd);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    document.body.style.background = "rgba(0,0,0,0.1)";
+    mock(recognition, savedbackground);
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("white");
+    expect(document.getElementById("active-task-container").style.background).toEqual("");
+    expect(document.body.style.pointerEvents).toEqual("all");
+
+  });
+
+  test("test recordingEnd, shound return to black background", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      stop(){
+        return false;
+      }
+    }
+    var recognition = new object;
+    var savedbackground = "rgb(26, 26, 26)";
+    const mock = jest.fn(set.recordingEnd);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    document.body.style.background = "rgba(0,0,0,0.1)";
+    mock(recognition, savedbackground);
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("rgb(26, 26, 26)");
+    expect(document.getElementById("active-task-container").style.background).toEqual("");
+    expect(document.body.style.pointerEvents).toEqual("all");
+
+  });
+
+});

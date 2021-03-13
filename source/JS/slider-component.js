@@ -2,6 +2,11 @@ if (!window.localStorage.getItem('slider-clicked')){
   window.localStorage.setItem('slider-clicked', JSON.stringify({}));
 }
 
+document.getElementById("alert-frequency").addEventListener('change', ()=>{
+  document.getElementById("alert-number").textContent = document.getElementById("alert-frequency").value;
+});
+
+
 // component to create slider. Used for dark mode setting
 class SliderComponent extends HTMLElement {
     constructor(){
@@ -10,7 +15,7 @@ class SliderComponent extends HTMLElement {
         const container = document.createElement('div');
         
         const button = container.appendChild(document.createElement('button'));
-        button.setAttribute('class','setting-slider');
+        button.setAttribute('class','setting-slider'); 
         button.id =  this.hasAttribute('button-id') ? this.getAttribute('button-id') : "default-id";
 
         const slider = button.appendChild(document.createElement('div'));
@@ -36,6 +41,13 @@ class SliderComponent extends HTMLElement {
                 window.localStorage.setItem('dark-mode', `${color}`);
                 document.body.style.backgroundColor = color;
                 document.body.style.color = otherColor;
+
+                //update mic color
+                let task = document.getElementById("active-task-container").children[document.getElementById("active-task-container").children.length-1];
+                if (task.shadowRoot.children[1].children.length == 3){
+                  let microphone = task.shadowRoot.children[1].children[1];
+                  microphone.style.filter = color == "#1a1a1a" ? "invert(1)" : "";
+                }
             }
             else if (button.id == "alert-button"){
               if (currentText == "On"){
@@ -98,7 +110,3 @@ class SliderComponent extends HTMLElement {
 }
 
 customElements.define('slider-component', SliderComponent);
-
-document.getElementById("alert-frequency").addEventListener('change', ()=>{
-  document.getElementById("alert-number").textContent = document.getElementById("alert-frequency").value;
-});

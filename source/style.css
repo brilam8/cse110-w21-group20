@@ -1,92 +1,52 @@
-/* CSS FOR ALL PAGE SIMILAR PIECES */
-
 /* Consistent Titles */
-.wb-page-title {
-  font-family: 'Oswald', sans-serif;
-  position: relative;
-  left: 10%;
-  top: 15px;
-  text-align: left;
-  color: rgb(242, 71, 38, 0.9);
-  font-size: 40px;
-  font-weight: 800;
-}
-
-.ob-page-title {
-  font-family: 'Oswald', sans-serif;
-  position: relative;
-  left: 10%;
-  top: 15px;
-  text-align: left;
-  color: #fff;
+header {
   font-size: 40px;
   font-weight: bold;
+  color: rgb(242, 71, 38, 0.9);
+  padding: 60px 10%;
+  display: inline-block;
+  width: 65%;
+}
+
+header > a {
+  float: right;
+  transform: translateX(20vw);
+}
+
+.logo {
+  color: white;
+  font-size: 60px;
 }
 
 /* Consistent Buttons */
-.wb-button {
-  background-color: rgb(242, 71, 38, 0.9);
-  text-align: center;
-  font-size: 16px;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 12px;
+button {
+  height: 45px;
+  width: 150px;
+  margin: 10px 50px;
   color: white;
-  font-family: 'Lato', sans-serif;
-  width: 8em;
-}
-
-.wb-button:hover {
-  border: 2px solid grey;
-  background-color: rgba(242, 71, 38, 0.7);
-  cursor: pointer;
-  transition: background-color 0.5s ease;
+  background-color: rgb(242, 71, 38, 0.9);
+  border: none;
+  border-radius: 10px;
+  outline: none;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 .ob-button {
   background-color: rgb(255, 255, 255, 80%);
-  font-family: "Open Sans", sans-serif;
-  font-size: 20px;
-  font-weight: bold;
   color: #f24726;
-  border-style: none;
-  border-radius: 8px;
-  width: 175px;
+  width: 375px;
   height: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+}
+
+button:hover {
+  background-color: rgba(242, 71, 38, 0.7);
+  outline: none;
+  cursor: pointer;
 }
 
 .ob-button:hover {
-  border: 2px solid grey;
   background-color: rgba(235, 235, 235, 0.8);
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-
-/* Consistent Tables */
-.wb-table {
-  border-collapse: collapse;
-  width: 60%;
-  height: 200px;
-  margin-left: 200px;
-}
-
-.wb-table th {
-  background-color: #e6e6e6;
-}
-
-.wb-table tr {
-  color: rgba(242, 71, 38, 0.8);
-  border: 1px solid #e6e6e6;
-}
-
-.wb-table tr:nth-child(odd) {
-  background-color: #e6e6e6;
-}
-
-.wb-table td {
-  padding: 15px;
 }
 
 input[type=number]::-webkit-inner-spin-button,
@@ -96,58 +56,45 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* END OF ALL PAGE PIECES */
 body {
-  font-family: 'Lato', sans-serif;
-  background-color: white;
-  color: #1a1a1a;
-  margin: 0;
+  font-family: 'Oswald', sans-serif;
 }
 
-.p-body {
-  padding-top: 3px;
-  padding-bottom: 3px;
-  font-family: 'Open Sans', sans-serif;
-  color: #fff;
-  font-size: 20px;
-  font-style: normal;
-}
-
-.section-page {
-  width: 100%;
-  height: 100vh;
-  display: none;
-}
-
-.p-title {
-  color: rgb(242, 71, 38);
-  font-size: 40px;
-  font-weight: 800;
-  margin-left: 50px;
+.orange {
+  background-color: rgb(242, 71, 38, 80%);
+  color: white;
 }
 
 main {
   width: 100%;
-  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.button {
-  background-color: rgba(242, 71, 38, 1);
-  border: none;
-  color: white;
-  height: 50px;
-  width: 250px;
-  border-radius: 10px;
-  outline: none;
-  cursor: pointer;
-  font-size: larger;
-  transition: all 0.3s ease-in;
+.results-container {
+  width: 75%;
+  margin: auto;
+  padding: 30px;
+  display: block;
 }
 
-.button:hover {
-  background-color: rgba(242, 71, 38, 0.7);
+.set-up-page {
+  text-align: center;
+  padding-bottom: 100px;
+}
+
+.break-page {
+  display: none;
+}
+
+.section-page {
+  display: none;
+}
+
+.p-body {
+  color: #fff;
+  font-size: 20px;
 }
 
 audio {
@@ -186,17 +133,6 @@ h3 {
 /* end of custom scrollbar */
 
 /* results-page css starts here */
-.logo {
-  padding-left: 10vw;
-  padding-top: 10vh;
-}
-
-.logo-text {
-  font-family: 'Oswald', sans-serif;
-  font-size: 64px;
-  font-weight: bold;
-  color: #fff;
-}
 
 .table-header {
   font-family: 'Open Sans', sans-serif;
@@ -234,15 +170,6 @@ h3 {
   list-style-position: inside;
 }
 
-.li-task {
-  padding-top: 7px;
-  padding-bottom: 7px;
-  font-family: 'Open Sans', sans-serif;
-  color: #fff;
-  font-size: 20px;
-  font-style: normal;
-}
-
 .div-flex-row {
   display: flex;
   flex-direction: row;
@@ -250,38 +177,6 @@ h3 {
   padding-left: 50px;
   padding-right: 50px;
   margin: 25px;
-}
-
-.button-gray-back {
-  background-color: rgb(255, 255, 255, 80%);
-  font-family: "Open Sans", sans-serif;
-  font-size: 20px;
-  font-weight: bold;
-  color: #f24726;
-  border-style: none;
-  border-radius: 8px;
-  width: 175px;
-  height: 50px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.button-gray-back:hover {
-  border: 2px solid grey;
-  background-color: rgba(235, 235, 235, 0.8);
-  cursor: pointer;
-  transition: background-color 0.5s ease;
-}
-
-.results-container {
-  width: 75%;
-  margin: auto;
-  padding: 30px;
-  height: 100%;
-  display: block;
-  flex-direction: none;
-  justify-content: none;
-  align-items: none;
 }
 
 .task-comp {
@@ -406,10 +301,6 @@ h3 {
 }
 
 /* style for break-page html */
-.break-page {
-  text-align: center;
-  margin-bottom: 3%;
-}
 
 .break-timer-container {
   display: flex;
@@ -420,21 +311,9 @@ h3 {
   margin-bottom: 5%;
 }
 
-.break-page .p-title {
-  margin: 1% 0;
-}
-
 /* style for break-page ends here */
 
 /* set-up page starts here */
-
-.set-up-page {
-  text-align: center;
-}
-
-.set-up-page .p-title {
-  margin: 5% 0;
-}
 
 hr {
   border: 1px solid rgb(255, 81, 0);
@@ -509,40 +388,130 @@ hr {
   color: rgb(255, 81, 0);
 }
 
-.set-up-page button {
-  width: 150px;
-  font-size: 20px;
-  font-weight: bold;
-  padding: 10px 30px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.cButton {
-  margin-top: 1%;
-}
-
-.bButton {
-  margin-bottom: 10%;
-}
-
-.to-how-to-page {
-  position: absolute;
-  right: 21%;
-  width: 25px;
-  height: 25px;
-  border: none;
-  border-radius: 50%;
-  outline: none;
-  font-weight: bold;
-  font-size: smaller;
-  transition: all 0.15s ease-in;
-}
-
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 935px) {
   .task-title > .task-left {
+    width: 30%;
+  }
+
+  .settingtitle > .task-left {
     width: 50%;
   }
+
+  header > a {
+    margin-left: -100px;
+  }
+
+  .to-delete {
+    display: none;
+  }
+}
+
+/* how-to-page starts here */
+.how-to-body {
+  width: 98vw;
+}
+
+.tip-div {
+  background-color: rgba(255, 81, 0, 0.6);
+  padding: 7px 0;
+  text-align: center;
+  font-size: 14px;
+  margin-left: 30px;
+  margin-top: 10px;
+  margin-right: 30px;
+  height: 80px;
+}
+
+.instructions-list {
+  padding-left: 0;
+  text-align: left;
+  list-style: none;
+  counter-reset: li;
+}
+
+.instructions-list li {
+  padding: 3px;
+  font-size: 20px;
+}
+
+.instructions-list a {
+  position: relative;
+  padding: 8px 8px 8px 8px;
+  background: rgba(255, 81, 0, 0.5);
+  text-decoration: none;
+  border-radius: 8px;
+  display: block;
+  pointer-events: none;
+}
+
+.instructions-list a::before {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  border-radius: 14px;
+  content: counter(li);
+  font-weight: bold;
+  counter-increment: li;
+  position: absolute;
+  left: -40px;
+  top: 20px;
+  margin-top: -18px;
+  background: rgba(255, 81, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#buttonwrapper {
+  width: 100%;
+  height: 95px;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#listwrapper {
+  width: 100%;
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+.wb-button.setup {
+  margin-left: 150px;
+}
+
+@media only screen and (min-width: 1200px) {
+  .howtoTitle {
+    left: 20%;
+  }
+}
+
+@media only screen and (min-width: 1600px) {
+  .howtoTitle {
+    left: 25%;
+  }
+}
+
+@media only screen and (min-width: 1800px) {
+  .howtoTitle {
+    left: 30%;
+  }
+}
+
+.howtoTitle {
+  font-family: 'Oswald', sans-serif;
+  font-size: 40px;
+  font-weight: bold;
+  color: rgba(255, 81, 0, 0.9);
+  display: inline-block;
+  width: 30%;
+}
+
+.browser-reqs {
+  text-align: center;
+  margin-left: 30px;
+  margin-right: 30px;
+  color: rgba(255, 81, 0, 0.9);
 }
