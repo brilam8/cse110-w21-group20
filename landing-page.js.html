@@ -1,8 +1,10 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Class: TaskComponent | source</title>
+    <title>Source: landing-page.js | source</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -43,133 +45,75 @@
 
 
 
-
-<section>
-
-<header>
     
-        <h2><span class="attribs"><span class="type-signature"></span></span>TaskComponent<span class="signature">()</span><span class="type-signature"></span></h2>
-        
-            <div class="class-description"><p>Component used to create tasks in set-up page and break page.
-Allows you to manipulate the tasks by deleting, creating and editting tasks</p></div>
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>window.addEventListener('DOMContentLoaded', () => {
+document.getElementById("to-how-to").addEventListener('click', toHowTo); //clcik to redirect to how to page
+document.getElementById("to-set-up").addEventListener('click', toSetUp); // click to redirect to set up page
+document.getElementById("download-wepomo").addEventListener('click', osSupport); //click to download wepomo
+setInterval(funFacts, 5000); //cycle through fun facts array
+});
 
-<article>
-    
-        <div class="container-overview">
-        
-            
+/**
+ * Function used in click event by to-how-to
+ */
+function toHowTo(){
+    window.location.href = "./how-to-page.html";
+}
 
-<dt>
-    
-        <h4 class="name" id="TaskComponent">
-            
-                new <span class="type-signature"></span>TaskComponent<span class="signature">()</span><span class="type-signature"></span>
-                
-            
-            <div class="container-source members">
-                <code><a href="set-up-page.js.html">set-up-page.js</a></code>,
-                <code><a href="set-up-page.js.html#line54">line 54</a></code>
-            </div>
-            
-        </h4>
+/**
+ * Function used in click event by to-set-up
+ */
+function toSetUp(){
+    window.location.href = "./setup-active-break-pages.html";
+}
 
-        
-    
-</dt>
-<dd>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
+/**
+ * Function used in click event by download-wepomo
+ */
+function osSupport(){
+    document.getElementById("download-wepomo").href = "../wepomo-win32-x64.zip";
+    //user is on windows device
+    if (navigator.appVersion.indexOf("Win") != -1){
+        document.getElementById("download-wepomo").href = "../wepomo-win32-x64.zip";
+    } 
+    //user is on darwin device
+    if (navigator.appVersion.indexOf("Mac") != -1) {
+        document.getElementById("download-wepomo").href = "../wepomo-darwin-x64.zip";
+    }
+    //user is on linux device
+    if (navigator.appVersion.indexOf("Linux") != -1){
+        document.getElementById("download-wepomo").href = "../wepomo-linux-x64.zip";
+    }
+}
 
 
-<dl class="details">
+//fun facts array container
+let facts = ['Fun Fact: Pomodoro means Tomato in Italian!',
+            'Fun Fact: Francesco Cirillo was the original creator of the Pomodoro Timer!', 
+            'Fun Fact: The Pomodoro timer was inspired by a tomato shaped timer!', 
+            "Remember: The Pomodoro timer's biggest strength is its simplicity!"];
 
-    
+//variable for keeping track of index of fun facts
+let index = 0;
 
-    
+/**
+ * Function used on setInterval to cycle through fun facts array
+ */
+function funFacts(){
+    if (index >= facts.length) index = 0;
+    document.getElementById('fun-facts').innerHTML = facts[index];
+    index++;
+}
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-    
-
-</dd>
-
-        
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+exports.toHowTo = toHowTo;
+exports.toSetUp = toSetUp;
+exports.osSupport = osSupport;
+exports.funFacts = funFacts;
+</code></pre>
+        </article>
+    </section>
 
 
 
@@ -186,7 +130,7 @@ Allows you to manipulate the tasks by deleting, creating and editting tasks</p><
 <script src="scripts/linenumber.js"></script>
 
     <script>
-        var id = 'TaskComponent_sub'.replace(/"/g, '_');
+        var id = '_sub'.replace(/"/g, '_');
         var selectedApi = document.getElementById(id); // do not use jquery selector
         var $selectedApi = $(selectedApi);
 
