@@ -3,6 +3,10 @@ const checkmarkPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-
 const xPATH = "M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z";
 const ns = 'http://www.w3.org/2000/svg';
 
+/**
+ * Component that represents each individual task item on the results page
+ * Has different styles depending on actual pomos taken vs expected pomos
+ */
 class TaskItem extends HTMLElement {
     static get observedAttributes() {
         return ['completed', 'name', 'actualpomos', 'expectedpomos'];
@@ -153,7 +157,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 /**
  * Using the local storage, populates the two ordered lists containing
- * completed and uncompleted tasks.
+ * completed and uncompleted tasks, which is then shown on the UI
  */
 function populateTasks(){
     const completedItems = document.getElementById('complete-items');
@@ -213,7 +217,7 @@ function populateTasks(){
 
 /**
  * Checks to see whether either the completed items or uncompleted items 
- * arrays are empty or not and appropriately adds a message if so
+ * arrays are empty or not and appropriately adds messages to the UI if so
  */
 function checkEmpty(){
     const completedItems = document.getElementById('complete-items');
