@@ -412,20 +412,21 @@ hr {
 }
 
 .tip-div {
-  background-color: rgb(255, 119, 45, 0.6);
-  color: black;
+  background-color: rgba(255, 81, 0, 0.6);
   padding: 7px 0;
   text-align: center;
   font-size: 14px;
-  margin-top: 40px;
   margin-left: 30px;
+  margin-top: 10px;
   margin-right: 30px;
-  height: 95px;
+  height: 80px;
 }
 
 .instructions-list {
   padding-left: 0;
   text-align: left;
+  list-style: none;
+  counter-reset: li;
 }
 
 .instructions-list li {
@@ -433,12 +434,39 @@ hr {
   font-size: 20px;
 }
 
+.instructions-list a {
+  position: relative;
+  padding: 8px 8px 8px 8px;
+  background: rgba(255, 81, 0, 0.5);
+  text-decoration: none;
+  border-radius: 8px;
+  display: block;
+  pointer-events: none;
+}
+
+.instructions-list a::before {
+  height: 30px;
+  width: 30px;
+  text-align: center;
+  border-radius: 14px;
+  content: counter(li);
+  font-weight: bold;
+  counter-increment: li;
+  position: absolute;
+  left: -40px;
+  top: 20px;
+  margin-top: -18px;
+  background: rgba(255, 81, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #buttonwrapper {
   width: 100%;
   height: 95px;
   border: none;
   display: flex;
-  padding: 15px 0;
   align-items: center;
   justify-content: center;
 }
@@ -447,7 +475,6 @@ hr {
   width: 100%;
   border: none;
   display: flex;
-  margin-bottom: 40px;
   justify-content: center;
 }
 
@@ -477,7 +504,7 @@ hr {
   font-family: 'Oswald', sans-serif;
   font-size: 40px;
   font-weight: bold;
-  color: rgb(242, 71, 38, 0.9);
+  color: rgba(255, 81, 0, 0.9);
   display: inline-block;
   width: 30%;
 }
@@ -486,5 +513,5 @@ hr {
   text-align: center;
   margin-left: 30px;
   margin-right: 30px;
-  color: rgb(242, 71, 38, 0.9);
+  color: rgba(255, 81, 0, 0.9);
 }
