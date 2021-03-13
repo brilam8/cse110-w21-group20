@@ -1,4 +1,4 @@
-/*global startTimer, set_time*/
+/*global startTimer, set_time, webkitSpeechRecognition*/
 
 // variables used in active and break pages
 var copytasklist = [];
@@ -7,6 +7,8 @@ var completed = [];
 var setup_value=[];
 var totalpomo = 0;
 
+let inputEvent = new Event("input");
+
 let totaltime = 0;
 let timersettingIDs=["task-right-len","task-right-total","task-right-break-btw","task-right-long-break"];
 
@@ -14,7 +16,6 @@ window.addEventListener('DOMContentLoaded', () => {
     // resets tasks list in localstorage every time user enters set-up page
     window.localStorage.removeItem('tasks');
     window.localStorage.removeItem('set-up');
-
     /**
      * Clicking the begin button create render all the task-components in the break-page,
      * set the tasklist by removing all empty tasks, and redirect to and start the timer for active page.
@@ -22,7 +23,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("begin").addEventListener("click", ()=>{
         exitSetUp();
     });
-
     /**
      * Clicking the create button will create a task-component on the set-up page. 
      * It will only allow 6 task-components.
@@ -30,7 +30,6 @@ window.addEventListener('DOMContentLoaded', () => {
     document.getElementById("create").addEventListener("click", ()=>{
         createTask();
     });
-
     /** 
      * Updates span for 'long break on every 4th pomo' setting
      */ 
@@ -39,7 +38,6 @@ window.addEventListener('DOMContentLoaded', () => {
         document.getElementById("long-break-indicator").textContent = value == 1 ? "1st" : value == 2 ? "2nd" : value == 3 ? "3rd"  : value + "th";
         calculateTotalTime();
     });
-
     /**
      * Everytime input for timer settings is changed, update the totaltime
      */
@@ -67,6 +65,14 @@ class TaskComponent extends HTMLElement {
         left.placeholder = "Enter Task Here";
         left.maxLength = 20; // TO CHANGE
 
+        const speaker = container.appendChild(document.createElement('img'));
+        speaker.src = "../assets/microphone.png";
+        speaker.style.margin = "6px 0 0 0";
+        speaker.width = "30";
+        speaker.height = "30";
+        let color = window.localStorage.getItem('dark-mode');
+        if (color) color == "#1a1a1a" ? speaker.style.filter = "invert(1)" : "";
+        
         const rightcontainer = container.appendChild(document.createElement('div'));
         rightcontainer.setAttribute('class', 'task-right');
 
@@ -86,6 +92,7 @@ class TaskComponent extends HTMLElement {
 
         this.left = left;
         this.right= right;
+        this.speaker = speaker;
         this.rightsuffix = rightsuffix;
         this.deleteButton = deleteButton;
         tasklist.push(["", 1]);
@@ -95,6 +102,9 @@ class TaskComponent extends HTMLElement {
             if (right.type == "number"){ //only in set up
                 updateTaskList(this.index, left.value, right.value);
             }
+        });
+        speaker.addEventListener('click', ()=>{
+            record();
         });
         right.addEventListener('input', ()=>{
             if (right.type == "number"){ //only in set up
@@ -118,6 +128,10 @@ class TaskComponent extends HTMLElement {
             border: solid;
             border-color: lightgrey;
             border-width: 0 0 2px 0;
+        }
+
+        img {
+            float:left;
         }
 
         .entry *{
@@ -183,6 +197,7 @@ class TaskComponent extends HTMLElement {
             transition: all 0.3s ease-in;
             pointer-events: none;
         }
+
         .deleteTask {
             background-color: rgba(242, 71, 38, 1);
             pointer-events: auto;
@@ -195,12 +210,19 @@ class TaskComponent extends HTMLElement {
         ::placeholder {
             font-size: 20px;
             color: rgb(255, 81, 0);
-        }       
+        }
+
+        @media only screen and (max-width: 700px) {
+            .task-left {
+                width: 30%;
+            }
+          }
+
         `;
 
         this.shadowRoot.append(style, container);
     }
-
+    
     static get observedAttributes() {
         return [`type`, `left-pointer-event`, `left-task`, 'delete', 'index', 'set-right-input', 'remove-right-suffix'];
     }
@@ -219,6 +241,7 @@ class TaskComponent extends HTMLElement {
         else if (name == 'delete'){
             this.deleteButton.style.display = newValue;
             this.right.style.transform = "translate(-74px, 3px)";
+            this.speaker.style.display = newValue;
         }
         else if (name == 'index'){
             this.index -= 1;
@@ -236,6 +259,44 @@ class TaskComponent extends HTMLElement {
 
 customElements.define('task-component', TaskComponent);
 
+/**
+ * Function to enable Speech to text for task input
+ */
+function record(){
+
+    var recognition = new webkitSpeechRecognition();
+    recognition.interimResults = false;
+    recognition.start();
+
+    //changes background to focus on input
+    let savedbackground = document.body.style.backgroundColor;
+    document.body.style.background = "rgba(0,0,0,0.1)";
+    document.getElementById("active-task-container").style.background = savedbackground == "" ? "white" : savedbackground;
+    document.body.style.pointerEvents = "none";
+
+    let ATContainer = document.getElementById("active-task-container");
+    let ATCLength = ATContainer.children.length;
+    let container = ATContainer.children[ATCLength-1].shadowRoot.children[1];
+    let input = container.children[0];
+
+    //updates input
+    recognition.onresult = function(e) {
+        input.value = e.results[0][0].transcript;
+        input.dispatchEvent(inputEvent);
+        recordingEnd(recognition, savedbackground);
+    };
+    recognition.onend = ()=> recordingEnd(recognition, savedbackground);
+}
+
+/**
+ * Function used by function record to resets background after recording ends.
+ */
+function recordingEnd(recognition, savedbackground){
+    document.body.style.background = savedbackground;
+    document.getElementById("active-task-container").style.background = "";
+    document.body.style.pointerEvents = "all";
+    recognition.stop();
+}
 
 /**
  * Function used in TaskComponent to delete the component 
@@ -249,7 +310,6 @@ function deleteComponent(index){
     document.getElementById("active-task-container").children[index+1].remove(); //removes task component
     calculateTotalTime();
 }
-
 
 /**
  * Function sets the timer settings for active and break pages
@@ -299,14 +359,19 @@ function createTask(){
     let input = container.children[0];
     
     if (ATCLength<=6 && input.value.length!=0){
+        
         let input = container.children[0];
         input.style.pointerEvents = "none";
         
-        let wheel = container.children[1].children[2];
+        let speaker = container.children[1];
+        speaker.style.opacity = 0;
+        speaker.style.pointerEvents = "none";
+        
+        let wheel = container.children[2].children[2];
         wheel.type = "text";
         wheel.style.pointerEvents = "none";
         
-        let button = container.children[1].children[0];
+        let button = container.children[2].children[0];
         button.setAttribute('class', 'deleteTask');
         button.textContent = "X";
         
@@ -398,3 +463,5 @@ exports.createTask = createTask;
 exports.exitSetUp = exitSetUp;
 exports.setTaskName = setTaskName;
 exports.updateTaskList = updateTaskList;
+exports.record = record;
+exports.recordingEnd = recordingEnd;

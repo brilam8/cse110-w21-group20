@@ -328,4 +328,126 @@ describe('set up page', () => {
     expect(document.getElementById("setup").style.display).toEqual("none");
     expect(document.getElementById("active-page").style.display).toEqual("inline");
   });
+
+  test("test recording with white background", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      start(){
+        return true;
+      }
+    }
+    global.webkitSpeechRecognition= object;
+    const mock = jest.fn(set.record);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    mock();
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("rgba(0, 0, 0, 0.1)");
+    expect(document.getElementById("active-task-container").style.background).toEqual("white");
+    expect(document.body.style.pointerEvents).toEqual("none");
+
+  });
+
+  test("test recording with dark mode (black background)", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      start(){
+        return true;
+      }
+    }
+    global.webkitSpeechRecognition= object;
+    const mock = jest.fn(set.record);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    document.body.style.background = "#1a1a1a";
+    mock();
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("rgba(0, 0, 0, 0.1)");
+    expect(document.getElementById("active-task-container").style.background).toEqual("rgb(26, 26, 26)"); //#1a1a1a equivalent
+    expect(document.body.style.pointerEvents).toEqual("none");
+
+  });
+
+  test("test recordingEnd, should return to white background", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      stop(){
+        return false;
+      }
+    }
+    var recognition = new object;
+    var savedbackground = "white";
+    const mock = jest.fn(set.recordingEnd);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    document.body.style.background = "rgba(0,0,0,0.1)";
+    mock(recognition, savedbackground);
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("white");
+    expect(document.getElementById("active-task-container").style.background).toEqual("");
+    expect(document.body.style.pointerEvents).toEqual("all");
+
+  });
+
+  test("test recordingEnd, shound return to black background", ()=>{
+    class object{
+      constructor(){
+        this.x = "hello";
+      }
+      stop(){
+        return false;
+      }
+    }
+    var recognition = new object;
+    var savedbackground = "rgb(26, 26, 26)";
+    const mock = jest.fn(set.recordingEnd);
+    document.body.innerHTML =`
+    <div id="active-task-container" class="flex-container">
+      <div class="task-title">
+        <div class="task-left"><b>Task List</b></div>
+        <div class="task-right"><b>Estimate</b></div>
+      </div>
+      <task-component id="task1"></task-component>
+    </div> 
+    <button id="create" class="cButton">Create</button>
+    `
+    document.body.style.background = "rgba(0,0,0,0.1)";
+    mock(recognition, savedbackground);
+    expect(mock).toHaveBeenCalled();
+    expect(document.body.style.background).toEqual("rgb(26, 26, 26)");
+    expect(document.getElementById("active-task-container").style.background).toEqual("");
+    expect(document.body.style.pointerEvents).toEqual("all");
+
+  });
+
 });

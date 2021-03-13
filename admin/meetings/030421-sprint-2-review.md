@@ -39,3 +39,5 @@ Brian: Revamped the results page to make it more graphically pleasing. Made Cypr
 Iain: Adjusted some of the landing page css, added in the fun facts and the welcoming message to the landing page.
 
 Megan: Centralized and changed spacing for elements on how to page. Add browser/local download support information.
+
+Ari: Prevented empty task creation, disabled delete button for create prompt, removed spinners on created tasks, finsihed HowTo button. Updated css for titles/buttons, removed unused css, updated the HTML/JS pages and cypress tests to utilize new functionality and CSS changes.
