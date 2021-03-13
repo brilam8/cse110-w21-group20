@@ -1,19 +1,14 @@
 const res = require('../JS/results-page');
-
-// sample test
-require('../JS/results-page')
 global.window = { location: { pathname: null } };
 
-describe ('restart button', () => {
+describe ('test redirect', () => {
   test('redirects to landing page', () => {
-    document.body.innerHTML =
-    `
-      <a href="landing-page.html" id="restart-btn"> 
-        <button class="ob-button"> Restart </button>
-      </a>
-    `
-    const restartButton = document.getElementById("restart-btn");
-    expect(restartButton.getAttribute('href')).toEqual('landing-page.html');
+    delete window.location;
+    window.location = { href: jest.fn() }
+
+    const mock = jest.fn(res.toLanding);
+    mock();
+    expect(window.location.href).toEqual('./landing-page.html');
   });
 });
 

@@ -195,15 +195,6 @@ h3 {
   list-style-position: inside;
 }
 
-.li-task {
-  padding-top: 7px;
-  padding-bottom: 7px;
-  font-family: 'Open Sans', sans-serif;
-  color: #fff;
-  font-size: 20px;
-  font-style: normal;
-}
-
 .div-flex-row {
   display: flex;
   flex-direction: row;
@@ -435,7 +426,7 @@ hr {
   transition: all 0.15s ease-in;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 1000px) {
   .task-title > .task-left {
     width: 50%;
   }
