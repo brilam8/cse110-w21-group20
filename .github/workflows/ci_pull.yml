@@ -27,7 +27,7 @@ jobs:
       - run: npx http-server -a localhost -p 5500 . &
       - run: npx cypress run
       - run: npx cypress run --browser chrome
-      - run: npx cypress run --browser edge
+      - run: npx cypress run --browser chromium
       - run: npx cypress run --browser firefox
       - run: npx cypress run --browser electron
   HTMLHint:
