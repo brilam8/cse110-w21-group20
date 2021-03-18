@@ -16,7 +16,7 @@ On any pull request FROM development branches (including individual feature bran
   <li> <b>HTMLHint,</b> which checks style and format of HTML files </li>
   <li> <b>ESLint,</b> which checks style and format of JavaScript files </li>
   <li> <b>StyleLint,</b> which checks style and format of CSS files. </li>
-  <li> <b>Cypress,</b> which runs all of our Cypress tests, covering end-to-end testing. </li>
+  <li> <b>Cypress,</b> which runs all of our Cypress tests, covering end-to-end testing on four different browsers to ensure cross-browser support. </li>
   <li> <b>Jest,</b> which runs all of our Jest tests, covering unit testing for our application. </li>
 </ol>
 
