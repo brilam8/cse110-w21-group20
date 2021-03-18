@@ -23,10 +23,13 @@ On any pull request FROM development branches (including individual feature bran
 Code coverage percentage is also shown on the pull request as a comment after the Cypress and Jest tests are ran.
 If any one of these processes fail, the pull request will not be available to merge until the issues are fixed.
 
-
 In addition to these tests, we also use Codefactor for code quality and also have one final step in our build pipeline.
 We added automatic Electron application building into our pipeline, so whenever a pull request is made to update our web application,
 we rebuild our Electron app and place the new app into our repo, which you can then download from the web application itself.
+
+You can see a brief overview of our pipeline results below, though this doesn't show every small detail in our pipeline:
+
+![briefresults](https://github.com/brilam8/cse110-w21-group20/blob/main/specs/pipeline/pipeline_results.png)
 
 ## On push to "main" branch
 
