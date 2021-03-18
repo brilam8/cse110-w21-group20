@@ -26,9 +26,9 @@ If any one of these processes fail, the pull request will not be available to me
 
 In addition to these tests, we also use Codefactor for code quality and also have one final step in our build pipeline.
 We added automatic Electron application building into our pipeline, so whenever a pull request is made to update our web application,
-we rebuild our Electron app, which you can then download from the web application itself.
+we rebuild our Electron app and place the new app into our repo, which you can then download from the web application itself.
 
 ## On push to "main" branch
 
 Finally, on a push to the main branch, we generate documentation for our web application using JSDocs and a JSDocs template.
-The documentation is generated and then pushed to a separate branch called "docs" in our repository.
+The documentation is generated and then pushed to a separate branch called "docs" in our repository, where you can access the documentation.
